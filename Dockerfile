@@ -2,7 +2,7 @@
 FROM node:20
 
 # 設定工作目錄
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # 複製當前目錄下的所有檔案到工作目錄
 COPY . .
@@ -13,7 +13,8 @@ ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install --lts
 
 # 安裝 Node.js 專案的依賴項
-RUN npm install
+RUN npm install -g nodemon && npm install 
+EXPOSE 7230 24678
 
 # 啟動 Node.js 應用程式
 CMD ["npm", "start"]
