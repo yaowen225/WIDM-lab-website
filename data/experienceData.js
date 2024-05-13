@@ -1,8 +1,8 @@
 const experienceData = [
   {
-    title: 'Data Engineering Intern',
-    company: 'Accenture',
-    location: 'Ahmedabad, India',
+    title: 'Professor',
+    company: 'National Central University',
+    location: 'Taiwan, Taoyuan City',
     range: 'January 2022 - May 2022',
     url: 'https://www.accenture.com/gr-en/about/consulting-index',
     text1:

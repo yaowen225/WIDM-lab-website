@@ -6,6 +6,6 @@ const headerNavLinks = [
   { title: 'Papers', href: '/papers' },
   { title: 'Members', href: '/members' },
   { title: 'Activate', href: '/activate' },
-];
+]
 
-export default headerNavLinks;
+export default headerNavLinks
