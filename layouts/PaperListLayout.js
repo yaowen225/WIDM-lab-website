@@ -8,7 +8,8 @@ import ViewCounter from '@/components/ViewCounter'
 export default function ListLayout({ posts, title, initialDisplayPosts = [], pagination }) {
   const [searchValue, setSearchValue] = useState('')
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.title + frontMatter.summary + frontMatter.tags.join(' ')
+    const searchContent =
+      frontMatter.paper_title + frontMatter.paper_authors + frontMatter.paper_tags.join(' ')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
@@ -19,7 +20,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
   return (
     <>
       <div className="mx-auto max-w-6xl divide-y divide-gray-400">
-        <div className="space-y-2 pt-6 pb-8 md:space-y-5">
+        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
           {/* 大標題 */}
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
@@ -53,20 +54,30 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter
+            // const { slug, date, title, summary, tags } = frontMatter
+
+            const {
+              paper_title,
+              paper_authors,
+              paper_original,
+              paper_tags,
+              paper_attachment,
+              paper_link,
+              year,
+            } = frontMatter
+
             return (
               <Link
-                href={`/blog/${slug}`}
-                key={slug}
+                key={paper_attachment}
                 className="group flex bg-transparent bg-opacity-20 px-2 transition duration-100 hover:scale-105 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
               >
-                <li key={slug} className="py-6">
+                <li key={paper_attachment} className="py-6">
                   <article className="space-y-2 bg-transparent bg-opacity-20 p-2 transition duration-200 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-3">
                     <dl>
                       <dd className="text-sm font-normal leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date)}</time>
+                        <time dateTime={year}>{formatDate(year)}</time>
                         {' • '}
-                        <ViewCounter className="mx-1" slug={slug} />
+                        <ViewCounter className="mx-1" slug={paper_attachment} />
                         views
                       </dd>
                     </dl>
@@ -75,20 +86,20 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
-                              href={`/blog/${slug}`}
+                              href={`${paper_link}`}
                               className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500"
                             >
-                              {title}
+                              {paper_title}
                             </Link>
                           </h2>
                         </div>
                         <div className="flex flex-wrap">
-                          {tags.map((tag) => (
+                          {paper_tags.map((tag) => (
                             <Tag key={tag} text={tag} />
                           ))}
                         </div>
                         <div className="prose max-w-none pt-5 text-gray-500 dark:text-gray-400">
-                          {summary}
+                          {paper_authors}
                         </div>
                       </div>
                     </div>

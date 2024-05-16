@@ -204,7 +204,17 @@ export default function Home({ posts }) {
         <ul>
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((frontMatter) => {
-            const { slug, date, title, summary, tags } = frontMatter
+            const {
+              paper_title,
+              paper_authors,
+              paper_original,
+              paper_tags,
+              paper_attachment,
+              paper_link,
+              year,
+              slug,
+            } = frontMatter
+
             return (
               <Link
                 href={`/blog/${slug}`}
@@ -217,7 +227,7 @@ export default function Home({ posts }) {
                       <dl>
                         <dt className="sr-only">Published on</dt>
                         <dd className="text-sm font-normal leading-6 text-gray-500 dark:text-gray-400">
-                          <time dateTime={date}>{formatDate(date)}</time>
+                          <time dateTime={year}>{formatDate(year)}</time>
                           {' • '}
                           <ViewCounter className="mx-1" slug={slug} />
                           views
@@ -231,17 +241,17 @@ export default function Home({ posts }) {
                                 href={`/blog/${slug}`}
                                 className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500"
                               >
-                                {title}
+                                {paper_title}
                               </Link>
                             </h2>
                           </div>
                           <div className="flex flex-wrap">
-                            {tags.map((tag) => (
+                            {paper_tags.map((tag) => (
                               <Tag key={tag} text={tag} />
                             ))}
                           </div>
                           <div className="prose max-w-none pt-5 text-gray-500 dark:text-gray-400">
-                            {summary}
+                            {paper_authors}
                           </div>
                         </div>
                       </div>
