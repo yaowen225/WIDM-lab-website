@@ -16,17 +16,33 @@ const Experience = ({ title, company, location, range, url, textArray = [] }) =>
         <div className="p-1 font-mono text-sm text-gray-400 dark:text-gray-600">{range}</div>
         <div className="p-2">
           {textArray.map((text, index) => (
-            <div key={index} className="items-top flex flex-row">
-              <div className="mr-2 text-lg text-primary-color-500"> &#8227;</div>
-              <div className="text-gray-500 dark:text-gray-400 mr-4 whitespace-nowrap">{text.time}</div>
-              <div className="text-gray-500 dark:text-gray-400 mr-4">
-                {text.content && text.content.map((contentItem, contentIndex) => (
-                  contentItem.link ? (
-                    <a key={contentIndex} href={contentItem.link} target="_blank" rel="noopener noreferrer" className="text-primary-color-500"> {contentItem.text}</a>
-                  ) : (
-                    <a key={contentIndex}>{contentItem.text}</a>
-                  )
-                ))}
+            <div key={index} className="grid grid-cols-9 gap-1">
+              <div className="col-span-2 flex-row content-center align-middle">
+                <div className="items-top flex ">
+                  <div className="mr-2 text-lg text-primary-color-500"> &#8227;</div>
+                  <div className="mr-4 whitespace-nowrap text-lg text-gray-500 dark:text-gray-400">
+                    {text.time}
+                  </div>
+                </div>
+              </div>
+              <div className="col-span-7 mb-2 mr-4 text-gray-500 dark:text-gray-400">
+                {text.content &&
+                  text.content.map((contentItem, contentIndex) =>
+                    contentItem.link ? (
+                      <a
+                        key={contentIndex}
+                        href={contentItem.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className=" text-primary-color-500"
+                      >
+                        {' '}
+                        {contentItem.text}
+                      </a>
+                    ) : (
+                      <a key={contentIndex}>{contentItem.text}</a>
+                    )
+                  )}
               </div>
             </div>
           ))}
