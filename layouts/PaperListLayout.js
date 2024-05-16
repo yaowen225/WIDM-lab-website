@@ -26,7 +26,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
             {title}
           </h1>
 
-          {/*  */}
+          {/* 搜索框 */}
           <div className="relative max-w-lg">
             <input
               aria-label="Search articles"
@@ -54,43 +54,42 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            // const { slug, date, title, summary, tags } = frontMatter
-
             const {
-              paper_title,
-              paper_authors,
-              paper_original,
-              paper_tags,
+              id,
+              uniqueId,
+              create_time,
               paper_attachment,
+              paper_authors,
               paper_link,
-              year,
+              paper_origin,
+              paper_publish_year,
+              paper_tags,
+              paper_title,
+              update_time,
             } = frontMatter
 
             return (
-              <Link
-                key={paper_attachment}
-                className="group flex bg-transparent bg-opacity-20 px-2 transition duration-100 hover:scale-105 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
-              >
-                <li key={paper_attachment} className="py-6">
-                  <article className="space-y-2 bg-transparent bg-opacity-20 p-2 transition duration-200 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-3">
+              <li key={`li-${paper_attachment}-${uniqueId}`} className="py-6">
+                <Link
+                  href={`${paper_link}`}
+                  className="group flex bg-transparent bg-opacity-20 px-2 transition duration-100 hover:scale-105 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
+                >
+                  <article className="space-y-2 bg-transparent bg-opacity-20 p-2 transition duration-200 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 xl:grid xl:grid-cols-2 xl:items-baseline xl:space-y-3">
                     <dl>
                       <dd className="text-sm font-normal leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={year}>{formatDate(year)}</time>
+                        <a>Publish Year {paper_publish_year}</a>
                         {' • '}
                         <ViewCounter className="mx-1" slug={paper_attachment} />
-                        views
+                        <time dateTime={update_time}>Update by {formatDate(update_time)}</time>
                       </dd>
                     </dl>
                     <div className="space-y-5 xl:col-span-4">
                       <div className="space-y-1">
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`${paper_link}`}
-                              className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500"
-                            >
+                            <span className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500">
                               {paper_title}
-                            </Link>
+                            </span>
                           </h2>
                         </div>
                         <div className="flex flex-wrap">
@@ -98,14 +97,15 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                             <Tag key={tag} text={tag} />
                           ))}
                         </div>
+                        <div>{paper_origin}</div>
                         <div className="prose max-w-none pt-5 text-gray-500 dark:text-gray-400">
-                          {paper_authors}
+                          Author: {paper_authors}
                         </div>
                       </div>
                     </div>
                   </article>
-                </li>
-              </Link>
+                </Link>
+              </li>
             )
           })}
         </ul>

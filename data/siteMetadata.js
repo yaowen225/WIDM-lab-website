@@ -1,6 +1,6 @@
 const siteMetadata = {
   title: 'Blog | Parth Desai',
-  author: 'Parth Desai',
+  author: 'WIDM',
   headerTitle: 'Mere Musings',
   description: 'My personal blog where I share my musings',
   snippets: 'Reuseable code snippets collected by Parth',

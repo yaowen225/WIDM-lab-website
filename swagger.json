@@ -1,0 +1,1541 @@
+﻿
+{
+  "definitions": {
+    "activity": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "activity_sub_title": {
+              "type": "string"
+            },
+            "activity_title": {
+              "type": "string"
+            },
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "activity_image": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "activity_id": {
+              "type": "integer"
+            },
+            "create_time": {
+              "type": "string"
+            },
+            "image_name": {
+              "type": "string"
+            },
+            "image_uuid": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "member": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "member_intro": {
+              "type": "string"
+            },
+            "member_name": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "member_image": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "image_uuid": {
+              "type": "string"
+            },
+            "member_id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "members": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "create_time": {
+                "type": "string"
+              },
+              "member_image": {
+                "type": "string"
+              },
+              "member_intro": {
+                "type": "string"
+              },
+              "member_name": {
+                "type": "string"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    },
+    "paper": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "paper_link": {
+              "type": "string"
+            },
+            "paper_origin": {
+              "type": "string"
+            },
+            "paper_publish_year": {
+              "type": "integer"
+            },
+            "paper_title": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "paper_attachment": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "image_uuid": {
+              "type": "string"
+            },
+            "member_id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "paper_author": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "author_name": {
+              "type": "string"
+            },
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "paper_id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "paper_authors": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "author_name": {
+                "type": "string"
+              },
+              "create_time": {
+                "type": "string"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "paper_id": {
+                "type": "integer"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    },
+    "paper_tag": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "paper_id": {
+              "type": "integer"
+            },
+            "tag_name": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "paper_tags": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "create_time": {
+                "type": "string"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "paper_id": {
+                "type": "integer"
+              },
+              "tag_name": {
+                "type": "string"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    },
+    "papers": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "create_time": {
+                "type": "string"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "paper_attachment": {
+                "type": "string"
+              },
+              "paper_authors": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "paper_link": {
+                "type": "string"
+              },
+              "paper_origin": {
+                "type": "string"
+              },
+              "paper_publish_year": {
+                "type": "integer"
+              },
+              "paper_tags": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "paper_title": {
+                "type": "string"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    }
+  },
+  "info": {
+    "description": "Nation Central University WIDM LAB back-end API",
+    "termsOfService": "/tos",
+    "title": "widm-back-end",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/activity": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get activities successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "put activity",
+        "tags": [
+          "activity"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "activity_title",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "activity_sub_title",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "400": {
+            "description": "no ['activity_title', 'activity_sub_title'] or content in form"
+          }
+        },
+        "summary": "post activity",
+        "tags": [
+          "activity"
+        ]
+      }
+    },
+    "/activity/{activity_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "delete activity",
+        "tags": [
+          "activity"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "get activity",
+        "tags": [
+          "activity"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "activity_title",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "activity_sub_title",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "patch activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "400": {
+            "description": "no ['activity_title', 'activity_sub_title'] or content in form"
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "patch activity",
+        "tags": [
+          "activity"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "activity_title",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "activity_sub_title",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "put activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "400": {
+            "description": "no ['activity_title', 'activity_sub_title'] or content in form"
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "put activity",
+        "tags": [
+          "activity"
+        ]
+      }
+    },
+    "/activity/{activity_id}/activity-image": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get activity images successfully",
+            "schema": {
+              "$ref": "#/definitions/activity_image"
+            }
+          },
+          "404": {
+            "description": "activity not exist or activity image not exist"
+          }
+        },
+        "summary": "get activity images",
+        "tags": [
+          "activity_image"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post activity image successfully",
+            "schema": {
+              "$ref": "#/definitions/activity_image"
+            }
+          },
+          "400": {
+            "description": "no ['image'] or content in form"
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "post activity image",
+        "tags": [
+          "activity_image"
+        ]
+      }
+    },
+    "/activity/{activity_id}/activity-image/{activity_image_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "activity_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete activity image successfully",
+            "schema": {
+              "$ref": "#/definitions/activity_image"
+            }
+          },
+          "404": {
+            "description": "activity not exist or activity image not exist"
+          }
+        },
+        "summary": "delete activity image",
+        "tags": [
+          "activity_image"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "activity_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get activity image successfully"
+          },
+          "404": {
+            "description": "activity not exist or activity image not exist"
+          }
+        },
+        "summary": "get activity image",
+        "tags": [
+          "activity_image"
+        ]
+      }
+    },
+    "/member": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get members successfully",
+            "schema": {
+              "$ref": "#/definitions/members"
+            }
+          },
+          "404": {
+            "description": "no member exist"
+          }
+        },
+        "summary": "get members",
+        "tags": [
+          "member"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "member_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "member_intro",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "400": {
+            "description": "no ['member_name', 'member_intro'] or content in form"
+          }
+        },
+        "summary": "post member",
+        "tags": [
+          "member"
+        ]
+      }
+    },
+    "/member/{member_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete member successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "delete member",
+        "tags": [
+          "member"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "member_name",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "member_intro",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "patch member successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "400": {
+            "description": "no ['member_name', 'member_intro'] or content in form"
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "patch member",
+        "tags": [
+          "member"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "member_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "member_intro",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "put member successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "400": {
+            "description": "no ['member_name', 'member_intro'] or content in form"
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "put member",
+        "tags": [
+          "member"
+        ]
+      }
+    },
+    "/member/{member_id}/member-image": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post member image successfully",
+            "schema": {
+              "$ref": "#/definitions/member_image"
+            }
+          },
+          "400": {
+            "description": "no ['image'] or content in form"
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "post member image",
+        "tags": [
+          "member_image"
+        ]
+      }
+    },
+    "/member/{member_id}/member-image/{member_image_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "member_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete attachment successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_attachment"
+            }
+          },
+          "404": {
+            "description": "member_id or member_image_uuid not exist"
+          }
+        },
+        "summary": "delete member image",
+        "tags": [
+          "member_image"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "member_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get paper attachment successfully"
+          },
+          "404": {
+            "description": "paper_id or paper_attachment_id not exist"
+          }
+        },
+        "summary": "get member images",
+        "tags": [
+          "member_image"
+        ]
+      }
+    },
+    "/paper": {
+      "get": {
+        "parameters": [
+          {
+            "in": "query",
+            "name": "paper_tag",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "paper_author",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get papers successfully",
+            "schema": {
+              "$ref": "#/definitions/papers"
+            }
+          }
+        },
+        "summary": "get_papers",
+        "tags": [
+          "paper"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "paper_publish_year",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "paper_title",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "paper_origin",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "paper_link",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "400": {
+            "description": "no ['paper_publish_year', 'paper_title', 'paper_origin', 'paper_attachment', 'paper_link'] or content in form"
+          }
+        },
+        "summary": "post paper",
+        "tags": [
+          "paper"
+        ]
+      }
+    },
+    "/paper/{paper_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "delete paper",
+        "tags": [
+          "paper"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "paper_publish_year",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "paper_title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "paper_origin",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "paper_link",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "patch paper",
+        "tags": [
+          "paper"
+        ]
+      },
+      "put": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "paper_publish_year",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "paper_title",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "paper_origin",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "paper_link",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "put paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "400": {
+            "description": "no ['paper_publish_year', 'paper_title', 'paper_origin', 'paper_attachment', 'paper_link'] or content in form"
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "put paper",
+        "tags": [
+          "paper"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-attachment": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "attachment",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper attachment successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_attachment"
+            }
+          },
+          "400": {
+            "description": "no ['attachment'] or content in form"
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "post paper attachment",
+        "tags": [
+          "paper_attachment"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-attachment/{paper_attachment_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "paper_attachment_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete attachment successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_attachment"
+            }
+          },
+          "404": {
+            "description": "paper_id or paper_attachment_id not exist"
+          }
+        },
+        "summary": "delete paper attachment",
+        "tags": [
+          "paper_attachment"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "paper_attachment_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get paper attachment successfully"
+          },
+          "404": {
+            "description": "paper_id or paper_attachment_id not exist"
+          }
+        },
+        "summary": "get paper attachment",
+        "tags": [
+          "paper_attachment"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-author": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get paper author successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_authors"
+            }
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "get paper author",
+        "tags": [
+          "paper_author"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "author_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper author successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_author"
+            }
+          },
+          "400": {
+            "description": "no ['author_name'] or content in form"
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "post paper author",
+        "tags": [
+          "paper_author"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-author/{author_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "author_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete author successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_author"
+            }
+          },
+          "404": {
+            "description": "paper_id or author_id not exist"
+          }
+        },
+        "summary": "delete author",
+        "tags": [
+          "paper_author"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "author_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get author successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_author"
+            }
+          },
+          "404": {
+            "description": "paper_id or author_id not exist"
+          }
+        },
+        "summary": "get author",
+        "tags": [
+          "paper_author"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "author_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "author_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update author successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_author"
+            }
+          },
+          "400": {
+            "description": "no ['author_name'] or content in form"
+          },
+          "404": {
+            "description": "paper_id or author_id not exist"
+          }
+        },
+        "summary": "update author",
+        "tags": [
+          "paper_author"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-tag": {
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get paper tag successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_tags"
+            }
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "get paper tag",
+        "tags": [
+          "paper_tag"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "tag_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper tag successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_tag"
+            }
+          },
+          "400": {
+            "description": "no ['tag_name'] or content in form"
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "post paper tag",
+        "tags": [
+          "paper_tag"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-tag/{tag_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "tag_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete tag successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_tag"
+            }
+          },
+          "404": {
+            "description": "paper_id or tag_id not exist"
+          }
+        },
+        "summary": "delete tag",
+        "tags": [
+          "paper_tag"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "tag_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get tag successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_tag"
+            }
+          },
+          "404": {
+            "description": "paper_id or tag_id not exist"
+          }
+        },
+        "summary": "get tag",
+        "tags": [
+          "paper_tag"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "tag_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "tag_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update tag successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_tag"
+            }
+          },
+          "400": {
+            "description": "no ['tag_name'] or content in form"
+          },
+          "404": {
+            "description": "paper_id or tag_id not exist"
+          }
+        },
+        "summary": "update tag",
+        "tags": [
+          "paper_tag"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0"
+}

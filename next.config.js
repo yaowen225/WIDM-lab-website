@@ -79,7 +79,7 @@ module.exports = withBundleAnalyzer({
   ],
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],
   eslint: {
-    dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
+    dirs: ['pages', 'components', 'lib', 'layouts', 'scripts', 'api-client'],
   },
   async headers() {
     return [
@@ -103,8 +103,40 @@ module.exports = withBundleAnalyzer({
         'react-dom/test-utils': 'preact/test-utils',
         'react-dom': 'preact/compat',
       })
+      config.resolve.fallback = {
+        fs: false,
+        module: false,
+        path: false,
+        os: false,
+      }
     }
 
     return config
   },
 })
+
+module.exports = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://widm-back-end.nevercareu.space/:path*', // API URL
+      },
+    ]
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.devServer = {
+        ...config.devServer,
+        proxy: {
+          '/api': {
+            target: 'https://widm-back-end.nevercareu.space',
+            changeOrigin: true,
+            secure: false,
+          },
+        },
+      }
+    }
+    return config
+  },
+}
