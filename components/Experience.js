@@ -16,16 +16,16 @@ const Experience = ({ title, company, location, range, url, textArray = [] }) =>
         <div className="p-1 font-mono text-sm text-gray-400 dark:text-gray-600">{range}</div>
         <div className="p-2">
           {textArray.map((text, index) => (
-            <div key={index} className="grid grid-cols-9 gap-1">
-              <div className="col-span-2 flex-row content-center align-middle">
-                <div className="items-top flex ">
+            <div key={index} className="grid grid-cols-1 flex-nowrap gap-1 md:grid-cols-9">
+              <div className="flex items-center md:col-span-2 md:flex-row">
+                <div className="items-top flex">
                   <div className="mr-2 text-lg text-primary-color-500"> &#8227;</div>
                   <div className="mr-4 whitespace-nowrap text-lg text-gray-500 dark:text-gray-400">
                     {text.time}
                   </div>
                 </div>
               </div>
-              <div className="col-span-7 mb-2 mr-4 text-gray-500 dark:text-gray-400">
+              <div className="mb-2 mr-4 text-gray-500 dark:text-gray-400 md:col-span-7">
                 {text.content &&
                   text.content.map((contentItem, contentIndex) =>
                     contentItem.link ? (
@@ -34,9 +34,8 @@ const Experience = ({ title, company, location, range, url, textArray = [] }) =>
                         href={contentItem.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className=" text-primary-color-500"
+                        className="text-primary-color-500"
                       >
-                        {' '}
                         {contentItem.text}
                       </a>
                     ) : (
