@@ -24,13 +24,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.MemberImageApi();
 let memberId = 56; // Number | 
 let memberImageUuid = "memberImageUuid_example"; // String | 
-apiInstance.memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -69,13 +68,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.MemberImageApi();
 let memberId = 56; // Number | 
 let memberImageUuid = "memberImageUuid_example"; // String | 
-apiInstance.memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
+apiInstance.memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -114,13 +112,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.MemberImageApi();
 let memberId = 56; // Number | 
 let image = "/path/to/file"; // File | 
-apiInstance.memberMemberIdMemberImagePost(memberId, image, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberMemberIdMemberImagePost(memberId, image).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

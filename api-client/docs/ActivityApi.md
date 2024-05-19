@@ -26,13 +26,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.ActivityApi();
 let activityId = 56; // Number | 
-apiInstance.activityActivityIdDelete(activityId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdDelete(activityId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -69,13 +68,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.ActivityApi();
 let activityId = 56; // Number | 
-apiInstance.activityActivityIdGet(activityId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdGet(activityId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -116,13 +114,12 @@ let opts = {
   'activityTitle': "activityTitle_example", // String | 
   'activitySubTitle': "activitySubTitle_example" // String | 
 };
-apiInstance.activityActivityIdPatch(activityId, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdPatch(activityId, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -163,13 +160,12 @@ let apiInstance = new WidmBackEnd.ActivityApi();
 let activityId = 56; // Number | 
 let activityTitle = "activityTitle_example"; // String | 
 let activitySubTitle = "activitySubTitle_example"; // String | 
-apiInstance.activityActivityIdPut(activityId, activityTitle, activitySubTitle, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdPut(activityId, activityTitle, activitySubTitle).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -207,13 +203,12 @@ put activity
 import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.ActivityApi();
-apiInstance.activityGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityGet().then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -248,13 +243,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.ActivityApi();
 let activityTitle = "activityTitle_example"; // String | 
 let activitySubTitle = "activitySubTitle_example"; // String | 
-apiInstance.activityPost(activityTitle, activitySubTitle, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityPost(activityTitle, activitySubTitle).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

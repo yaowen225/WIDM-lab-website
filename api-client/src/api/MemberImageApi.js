@@ -35,22 +35,14 @@ export default class MemberImageApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the memberMemberIdMemberImageMemberImageUuidDelete operation.
-     * @callback module:api/MemberImageApi~memberMemberIdMemberImageMemberImageUuidDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAttachment} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * delete member image
      * @param {Number} memberId 
      * @param {String} memberImageUuid 
-     * @param {module:api/MemberImageApi~memberMemberIdMemberImageMemberImageUuidDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAttachment}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAttachment} and HTTP response
      */
-    memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid, callback) {
+    memberMemberIdMemberImageMemberImageUuidDeleteWithHttpInfo(memberId, memberImageUuid) {
       let postBody = null;
       // verify the required parameter 'memberId' is set
       if (memberId === undefined || memberId === null) {
@@ -79,25 +71,31 @@ export default class MemberImageApi {
       return this.apiClient.callApi(
         '/member/{member_id}/member-image/{member_image_uuid}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the memberMemberIdMemberImageMemberImageUuidGet operation.
-     * @callback module:api/MemberImageApi~memberMemberIdMemberImageMemberImageUuidGetCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * delete member image
+     * @param {Number} memberId 
+     * @param {String} memberImageUuid 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAttachment}
      */
+    memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid) {
+      return this.memberMemberIdMemberImageMemberImageUuidDeleteWithHttpInfo(memberId, memberImageUuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get member images
      * @param {Number} memberId 
      * @param {String} memberImageUuid 
-     * @param {module:api/MemberImageApi~memberMemberIdMemberImageMemberImageUuidGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid, callback) {
+    memberMemberIdMemberImageMemberImageUuidGetWithHttpInfo(memberId, memberImageUuid) {
       let postBody = null;
       // verify the required parameter 'memberId' is set
       if (memberId === undefined || memberId === null) {
@@ -126,26 +124,31 @@ export default class MemberImageApi {
       return this.apiClient.callApi(
         '/member/{member_id}/member-image/{member_image_uuid}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the memberMemberIdMemberImagePost operation.
-     * @callback module:api/MemberImageApi~memberMemberIdMemberImagePostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/MemberImage} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get member images
+     * @param {Number} memberId 
+     * @param {String} memberImageUuid 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid) {
+      return this.memberMemberIdMemberImageMemberImageUuidGetWithHttpInfo(memberId, memberImageUuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post member image
      * @param {Number} memberId 
      * @param {File} image 
-     * @param {module:api/MemberImageApi~memberMemberIdMemberImagePostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/MemberImage}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/MemberImage} and HTTP response
      */
-    memberMemberIdMemberImagePost(memberId, image, callback) {
+    memberMemberIdMemberImagePostWithHttpInfo(memberId, image) {
       let postBody = null;
       // verify the required parameter 'memberId' is set
       if (memberId === undefined || memberId === null) {
@@ -174,8 +177,21 @@ export default class MemberImageApi {
       return this.apiClient.callApi(
         '/member/{member_id}/member-image', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post member image
+     * @param {Number} memberId 
+     * @param {File} image 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/MemberImage}
+     */
+    memberMemberIdMemberImagePost(memberId, image) {
+      return this.memberMemberIdMemberImagePostWithHttpInfo(memberId, image)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

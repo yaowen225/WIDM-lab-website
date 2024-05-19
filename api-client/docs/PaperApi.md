@@ -28,13 +28,12 @@ let opts = {
   'paperTag': "paperTag_example", // String | 
   'paperAuthor': "paperAuthor_example" // String | 
 };
-apiInstance.paperGet(opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperGet(opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -72,13 +71,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.PaperApi();
 let paperId = 56; // Number | 
-apiInstance.paperPaperIdDelete(paperId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdDelete(paperId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -121,13 +119,12 @@ let opts = {
   'paperOrigin': "paperOrigin_example", // String | 
   'paperLink': "paperLink_example" // String | 
 };
-apiInstance.paperPaperIdPatch(paperId, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -172,13 +169,12 @@ let paperPublishYear = 56; // Number |
 let paperTitle = "paperTitle_example"; // String | 
 let paperOrigin = "paperOrigin_example"; // String | 
 let paperLink = "paperLink_example"; // String | 
-apiInstance.paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -222,13 +218,12 @@ let paperPublishYear = 56; // Number |
 let paperTitle = "paperTitle_example"; // String | 
 let paperOrigin = "paperOrigin_example"; // String | 
 let paperLink = "paperLink_example"; // String | 
-apiInstance.paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

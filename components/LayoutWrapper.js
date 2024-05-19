@@ -11,9 +11,15 @@ import { useRouter } from 'next/router'
 import DropMenu from './DropMenu.js'
 // import Logo from '@/data/logo.svg'
 // import MobileNav from './MobileNav'
+import { useEffect, useState } from 'react'
 
 const LayoutWrapper = ({ children }) => {
   const router = useRouter()
+  const [path, setPath] = useState('')
+
+  useEffect(() => {
+    setPath(router.asPath)
+  }, [router.asPath])
 
   return (
     <SectionContainer>
@@ -21,20 +27,8 @@ const LayoutWrapper = ({ children }) => {
         <header className="flex items-center justify-between py-10">
           <div>
             <Link href="/" aria-label={siteMetadata.headerTitle}>
-              {/* <div className="flex items-center justify-between">
-                <div className="mr-1">
-                  <Logo />
-                </div>
-                {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className="hidden h-6 text-2xl font-semibold sm:block">
-                    {siteMetadata.headerTitle}
-                  </div>
-                ) : (
-                  siteMetadata.headerTitle
-                )}
-              </div> */}
               <div className="text-primary-color dark:text-primary-color-dark flex items-center justify-between text-xl font-semibold">
-                {`~${router.asPath}`}{' '}
+                {`~${path}`}{' '}
                 <Typewriter
                   options={{
                     strings: [],
@@ -59,7 +53,7 @@ const LayoutWrapper = ({ children }) => {
             </div>
             <CommandPalette navigation={navigation} />
             <ThemeSwitch />
-            <DropMenu />
+            {/* <DropMenu /> */}
             {/* <MobileNav /> */}
           </div>
         </header>

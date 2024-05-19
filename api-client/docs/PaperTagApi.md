@@ -25,13 +25,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.PaperTagApi();
 let paperId = 56; // Number | 
-apiInstance.paperPaperIdPaperTagGet(paperId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperTagGet(paperId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -69,13 +68,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperTagApi();
 let paperId = 56; // Number | 
 let tagName = "tagName_example"; // String | 
-apiInstance.paperPaperIdPaperTagPost(paperId, tagName, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperTagPost(paperId, tagName).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -114,13 +112,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperTagApi();
 let paperId = 56; // Number | 
 let tagId = 56; // Number | 
-apiInstance.paperPaperIdPaperTagTagIdDelete(paperId, tagId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperTagTagIdDelete(paperId, tagId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -159,13 +156,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperTagApi();
 let paperId = 56; // Number | 
 let tagId = 56; // Number | 
-apiInstance.paperPaperIdPaperTagTagIdGet(paperId, tagId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperTagTagIdGet(paperId, tagId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -205,13 +201,12 @@ let apiInstance = new WidmBackEnd.PaperTagApi();
 let paperId = 56; // Number | 
 let tagId = 56; // Number | 
 let tagName = "tagName_example"; // String | 
-apiInstance.paperPaperIdPaperTagTagIdPatch(paperId, tagId, tagName, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperTagTagIdPatch(paperId, tagId, tagName).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

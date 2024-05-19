@@ -35,22 +35,14 @@ export default class PaperAuthorApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the paperPaperIdPaperAuthorAuthorIdDelete operation.
-     * @callback module:api/PaperAuthorApi~paperPaperIdPaperAuthorAuthorIdDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAuthor} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * delete author
      * @param {Number} paperId 
      * @param {Number} authorId 
-     * @param {module:api/PaperAuthorApi~paperPaperIdPaperAuthorAuthorIdDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAuthor}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAuthor} and HTTP response
      */
-    paperPaperIdPaperAuthorAuthorIdDelete(paperId, authorId, callback) {
+    paperPaperIdPaperAuthorAuthorIdDeleteWithHttpInfo(paperId, authorId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -79,26 +71,31 @@ export default class PaperAuthorApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-author/{author_id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperAuthorAuthorIdGet operation.
-     * @callback module:api/PaperAuthorApi~paperPaperIdPaperAuthorAuthorIdGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAuthor} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * delete author
+     * @param {Number} paperId 
+     * @param {Number} authorId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAuthor}
      */
+    paperPaperIdPaperAuthorAuthorIdDelete(paperId, authorId) {
+      return this.paperPaperIdPaperAuthorAuthorIdDeleteWithHttpInfo(paperId, authorId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get author
      * @param {Number} paperId 
      * @param {Number} authorId 
-     * @param {module:api/PaperAuthorApi~paperPaperIdPaperAuthorAuthorIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAuthor}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAuthor} and HTTP response
      */
-    paperPaperIdPaperAuthorAuthorIdGet(paperId, authorId, callback) {
+    paperPaperIdPaperAuthorAuthorIdGetWithHttpInfo(paperId, authorId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -127,27 +124,32 @@ export default class PaperAuthorApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-author/{author_id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperAuthorAuthorIdPatch operation.
-     * @callback module:api/PaperAuthorApi~paperPaperIdPaperAuthorAuthorIdPatchCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAuthor} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get author
+     * @param {Number} paperId 
+     * @param {Number} authorId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAuthor}
      */
+    paperPaperIdPaperAuthorAuthorIdGet(paperId, authorId) {
+      return this.paperPaperIdPaperAuthorAuthorIdGetWithHttpInfo(paperId, authorId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * update author
      * @param {Number} paperId 
      * @param {Number} authorId 
      * @param {String} authorName 
-     * @param {module:api/PaperAuthorApi~paperPaperIdPaperAuthorAuthorIdPatchCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAuthor}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAuthor} and HTTP response
      */
-    paperPaperIdPaperAuthorAuthorIdPatch(paperId, authorId, authorName, callback) {
+    paperPaperIdPaperAuthorAuthorIdPatchWithHttpInfo(paperId, authorId, authorName) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -181,25 +183,31 @@ export default class PaperAuthorApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-author/{author_id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperAuthorGet operation.
-     * @callback module:api/PaperAuthorApi~paperPaperIdPaperAuthorGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAuthors} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * update author
+     * @param {Number} paperId 
+     * @param {Number} authorId 
+     * @param {String} authorName 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAuthor}
      */
+    paperPaperIdPaperAuthorAuthorIdPatch(paperId, authorId, authorName) {
+      return this.paperPaperIdPaperAuthorAuthorIdPatchWithHttpInfo(paperId, authorId, authorName)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get paper author
      * @param {Number} paperId 
-     * @param {module:api/PaperAuthorApi~paperPaperIdPaperAuthorGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAuthors}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAuthors} and HTTP response
      */
-    paperPaperIdPaperAuthorGet(paperId, callback) {
+    paperPaperIdPaperAuthorGetWithHttpInfo(paperId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -223,26 +231,30 @@ export default class PaperAuthorApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-author', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperAuthorPost operation.
-     * @callback module:api/PaperAuthorApi~paperPaperIdPaperAuthorPostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAuthor} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get paper author
+     * @param {Number} paperId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAuthors}
      */
+    paperPaperIdPaperAuthorGet(paperId) {
+      return this.paperPaperIdPaperAuthorGetWithHttpInfo(paperId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post paper author
      * @param {Number} paperId 
      * @param {String} authorName 
-     * @param {module:api/PaperAuthorApi~paperPaperIdPaperAuthorPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAuthor}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAuthor} and HTTP response
      */
-    paperPaperIdPaperAuthorPost(paperId, authorName, callback) {
+    paperPaperIdPaperAuthorPostWithHttpInfo(paperId, authorName) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -271,8 +283,21 @@ export default class PaperAuthorApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-author', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post paper author
+     * @param {Number} paperId 
+     * @param {String} authorName 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAuthor}
+     */
+    paperPaperIdPaperAuthorPost(paperId, authorName) {
+      return this.paperPaperIdPaperAuthorPostWithHttpInfo(paperId, authorName)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

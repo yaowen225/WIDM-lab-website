@@ -35,21 +35,13 @@ export default class PaperTagApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the paperPaperIdPaperTagGet operation.
-     * @callback module:api/PaperTagApi~paperPaperIdPaperTagGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperTags} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * get paper tag
      * @param {Number} paperId 
-     * @param {module:api/PaperTagApi~paperPaperIdPaperTagGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperTags}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperTags} and HTTP response
      */
-    paperPaperIdPaperTagGet(paperId, callback) {
+    paperPaperIdPaperTagGetWithHttpInfo(paperId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -73,26 +65,30 @@ export default class PaperTagApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-tag', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperTagPost operation.
-     * @callback module:api/PaperTagApi~paperPaperIdPaperTagPostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperTag} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get paper tag
+     * @param {Number} paperId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperTags}
      */
+    paperPaperIdPaperTagGet(paperId) {
+      return this.paperPaperIdPaperTagGetWithHttpInfo(paperId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post paper tag
      * @param {Number} paperId 
      * @param {String} tagName 
-     * @param {module:api/PaperTagApi~paperPaperIdPaperTagPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperTag}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperTag} and HTTP response
      */
-    paperPaperIdPaperTagPost(paperId, tagName, callback) {
+    paperPaperIdPaperTagPostWithHttpInfo(paperId, tagName) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -121,26 +117,31 @@ export default class PaperTagApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-tag', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperTagTagIdDelete operation.
-     * @callback module:api/PaperTagApi~paperPaperIdPaperTagTagIdDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperTag} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * post paper tag
+     * @param {Number} paperId 
+     * @param {String} tagName 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperTag}
      */
+    paperPaperIdPaperTagPost(paperId, tagName) {
+      return this.paperPaperIdPaperTagPostWithHttpInfo(paperId, tagName)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * delete tag
      * @param {Number} paperId 
      * @param {Number} tagId 
-     * @param {module:api/PaperTagApi~paperPaperIdPaperTagTagIdDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperTag}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperTag} and HTTP response
      */
-    paperPaperIdPaperTagTagIdDelete(paperId, tagId, callback) {
+    paperPaperIdPaperTagTagIdDeleteWithHttpInfo(paperId, tagId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -169,26 +170,31 @@ export default class PaperTagApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-tag/{tag_id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperTagTagIdGet operation.
-     * @callback module:api/PaperTagApi~paperPaperIdPaperTagTagIdGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperTag} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * delete tag
+     * @param {Number} paperId 
+     * @param {Number} tagId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperTag}
      */
+    paperPaperIdPaperTagTagIdDelete(paperId, tagId) {
+      return this.paperPaperIdPaperTagTagIdDeleteWithHttpInfo(paperId, tagId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get tag
      * @param {Number} paperId 
      * @param {Number} tagId 
-     * @param {module:api/PaperTagApi~paperPaperIdPaperTagTagIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperTag}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperTag} and HTTP response
      */
-    paperPaperIdPaperTagTagIdGet(paperId, tagId, callback) {
+    paperPaperIdPaperTagTagIdGetWithHttpInfo(paperId, tagId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -217,27 +223,32 @@ export default class PaperTagApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-tag/{tag_id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperTagTagIdPatch operation.
-     * @callback module:api/PaperTagApi~paperPaperIdPaperTagTagIdPatchCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperTag} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get tag
+     * @param {Number} paperId 
+     * @param {Number} tagId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperTag}
      */
+    paperPaperIdPaperTagTagIdGet(paperId, tagId) {
+      return this.paperPaperIdPaperTagTagIdGetWithHttpInfo(paperId, tagId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * update tag
      * @param {Number} paperId 
      * @param {Number} tagId 
      * @param {String} tagName 
-     * @param {module:api/PaperTagApi~paperPaperIdPaperTagTagIdPatchCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperTag}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperTag} and HTTP response
      */
-    paperPaperIdPaperTagTagIdPatch(paperId, tagId, tagName, callback) {
+    paperPaperIdPaperTagTagIdPatchWithHttpInfo(paperId, tagId, tagName) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -271,8 +282,22 @@ export default class PaperTagApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-tag/{tag_id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * update tag
+     * @param {Number} paperId 
+     * @param {Number} tagId 
+     * @param {String} tagName 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperTag}
+     */
+    paperPaperIdPaperTagTagIdPatch(paperId, tagId, tagName) {
+      return this.paperPaperIdPaperTagTagIdPatchWithHttpInfo(paperId, tagId, tagName)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

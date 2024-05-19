@@ -34,21 +34,13 @@ export default class ActivityApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the activityActivityIdDelete operation.
-     * @callback module:api/ActivityApi~activityActivityIdDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Activity} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * delete activity
      * @param {Number} activityId 
-     * @param {module:api/ActivityApi~activityActivityIdDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
      */
-    activityActivityIdDelete(activityId, callback) {
+    activityActivityIdDeleteWithHttpInfo(activityId) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -72,25 +64,29 @@ export default class ActivityApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityActivityIdGet operation.
-     * @callback module:api/ActivityApi~activityActivityIdGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Activity} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * delete activity
+     * @param {Number} activityId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
      */
+    activityActivityIdDelete(activityId) {
+      return this.activityActivityIdDeleteWithHttpInfo(activityId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get activity
      * @param {Number} activityId 
-     * @param {module:api/ActivityApi~activityActivityIdGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
      */
-    activityActivityIdGet(activityId, callback) {
+    activityActivityIdGetWithHttpInfo(activityId) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -114,17 +110,22 @@ export default class ActivityApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityActivityIdPatch operation.
-     * @callback module:api/ActivityApi~activityActivityIdPatchCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Activity} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get activity
+     * @param {Number} activityId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
      */
+    activityActivityIdGet(activityId) {
+      return this.activityActivityIdGetWithHttpInfo(activityId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * patch activity
@@ -132,10 +133,9 @@ export default class ActivityApi {
      * @param {Object} opts Optional parameters
      * @param {String} [activityTitle] 
      * @param {String} [activitySubTitle] 
-     * @param {module:api/ActivityApi~activityActivityIdPatchCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
      */
-    activityActivityIdPatch(activityId, opts, callback) {
+    activityActivityIdPatchWithHttpInfo(activityId, opts) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'activityId' is set
@@ -162,27 +162,34 @@ export default class ActivityApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityActivityIdPut operation.
-     * @callback module:api/ActivityApi~activityActivityIdPutCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Activity} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * patch activity
+     * @param {Number} activityId 
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.activityTitle 
+     * @param {String} opts.activitySubTitle 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
      */
+    activityActivityIdPatch(activityId, opts) {
+      return this.activityActivityIdPatchWithHttpInfo(activityId, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * put activity
      * @param {Number} activityId 
      * @param {String} activityTitle 
      * @param {String} activitySubTitle 
-     * @param {module:api/ActivityApi~activityActivityIdPutCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
      */
-    activityActivityIdPut(activityId, activityTitle, activitySubTitle, callback) {
+    activityActivityIdPutWithHttpInfo(activityId, activityTitle, activitySubTitle) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -216,24 +223,30 @@ export default class ActivityApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityGet operation.
-     * @callback module:api/ActivityApi~activityGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Activity} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * put activity
+     * @param {Number} activityId 
+     * @param {String} activityTitle 
+     * @param {String} activitySubTitle 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
      */
+    activityActivityIdPut(activityId, activityTitle, activitySubTitle) {
+      return this.activityActivityIdPutWithHttpInfo(activityId, activityTitle, activitySubTitle)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * put activity
-     * @param {module:api/ActivityApi~activityGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
      */
-    activityGet(callback) {
+    activityGetWithHttpInfo() {
       let postBody = null;
 
       let pathParams = {
@@ -252,26 +265,29 @@ export default class ActivityApi {
       return this.apiClient.callApi(
         '/activity', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityPost operation.
-     * @callback module:api/ActivityApi~activityPostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Activity} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * put activity
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
      */
+    activityGet() {
+      return this.activityGetWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post activity
      * @param {String} activityTitle 
      * @param {String} activitySubTitle 
-     * @param {module:api/ActivityApi~activityPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
      */
-    activityPost(activityTitle, activitySubTitle, callback) {
+    activityPostWithHttpInfo(activityTitle, activitySubTitle) {
       let postBody = null;
       // verify the required parameter 'activityTitle' is set
       if (activityTitle === undefined || activityTitle === null) {
@@ -300,8 +316,21 @@ export default class ActivityApi {
       return this.apiClient.callApi(
         '/activity', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post activity
+     * @param {String} activityTitle 
+     * @param {String} activitySubTitle 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
+     */
+    activityPost(activityTitle, activitySubTitle) {
+      return this.activityPostWithHttpInfo(activityTitle, activitySubTitle)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

@@ -24,13 +24,12 @@ get members
 import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.MemberApi();
-apiInstance.memberGet((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberGet().then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -64,13 +63,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.MemberApi();
 let memberId = 56; // Number | 
-apiInstance.memberMemberIdDelete(memberId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberMemberIdDelete(memberId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -111,13 +109,12 @@ let opts = {
   'memberName': "memberName_example", // String | 
   'memberIntro': "memberIntro_example" // String | 
 };
-apiInstance.memberMemberIdPatch(memberId, opts, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberMemberIdPatch(memberId, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -158,13 +155,12 @@ let apiInstance = new WidmBackEnd.MemberApi();
 let memberId = 56; // Number | 
 let memberName = "memberName_example"; // String | 
 let memberIntro = "memberIntro_example"; // String | 
-apiInstance.memberMemberIdPut(memberId, memberName, memberIntro, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberMemberIdPut(memberId, memberName, memberIntro).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -204,13 +200,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.MemberApi();
 let memberName = "memberName_example"; // String | 
 let memberIntro = "memberIntro_example"; // String | 
-apiInstance.memberPost(memberName, memberIntro, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.memberPost(memberName, memberIntro).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

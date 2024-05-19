@@ -10,3 +10,6 @@ docker run -d -p 7230:7230 -p 24678:24678 -v ${PWD}:/usr/src/app --name widm-fro
 # ./run_docker.sh
 
 # --legacy-peer-deps
+
+# openapi-generator-cli generate -i swagger.json -g javascript -o ./api-client -t ./custom-templates/javascript --additional-properties=usePromises=true
+

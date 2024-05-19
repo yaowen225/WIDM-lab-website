@@ -104,14 +104,12 @@ var WidmBackEnd = require('widm_back_end');
 
 var api = new WidmBackEnd.ActivityApi()
 var activityId = 56; // {Number} 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.activityActivityIdDelete(activityId, callback);
+api.activityActivityIdDelete(activityId).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 
 ```
 

@@ -25,13 +25,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.ActivityImageApi();
 let activityId = 56; // Number | 
 let activityImageUuid = "activityImageUuid_example"; // String | 
-apiInstance.activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -70,13 +69,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.ActivityImageApi();
 let activityId = 56; // Number | 
 let activityImageUuid = "activityImageUuid_example"; // String | 
-apiInstance.activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
+apiInstance.activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -114,13 +112,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.ActivityImageApi();
 let activityId = 56; // Number | 
-apiInstance.activityActivityIdActivityImageGet(activityId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdActivityImageGet(activityId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -158,13 +155,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.ActivityImageApi();
 let activityId = 56; // Number | 
 let image = "/path/to/file"; // File | 
-apiInstance.activityActivityIdActivityImagePost(activityId, image, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.activityActivityIdActivityImagePost(activityId, image).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

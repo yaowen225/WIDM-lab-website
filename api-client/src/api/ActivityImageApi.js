@@ -34,22 +34,14 @@ export default class ActivityImageApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the activityActivityIdActivityImageActivityImageUuidDelete operation.
-     * @callback module:api/ActivityImageApi~activityActivityIdActivityImageActivityImageUuidDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ActivityImage} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * delete activity image
      * @param {Number} activityId 
      * @param {String} activityImageUuid 
-     * @param {module:api/ActivityImageApi~activityActivityIdActivityImageActivityImageUuidDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ActivityImage}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActivityImage} and HTTP response
      */
-    activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid, callback) {
+    activityActivityIdActivityImageActivityImageUuidDeleteWithHttpInfo(activityId, activityImageUuid) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -78,25 +70,31 @@ export default class ActivityImageApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}/activity-image/{activity_image_uuid}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityActivityIdActivityImageActivityImageUuidGet operation.
-     * @callback module:api/ActivityImageApi~activityActivityIdActivityImageActivityImageUuidGetCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * delete activity image
+     * @param {Number} activityId 
+     * @param {String} activityImageUuid 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActivityImage}
      */
+    activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid) {
+      return this.activityActivityIdActivityImageActivityImageUuidDeleteWithHttpInfo(activityId, activityImageUuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get activity image
      * @param {Number} activityId 
      * @param {String} activityImageUuid 
-     * @param {module:api/ActivityImageApi~activityActivityIdActivityImageActivityImageUuidGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid, callback) {
+    activityActivityIdActivityImageActivityImageUuidGetWithHttpInfo(activityId, activityImageUuid) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -125,25 +123,30 @@ export default class ActivityImageApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}/activity-image/{activity_image_uuid}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityActivityIdActivityImageGet operation.
-     * @callback module:api/ActivityImageApi~activityActivityIdActivityImageGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ActivityImage} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get activity image
+     * @param {Number} activityId 
+     * @param {String} activityImageUuid 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid) {
+      return this.activityActivityIdActivityImageActivityImageUuidGetWithHttpInfo(activityId, activityImageUuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get activity images
      * @param {Number} activityId 
-     * @param {module:api/ActivityImageApi~activityActivityIdActivityImageGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ActivityImage}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActivityImage} and HTTP response
      */
-    activityActivityIdActivityImageGet(activityId, callback) {
+    activityActivityIdActivityImageGetWithHttpInfo(activityId) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -167,26 +170,30 @@ export default class ActivityImageApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}/activity-image', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the activityActivityIdActivityImagePost operation.
-     * @callback module:api/ActivityImageApi~activityActivityIdActivityImagePostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/ActivityImage} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get activity images
+     * @param {Number} activityId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActivityImage}
      */
+    activityActivityIdActivityImageGet(activityId) {
+      return this.activityActivityIdActivityImageGetWithHttpInfo(activityId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post activity image
      * @param {Number} activityId 
      * @param {File} image 
-     * @param {module:api/ActivityImageApi~activityActivityIdActivityImagePostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/ActivityImage}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActivityImage} and HTTP response
      */
-    activityActivityIdActivityImagePost(activityId, image, callback) {
+    activityActivityIdActivityImagePostWithHttpInfo(activityId, image) {
       let postBody = null;
       // verify the required parameter 'activityId' is set
       if (activityId === undefined || activityId === null) {
@@ -215,8 +222,21 @@ export default class ActivityImageApi {
       return this.apiClient.callApi(
         '/activity/{activity_id}/activity-image', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post activity image
+     * @param {Number} activityId 
+     * @param {File} image 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActivityImage}
+     */
+    activityActivityIdActivityImagePost(activityId, image) {
+      return this.activityActivityIdActivityImagePostWithHttpInfo(activityId, image)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

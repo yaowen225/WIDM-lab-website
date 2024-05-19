@@ -35,68 +35,61 @@ export default class PaperApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the paperGet operation.
-     * @callback module:api/PaperApi~paperGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Papers} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * get_papers
      * @param {Object} opts Optional parameters
      * @param {String} [paperTag] 
      * @param {String} [paperAuthor] 
-     * @param {module:api/PaperApi~paperGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Papers}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Papers} and HTTP response
      */
-    paperGet() {
+    paperGetWithHttpInfo(opts) {
+      opts = opts || {};
       let postBody = null;
-  
-      let pathParams = {};
-      let queryParams = {};
-      let headerParams = {};
-      let formParams = {};
-  
+
+      let pathParams = {
+      };
+      let queryParams = {
+        'paper_tag': opts['paperTag'],
+        'paper_author': opts['paperAuthor']
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
       let authNames = [];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = Paper;
-  
-      return new Promise((resolve, reject) => {
-        this.apiClient.callApi(
-          '/paper', 'GET',
-          pathParams, queryParams, headerParams, formParams, postBody,
-          authNames, contentTypes, accepts, returnType, null,
-          (error, data, response) => {
-            if (error) {
-              console.error('API 调用失败:', response ? response.text : '没有响应');
-              reject(error);
-            } else {
-              console.log('API 返回数据:', data);
-              resolve(data);
-            }
-          }
-        );
-      });
+      let returnType = Papers;
+      return this.apiClient.callApi(
+        '/paper', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdDelete operation.
-     * @callback module:api/PaperApi~paperPaperIdDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Paper} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get_papers
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.paperTag 
+     * @param {String} opts.paperAuthor 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Papers}
      */
+    paperGet(opts) {
+      return this.paperGetWithHttpInfo(opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * delete paper
      * @param {Number} paperId 
-     * @param {module:api/PaperApi~paperPaperIdDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Paper}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
-    paperPaperIdDelete(paperId, callback) {
+    paperPaperIdDeleteWithHttpInfo(paperId) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -120,17 +113,22 @@ export default class PaperApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPatch operation.
-     * @callback module:api/PaperApi~paperPaperIdPatchCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Paper} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * delete paper
+     * @param {Number} paperId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
+    paperPaperIdDelete(paperId) {
+      return this.paperPaperIdDeleteWithHttpInfo(paperId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * patch paper
@@ -140,10 +138,9 @@ export default class PaperApi {
      * @param {String} [paperTitle] 
      * @param {String} [paperOrigin] 
      * @param {String} [paperLink] 
-     * @param {module:api/PaperApi~paperPaperIdPatchCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Paper}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
-    paperPaperIdPatch(paperId, opts, callback) {
+    paperPaperIdPatchWithHttpInfo(paperId, opts) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'paperId' is set
@@ -172,17 +169,27 @@ export default class PaperApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPut operation.
-     * @callback module:api/PaperApi~paperPaperIdPutCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Paper} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * patch paper
+     * @param {Number} paperId 
+     * @param {Object} opts Optional parameters
+     * @param {Number} opts.paperPublishYear 
+     * @param {String} opts.paperTitle 
+     * @param {String} opts.paperOrigin 
+     * @param {String} opts.paperLink 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
+    paperPaperIdPatch(paperId, opts) {
+      return this.paperPaperIdPatchWithHttpInfo(paperId, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * put paper
@@ -191,10 +198,9 @@ export default class PaperApi {
      * @param {String} paperTitle 
      * @param {String} paperOrigin 
      * @param {String} paperLink 
-     * @param {module:api/PaperApi~paperPaperIdPutCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Paper}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
-    paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink, callback) {
+    paperPaperIdPutWithHttpInfo(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -238,17 +244,26 @@ export default class PaperApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPost operation.
-     * @callback module:api/PaperApi~paperPostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Paper} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * put paper
+     * @param {Number} paperId 
+     * @param {Number} paperPublishYear 
+     * @param {String} paperTitle 
+     * @param {String} paperOrigin 
+     * @param {String} paperLink 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
+    paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink) {
+      return this.paperPaperIdPutWithHttpInfo(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post paper
@@ -256,10 +271,9 @@ export default class PaperApi {
      * @param {String} paperTitle 
      * @param {String} paperOrigin 
      * @param {String} paperLink 
-     * @param {module:api/PaperApi~paperPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Paper}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
-    paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink, callback) {
+    paperPostWithHttpInfo(paperPublishYear, paperTitle, paperOrigin, paperLink) {
       let postBody = null;
       // verify the required parameter 'paperPublishYear' is set
       if (paperPublishYear === undefined || paperPublishYear === null) {
@@ -298,8 +312,23 @@ export default class PaperApi {
       return this.apiClient.callApi(
         '/paper', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post paper
+     * @param {Number} paperPublishYear 
+     * @param {String} paperTitle 
+     * @param {String} paperOrigin 
+     * @param {String} paperLink 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
+     */
+    paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink) {
+      return this.paperPostWithHttpInfo(paperPublishYear, paperTitle, paperOrigin, paperLink)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

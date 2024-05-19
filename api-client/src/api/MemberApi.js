@@ -35,20 +35,12 @@ export default class MemberApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the memberGet operation.
-     * @callback module:api/MemberApi~memberGetCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Members} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * get members
-     * @param {module:api/MemberApi~memberGetCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Members}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Members} and HTTP response
      */
-    memberGet(callback) {
+    memberGetWithHttpInfo() {
       let postBody = null;
 
       let pathParams = {
@@ -67,25 +59,28 @@ export default class MemberApi {
       return this.apiClient.callApi(
         '/member', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the memberMemberIdDelete operation.
-     * @callback module:api/MemberApi~memberMemberIdDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Member} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get members
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Members}
      */
+    memberGet() {
+      return this.memberGetWithHttpInfo()
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * delete member
      * @param {Number} memberId 
-     * @param {module:api/MemberApi~memberMemberIdDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Member}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
      */
-    memberMemberIdDelete(memberId, callback) {
+    memberMemberIdDeleteWithHttpInfo(memberId) {
       let postBody = null;
       // verify the required parameter 'memberId' is set
       if (memberId === undefined || memberId === null) {
@@ -109,17 +104,22 @@ export default class MemberApi {
       return this.apiClient.callApi(
         '/member/{member_id}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the memberMemberIdPatch operation.
-     * @callback module:api/MemberApi~memberMemberIdPatchCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Member} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * delete member
+     * @param {Number} memberId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
      */
+    memberMemberIdDelete(memberId) {
+      return this.memberMemberIdDeleteWithHttpInfo(memberId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * patch member
@@ -127,10 +127,9 @@ export default class MemberApi {
      * @param {Object} opts Optional parameters
      * @param {String} [memberName] 
      * @param {String} [memberIntro] 
-     * @param {module:api/MemberApi~memberMemberIdPatchCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Member}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
      */
-    memberMemberIdPatch(memberId, opts, callback) {
+    memberMemberIdPatchWithHttpInfo(memberId, opts) {
       opts = opts || {};
       let postBody = null;
       // verify the required parameter 'memberId' is set
@@ -157,27 +156,34 @@ export default class MemberApi {
       return this.apiClient.callApi(
         '/member/{member_id}', 'PATCH',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the memberMemberIdPut operation.
-     * @callback module:api/MemberApi~memberMemberIdPutCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Member} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * patch member
+     * @param {Number} memberId 
+     * @param {Object} opts Optional parameters
+     * @param {String} opts.memberName 
+     * @param {String} opts.memberIntro 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
      */
+    memberMemberIdPatch(memberId, opts) {
+      return this.memberMemberIdPatchWithHttpInfo(memberId, opts)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * put member
      * @param {Number} memberId 
      * @param {String} memberName 
      * @param {String} memberIntro 
-     * @param {module:api/MemberApi~memberMemberIdPutCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Member}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
      */
-    memberMemberIdPut(memberId, memberName, memberIntro, callback) {
+    memberMemberIdPutWithHttpInfo(memberId, memberName, memberIntro) {
       let postBody = null;
       // verify the required parameter 'memberId' is set
       if (memberId === undefined || memberId === null) {
@@ -211,26 +217,32 @@ export default class MemberApi {
       return this.apiClient.callApi(
         '/member/{member_id}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the memberPost operation.
-     * @callback module:api/MemberApi~memberPostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/Member} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * put member
+     * @param {Number} memberId 
+     * @param {String} memberName 
+     * @param {String} memberIntro 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
      */
+    memberMemberIdPut(memberId, memberName, memberIntro) {
+      return this.memberMemberIdPutWithHttpInfo(memberId, memberName, memberIntro)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post member
      * @param {String} memberName 
      * @param {String} memberIntro 
-     * @param {module:api/MemberApi~memberPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/Member}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
      */
-    memberPost(memberName, memberIntro, callback) {
+    memberPostWithHttpInfo(memberName, memberIntro) {
       let postBody = null;
       // verify the required parameter 'memberName' is set
       if (memberName === undefined || memberName === null) {
@@ -259,8 +271,21 @@ export default class MemberApi {
       return this.apiClient.callApi(
         '/member', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post member
+     * @param {String} memberName 
+     * @param {String} memberIntro 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
+     */
+    memberPost(memberName, memberIntro) {
+      return this.memberPostWithHttpInfo(memberName, memberIntro)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

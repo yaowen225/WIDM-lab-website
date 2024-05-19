@@ -24,13 +24,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperAttachmentApi();
 let paperId = 56; // Number | 
 let paperAttachmentUuid = "paperAttachmentUuid_example"; // String | 
-apiInstance.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -69,13 +68,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperAttachmentApi();
 let paperId = 56; // Number | 
 let paperAttachmentUuid = "paperAttachmentUuid_example"; // String | 
-apiInstance.paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
+apiInstance.paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid).then(() => {
+  console.log('API called successfully.');
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -114,13 +112,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperAttachmentApi();
 let paperId = 56; // Number | 
 let attachment = "/path/to/file"; // File | 
-apiInstance.paperPaperIdPaperAttachmentPost(paperId, attachment, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAttachmentPost(paperId, attachment).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

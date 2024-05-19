@@ -24,9 +24,9 @@ class Paper {
      * Constructs a new <code>Paper</code>.
      * @alias module:model/Paper
      */
-    constructor() {
-      this.description = '';
-      this.response = [];
+    constructor() { 
+        
+        Paper.initialize(this);
     }
 
     /**
@@ -45,17 +45,17 @@ class Paper {
      * @return {module:model/Paper} The populated <code>Paper</code> instance.
      */
     static constructFromObject(data, obj) {
-      if (data) {
-        obj = obj || new Paper();
-        if (data.hasOwnProperty('description')) {
-          obj['description'] = data['description'];
+        if (data) {
+            obj = obj || new Paper();
+
+            if (data.hasOwnProperty('description')) {
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
+            }
+            if (data.hasOwnProperty('response')) {
+                obj['response'] = PaperResponse.constructFromObject(data['response']);
+            }
         }
-        if (data.hasOwnProperty('response')) {
-          console.log('构建 Paper 对象时的 response:', data['response']); // 调试信息
-          obj['response'] = data['response'];
-        }
-      }
-      return obj;
+        return obj;
     }
 
     /**

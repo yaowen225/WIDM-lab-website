@@ -34,22 +34,14 @@ export default class PaperAttachmentApi {
     }
 
 
-    /**
-     * Callback function to receive the result of the paperPaperIdPaperAttachmentPaperAttachmentUuidDelete operation.
-     * @callback module:api/PaperAttachmentApi~paperPaperIdPaperAttachmentPaperAttachmentUuidDeleteCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAttachment} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
 
     /**
      * delete paper attachment
      * @param {Number} paperId 
      * @param {String} paperAttachmentUuid 
-     * @param {module:api/PaperAttachmentApi~paperPaperIdPaperAttachmentPaperAttachmentUuidDeleteCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAttachment}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAttachment} and HTTP response
      */
-    paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid, callback) {
+    paperPaperIdPaperAttachmentPaperAttachmentUuidDeleteWithHttpInfo(paperId, paperAttachmentUuid) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -78,25 +70,31 @@ export default class PaperAttachmentApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-attachment/{paper_attachment_uuid}', 'DELETE',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperAttachmentPaperAttachmentUuidGet operation.
-     * @callback module:api/PaperAttachmentApi~paperPaperIdPaperAttachmentPaperAttachmentUuidGetCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
+     * delete paper attachment
+     * @param {Number} paperId 
+     * @param {String} paperAttachmentUuid 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAttachment}
      */
+    paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid) {
+      return this.paperPaperIdPaperAttachmentPaperAttachmentUuidDeleteWithHttpInfo(paperId, paperAttachmentUuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * get paper attachment
      * @param {Number} paperId 
      * @param {String} paperAttachmentUuid 
-     * @param {module:api/PaperAttachmentApi~paperPaperIdPaperAttachmentPaperAttachmentUuidGetCallback} callback The callback function, accepting three arguments: error, data, response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
-    paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid, callback) {
+    paperPaperIdPaperAttachmentPaperAttachmentUuidGetWithHttpInfo(paperId, paperAttachmentUuid) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -125,26 +123,31 @@ export default class PaperAttachmentApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-attachment/{paper_attachment_uuid}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
     }
 
     /**
-     * Callback function to receive the result of the paperPaperIdPaperAttachmentPost operation.
-     * @callback module:api/PaperAttachmentApi~paperPaperIdPaperAttachmentPostCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/PaperAttachment} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
+     * get paper attachment
+     * @param {Number} paperId 
+     * @param {String} paperAttachmentUuid 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
+    paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid) {
+      return this.paperPaperIdPaperAttachmentPaperAttachmentUuidGetWithHttpInfo(paperId, paperAttachmentUuid)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
 
     /**
      * post paper attachment
      * @param {Number} paperId 
      * @param {File} attachment 
-     * @param {module:api/PaperAttachmentApi~paperPaperIdPaperAttachmentPostCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PaperAttachment}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAttachment} and HTTP response
      */
-    paperPaperIdPaperAttachmentPost(paperId, attachment, callback) {
+    paperPaperIdPaperAttachmentPostWithHttpInfo(paperId, attachment) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
@@ -173,8 +176,21 @@ export default class PaperAttachmentApi {
       return this.apiClient.callApi(
         '/paper/{paper_id}/paper-attachment', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
+        authNames, contentTypes, accepts, returnType, null
       );
+    }
+
+    /**
+     * post paper attachment
+     * @param {Number} paperId 
+     * @param {File} attachment 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAttachment}
+     */
+    paperPaperIdPaperAttachmentPost(paperId, attachment) {
+      return this.paperPaperIdPaperAttachmentPostWithHttpInfo(paperId, attachment)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
     }
 
 

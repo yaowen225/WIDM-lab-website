@@ -26,13 +26,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperAuthorApi();
 let paperId = 56; // Number | 
 let authorId = 56; // Number | 
-apiInstance.paperPaperIdPaperAuthorAuthorIdDelete(paperId, authorId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAuthorAuthorIdDelete(paperId, authorId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -71,13 +70,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperAuthorApi();
 let paperId = 56; // Number | 
 let authorId = 56; // Number | 
-apiInstance.paperPaperIdPaperAuthorAuthorIdGet(paperId, authorId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAuthorAuthorIdGet(paperId, authorId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -117,13 +115,12 @@ let apiInstance = new WidmBackEnd.PaperAuthorApi();
 let paperId = 56; // Number | 
 let authorId = 56; // Number | 
 let authorName = "authorName_example"; // String | 
-apiInstance.paperPaperIdPaperAuthorAuthorIdPatch(paperId, authorId, authorName, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAuthorAuthorIdPatch(paperId, authorId, authorName).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -162,13 +159,12 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.PaperAuthorApi();
 let paperId = 56; // Number | 
-apiInstance.paperPaperIdPaperAuthorGet(paperId, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAuthorGet(paperId).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -206,13 +202,12 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperAuthorApi();
 let paperId = 56; // Number | 
 let authorName = "authorName_example"; // String | 
-apiInstance.paperPaperIdPaperAuthorPost(paperId, authorName, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+apiInstance.paperPaperIdPaperAuthorPost(paperId, authorName).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
