@@ -53,9 +53,12 @@ class ApiClient {
          * @type {Array.<String>}
          * @default {}
          */
-        this.defaultHeaders = {
-            'User-Agent': 'OpenAPI-Generator/1.0.0/Javascript'
-        };
+
+        this.defaultHeaders = {};
+
+        if (typeof window === 'undefined') {
+            this.defaultHeaders['User-Agent'] = 'OpenAPI-Generator/1.0.0/Javascript';
+        }
 
         /**
          * The default HTTP timeout for all API calls.
