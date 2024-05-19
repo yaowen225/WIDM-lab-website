@@ -20,7 +20,6 @@ const Papers = () => {
       const apiClient = new PaperApi()
       try {
         const data = await apiClient.paperGet()
-        console.log('API Response:', data.response)
 
         // 確保每個 paper 都有唯一的 `id`
         const papersWithId = data.response.map((paper, index) => ({
