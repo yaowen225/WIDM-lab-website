@@ -6,12 +6,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app;
-  style-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
+  font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
   img-src * blob: data:;
   media-src 'none';
   connect-src *;
-  font-src 'self';
-  frame-src giscus.app
+  frame-src giscus.app;
 `;
 
 // Security headers
@@ -133,4 +133,3 @@ module.exports = withBundleAnalyzer({
     NEXTAUTH_URL: 'http://localhost:3000/api/auth',
   },
 });
-
