@@ -1,15 +1,33 @@
+import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
-import Tweet from '@/components/Activate'
-import { getTweets } from '@/lib/twitter'
+import Activate from '@/components/Activate'
+import { ActivityApi } from '../api-client/src'
 
-export async function getStaticProps() {
-  const tweets = []
 
-  return { props: { tweets } }
-}
+export const activate = () => {
 
-export default function Tweets({ tweets }) {
+  const [activates, setActivates] = useState([])
+
+  useEffect(() => {
+    const fetchActivates = async () => {
+      const apiClient = new ActivityApi()
+      try {
+        const data = await apiClient.activityGet()
+
+        setActivates(data.response)
+        console.log(data.response)
+      } catch (error) {
+        console.error('API 調用失敗:', error.message)
+        if (error.response) {
+          console.error('API Response Error:', error.response.body)
+        }
+      }
+    }
+
+    fetchActivates()
+  }, [])
+
   return (
     <>
       <PageSEO
@@ -19,17 +37,15 @@ export default function Tweets({ tweets }) {
       <div className="mx-auto max-w-2xl">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            Tweets
+            Activates
           </h1>
-          <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
-            This is a collection of tweets I've enjoyed. I use Twitter quite a bit, so I wanted a
-            place to publicly share what inspires me, makes me laugh, and makes me think.
-          </p>
         </div>
-        {tweets.map((tweet) => (
-          <Tweet key={tweet.id} {...tweet} />
+        {activates.map((activate) => (
+          <Activate key={activate.id} {...activate} />
         ))}
       </div>
     </>
   )
 }
+
+export default activate

@@ -8,7 +8,7 @@ export const Members = () => {
   const [members, setMembers] = useState([])
 
   useEffect(() => {
-    const fetchPapers = async () => {
+    const fetchMembers = async () => {
       const apiClient = new MemberApi()
       try {
         const data = await apiClient.memberGet()
@@ -23,7 +23,7 @@ export const Members = () => {
       }
     }
 
-    fetchPapers()
+    fetchMembers()
   }, [])
 
   return (
