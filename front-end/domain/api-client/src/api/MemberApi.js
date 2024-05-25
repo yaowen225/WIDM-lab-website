@@ -14,6 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import Member from '../model/Member';
+import MemberInput from '../model/MemberInput';
 import Members from '../model/Members';
 
 /**
@@ -125,13 +126,12 @@ export default class MemberApi {
      * patch member
      * @param {Number} memberId 
      * @param {Object} opts Optional parameters
-     * @param {String} [memberName] 
-     * @param {String} [memberIntro] 
+     * @param {module:model/MemberInput} [member] 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
      */
     memberMemberIdPatchWithHttpInfo(memberId, opts) {
       opts = opts || {};
-      let postBody = null;
+      let postBody = opts['member'];
       // verify the required parameter 'memberId' is set
       if (memberId === undefined || memberId === null) {
         throw new Error("Missing the required parameter 'memberId' when calling memberMemberIdPatch");
@@ -145,12 +145,10 @@ export default class MemberApi {
       let headerParams = {
       };
       let formParams = {
-        'member_name': opts['memberName'],
-        'member_intro': opts['memberIntro']
       };
 
       let authNames = [];
-      let contentTypes = ['multipart/form-data'];
+      let contentTypes = [];
       let accepts = ['*/*'];
       let returnType = Member;
       return this.apiClient.callApi(
@@ -164,8 +162,7 @@ export default class MemberApi {
      * patch member
      * @param {Number} memberId 
      * @param {Object} opts Optional parameters
-     * @param {String} opts.memberName 
-     * @param {String} opts.memberIntro 
+     * @param {module:model/MemberInput} opts.member 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
      */
     memberMemberIdPatch(memberId, opts) {
@@ -177,81 +174,14 @@ export default class MemberApi {
 
 
     /**
-     * put member
-     * @param {Number} memberId 
-     * @param {String} memberName 
-     * @param {String} memberIntro 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
-     */
-    memberMemberIdPutWithHttpInfo(memberId, memberName, memberIntro) {
-      let postBody = null;
-      // verify the required parameter 'memberId' is set
-      if (memberId === undefined || memberId === null) {
-        throw new Error("Missing the required parameter 'memberId' when calling memberMemberIdPut");
-      }
-      // verify the required parameter 'memberName' is set
-      if (memberName === undefined || memberName === null) {
-        throw new Error("Missing the required parameter 'memberName' when calling memberMemberIdPut");
-      }
-      // verify the required parameter 'memberIntro' is set
-      if (memberIntro === undefined || memberIntro === null) {
-        throw new Error("Missing the required parameter 'memberIntro' when calling memberMemberIdPut");
-      }
-
-      let pathParams = {
-        'member_id': memberId
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-        'member_name': memberName,
-        'member_intro': memberIntro
-      };
-
-      let authNames = [];
-      let contentTypes = ['multipart/form-data'];
-      let accepts = ['*/*'];
-      let returnType = Member;
-      return this.apiClient.callApi(
-        '/member/{member_id}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
-      );
-    }
-
-    /**
-     * put member
-     * @param {Number} memberId 
-     * @param {String} memberName 
-     * @param {String} memberIntro 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
-     */
-    memberMemberIdPut(memberId, memberName, memberIntro) {
-      return this.memberMemberIdPutWithHttpInfo(memberId, memberName, memberIntro)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
      * post member
-     * @param {String} memberName 
-     * @param {String} memberIntro 
+     * @param {Object} opts Optional parameters
+     * @param {module:model/MemberInput} [member] 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Member} and HTTP response
      */
-    memberPostWithHttpInfo(memberName, memberIntro) {
-      let postBody = null;
-      // verify the required parameter 'memberName' is set
-      if (memberName === undefined || memberName === null) {
-        throw new Error("Missing the required parameter 'memberName' when calling memberPost");
-      }
-      // verify the required parameter 'memberIntro' is set
-      if (memberIntro === undefined || memberIntro === null) {
-        throw new Error("Missing the required parameter 'memberIntro' when calling memberPost");
-      }
+    memberPostWithHttpInfo(opts) {
+      opts = opts || {};
+      let postBody = opts['member'];
 
       let pathParams = {
       };
@@ -260,12 +190,10 @@ export default class MemberApi {
       let headerParams = {
       };
       let formParams = {
-        'member_name': memberName,
-        'member_intro': memberIntro
       };
 
       let authNames = [];
-      let contentTypes = ['multipart/form-data'];
+      let contentTypes = [];
       let accepts = ['*/*'];
       let returnType = Member;
       return this.apiClient.callApi(
@@ -277,12 +205,12 @@ export default class MemberApi {
 
     /**
      * post member
-     * @param {String} memberName 
-     * @param {String} memberIntro 
+     * @param {Object} opts Optional parameters
+     * @param {module:model/MemberInput} opts.member 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Member}
      */
-    memberPost(memberName, memberIntro) {
-      return this.memberPostWithHttpInfo(memberName, memberIntro)
+    memberPost(opts) {
+      return this.memberPostWithHttpInfo(opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

@@ -142,52 +142,6 @@ export default class ActivityImageApi {
 
 
     /**
-     * get activity images
-     * @param {Number} activityId 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ActivityImage} and HTTP response
-     */
-    activityActivityIdActivityImageGetWithHttpInfo(activityId) {
-      let postBody = null;
-      // verify the required parameter 'activityId' is set
-      if (activityId === undefined || activityId === null) {
-        throw new Error("Missing the required parameter 'activityId' when calling activityActivityIdActivityImageGet");
-      }
-
-      let pathParams = {
-        'activity_id': activityId
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = [];
-      let contentTypes = [];
-      let accepts = ['*/*'];
-      let returnType = ActivityImage;
-      return this.apiClient.callApi(
-        '/activity/{activity_id}/activity-image', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
-      );
-    }
-
-    /**
-     * get activity images
-     * @param {Number} activityId 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ActivityImage}
-     */
-    activityActivityIdActivityImageGet(activityId) {
-      return this.activityActivityIdActivityImageGetWithHttpInfo(activityId)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
      * post activity image
      * @param {Number} activityId 
      * @param {File} image 

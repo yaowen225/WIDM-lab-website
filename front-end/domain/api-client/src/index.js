@@ -16,32 +16,25 @@ import ApiClient from './ApiClient';
 import Activity from './model/Activity';
 import ActivityImage from './model/ActivityImage';
 import ActivityImageResponse from './model/ActivityImageResponse';
+import ActivityPostRequest from './model/ActivityPostRequest';
 import ActivityResponse from './model/ActivityResponse';
 import Member from './model/Member';
 import MemberImage from './model/MemberImage';
 import MemberImageResponse from './model/MemberImageResponse';
+import MemberInput from './model/MemberInput';
 import MemberResponse from './model/MemberResponse';
 import Members from './model/Members';
 import MembersResponseInner from './model/MembersResponseInner';
 import Paper from './model/Paper';
 import PaperAttachment from './model/PaperAttachment';
-import PaperAuthor from './model/PaperAuthor';
-import PaperAuthorResponse from './model/PaperAuthorResponse';
-import PaperAuthors from './model/PaperAuthors';
+import PaperPostRequest from './model/PaperPostRequest';
 import PaperResponse from './model/PaperResponse';
-import PaperTag from './model/PaperTag';
-import PaperTagResponse from './model/PaperTagResponse';
-import PaperTags from './model/PaperTags';
-import Papers from './model/Papers';
-import PapersResponseInner from './model/PapersResponseInner';
 import ActivityApi from './api/ActivityApi';
 import ActivityImageApi from './api/ActivityImageApi';
 import MemberApi from './api/MemberApi';
 import MemberImageApi from './api/MemberImageApi';
 import PaperApi from './api/PaperApi';
 import PaperAttachmentApi from './api/PaperAttachmentApi';
-import PaperAuthorApi from './api/PaperAuthorApi';
-import PaperTagApi from './api/PaperTagApi';
 
 
 /**
@@ -101,6 +94,12 @@ export {
     ActivityImageResponse,
 
     /**
+     * The ActivityPostRequest model constructor.
+     * @property {module:model/ActivityPostRequest}
+     */
+    ActivityPostRequest,
+
+    /**
      * The ActivityResponse model constructor.
      * @property {module:model/ActivityResponse}
      */
@@ -123,6 +122,12 @@ export {
      * @property {module:model/MemberImageResponse}
      */
     MemberImageResponse,
+
+    /**
+     * The MemberInput model constructor.
+     * @property {module:model/MemberInput}
+     */
+    MemberInput,
 
     /**
      * The MemberResponse model constructor.
@@ -155,58 +160,16 @@ export {
     PaperAttachment,
 
     /**
-     * The PaperAuthor model constructor.
-     * @property {module:model/PaperAuthor}
+     * The PaperPostRequest model constructor.
+     * @property {module:model/PaperPostRequest}
      */
-    PaperAuthor,
-
-    /**
-     * The PaperAuthorResponse model constructor.
-     * @property {module:model/PaperAuthorResponse}
-     */
-    PaperAuthorResponse,
-
-    /**
-     * The PaperAuthors model constructor.
-     * @property {module:model/PaperAuthors}
-     */
-    PaperAuthors,
+    PaperPostRequest,
 
     /**
      * The PaperResponse model constructor.
      * @property {module:model/PaperResponse}
      */
     PaperResponse,
-
-    /**
-     * The PaperTag model constructor.
-     * @property {module:model/PaperTag}
-     */
-    PaperTag,
-
-    /**
-     * The PaperTagResponse model constructor.
-     * @property {module:model/PaperTagResponse}
-     */
-    PaperTagResponse,
-
-    /**
-     * The PaperTags model constructor.
-     * @property {module:model/PaperTags}
-     */
-    PaperTags,
-
-    /**
-     * The Papers model constructor.
-     * @property {module:model/Papers}
-     */
-    Papers,
-
-    /**
-     * The PapersResponseInner model constructor.
-     * @property {module:model/PapersResponseInner}
-     */
-    PapersResponseInner,
 
     /**
     * The ActivityApi service constructor.
@@ -242,17 +205,5 @@ export {
     * The PaperAttachmentApi service constructor.
     * @property {module:api/PaperAttachmentApi}
     */
-    PaperAttachmentApi,
-
-    /**
-    * The PaperAuthorApi service constructor.
-    * @property {module:api/PaperAuthorApi}
-    */
-    PaperAuthorApi,
-
-    /**
-    * The PaperTagApi service constructor.
-    * @property {module:api/PaperTagApi}
-    */
-    PaperTagApi
+    PaperAttachmentApi
 };

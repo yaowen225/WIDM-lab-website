@@ -7,14 +7,13 @@ Method | HTTP request | Description
 [**paperGet**](PaperApi.md#paperGet) | **GET** /paper | get_papers
 [**paperPaperIdDelete**](PaperApi.md#paperPaperIdDelete) | **DELETE** /paper/{paper_id} | delete paper
 [**paperPaperIdPatch**](PaperApi.md#paperPaperIdPatch) | **PATCH** /paper/{paper_id} | patch paper
-[**paperPaperIdPut**](PaperApi.md#paperPaperIdPut) | **PUT** /paper/{paper_id} | put paper
 [**paperPost**](PaperApi.md#paperPost) | **POST** /paper | post paper
 
 
 
 ## paperGet
 
-> Papers paperGet(opts)
+> Paper paperGet()
 
 get_papers
 
@@ -24,11 +23,7 @@ get_papers
 import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.PaperApi();
-let opts = {
-  'paperTag': "paperTag_example", // String | 
-  'paperAuthor': "paperAuthor_example" // String | 
-};
-apiInstance.paperGet(opts).then((data) => {
+apiInstance.paperGet().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -38,15 +33,11 @@ apiInstance.paperGet(opts).then((data) => {
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **paperTag** | **String**|  | [optional] 
- **paperAuthor** | **String**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**Papers**](Papers.md)
+[**Paper**](Paper.md)
 
 ### Authorization
 
@@ -114,10 +105,7 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperApi();
 let paperId = 56; // Number | 
 let opts = {
-  'paperPublishYear': 56, // Number | 
-  'paperTitle': "paperTitle_example", // String | 
-  'paperOrigin': "paperOrigin_example", // String | 
-  'paperLink': "paperLink_example" // String | 
+  'paper': new WidmBackEnd.PaperPostRequest() // PaperPostRequest | 
 };
 apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -133,10 +121,7 @@ apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **paperId** | **Number**|  | 
- **paperPublishYear** | **Number**|  | [optional] 
- **paperTitle** | **String**|  | [optional] 
- **paperOrigin** | **String**|  | [optional] 
- **paperLink** | **String**|  | [optional] 
+ **paper** | [**PaperPostRequest**](PaperPostRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -148,63 +133,13 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: */*
-
-
-## paperPaperIdPut
-
-> Paper paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink)
-
-put paper
-
-### Example
-
-```javascript
-import WidmBackEnd from 'widm_back_end';
-
-let apiInstance = new WidmBackEnd.PaperApi();
-let paperId = 56; // Number | 
-let paperPublishYear = 56; // Number | 
-let paperTitle = "paperTitle_example"; // String | 
-let paperOrigin = "paperOrigin_example"; // String | 
-let paperLink = "paperLink_example"; // String | 
-apiInstance.paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **paperId** | **Number**|  | 
- **paperPublishYear** | **Number**|  | 
- **paperTitle** | **String**|  | 
- **paperOrigin** | **String**|  | 
- **paperLink** | **String**|  | 
-
-### Return type
-
-[**Paper**](Paper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
+- **Content-Type**: Not defined
 - **Accept**: */*
 
 
 ## paperPost
 
-> Paper paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink)
+> Paper paperPost(opts)
 
 post paper
 
@@ -214,11 +149,10 @@ post paper
 import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.PaperApi();
-let paperPublishYear = 56; // Number | 
-let paperTitle = "paperTitle_example"; // String | 
-let paperOrigin = "paperOrigin_example"; // String | 
-let paperLink = "paperLink_example"; // String | 
-apiInstance.paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink).then((data) => {
+let opts = {
+  'paper': new WidmBackEnd.PaperPostRequest() // PaperPostRequest | 
+};
+apiInstance.paperPost(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -231,10 +165,7 @@ apiInstance.paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink).then
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **paperPublishYear** | **Number**|  | 
- **paperTitle** | **String**|  | 
- **paperOrigin** | **String**|  | 
- **paperLink** | **String**|  | 
+ **paper** | [**PaperPostRequest**](PaperPostRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -246,6 +177,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: Not defined
 - **Accept**: */*
 

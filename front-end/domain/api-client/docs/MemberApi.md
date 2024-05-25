@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**memberGet**](MemberApi.md#memberGet) | **GET** /member | get members
 [**memberMemberIdDelete**](MemberApi.md#memberMemberIdDelete) | **DELETE** /member/{member_id} | delete member
 [**memberMemberIdPatch**](MemberApi.md#memberMemberIdPatch) | **PATCH** /member/{member_id} | patch member
-[**memberMemberIdPut**](MemberApi.md#memberMemberIdPut) | **PUT** /member/{member_id} | put member
 [**memberPost**](MemberApi.md#memberPost) | **POST** /member | post member
 
 
@@ -106,8 +105,7 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.MemberApi();
 let memberId = 56; // Number | 
 let opts = {
-  'memberName': "memberName_example", // String | 
-  'memberIntro': "memberIntro_example" // String | 
+  'member': new WidmBackEnd.MemberInput() // MemberInput | 
 };
 apiInstance.memberMemberIdPatch(memberId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -123,8 +121,7 @@ apiInstance.memberMemberIdPatch(memberId, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **memberId** | **Number**|  | 
- **memberName** | **String**|  | [optional] 
- **memberIntro** | **String**|  | [optional] 
+ **member** | [**MemberInput**](MemberInput.md)|  | [optional] 
 
 ### Return type
 
@@ -136,59 +133,13 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
-- **Accept**: */*
-
-
-## memberMemberIdPut
-
-> Member memberMemberIdPut(memberId, memberName, memberIntro)
-
-put member
-
-### Example
-
-```javascript
-import WidmBackEnd from 'widm_back_end';
-
-let apiInstance = new WidmBackEnd.MemberApi();
-let memberId = 56; // Number | 
-let memberName = "memberName_example"; // String | 
-let memberIntro = "memberIntro_example"; // String | 
-apiInstance.memberMemberIdPut(memberId, memberName, memberIntro).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **memberId** | **Number**|  | 
- **memberName** | **String**|  | 
- **memberIntro** | **String**|  | 
-
-### Return type
-
-[**Member**](Member.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
+- **Content-Type**: Not defined
 - **Accept**: */*
 
 
 ## memberPost
 
-> Member memberPost(memberName, memberIntro)
+> Member memberPost(opts)
 
 post member
 
@@ -198,9 +149,10 @@ post member
 import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.MemberApi();
-let memberName = "memberName_example"; // String | 
-let memberIntro = "memberIntro_example"; // String | 
-apiInstance.memberPost(memberName, memberIntro).then((data) => {
+let opts = {
+  'member': new WidmBackEnd.MemberInput() // MemberInput | 
+};
+apiInstance.memberPost(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -213,8 +165,7 @@ apiInstance.memberPost(memberName, memberIntro).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **memberName** | **String**|  | 
- **memberIntro** | **String**|  | 
+ **member** | [**MemberInput**](MemberInput.md)|  | [optional] 
 
 ### Return type
 
@@ -226,6 +177,6 @@ No authorization required
 
 ### HTTP request headers
 
-- **Content-Type**: multipart/form-data
+- **Content-Type**: Not defined
 - **Accept**: */*
 

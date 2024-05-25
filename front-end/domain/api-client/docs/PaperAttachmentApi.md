@@ -100,7 +100,7 @@ No authorization required
 
 ## paperPaperIdPaperAttachmentPost
 
-> PaperAttachment paperPaperIdPaperAttachmentPost(paperId, attachment)
+> PaperAttachment paperPaperIdPaperAttachmentPost(paperId, paperAttachment)
 
 post paper attachment
 
@@ -111,8 +111,8 @@ import WidmBackEnd from 'widm_back_end';
 
 let apiInstance = new WidmBackEnd.PaperAttachmentApi();
 let paperId = 56; // Number | 
-let attachment = "/path/to/file"; // File | 
-apiInstance.paperPaperIdPaperAttachmentPost(paperId, attachment).then((data) => {
+let paperAttachment = "/path/to/file"; // File | 
+apiInstance.paperPaperIdPaperAttachmentPost(paperId, paperAttachment).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -126,7 +126,7 @@ apiInstance.paperPaperIdPaperAttachmentPost(paperId, attachment).then((data) => 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **paperId** | **Number**|  | 
- **attachment** | **File**|  | 
+ **paperAttachment** | **File**|  | 
 
 ### Return type
 

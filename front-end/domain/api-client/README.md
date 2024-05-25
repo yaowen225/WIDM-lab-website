@@ -120,19 +120,15 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *WidmBackEnd.ActivityApi* | [**activityActivityIdDelete**](docs/ActivityApi.md#activityActivityIdDelete) | **DELETE** /activity/{activity_id} | delete activity
-*WidmBackEnd.ActivityApi* | [**activityActivityIdGet**](docs/ActivityApi.md#activityActivityIdGet) | **GET** /activity/{activity_id} | get activity
 *WidmBackEnd.ActivityApi* | [**activityActivityIdPatch**](docs/ActivityApi.md#activityActivityIdPatch) | **PATCH** /activity/{activity_id} | patch activity
-*WidmBackEnd.ActivityApi* | [**activityActivityIdPut**](docs/ActivityApi.md#activityActivityIdPut) | **PUT** /activity/{activity_id} | put activity
-*WidmBackEnd.ActivityApi* | [**activityGet**](docs/ActivityApi.md#activityGet) | **GET** /activity | put activity
+*WidmBackEnd.ActivityApi* | [**activityGet**](docs/ActivityApi.md#activityGet) | **GET** /activity | get activity
 *WidmBackEnd.ActivityApi* | [**activityPost**](docs/ActivityApi.md#activityPost) | **POST** /activity | post activity
 *WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImageActivityImageUuidDelete**](docs/ActivityImageApi.md#activityActivityIdActivityImageActivityImageUuidDelete) | **DELETE** /activity/{activity_id}/activity-image/{activity_image_uuid} | delete activity image
 *WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImageActivityImageUuidGet**](docs/ActivityImageApi.md#activityActivityIdActivityImageActivityImageUuidGet) | **GET** /activity/{activity_id}/activity-image/{activity_image_uuid} | get activity image
-*WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImageGet**](docs/ActivityImageApi.md#activityActivityIdActivityImageGet) | **GET** /activity/{activity_id}/activity-image | get activity images
 *WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImagePost**](docs/ActivityImageApi.md#activityActivityIdActivityImagePost) | **POST** /activity/{activity_id}/activity-image | post activity image
 *WidmBackEnd.MemberApi* | [**memberGet**](docs/MemberApi.md#memberGet) | **GET** /member | get members
 *WidmBackEnd.MemberApi* | [**memberMemberIdDelete**](docs/MemberApi.md#memberMemberIdDelete) | **DELETE** /member/{member_id} | delete member
 *WidmBackEnd.MemberApi* | [**memberMemberIdPatch**](docs/MemberApi.md#memberMemberIdPatch) | **PATCH** /member/{member_id} | patch member
-*WidmBackEnd.MemberApi* | [**memberMemberIdPut**](docs/MemberApi.md#memberMemberIdPut) | **PUT** /member/{member_id} | put member
 *WidmBackEnd.MemberApi* | [**memberPost**](docs/MemberApi.md#memberPost) | **POST** /member | post member
 *WidmBackEnd.MemberImageApi* | [**memberMemberIdMemberImageMemberImageUuidDelete**](docs/MemberImageApi.md#memberMemberIdMemberImageMemberImageUuidDelete) | **DELETE** /member/{member_id}/member-image/{member_image_uuid} | delete member image
 *WidmBackEnd.MemberImageApi* | [**memberMemberIdMemberImageMemberImageUuidGet**](docs/MemberImageApi.md#memberMemberIdMemberImageMemberImageUuidGet) | **GET** /member/{member_id}/member-image/{member_image_uuid} | get member images
@@ -140,21 +136,10 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.PaperApi* | [**paperGet**](docs/PaperApi.md#paperGet) | **GET** /paper | get_papers
 *WidmBackEnd.PaperApi* | [**paperPaperIdDelete**](docs/PaperApi.md#paperPaperIdDelete) | **DELETE** /paper/{paper_id} | delete paper
 *WidmBackEnd.PaperApi* | [**paperPaperIdPatch**](docs/PaperApi.md#paperPaperIdPatch) | **PATCH** /paper/{paper_id} | patch paper
-*WidmBackEnd.PaperApi* | [**paperPaperIdPut**](docs/PaperApi.md#paperPaperIdPut) | **PUT** /paper/{paper_id} | put paper
 *WidmBackEnd.PaperApi* | [**paperPost**](docs/PaperApi.md#paperPost) | **POST** /paper | post paper
 *WidmBackEnd.PaperAttachmentApi* | [**paperPaperIdPaperAttachmentPaperAttachmentUuidDelete**](docs/PaperAttachmentApi.md#paperPaperIdPaperAttachmentPaperAttachmentUuidDelete) | **DELETE** /paper/{paper_id}/paper-attachment/{paper_attachment_uuid} | delete paper attachment
 *WidmBackEnd.PaperAttachmentApi* | [**paperPaperIdPaperAttachmentPaperAttachmentUuidGet**](docs/PaperAttachmentApi.md#paperPaperIdPaperAttachmentPaperAttachmentUuidGet) | **GET** /paper/{paper_id}/paper-attachment/{paper_attachment_uuid} | get paper attachment
 *WidmBackEnd.PaperAttachmentApi* | [**paperPaperIdPaperAttachmentPost**](docs/PaperAttachmentApi.md#paperPaperIdPaperAttachmentPost) | **POST** /paper/{paper_id}/paper-attachment | post paper attachment
-*WidmBackEnd.PaperAuthorApi* | [**paperPaperIdPaperAuthorAuthorIdDelete**](docs/PaperAuthorApi.md#paperPaperIdPaperAuthorAuthorIdDelete) | **DELETE** /paper/{paper_id}/paper-author/{author_id} | delete author
-*WidmBackEnd.PaperAuthorApi* | [**paperPaperIdPaperAuthorAuthorIdGet**](docs/PaperAuthorApi.md#paperPaperIdPaperAuthorAuthorIdGet) | **GET** /paper/{paper_id}/paper-author/{author_id} | get author
-*WidmBackEnd.PaperAuthorApi* | [**paperPaperIdPaperAuthorAuthorIdPatch**](docs/PaperAuthorApi.md#paperPaperIdPaperAuthorAuthorIdPatch) | **PATCH** /paper/{paper_id}/paper-author/{author_id} | update author
-*WidmBackEnd.PaperAuthorApi* | [**paperPaperIdPaperAuthorGet**](docs/PaperAuthorApi.md#paperPaperIdPaperAuthorGet) | **GET** /paper/{paper_id}/paper-author | get paper author
-*WidmBackEnd.PaperAuthorApi* | [**paperPaperIdPaperAuthorPost**](docs/PaperAuthorApi.md#paperPaperIdPaperAuthorPost) | **POST** /paper/{paper_id}/paper-author | post paper author
-*WidmBackEnd.PaperTagApi* | [**paperPaperIdPaperTagGet**](docs/PaperTagApi.md#paperPaperIdPaperTagGet) | **GET** /paper/{paper_id}/paper-tag | get paper tag
-*WidmBackEnd.PaperTagApi* | [**paperPaperIdPaperTagPost**](docs/PaperTagApi.md#paperPaperIdPaperTagPost) | **POST** /paper/{paper_id}/paper-tag | post paper tag
-*WidmBackEnd.PaperTagApi* | [**paperPaperIdPaperTagTagIdDelete**](docs/PaperTagApi.md#paperPaperIdPaperTagTagIdDelete) | **DELETE** /paper/{paper_id}/paper-tag/{tag_id} | delete tag
-*WidmBackEnd.PaperTagApi* | [**paperPaperIdPaperTagTagIdGet**](docs/PaperTagApi.md#paperPaperIdPaperTagTagIdGet) | **GET** /paper/{paper_id}/paper-tag/{tag_id} | get tag
-*WidmBackEnd.PaperTagApi* | [**paperPaperIdPaperTagTagIdPatch**](docs/PaperTagApi.md#paperPaperIdPaperTagTagIdPatch) | **PATCH** /paper/{paper_id}/paper-tag/{tag_id} | update tag
 
 
 ## Documentation for Models
@@ -162,24 +147,19 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.Activity](docs/Activity.md)
  - [WidmBackEnd.ActivityImage](docs/ActivityImage.md)
  - [WidmBackEnd.ActivityImageResponse](docs/ActivityImageResponse.md)
+ - [WidmBackEnd.ActivityPostRequest](docs/ActivityPostRequest.md)
  - [WidmBackEnd.ActivityResponse](docs/ActivityResponse.md)
  - [WidmBackEnd.Member](docs/Member.md)
  - [WidmBackEnd.MemberImage](docs/MemberImage.md)
  - [WidmBackEnd.MemberImageResponse](docs/MemberImageResponse.md)
+ - [WidmBackEnd.MemberInput](docs/MemberInput.md)
  - [WidmBackEnd.MemberResponse](docs/MemberResponse.md)
  - [WidmBackEnd.Members](docs/Members.md)
  - [WidmBackEnd.MembersResponseInner](docs/MembersResponseInner.md)
  - [WidmBackEnd.Paper](docs/Paper.md)
  - [WidmBackEnd.PaperAttachment](docs/PaperAttachment.md)
- - [WidmBackEnd.PaperAuthor](docs/PaperAuthor.md)
- - [WidmBackEnd.PaperAuthorResponse](docs/PaperAuthorResponse.md)
- - [WidmBackEnd.PaperAuthors](docs/PaperAuthors.md)
+ - [WidmBackEnd.PaperPostRequest](docs/PaperPostRequest.md)
  - [WidmBackEnd.PaperResponse](docs/PaperResponse.md)
- - [WidmBackEnd.PaperTag](docs/PaperTag.md)
- - [WidmBackEnd.PaperTagResponse](docs/PaperTagResponse.md)
- - [WidmBackEnd.PaperTags](docs/PaperTags.md)
- - [WidmBackEnd.Papers](docs/Papers.md)
- - [WidmBackEnd.PapersResponseInner](docs/PapersResponseInner.md)
 
 
 ## Documentation for Authorization

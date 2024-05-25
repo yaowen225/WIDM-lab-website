@@ -144,18 +144,18 @@ export default class PaperAttachmentApi {
     /**
      * post paper attachment
      * @param {Number} paperId 
-     * @param {File} attachment 
+     * @param {File} paperAttachment 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/PaperAttachment} and HTTP response
      */
-    paperPaperIdPaperAttachmentPostWithHttpInfo(paperId, attachment) {
+    paperPaperIdPaperAttachmentPostWithHttpInfo(paperId, paperAttachment) {
       let postBody = null;
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
         throw new Error("Missing the required parameter 'paperId' when calling paperPaperIdPaperAttachmentPost");
       }
-      // verify the required parameter 'attachment' is set
-      if (attachment === undefined || attachment === null) {
-        throw new Error("Missing the required parameter 'attachment' when calling paperPaperIdPaperAttachmentPost");
+      // verify the required parameter 'paperAttachment' is set
+      if (paperAttachment === undefined || paperAttachment === null) {
+        throw new Error("Missing the required parameter 'paperAttachment' when calling paperPaperIdPaperAttachmentPost");
       }
 
       let pathParams = {
@@ -166,7 +166,7 @@ export default class PaperAttachmentApi {
       let headerParams = {
       };
       let formParams = {
-        'attachment': attachment
+        'paper_attachment': paperAttachment
       };
 
       let authNames = [];
@@ -183,11 +183,11 @@ export default class PaperAttachmentApi {
     /**
      * post paper attachment
      * @param {Number} paperId 
-     * @param {File} attachment 
+     * @param {File} paperAttachment 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/PaperAttachment}
      */
-    paperPaperIdPaperAttachmentPost(paperId, attachment) {
-      return this.paperPaperIdPaperAttachmentPostWithHttpInfo(paperId, attachment)
+    paperPaperIdPaperAttachmentPost(paperId, paperAttachment) {
+      return this.paperPaperIdPaperAttachmentPostWithHttpInfo(paperId, paperAttachment)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

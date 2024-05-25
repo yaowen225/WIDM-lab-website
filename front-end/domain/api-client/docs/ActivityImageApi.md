@@ -6,7 +6,6 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**activityActivityIdActivityImageActivityImageUuidDelete**](ActivityImageApi.md#activityActivityIdActivityImageActivityImageUuidDelete) | **DELETE** /activity/{activity_id}/activity-image/{activity_image_uuid} | delete activity image
 [**activityActivityIdActivityImageActivityImageUuidGet**](ActivityImageApi.md#activityActivityIdActivityImageActivityImageUuidGet) | **GET** /activity/{activity_id}/activity-image/{activity_image_uuid} | get activity image
-[**activityActivityIdActivityImageGet**](ActivityImageApi.md#activityActivityIdActivityImageGet) | **GET** /activity/{activity_id}/activity-image | get activity images
 [**activityActivityIdActivityImagePost**](ActivityImageApi.md#activityActivityIdActivityImagePost) | **POST** /activity/{activity_id}/activity-image | post activity image
 
 
@@ -97,48 +96,6 @@ No authorization required
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
-
-
-## activityActivityIdActivityImageGet
-
-> ActivityImage activityActivityIdActivityImageGet(activityId)
-
-get activity images
-
-### Example
-
-```javascript
-import WidmBackEnd from 'widm_back_end';
-
-let apiInstance = new WidmBackEnd.ActivityImageApi();
-let activityId = 56; // Number | 
-apiInstance.activityActivityIdActivityImageGet(activityId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **activityId** | **Number**|  | 
-
-### Return type
-
-[**ActivityImage**](ActivityImage.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
 
 
 ## activityActivityIdActivityImagePost

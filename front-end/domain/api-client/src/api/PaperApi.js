@@ -14,7 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import Paper from '../model/Paper';
-import Papers from '../model/Papers';
+import PaperPostRequest from '../model/PaperPostRequest';
 
 /**
 * Paper service.
@@ -38,20 +38,14 @@ export default class PaperApi {
 
     /**
      * get_papers
-     * @param {Object} opts Optional parameters
-     * @param {String} [paperTag] 
-     * @param {String} [paperAuthor] 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Papers} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
-    paperGetWithHttpInfo(opts) {
-      opts = opts || {};
+    paperGetWithHttpInfo() {
       let postBody = null;
 
       let pathParams = {
       };
       let queryParams = {
-        'paper_tag': opts['paperTag'],
-        'paper_author': opts['paperAuthor']
       };
       let headerParams = {
       };
@@ -61,7 +55,7 @@ export default class PaperApi {
       let authNames = [];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = Papers;
+      let returnType = Paper;
       return this.apiClient.callApi(
         '/paper', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -71,13 +65,10 @@ export default class PaperApi {
 
     /**
      * get_papers
-     * @param {Object} opts Optional parameters
-     * @param {String} opts.paperTag 
-     * @param {String} opts.paperAuthor 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Papers}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
-    paperGet(opts) {
-      return this.paperGetWithHttpInfo(opts)
+    paperGet() {
+      return this.paperGetWithHttpInfo()
         .then(function(response_and_data) {
           return response_and_data.data;
         });
@@ -134,15 +125,12 @@ export default class PaperApi {
      * patch paper
      * @param {Number} paperId 
      * @param {Object} opts Optional parameters
-     * @param {Number} [paperPublishYear] 
-     * @param {String} [paperTitle] 
-     * @param {String} [paperOrigin] 
-     * @param {String} [paperLink] 
+     * @param {module:model/PaperPostRequest} [paper] 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
     paperPaperIdPatchWithHttpInfo(paperId, opts) {
       opts = opts || {};
-      let postBody = null;
+      let postBody = opts['paper'];
       // verify the required parameter 'paperId' is set
       if (paperId === undefined || paperId === null) {
         throw new Error("Missing the required parameter 'paperId' when calling paperPaperIdPatch");
@@ -156,14 +144,10 @@ export default class PaperApi {
       let headerParams = {
       };
       let formParams = {
-        'paper_publish_year': opts['paperPublishYear'],
-        'paper_title': opts['paperTitle'],
-        'paper_origin': opts['paperOrigin'],
-        'paper_link': opts['paperLink']
       };
 
       let authNames = [];
-      let contentTypes = ['multipart/form-data'];
+      let contentTypes = [];
       let accepts = ['*/*'];
       let returnType = Paper;
       return this.apiClient.callApi(
@@ -177,10 +161,7 @@ export default class PaperApi {
      * patch paper
      * @param {Number} paperId 
      * @param {Object} opts Optional parameters
-     * @param {Number} opts.paperPublishYear 
-     * @param {String} opts.paperTitle 
-     * @param {String} opts.paperOrigin 
-     * @param {String} opts.paperLink 
+     * @param {module:model/PaperPostRequest} opts.paper 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
     paperPaperIdPatch(paperId, opts) {
@@ -192,105 +173,14 @@ export default class PaperApi {
 
 
     /**
-     * put paper
-     * @param {Number} paperId 
-     * @param {Number} paperPublishYear 
-     * @param {String} paperTitle 
-     * @param {String} paperOrigin 
-     * @param {String} paperLink 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
-     */
-    paperPaperIdPutWithHttpInfo(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink) {
-      let postBody = null;
-      // verify the required parameter 'paperId' is set
-      if (paperId === undefined || paperId === null) {
-        throw new Error("Missing the required parameter 'paperId' when calling paperPaperIdPut");
-      }
-      // verify the required parameter 'paperPublishYear' is set
-      if (paperPublishYear === undefined || paperPublishYear === null) {
-        throw new Error("Missing the required parameter 'paperPublishYear' when calling paperPaperIdPut");
-      }
-      // verify the required parameter 'paperTitle' is set
-      if (paperTitle === undefined || paperTitle === null) {
-        throw new Error("Missing the required parameter 'paperTitle' when calling paperPaperIdPut");
-      }
-      // verify the required parameter 'paperOrigin' is set
-      if (paperOrigin === undefined || paperOrigin === null) {
-        throw new Error("Missing the required parameter 'paperOrigin' when calling paperPaperIdPut");
-      }
-      // verify the required parameter 'paperLink' is set
-      if (paperLink === undefined || paperLink === null) {
-        throw new Error("Missing the required parameter 'paperLink' when calling paperPaperIdPut");
-      }
-
-      let pathParams = {
-        'paper_id': paperId
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-        'paper_publish_year': paperPublishYear,
-        'paper_title': paperTitle,
-        'paper_origin': paperOrigin,
-        'paper_link': paperLink
-      };
-
-      let authNames = [];
-      let contentTypes = ['multipart/form-data'];
-      let accepts = ['*/*'];
-      let returnType = Paper;
-      return this.apiClient.callApi(
-        '/paper/{paper_id}', 'PUT',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null
-      );
-    }
-
-    /**
-     * put paper
-     * @param {Number} paperId 
-     * @param {Number} paperPublishYear 
-     * @param {String} paperTitle 
-     * @param {String} paperOrigin 
-     * @param {String} paperLink 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
-     */
-    paperPaperIdPut(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink) {
-      return this.paperPaperIdPutWithHttpInfo(paperId, paperPublishYear, paperTitle, paperOrigin, paperLink)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
      * post paper
-     * @param {Number} paperPublishYear 
-     * @param {String} paperTitle 
-     * @param {String} paperOrigin 
-     * @param {String} paperLink 
+     * @param {Object} opts Optional parameters
+     * @param {module:model/PaperPostRequest} [paper] 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
-    paperPostWithHttpInfo(paperPublishYear, paperTitle, paperOrigin, paperLink) {
-      let postBody = null;
-      // verify the required parameter 'paperPublishYear' is set
-      if (paperPublishYear === undefined || paperPublishYear === null) {
-        throw new Error("Missing the required parameter 'paperPublishYear' when calling paperPost");
-      }
-      // verify the required parameter 'paperTitle' is set
-      if (paperTitle === undefined || paperTitle === null) {
-        throw new Error("Missing the required parameter 'paperTitle' when calling paperPost");
-      }
-      // verify the required parameter 'paperOrigin' is set
-      if (paperOrigin === undefined || paperOrigin === null) {
-        throw new Error("Missing the required parameter 'paperOrigin' when calling paperPost");
-      }
-      // verify the required parameter 'paperLink' is set
-      if (paperLink === undefined || paperLink === null) {
-        throw new Error("Missing the required parameter 'paperLink' when calling paperPost");
-      }
+    paperPostWithHttpInfo(opts) {
+      opts = opts || {};
+      let postBody = opts['paper'];
 
       let pathParams = {
       };
@@ -299,14 +189,10 @@ export default class PaperApi {
       let headerParams = {
       };
       let formParams = {
-        'paper_publish_year': paperPublishYear,
-        'paper_title': paperTitle,
-        'paper_origin': paperOrigin,
-        'paper_link': paperLink
       };
 
       let authNames = [];
-      let contentTypes = ['multipart/form-data'];
+      let contentTypes = [];
       let accepts = ['*/*'];
       let returnType = Paper;
       return this.apiClient.callApi(
@@ -318,14 +204,12 @@ export default class PaperApi {
 
     /**
      * post paper
-     * @param {Number} paperPublishYear 
-     * @param {String} paperTitle 
-     * @param {String} paperOrigin 
-     * @param {String} paperLink 
+     * @param {Object} opts Optional parameters
+     * @param {module:model/PaperPostRequest} opts.paper 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
-    paperPost(paperPublishYear, paperTitle, paperOrigin, paperLink) {
-      return this.paperPostWithHttpInfo(paperPublishYear, paperTitle, paperOrigin, paperLink)
+    paperPost(opts) {
+      return this.paperPostWithHttpInfo(opts)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
