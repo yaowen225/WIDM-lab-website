@@ -52,7 +52,7 @@ class Activity {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
             if (data.hasOwnProperty('response')) {
-                obj['response'] = ApiClient.convertToType(data['response'], [ActivityResponse]);
+                obj['response'] = ActivityResponse.constructFromObject(data['response']);
             }
         }
         return obj;
