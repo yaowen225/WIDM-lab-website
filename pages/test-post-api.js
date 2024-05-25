@@ -1,6 +1,6 @@
 ﻿// pages/test-post-api.js
 import React, { useState } from 'react';
-import PaperApi from '../api-client/src/api/PaperApi';
+import PaperApi from '../domain/api-client/src/api/PaperApi';
 
 const TestPostApi = () => {
   const [formData, setFormData] = useState({

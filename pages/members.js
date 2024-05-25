@@ -2,7 +2,7 @@
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Link from '@/components/Link'
-import { MemberApi } from '../api-client/src'
+import { MemberApi } from '../domain/api-client/src'
 
 export const Members = () => {
   const [members, setMembers] = useState([])
