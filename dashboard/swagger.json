@@ -1,0 +1,897 @@
+﻿{
+  "definitions": {
+    "activity": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "activity_sub_title": {
+              "type": "string"
+            },
+            "activity_title": {
+              "type": "string"
+            },
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "activity_image": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "activity_id": {
+              "type": "integer"
+            },
+            "create_time": {
+              "type": "string"
+            },
+            "image_name": {
+              "type": "string"
+            },
+            "image_uuid": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "member": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "member_intro": {
+              "type": "string"
+            },
+            "member_name": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "member input": {
+      "properties": {
+        "member_character": {
+          "type": "string"
+        },
+        "member_intro": {
+          "type": "string"
+        },
+        "member_name": {
+          "type": "string"
+        }
+      }
+    },
+    "member_image": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "image_uuid": {
+              "type": "string"
+            },
+            "member_id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "members": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "create_time": {
+                "type": "string"
+              },
+              "member_image": {
+                "type": "string"
+              },
+              "member_intro": {
+                "type": "string"
+              },
+              "member_name": {
+                "type": "string"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    },
+    "paper": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "paper_link": {
+              "type": "string"
+            },
+            "paper_origin": {
+              "type": "string"
+            },
+            "paper_publish_year": {
+              "type": "integer"
+            },
+            "paper_title": {
+              "type": "string"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "type": "object"
+    },
+    "paper_attachment": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "create_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "image_uuid": {
+              "type": "string"
+            },
+            "member_id": {
+              "type": "integer"
+            },
+            "update_time": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "type": "object"
+    }
+  },
+  "info": {
+    "description": "Nation Central University WIDM LAB back-end API",
+    "termsOfService": "/tos",
+    "title": "widm-back-end",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/activity": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get activities successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "get activity",
+        "tags": [
+          "activity"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "activity",
+            "schema": {
+              "properties": {
+                "activity_sub_title": {
+                  "type": "string"
+                },
+                "activity_title": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "activity_title",
+                "activity_sub_title"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "400": {
+            "description": "no ['activity_title', 'activity_sub_title'] or content in form"
+          }
+        },
+        "summary": "post activity",
+        "tags": [
+          "activity"
+        ]
+      }
+    },
+    "/activity/{activity_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "delete activity",
+        "tags": [
+          "activity"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "activity",
+            "schema": {
+              "properties": {
+                "activity_sub_title": {
+                  "type": "string"
+                },
+                "activity_title": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "activity_title",
+                "activity_sub_title"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "patch activity successfully",
+            "schema": {
+              "$ref": "#/definitions/activity"
+            }
+          },
+          "400": {
+            "description": "no ['activity_title', 'activity_sub_title'] or content in form"
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "patch activity",
+        "tags": [
+          "activity"
+        ]
+      }
+    },
+    "/activity/{activity_id}/activity-image": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post activity image successfully",
+            "schema": {
+              "$ref": "#/definitions/activity_image"
+            }
+          },
+          "400": {
+            "description": "no ['image'] or content in form"
+          },
+          "404": {
+            "description": "activity not exist"
+          }
+        },
+        "summary": "post activity image",
+        "tags": [
+          "activity_image"
+        ]
+      }
+    },
+    "/activity/{activity_id}/activity-image/{activity_image_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "activity_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete activity image successfully",
+            "schema": {
+              "$ref": "#/definitions/activity_image"
+            }
+          },
+          "404": {
+            "description": "activity not exist or activity image not exist"
+          }
+        },
+        "summary": "delete activity image",
+        "tags": [
+          "activity_image"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "activity_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "activity_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get activity image successfully"
+          },
+          "404": {
+            "description": "activity not exist or activity image not exist"
+          }
+        },
+        "summary": "get activity image",
+        "tags": [
+          "activity_image"
+        ]
+      }
+    },
+    "/member": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get members successfully",
+            "schema": {
+              "$ref": "#/definitions/members"
+            }
+          },
+          "404": {
+            "description": "no member exist"
+          }
+        },
+        "summary": "get members",
+        "tags": [
+          "member"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "member",
+            "schema": {
+              "$ref": "#/definitions/member input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "400": {
+            "description": "no ['member_name', 'member_intro'] or content in form"
+          }
+        },
+        "summary": "post member",
+        "tags": [
+          "member"
+        ]
+      }
+    },
+    "/member/{member_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete member successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "delete member",
+        "tags": [
+          "member"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "member",
+            "schema": {
+              "$ref": "#/definitions/member input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "patch member successfully",
+            "schema": {
+              "$ref": "#/definitions/member"
+            }
+          },
+          "400": {
+            "description": "no ['member_name', 'member_intro'] or content in form"
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "patch member",
+        "tags": [
+          "member"
+        ]
+      }
+    },
+    "/member/{member_id}/member-image": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post member image successfully",
+            "schema": {
+              "$ref": "#/definitions/member_image"
+            }
+          },
+          "400": {
+            "description": "no ['image'] or content in form"
+          },
+          "404": {
+            "description": "member_id not exist"
+          }
+        },
+        "summary": "post member image",
+        "tags": [
+          "member_image"
+        ]
+      }
+    },
+    "/member/{member_id}/member-image/{member_image_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "member_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete attachment successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_attachment"
+            }
+          },
+          "404": {
+            "description": "member_id or member_image_uuid not exist"
+          }
+        },
+        "summary": "delete member image",
+        "tags": [
+          "member_image"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "member_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "member_image_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get paper attachment successfully"
+          },
+          "404": {
+            "description": "paper_id or paper_attachment_id not exist"
+          }
+        },
+        "summary": "get member images",
+        "tags": [
+          "member_image"
+        ]
+      }
+    },
+    "/paper": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get papers successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          }
+        },
+        "summary": "get_papers",
+        "tags": [
+          "paper"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "in": "body",
+            "name": "paper",
+            "schema": {
+              "properties": {
+                "paper_authors": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "required": false,
+                  "type": "array"
+                },
+                "paper_link": {
+                  "required": false,
+                  "type": "string"
+                },
+                "paper_origin": {
+                  "type": "string"
+                },
+                "paper_publish_year": {
+                  "type": "integer"
+                },
+                "paper_tags": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "required": false,
+                  "type": "array"
+                },
+                "paper_title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "400": {
+            "description": "no ['paper_publish_year', 'paper_title', 'paper_origin', 'paper_attachment', 'paper_link'] or content in form"
+          }
+        },
+        "summary": "post paper",
+        "tags": [
+          "paper"
+        ]
+      }
+    },
+    "/paper/{paper_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "delete paper",
+        "tags": [
+          "paper"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "paper",
+            "schema": {
+              "properties": {
+                "paper_authors": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "required": false,
+                  "type": "array"
+                },
+                "paper_link": {
+                  "required": false,
+                  "type": "string"
+                },
+                "paper_origin": {
+                  "type": "string"
+                },
+                "paper_publish_year": {
+                  "type": "integer"
+                },
+                "paper_tags": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "required": false,
+                  "type": "array"
+                },
+                "paper_title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "update paper successfully",
+            "schema": {
+              "$ref": "#/definitions/paper"
+            }
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "patch paper",
+        "tags": [
+          "paper"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-attachment": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "paper_attachment",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post paper attachment successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_attachment"
+            }
+          },
+          "400": {
+            "description": "no ['paper_attachment'] or content in form"
+          },
+          "404": {
+            "description": "paper_id not exist"
+          }
+        },
+        "summary": "post paper attachment",
+        "tags": [
+          "paper_attachment"
+        ]
+      }
+    },
+    "/paper/{paper_id}/paper-attachment/{paper_attachment_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "paper_attachment_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete attachment successfully",
+            "schema": {
+              "$ref": "#/definitions/paper_attachment"
+            }
+          },
+          "404": {
+            "description": "paper_id or paper_attachment_id not exist"
+          }
+        },
+        "summary": "delete paper attachment",
+        "tags": [
+          "paper_attachment"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "paper_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "paper_attachment_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get paper attachment successfully"
+          },
+          "404": {
+            "description": "paper_id or paper_attachment_id not exist"
+          }
+        },
+        "summary": "get paper attachment",
+        "tags": [
+          "paper_attachment"
+        ]
+      }
+    }
+  },
+  "swagger": "2.0"
+}

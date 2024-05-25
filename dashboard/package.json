@@ -14,9 +14,11 @@
     "url": "https://tailadmin.com"
   },
   "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.13.4",
     "apexcharts": "^3.41.0",
     "flatpickr": "^4.6.13",
     "headlessui": "^0.0.0",
+    "http-proxy-middleware": "^3.0.0",
     "jsvectormap": "^1.5.3",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
