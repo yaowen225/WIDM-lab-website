@@ -9,5 +9,5 @@ docker run -d -p 7230:7230 -p 24678:24678 -v ${PWD}:/usr/src/app --name widm-fro
 # chmod +x run_docker.sh
 # ./run_docker.sh
 
-# openapi-generator-cli generate -i swagger.json -g javascript -o ./api-client -t ./custom-templates/javascript --additional-properties=usePromises=true
+# openapi-generator-cli generate -i swagger.json -g javascript -o ./domain/api-client -t ./domain/custom-templates/javascript --additional-properties=usePromises=true
 

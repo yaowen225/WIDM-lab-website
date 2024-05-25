@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import ListLayout from '@/layouts/PaperListLayout'
 import { PageSEO } from '@/components/SEO'
-import { PaperApi } from '../api-client/src'
+import { PaperApi } from '../domain/api-client/src'
 
 export const POSTS_PER_PAGE = 20
 

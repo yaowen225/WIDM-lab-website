@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Activate from '@/components/Activate'
-import { ActivityApi } from '../api-client/src'
+import { ActivityApi } from '../domain/api-client/src'
 
 
 export const activate = () => {

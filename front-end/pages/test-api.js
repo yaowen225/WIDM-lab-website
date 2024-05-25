@@ -1,6 +1,6 @@
 ﻿// pages/test-api.js
 import React, { useEffect, useState } from 'react';
-import { PaperApi } from '../api-client/src';
+import { PaperApi } from '../domain/api-client/src';
 
 const TestApi = () => {
   const [data, setData] = useState(null);

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Pagination from '@/components/Pagination'
 import formatDate from '@/lib/utils/formatDate'
 import { FaFileDownload } from 'react-icons/fa'
-import { PaperAttachmentApi } from 'api-client/src'
+import { PaperAttachmentApi } from 'domain/api-client/src'
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
