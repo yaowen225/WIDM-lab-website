@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 interface TableProps {
   headers: Array<{ id: string; Name: string; isShow: string | boolean; type: string }>;
   data: Array<{ [key: string]: any }>;
+  onDelete: (id: number) => void;
 }
 
-const DynamicTable: React.FC<TableProps> = ({ headers, data }) => {
+const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const handleDeleteClick = (id: number) => {
+    setSelectedId(id);
+    setShowModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedId !== null) {
+      onDelete(selectedId);
+      setShowModal(false);
+      setSelectedId(null);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setShowModal(false);
+    setSelectedId(null);
+  };
+
   return (
-    <div className="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+    <div className="relative rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
@@ -37,7 +59,10 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data }) => {
                         <button className="hover:text-primary">
                           <FaEdit />
                         </button>
-                        <button className="hover:text-primary">
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => handleDeleteClick(row.id)}
+                        >
                           <FaTrashAlt />
                         </button>
                       </div>
@@ -53,6 +78,28 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data }) => {
           </tbody>
         </table>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg dark:bg-boxdark">
+            <h3 className="mb-4 text-black dark:text-white">確定刪除此筆資料?</h3>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={handleCancelDelete}
+                className="px-4 py-2 rounded border border-gray-300 text-black dark:text-white"
+              >
+                取消
+              </button>
+              <button
+                onClick={handleConfirmDelete}
+                className="px-4 py-2 rounded bg-red-500 text-white"
+              >
+                確定
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

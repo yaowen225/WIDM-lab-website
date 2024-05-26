@@ -10,9 +10,10 @@ interface Header {
 interface AddItemFormProps {
   headers: Header[];
   onClose: () => void;
+  onSubmit: (formData: { [key: string]: any }) => void;
 }
 
-const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose }) => {
+const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +25,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+    onSubmit(formData);
     onClose();
   };
 
