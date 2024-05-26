@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **Number** |  | [optional] 
 **paperAuthors** | **[String]** |  | [optional] 
 **paperLink** | **String** |  | [optional] 
 **paperOrigin** | **String** |  | [optional] 

@@ -3,7 +3,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Activate from '@/components/Activate'
 import { ActivityApi } from '../domain/api-client/src'
-
+import { Slide } from 'react-slideshow-image';
 
 export const activate = () => {
 

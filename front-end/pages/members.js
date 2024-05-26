@@ -34,13 +34,6 @@ export const Members = () => {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Members
           </h1>
-          <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
-            Software and hardware collection of things I'm using daily.
-          </p>
-          <div className="mt-5 mb-3 text-xs text-gray-500 dark:text-gray-400">
-            Note: This page contains links to buy or download the products. If you click through and
-            purchase, I do not receive any compensation for that purchase.
-          </div>
         </div>
         <div className="container py-12">
           <div className="flex flex-row flex-wrap">
@@ -52,20 +45,11 @@ export const Members = () => {
               >
                 <div className="flex items-center justify-start">
                   <div className="flex-shrink-0 p-3 font-sans text-gray-700 dark:text-gray-50 ">
-                    <svg
-                      width={36}
-                      height={36}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-12 w-12 stroke-current text-center align-middle leading-6 text-gray-700 dark:text-gray-50"
-                    >
-                      <path d="M4 17L10 11 4 5" />
-                      <path d="M12 19L20 19" />
-                    </svg>
+                    <img
+                      src={`https://widm-back-end.nevercareu.space/member/${d.id}/member-image/${d.member_image}`}
+                      alt="Member Icon"
+                      className="h-12 w-12 rounded-full"
+                    />
                   </div>
                   <div className="flex flex-col p-3">
                     <h3 className="truncate text-sm font-bold leading-5 text-gray-800 dark:text-white sm:text-base lg:text-base">

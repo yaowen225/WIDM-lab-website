@@ -1,18 +1,14 @@
-# WidmBackEnd.PapersResponseInner
+# WidmBackEnd.PaperPaperIdPatchRequest
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**createTime** | **String** |  | [optional] 
-**paperAttachment** | **String** |  | [optional] 
 **paperAuthors** | **[String]** |  | [optional] 
-**paperId** | **Number** |  | [optional] 
 **paperLink** | **String** |  | [optional] 
 **paperOrigin** | **String** |  | [optional] 
 **paperPublishYear** | **Number** |  | [optional] 
 **paperTags** | **[String]** |  | [optional] 
 **paperTitle** | **String** |  | [optional] 
-**updateTime** | **String** |  | [optional] 
 
 

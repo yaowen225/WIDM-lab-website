@@ -140,6 +140,13 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.PaperAttachmentApi* | [**paperPaperIdPaperAttachmentPaperAttachmentUuidDelete**](docs/PaperAttachmentApi.md#paperPaperIdPaperAttachmentPaperAttachmentUuidDelete) | **DELETE** /paper/{paper_id}/paper-attachment/{paper_attachment_uuid} | delete paper attachment
 *WidmBackEnd.PaperAttachmentApi* | [**paperPaperIdPaperAttachmentPaperAttachmentUuidGet**](docs/PaperAttachmentApi.md#paperPaperIdPaperAttachmentPaperAttachmentUuidGet) | **GET** /paper/{paper_id}/paper-attachment/{paper_attachment_uuid} | get paper attachment
 *WidmBackEnd.PaperAttachmentApi* | [**paperPaperIdPaperAttachmentPost**](docs/PaperAttachmentApi.md#paperPaperIdPaperAttachmentPost) | **POST** /paper/{paper_id}/paper-attachment | post paper attachment
+*WidmBackEnd.ProjectApi* | [**projectGet**](docs/ProjectApi.md#projectGet) | **GET** /project | get projects
+*WidmBackEnd.ProjectApi* | [**projectPost**](docs/ProjectApi.md#projectPost) | **POST** /project | post project
+*WidmBackEnd.ProjectApi* | [**projectProjectIdDelete**](docs/ProjectApi.md#projectProjectIdDelete) | **DELETE** /project/{project_id} | delete project
+*WidmBackEnd.ProjectApi* | [**projectProjectIdPatch**](docs/ProjectApi.md#projectProjectIdPatch) | **PATCH** /project/{project_id} | patch project
+*WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconPost**](docs/ProjectIconApi.md#projectProjectIdProjectIconPost) | **POST** /project/{project_id}/project-icon | post project icon
+*WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconProjectIconUuidDelete**](docs/ProjectIconApi.md#projectProjectIdProjectIconProjectIconUuidDelete) | **DELETE** /project/{project_id}/project-icon/{project_icon_uuid} | delete project icon
+*WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconProjectIconUuidGet**](docs/ProjectIconApi.md#projectProjectIdProjectIconProjectIconUuidGet) | **GET** /project/{project_id}/project-icon/{project_icon_uuid} | get project icon
 
 
 ## Documentation for Models
@@ -158,8 +165,18 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.MembersResponseInner](docs/MembersResponseInner.md)
  - [WidmBackEnd.Paper](docs/Paper.md)
  - [WidmBackEnd.PaperAttachment](docs/PaperAttachment.md)
+ - [WidmBackEnd.PaperPaperIdPatchRequest](docs/PaperPaperIdPatchRequest.md)
  - [WidmBackEnd.PaperPostRequest](docs/PaperPostRequest.md)
  - [WidmBackEnd.PaperResponse](docs/PaperResponse.md)
+ - [WidmBackEnd.Papers](docs/Papers.md)
+ - [WidmBackEnd.PapersResponseInner](docs/PapersResponseInner.md)
+ - [WidmBackEnd.Project](docs/Project.md)
+ - [WidmBackEnd.ProjectIcon](docs/ProjectIcon.md)
+ - [WidmBackEnd.ProjectIconResponse](docs/ProjectIconResponse.md)
+ - [WidmBackEnd.ProjectInput](docs/ProjectInput.md)
+ - [WidmBackEnd.ProjectResponse](docs/ProjectResponse.md)
+ - [WidmBackEnd.Projects](docs/Projects.md)
+ - [WidmBackEnd.ProjectsResponseInner](docs/ProjectsResponseInner.md)
 
 
 ## Documentation for Authorization

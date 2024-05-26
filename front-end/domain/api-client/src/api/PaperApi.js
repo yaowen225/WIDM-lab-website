@@ -14,7 +14,9 @@
 
 import ApiClient from "../ApiClient";
 import Paper from '../model/Paper';
+import PaperPaperIdPatchRequest from '../model/PaperPaperIdPatchRequest';
 import PaperPostRequest from '../model/PaperPostRequest';
+import Papers from '../model/Papers';
 
 /**
 * Paper service.
@@ -38,7 +40,7 @@ export default class PaperApi {
 
     /**
      * get_papers
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Papers} and HTTP response
      */
     paperGetWithHttpInfo() {
       let postBody = null;
@@ -55,7 +57,7 @@ export default class PaperApi {
       let authNames = [];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = Paper;
+      let returnType = Papers;
       return this.apiClient.callApi(
         '/paper', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -65,7 +67,7 @@ export default class PaperApi {
 
     /**
      * get_papers
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Papers}
      */
     paperGet() {
       return this.paperGetWithHttpInfo()
@@ -125,7 +127,7 @@ export default class PaperApi {
      * patch paper
      * @param {Number} paperId 
      * @param {Object} opts Optional parameters
-     * @param {module:model/PaperPostRequest} [paper] 
+     * @param {module:model/PaperPaperIdPatchRequest} [paper] 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
     paperPaperIdPatchWithHttpInfo(paperId, opts) {
@@ -161,7 +163,7 @@ export default class PaperApi {
      * patch paper
      * @param {Number} paperId 
      * @param {Object} opts Optional parameters
-     * @param {module:model/PaperPostRequest} opts.paper 
+     * @param {module:model/PaperPaperIdPatchRequest} opts.paper 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
     paperPaperIdPatch(paperId, opts) {

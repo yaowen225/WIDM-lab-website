@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The PaperPostRequest model module.
- * @module model/PaperPostRequest
+ * The PaperPaperIdPatchRequest model module.
+ * @module model/PaperPaperIdPatchRequest
  * @version 1.0.0
  */
-class PaperPostRequest {
+class PaperPaperIdPatchRequest {
     /**
-     * Constructs a new <code>PaperPostRequest</code>.
-     * @alias module:model/PaperPostRequest
+     * Constructs a new <code>PaperPaperIdPatchRequest</code>.
+     * @alias module:model/PaperPaperIdPatchRequest
      */
     constructor() { 
         
-        PaperPostRequest.initialize(this);
+        PaperPaperIdPatchRequest.initialize(this);
     }
 
     /**
@@ -37,19 +37,16 @@ class PaperPostRequest {
     }
 
     /**
-     * Constructs a <code>PaperPostRequest</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>PaperPaperIdPatchRequest</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/PaperPostRequest} obj Optional instance to populate.
-     * @return {module:model/PaperPostRequest} The populated <code>PaperPostRequest</code> instance.
+     * @param {module:model/PaperPaperIdPatchRequest} obj Optional instance to populate.
+     * @return {module:model/PaperPaperIdPatchRequest} The populated <code>PaperPaperIdPatchRequest</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new PaperPostRequest();
+            obj = obj || new PaperPaperIdPatchRequest();
 
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
             if (data.hasOwnProperty('paper_authors')) {
                 obj['paper_authors'] = ApiClient.convertToType(data['paper_authors'], ['String']);
             }
@@ -73,9 +70,9 @@ class PaperPostRequest {
     }
 
     /**
-     * Validates the JSON data with respect to <code>PaperPostRequest</code>.
+     * Validates the JSON data with respect to <code>PaperPaperIdPatchRequest</code>.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaperPostRequest</code>.
+     * @return {boolean} to indicate whether the JSON data is valid with respect to <code>PaperPaperIdPatchRequest</code>.
      */
     static validateJSON(data) {
         // ensure the json data is an array
@@ -108,44 +105,39 @@ class PaperPostRequest {
 
 
 /**
- * @member {Number} id
- */
-PaperPostRequest.prototype['id'] = undefined;
-
-/**
  * @member {Array.<String>} paper_authors
  */
-PaperPostRequest.prototype['paper_authors'] = undefined;
+PaperPaperIdPatchRequest.prototype['paper_authors'] = undefined;
 
 /**
  * @member {String} paper_link
  */
-PaperPostRequest.prototype['paper_link'] = undefined;
+PaperPaperIdPatchRequest.prototype['paper_link'] = undefined;
 
 /**
  * @member {String} paper_origin
  */
-PaperPostRequest.prototype['paper_origin'] = undefined;
+PaperPaperIdPatchRequest.prototype['paper_origin'] = undefined;
 
 /**
  * @member {Number} paper_publish_year
  */
-PaperPostRequest.prototype['paper_publish_year'] = undefined;
+PaperPaperIdPatchRequest.prototype['paper_publish_year'] = undefined;
 
 /**
  * @member {Array.<String>} paper_tags
  */
-PaperPostRequest.prototype['paper_tags'] = undefined;
+PaperPaperIdPatchRequest.prototype['paper_tags'] = undefined;
 
 /**
  * @member {String} paper_title
  */
-PaperPostRequest.prototype['paper_title'] = undefined;
+PaperPaperIdPatchRequest.prototype['paper_title'] = undefined;
 
 
 
 
 
 
-export default PaperPostRequest;
+export default PaperPaperIdPatchRequest;
 

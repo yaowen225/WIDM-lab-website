@@ -50,14 +50,14 @@ class PapersResponseInner {
             if (data.hasOwnProperty('create_time')) {
                 obj['create_time'] = ApiClient.convertToType(data['create_time'], 'String');
             }
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
             if (data.hasOwnProperty('paper_attachment')) {
                 obj['paper_attachment'] = ApiClient.convertToType(data['paper_attachment'], 'String');
             }
             if (data.hasOwnProperty('paper_authors')) {
                 obj['paper_authors'] = ApiClient.convertToType(data['paper_authors'], ['String']);
+            }
+            if (data.hasOwnProperty('paper_id')) {
+                obj['paper_id'] = ApiClient.convertToType(data['paper_id'], 'Number');
             }
             if (data.hasOwnProperty('paper_link')) {
                 obj['paper_link'] = ApiClient.convertToType(data['paper_link'], 'String');
@@ -134,11 +134,6 @@ class PapersResponseInner {
 PapersResponseInner.prototype['create_time'] = undefined;
 
 /**
- * @member {Number} id
- */
-PapersResponseInner.prototype['id'] = undefined;
-
-/**
  * @member {String} paper_attachment
  */
 PapersResponseInner.prototype['paper_attachment'] = undefined;
@@ -147,6 +142,11 @@ PapersResponseInner.prototype['paper_attachment'] = undefined;
  * @member {Array.<String>} paper_authors
  */
 PapersResponseInner.prototype['paper_authors'] = undefined;
+
+/**
+ * @member {Number} paper_id
+ */
+PapersResponseInner.prototype['paper_id'] = undefined;
 
 /**
  * @member {String} paper_link

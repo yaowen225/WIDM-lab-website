@@ -27,14 +27,26 @@ import Members from './model/Members';
 import MembersResponseInner from './model/MembersResponseInner';
 import Paper from './model/Paper';
 import PaperAttachment from './model/PaperAttachment';
+import PaperPaperIdPatchRequest from './model/PaperPaperIdPatchRequest';
 import PaperPostRequest from './model/PaperPostRequest';
 import PaperResponse from './model/PaperResponse';
+import Papers from './model/Papers';
+import PapersResponseInner from './model/PapersResponseInner';
+import Project from './model/Project';
+import ProjectIcon from './model/ProjectIcon';
+import ProjectIconResponse from './model/ProjectIconResponse';
+import ProjectInput from './model/ProjectInput';
+import ProjectResponse from './model/ProjectResponse';
+import Projects from './model/Projects';
+import ProjectsResponseInner from './model/ProjectsResponseInner';
 import ActivityApi from './api/ActivityApi';
 import ActivityImageApi from './api/ActivityImageApi';
 import MemberApi from './api/MemberApi';
 import MemberImageApi from './api/MemberImageApi';
 import PaperApi from './api/PaperApi';
 import PaperAttachmentApi from './api/PaperAttachmentApi';
+import ProjectApi from './api/ProjectApi';
+import ProjectIconApi from './api/ProjectIconApi';
 
 
 /**
@@ -160,6 +172,12 @@ export {
     PaperAttachment,
 
     /**
+     * The PaperPaperIdPatchRequest model constructor.
+     * @property {module:model/PaperPaperIdPatchRequest}
+     */
+    PaperPaperIdPatchRequest,
+
+    /**
      * The PaperPostRequest model constructor.
      * @property {module:model/PaperPostRequest}
      */
@@ -170,6 +188,60 @@ export {
      * @property {module:model/PaperResponse}
      */
     PaperResponse,
+
+    /**
+     * The Papers model constructor.
+     * @property {module:model/Papers}
+     */
+    Papers,
+
+    /**
+     * The PapersResponseInner model constructor.
+     * @property {module:model/PapersResponseInner}
+     */
+    PapersResponseInner,
+
+    /**
+     * The Project model constructor.
+     * @property {module:model/Project}
+     */
+    Project,
+
+    /**
+     * The ProjectIcon model constructor.
+     * @property {module:model/ProjectIcon}
+     */
+    ProjectIcon,
+
+    /**
+     * The ProjectIconResponse model constructor.
+     * @property {module:model/ProjectIconResponse}
+     */
+    ProjectIconResponse,
+
+    /**
+     * The ProjectInput model constructor.
+     * @property {module:model/ProjectInput}
+     */
+    ProjectInput,
+
+    /**
+     * The ProjectResponse model constructor.
+     * @property {module:model/ProjectResponse}
+     */
+    ProjectResponse,
+
+    /**
+     * The Projects model constructor.
+     * @property {module:model/Projects}
+     */
+    Projects,
+
+    /**
+     * The ProjectsResponseInner model constructor.
+     * @property {module:model/ProjectsResponseInner}
+     */
+    ProjectsResponseInner,
 
     /**
     * The ActivityApi service constructor.
@@ -205,5 +277,17 @@ export {
     * The PaperAttachmentApi service constructor.
     * @property {module:api/PaperAttachmentApi}
     */
-    PaperAttachmentApi
+    PaperAttachmentApi,
+
+    /**
+    * The ProjectApi service constructor.
+    * @property {module:api/ProjectApi}
+    */
+    ProjectApi,
+
+    /**
+    * The ProjectIconApi service constructor.
+    * @property {module:api/ProjectIconApi}
+    */
+    ProjectIconApi
 };

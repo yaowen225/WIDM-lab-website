@@ -1,0 +1,92 @@
+import React, { useState } from 'react';
+
+interface Header {
+  id: string;
+  Name: string;
+  isShow: string | boolean;
+  type: string;
+}
+
+interface AddItemFormProps {
+  headers: Header[];
+  onClose: () => void;
+}
+
+const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose }) => {
+  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(formData);
+    onClose();
+  };
+
+  const renderInputField = (header: Header) => {
+    if (header.type === 'Number') {
+      return (
+        <input
+          key={header.id}
+          type="number"
+          name={header.id}
+          placeholder={header.Name}
+          onChange={handleChange}
+          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+        />
+      );
+    }
+    return (
+      <input
+        key={header.id}
+        type="text"
+        name={header.id}
+        placeholder={header.Name}
+        onChange={handleChange}
+        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+      />
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
+          <h3 className="font-medium text-black dark:text-white">Add New Item</h3>
+        </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5.5 p-6.5">
+          {headers
+            .filter((header) => header.id !== 'id' && header.id !== 'actions')
+            .map((header) => (
+              <div key={header.id}>
+                <label className="mb-3 block text-black dark:text-white">{header.Name}</label>
+                {renderInputField(header)}
+              </div>
+            ))}
+          <div className="flex justify-end gap-2">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
+            >
+              取消
+            </button>
+            <button
+              type="submit"
+              className="rounded-md border border-primary bg-primary py-2 px-4 text-white"
+            >
+              新增
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default AddItemForm;

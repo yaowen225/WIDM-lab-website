@@ -75,19 +75,6 @@
         }
       }
     },
-    "member input": {
-      "properties": {
-        "member_character": {
-          "type": "string"
-        },
-        "member_intro": {
-          "type": "string"
-        },
-        "member_name": {
-          "type": "string"
-        }
-      }
-    },
     "member_image": {
       "properties": {
         "description": {
@@ -114,6 +101,19 @@
         }
       }
     },
+    "member_input": {
+      "properties": {
+        "member_character": {
+          "type": "string"
+        },
+        "member_intro": {
+          "type": "string"
+        },
+        "member_name": {
+          "type": "string"
+        }
+      }
+    },
     "members": {
       "properties": {
         "description": {
@@ -124,6 +124,9 @@
             "properties": {
               "create_time": {
                 "type": "string"
+              },
+              "id": {
+                "type": "integer"
               },
               "member_image": {
                 "type": "string"
@@ -199,6 +202,192 @@
         }
       },
       "type": "object"
+    },
+    "papers": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "create_time": {
+                "type": "string"
+              },
+              "paper_attachment": {
+                "type": "string"
+              },
+              "paper_authors": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "paper_id": {
+                "type": "integer"
+              },
+              "paper_link": {
+                "type": "string"
+              },
+              "paper_origin": {
+                "type": "string"
+              },
+              "paper_publish_year": {
+                "type": "integer"
+              },
+              "paper_tags": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "paper_title": {
+                "type": "string"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    },
+    "project": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "created_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "project_description": {
+              "type": "string"
+            },
+            "project_github": {
+              "type": "string"
+            },
+            "project_link": {
+              "type": "string"
+            },
+            "project_name": {
+              "type": "string"
+            },
+            "project_tags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "updated_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "project_icon": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "created_time": {
+              "type": "string"
+            },
+            "icon_name": {
+              "type": "string"
+            },
+            "icon_path": {
+              "type": "string"
+            },
+            "icon_uuid": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "project_id": {
+              "type": "integer"
+            },
+            "updated_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "project_input": {
+      "properties": {
+        "project_description": {
+          "type": "string"
+        },
+        "project_github": {
+          "type": "string"
+        },
+        "project_link": {
+          "type": "string"
+        },
+        "project_name": {
+          "type": "string"
+        },
+        "project_tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "projects": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "created_time": {
+                "type": "string"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "member_image": {
+                "type": "string"
+              },
+              "project_description": {
+                "type": "string"
+              },
+              "project_github": {
+                "type": "string"
+              },
+              "project_link": {
+                "type": "string"
+              },
+              "project_name": {
+                "type": "string"
+              },
+              "project_tags": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "updated_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
     }
   },
   "info": {
@@ -458,7 +647,7 @@
             "in": "body",
             "name": "member",
             "schema": {
-              "$ref": "#/definitions/member input"
+              "$ref": "#/definitions/member_input"
             }
           }
         ],
@@ -517,7 +706,7 @@
             "in": "body",
             "name": "member",
             "schema": {
-              "$ref": "#/definitions/member input"
+              "$ref": "#/definitions/member_input"
             }
           }
         ],
@@ -644,7 +833,7 @@
           "200": {
             "description": "get papers successfully",
             "schema": {
-              "$ref": "#/definitions/paper"
+              "$ref": "#/definitions/papers"
             }
           }
         },
@@ -660,6 +849,9 @@
             "name": "paper",
             "schema": {
               "properties": {
+                "id": {
+                  "type": "integer"
+                },
                 "paper_authors": {
                   "items": {
                     "type": "string"
@@ -889,6 +1081,206 @@
         "summary": "get paper attachment",
         "tags": [
           "paper_attachment"
+        ]
+      }
+    },
+    "/project": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "get projects successfully",
+            "schema": {
+              "$ref": "#/definitions/projects"
+            }
+          }
+        },
+        "summary": "get projects",
+        "tags": [
+          "project"
+        ]
+      },
+      "post": {
+        "parameters": [
+          {
+            "description": "project information",
+            "in": "body",
+            "name": "project",
+            "schema": {
+              "$ref": "#/definitions/project_input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post project successfully",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          },
+          "400": {
+            "description": "no ['project_name'] in json"
+          }
+        },
+        "summary": "post project",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/project/{project_id}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete project successfully",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "summary": "delete project",
+        "tags": [
+          "project"
+        ]
+      },
+      "patch": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "project information",
+            "in": "body",
+            "name": "project",
+            "schema": {
+              "$ref": "#/definitions/project_input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "patch project successfully",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "summary": "patch project",
+        "tags": [
+          "project"
+        ]
+      }
+    },
+    "/project/{project_id}/project-icon": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "name": "project_icon",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "post project icon successfully",
+            "schema": {
+              "$ref": "#/definitions/project_icon"
+            }
+          },
+          "400": {
+            "description": "no ['project_icon'] in files"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "summary": "post project icon",
+        "tags": [
+          "project_icon"
+        ]
+      }
+    },
+    "/project/{project_id}/project-icon/{project_icon_uuid}": {
+      "delete": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "project_icon_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete project icon successfully",
+            "schema": {
+              "$ref": "#/definitions/project_icon"
+            }
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "summary": "delete project icon",
+        "tags": [
+          "project_icon"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "path",
+            "name": "project_icon_uuid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get project icon successfully"
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "summary": "get project icon",
+        "tags": [
+          "project_icon"
         ]
       }
     }

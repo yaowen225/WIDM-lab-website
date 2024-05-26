@@ -1,29 +1,29 @@
-# WidmBackEnd.PaperApi
+# WidmBackEnd.ProjectApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**paperGet**](PaperApi.md#paperGet) | **GET** /paper | get_papers
-[**paperPaperIdDelete**](PaperApi.md#paperPaperIdDelete) | **DELETE** /paper/{paper_id} | delete paper
-[**paperPaperIdPatch**](PaperApi.md#paperPaperIdPatch) | **PATCH** /paper/{paper_id} | patch paper
-[**paperPost**](PaperApi.md#paperPost) | **POST** /paper | post paper
+[**projectGet**](ProjectApi.md#projectGet) | **GET** /project | get projects
+[**projectPost**](ProjectApi.md#projectPost) | **POST** /project | post project
+[**projectProjectIdDelete**](ProjectApi.md#projectProjectIdDelete) | **DELETE** /project/{project_id} | delete project
+[**projectProjectIdPatch**](ProjectApi.md#projectProjectIdPatch) | **PATCH** /project/{project_id} | patch project
 
 
 
-## paperGet
+## projectGet
 
-> Papers paperGet()
+> Projects projectGet()
 
-get_papers
+get projects
 
 ### Example
 
 ```javascript
 import WidmBackEnd from 'widm_back_end';
 
-let apiInstance = new WidmBackEnd.PaperApi();
-apiInstance.paperGet().then((data) => {
+let apiInstance = new WidmBackEnd.ProjectApi();
+apiInstance.projectGet().then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -37,7 +37,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Papers**](Papers.md)
+[**Projects**](Projects.md)
 
 ### Authorization
 
@@ -49,65 +49,22 @@ No authorization required
 - **Accept**: */*
 
 
-## paperPaperIdDelete
+## projectPost
 
-> Paper paperPaperIdDelete(paperId)
+> Project projectPost(opts)
 
-delete paper
-
-### Example
-
-```javascript
-import WidmBackEnd from 'widm_back_end';
-
-let apiInstance = new WidmBackEnd.PaperApi();
-let paperId = 56; // Number | 
-apiInstance.paperPaperIdDelete(paperId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **paperId** | **Number**|  | 
-
-### Return type
-
-[**Paper**](Paper.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
-## paperPaperIdPatch
-
-> Paper paperPaperIdPatch(paperId, opts)
-
-patch paper
+post project
 
 ### Example
 
 ```javascript
 import WidmBackEnd from 'widm_back_end';
 
-let apiInstance = new WidmBackEnd.PaperApi();
-let paperId = 56; // Number | 
+let apiInstance = new WidmBackEnd.ProjectApi();
 let opts = {
-  'paper': new WidmBackEnd.PaperPaperIdPatchRequest() // PaperPaperIdPatchRequest | 
+  'project': new WidmBackEnd.ProjectInput() // ProjectInput | project information
 };
-apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
+apiInstance.projectPost(opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -120,12 +77,11 @@ apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **paperId** | **Number**|  | 
- **paper** | [**PaperPaperIdPatchRequest**](PaperPaperIdPatchRequest.md)|  | [optional] 
+ **project** | [**ProjectInput**](ProjectInput.md)| project information | [optional] 
 
 ### Return type
 
-[**Paper**](Paper.md)
+[**Project**](Project.md)
 
 ### Authorization
 
@@ -137,22 +93,20 @@ No authorization required
 - **Accept**: */*
 
 
-## paperPost
+## projectProjectIdDelete
 
-> Paper paperPost(opts)
+> Project projectProjectIdDelete(projectId)
 
-post paper
+delete project
 
 ### Example
 
 ```javascript
 import WidmBackEnd from 'widm_back_end';
 
-let apiInstance = new WidmBackEnd.PaperApi();
-let opts = {
-  'paper': new WidmBackEnd.PaperPostRequest() // PaperPostRequest | 
-};
-apiInstance.paperPost(opts).then((data) => {
+let apiInstance = new WidmBackEnd.ProjectApi();
+let projectId = 56; // Number | 
+apiInstance.projectProjectIdDelete(projectId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);
@@ -165,11 +119,57 @@ apiInstance.paperPost(opts).then((data) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **paper** | [**PaperPostRequest**](PaperPostRequest.md)|  | [optional] 
+ **projectId** | **Number**|  | 
 
 ### Return type
 
-[**Paper**](Paper.md)
+[**Project**](Project.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: */*
+
+
+## projectProjectIdPatch
+
+> Project projectProjectIdPatch(projectId, opts)
+
+patch project
+
+### Example
+
+```javascript
+import WidmBackEnd from 'widm_back_end';
+
+let apiInstance = new WidmBackEnd.ProjectApi();
+let projectId = 56; // Number | 
+let opts = {
+  'project': new WidmBackEnd.ProjectInput() // ProjectInput | project information
+};
+apiInstance.projectProjectIdPatch(projectId, opts).then((data) => {
+  console.log('API called successfully. Returned data: ' + data);
+}, (error) => {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **projectId** | **Number**|  | 
+ **project** | [**ProjectInput**](ProjectInput.md)| project information | [optional] 
+
+### Return type
+
+[**Project**](Project.md)
 
 ### Authorization
 

@@ -50,6 +50,9 @@ class MembersResponseInner {
             if (data.hasOwnProperty('create_time')) {
                 obj['create_time'] = ApiClient.convertToType(data['create_time'], 'String');
             }
+            if (data.hasOwnProperty('id')) {
+                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
+            }
             if (data.hasOwnProperty('member_image')) {
                 obj['member_image'] = ApiClient.convertToType(data['member_image'], 'String');
             }
@@ -105,6 +108,11 @@ class MembersResponseInner {
  * @member {String} create_time
  */
 MembersResponseInner.prototype['create_time'] = undefined;
+
+/**
+ * @member {Number} id
+ */
+MembersResponseInner.prototype['id'] = undefined;
 
 /**
  * @member {String} member_image
