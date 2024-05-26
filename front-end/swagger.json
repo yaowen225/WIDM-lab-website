@@ -1,5 +1,40 @@
 ﻿{
   "definitions": {
+    "activities": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "response": {
+          "items": {
+            "properties": {
+              "activity_image": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "activity_sub_title": {
+                "type": "string"
+              },
+              "activity_title": {
+                "type": "string"
+              },
+              "create_time": {
+                "type": "string"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "update_time": {
+                "type": "string"
+              }
+            }
+          },
+          "type": "array"
+        }
+      }
+    },
     "activity": {
       "properties": {
         "description": {
@@ -403,7 +438,7 @@
           "200": {
             "description": "get activities successfully",
             "schema": {
-              "$ref": "#/definitions/activity"
+              "$ref": "#/definitions/activities"
             }
           },
           "404": {

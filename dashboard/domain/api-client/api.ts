@@ -26,6 +26,68 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
+ * @interface Activities
+ */
+export interface Activities {
+    /**
+     * 
+     * @type {string}
+     * @memberof Activities
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {Array<ActivitiesResponseInner>}
+     * @memberof Activities
+     */
+    'response'?: Array<ActivitiesResponseInner>;
+}
+/**
+ * 
+ * @export
+ * @interface ActivitiesResponseInner
+ */
+export interface ActivitiesResponseInner {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ActivitiesResponseInner
+     */
+    'activity_image'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActivitiesResponseInner
+     */
+    'activity_sub_title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActivitiesResponseInner
+     */
+    'activity_title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActivitiesResponseInner
+     */
+    'create_time'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ActivitiesResponseInner
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ActivitiesResponseInner
+     */
+    'update_time'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Activity
  */
 export interface Activity {
@@ -1051,7 +1113,7 @@ export const ActivityApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async activityGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Activity>> {
+        async activityGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Activities>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.activityGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ActivityApi.activityGet']?.[localVarOperationServerIndex]?.url;
@@ -1107,7 +1169,7 @@ export const ActivityApiFactory = function (configuration?: Configuration, baseP
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityGet(options?: any): AxiosPromise<Activity> {
+        activityGet(options?: any): AxiosPromise<Activities> {
             return localVarFp.activityGet(options).then((request) => request(axios, basePath));
         },
         /**

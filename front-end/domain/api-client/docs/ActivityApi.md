@@ -101,7 +101,7 @@ No authorization required
 
 ## activityGet
 
-> Activity activityGet()
+> Activities activityGet()
 
 get activity
 
@@ -125,7 +125,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**Activity**](Activity.md)
+[**Activities**](Activities.md)
 
 ### Authorization
 

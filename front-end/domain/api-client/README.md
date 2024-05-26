@@ -151,6 +151,8 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [WidmBackEnd.Activities](docs/Activities.md)
+ - [WidmBackEnd.ActivitiesResponseInner](docs/ActivitiesResponseInner.md)
  - [WidmBackEnd.Activity](docs/Activity.md)
  - [WidmBackEnd.ActivityImage](docs/ActivityImage.md)
  - [WidmBackEnd.ActivityImageResponse](docs/ActivityImageResponse.md)

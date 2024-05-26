@@ -2,6 +2,8 @@
 .gitignore
 .travis.yml
 README.md
+docs/Activities.md
+docs/ActivitiesResponseInner.md
 docs/Activity.md
 docs/ActivityApi.md
 docs/ActivityImage.md
@@ -49,6 +51,8 @@ src/api/PaperAttachmentApi.js
 src/api/ProjectApi.js
 src/api/ProjectIconApi.js
 src/index.js
+src/model/Activities.js
+src/model/ActivitiesResponseInner.js
 src/model/Activity.js
 src/model/ActivityImage.js
 src/model/ActivityImageResponse.js
@@ -75,13 +79,5 @@ src/model/ProjectInput.js
 src/model/ProjectResponse.js
 src/model/Projects.js
 src/model/ProjectsResponseInner.js
-test/api/ProjectApi.spec.js
-test/api/ProjectIconApi.spec.js
-test/model/PaperPaperIdPatchRequest.spec.js
-test/model/Project.spec.js
-test/model/ProjectIcon.spec.js
-test/model/ProjectIconResponse.spec.js
-test/model/ProjectInput.spec.js
-test/model/ProjectResponse.spec.js
-test/model/Projects.spec.js
-test/model/ProjectsResponseInner.spec.js
+test/model/Activities.spec.js
+test/model/ActivitiesResponseInner.spec.js

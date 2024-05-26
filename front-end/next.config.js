@@ -62,6 +62,7 @@ module.exports = withBundleAnalyzer({
       'cdn.hashnode.com',
       'res.craft.do',
       'res.cloudinary.com',
+      'widm-back-end.nevercareu.space', // 新增的圖片域名
     ],
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx'],

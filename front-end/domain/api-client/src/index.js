@@ -13,6 +13,8 @@
 
 
 import ApiClient from './ApiClient';
+import Activities from './model/Activities';
+import ActivitiesResponseInner from './model/ActivitiesResponseInner';
 import Activity from './model/Activity';
 import ActivityImage from './model/ActivityImage';
 import ActivityImageResponse from './model/ActivityImageResponse';
@@ -86,6 +88,18 @@ export {
      * @property {module:ApiClient}
      */
     ApiClient,
+
+    /**
+     * The Activities model constructor.
+     * @property {module:model/Activities}
+     */
+    Activities,
+
+    /**
+     * The ActivitiesResponseInner model constructor.
+     * @property {module:model/ActivitiesResponseInner}
+     */
+    ActivitiesResponseInner,
 
     /**
      * The Activity model constructor.

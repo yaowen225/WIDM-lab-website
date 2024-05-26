@@ -13,6 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
+import Activities from '../model/Activities';
 import Activity from '../model/Activity';
 import ActivityPostRequest from '../model/ActivityPostRequest';
 
@@ -135,7 +136,7 @@ export default class ActivityApi {
 
     /**
      * get activity
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activity} and HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Activities} and HTTP response
      */
     activityGetWithHttpInfo() {
       let postBody = null;
@@ -152,7 +153,7 @@ export default class ActivityApi {
       let authNames = [];
       let contentTypes = [];
       let accepts = ['*/*'];
-      let returnType = Activity;
+      let returnType = Activities;
       return this.apiClient.callApi(
         '/activity', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -162,7 +163,7 @@ export default class ActivityApi {
 
     /**
      * get activity
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activity}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Activities}
      */
     activityGet() {
       return this.activityGetWithHttpInfo()
