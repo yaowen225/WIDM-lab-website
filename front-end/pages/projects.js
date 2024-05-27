@@ -1,9 +1,32 @@
+import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
-import projectsData from '@/data/projectsData'
-import Card from '@/components/Card'
+import ProjectCard from '@/components/ProjectCard'
 import { PageSEO } from '@/components/SEO'
+import { ProjectApi } from 'domain/api-client/src'
+  
+export const projects = () => {
 
-export default function Projects() {
+  const [projectsDatas, setProjectsData] = useState([])
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const apiClient = new ProjectApi()
+      try {
+        const data = await apiClient.projectGet()
+
+        setProjectsData(data.response)
+        console.log(data.response)
+      } catch (error) {
+        console.error('API 調用失敗:', error.message)
+        if (error.response) {
+          console.error('API Response Error:', error.response.body)
+        }
+      }
+    }
+
+    fetchProjects()
+  }, [])
+
   return (
     <>
       <PageSEO
@@ -15,23 +38,16 @@ export default function Projects() {
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Projects
           </h1>
-          <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
-            A list of projects I have been working on or built
-          </p>
         </div>
         <div className="container py-12">
           <div className="-m-4 flex flex-wrap">
-            {projectsData.map((d) => (
-              <Card
-                key={d.title}
-                title={d.title}
-                description={d.description}
-                imgSrc={d.imgSrc}
-                href={d.href}
-                github={d.github}
-                tech1={d.tech1}
-                tech2={d.tech2}
-                tech3={d.tech3}
+            {projectsDatas.map((d) => (
+              <ProjectCard
+                key={d.id}
+                title={d.project_name}
+                description={d.project_description}
+                github={d.project_github}
+                tags={d.project_tags}
               />
             ))}
           </div>
@@ -40,3 +56,5 @@ export default function Projects() {
     </>
   )
 }
+
+export default projects
