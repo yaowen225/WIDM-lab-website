@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Header {
   id: string;
@@ -11,10 +11,17 @@ interface AddItemFormProps {
   headers: Header[];
   onClose: () => void;
   onSubmit: (formData: { [key: string]: any }) => void;
+  editData?: { [key: string]: any } | null;
 }
 
-const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit }) => {
+const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
+
+  useEffect(() => {
+    if (editData) {
+      setFormData(editData);
+    }
+  }, [editData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -37,6 +44,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit })
           type="number"
           name={header.id}
           placeholder={header.Name}
+          value={formData[header.id] || ''}
           onChange={handleChange}
           className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
         />
@@ -48,6 +56,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit })
         type="text"
         name={header.id}
         placeholder={header.Name}
+        value={formData[header.id] || ''}
         onChange={handleChange}
         className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
       />
@@ -81,7 +90,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit })
               type="submit"
               className="rounded-md border border-primary bg-primary py-2 px-4 text-white"
             >
-              新增
+              {editData ? '更新' : '新增'}
             </button>
           </div>
         </form>

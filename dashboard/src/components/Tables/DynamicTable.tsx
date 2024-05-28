@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { FaEye, FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 interface TableProps {
   headers: Array<{ id: string; Name: string; isShow: string | boolean; type: string }>;
   data: Array<{ [key: string]: any }>;
   onDelete: (id: number) => void;
+  onEdit: (row: { [key: string]: any }) => void;  // 新增 onEdit 屬性
 }
 
-const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete }) => {
+const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -53,10 +54,7 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete }) => {
                   <td key={header.id} className="border-b border-[#eee] py-5 px-4 dark:border-strokedark xl:pl-11">
                     {header.id === 'actions' ? (
                       <div className="flex items-center space-x-3.5">
-                        {/* <button className="hover:text-primary">
-                          <FaEye />
-                        </button> */}
-                        <button className="hover:text-primary">
+                        <button className="hover:text-primary" onClick={() => onEdit(row)}>
                           <FaEdit />
                         </button>
                         <button

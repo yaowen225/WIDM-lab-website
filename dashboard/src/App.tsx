@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import Settings from './pages/Settings';
 import Tables from './pages/Tables';
 import Activity from './pages/Activity';
+import Member from './pages/Member';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 
@@ -94,6 +95,15 @@ function App() {
             <>
               <PageTitle title="Activity | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Activity />
+            </>
+          }
+        />
+        <Route
+          path="/member"
+          element={
+            <>
+              <PageTitle title="Member | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Member />
             </>
           }
         />
