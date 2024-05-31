@@ -3,11 +3,11 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
-import { ActivityApi, Configuration } from '../../domain/api-client';
-import type { ActivityPostRequest } from 'domain/api-client';
+import { PaperApi, Configuration } from '../../domain/api-client';
+import type { PaperPostRequest } from 'domain/api-client';
 
-const ActivityPage = () => {
-  const [activities, setActivities] = useState<any[]>([]);
+const PaperPage = () => {
+  const [papers, setPapers] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -17,18 +17,21 @@ const ActivityPage = () => {
 
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
-    { id: 'activity_title', Name: '標題', isShow: 'true', type: 'String' },
-    { id: 'activity_sub_title', Name: '副標題', isShow: 'true', type: 'String' },
+    { id: 'paper_title', Name: '論文標題', isShow: 'true', type: 'String' },
+    { id: 'paper_origin', Name: '論文來源', isShow: 'true', type: 'String' },
+    { id: 'paper_publish_year', Name: '論文發布年分', isShow: 'true', type: 'Number' },
+    { id: 'paper_authors', Name: '論文作者', isShow: 'true', type: 'Tags' },
+    { id: 'paper_tags', Name: '論文標籤', isShow: 'true', type: 'Tags' },
     { id: 'actions', Name: 'Actions', isShow: 'false', type: 'Null' },
   ];
 
-  const fetchActivities = async () => {
+  const fetchPapers = async () => {
     const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ActivityApi(configuration);
+    const apiClient = new PaperApi(configuration);
     try {
-      const response = await apiClient.activityGet();
+      const response = await apiClient.paperGet();
       const data: any = response.data.response;
-      setActivities(data);
+      setPapers(data);
       console.log(data);
     } catch (error) {
       console.error('API 調用失敗:', (error as Error).message);
@@ -39,7 +42,7 @@ const ActivityPage = () => {
   };
 
   useEffect(() => {
-    fetchActivities();
+    fetchPapers();
   }, []);
 
   const handleAddNewItem = () => {
@@ -56,22 +59,28 @@ const ActivityPage = () => {
     setIsAdding(false);
   };
 
-  const createActivitie = async (formData: { [key: string]: any }) => {
-    const newActivity: ActivityPostRequest = {
-      activity_title: formData.activity_title,
-      activity_sub_title: formData.activity_sub_title,
+  const createPaper = async (formData: { [key: string]: any }) => {
+    console.log(formData)
+    const newPaper: PaperPostRequest = {
+      paper_title: formData.paper_title,
+      paper_origin: formData.paper_origin,
+      paper_publish_year: formData.paper_publish_year,
+      paper_authors: formData.paper_authors.map((author: { id: string; text: string; className: string }) => author.text),
+      paper_tags: formData.paper_tags.map((tag: { id: string; text: string; className: string }) => tag.text),
     };
+    console.log(newPaper)
 
     const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ActivityApi(configuration);
+    const apiClient = new PaperApi(configuration);
     try {
       if (editData) {
-        await apiClient.activityActivityIdPatch(editData.id, newActivity); // 使用 PATCH 方法更新資料
+        console.log()
+        await apiClient.paperPaperIdPatch(editData.id, newPaper); // 使用 PATCH 方法更新資料
       } else {
-        await apiClient.activityPost(newActivity); // 使用 POST 方法新增資料
+        await apiClient.paperPost(newPaper); // 使用 POST 方法新增資料
       }
       setIsAdding(false);
-      fetchActivities();  // 新增或更新後重新獲取活動數據
+      fetchPapers();  // 新增或更新後重新獲取論文數據
       setSuccessMessage('更新成功!');
       setShowSuccessMessage(true); // 顯示成功消息
       setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
@@ -86,12 +95,12 @@ const ActivityPage = () => {
     }
   };
 
-  const deleteActivitie = async (id: number) => {
+  const deletePaper = async (id: number) => {
     const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ActivityApi(configuration);
+    const apiClient = new PaperApi(configuration);
     try {
-      await apiClient.activityActivityIdDelete(id);
-      fetchActivities(); // 刪除後重新獲取活動數據
+      await apiClient.paperPaperIdDelete(id);
+      fetchPapers(); // 刪除後重新獲取論文數據
       setSuccessMessage('刪除成功!');
       setShowSuccessMessage(true); // 顯示成功消息
       setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
@@ -108,7 +117,7 @@ const ActivityPage = () => {
 
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Activity" />
+      <Breadcrumb pageName="Paper" />
       <div className="flex justify-end mb-1">
         <button
           onClick={handleAddNewItem}
@@ -118,9 +127,9 @@ const ActivityPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} />
+        <DynamicTable data={papers} headers={headers} onDelete={deletePaper} onEdit={handleEditItem} />
       </div>
-      {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />}
+      {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createPaper} editData={editData} />}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
@@ -135,4 +144,4 @@ const ActivityPage = () => {
   );
 };
 
-export default ActivityPage;
+export default PaperPage;

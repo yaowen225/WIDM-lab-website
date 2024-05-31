@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { WithContext as ReactTags } from 'react-tag-input';
 
 interface Header {
   id: string;
@@ -19,15 +20,41 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
 
   useEffect(() => {
     if (editData) {
-      setFormData(editData);
+      const cleanEditData = { ...editData };
+      headers.forEach((header) => {
+        if (header.type === 'Tags' && editData[header.id]) {
+          cleanEditData[header.id] = editData[header.id].map((item: any) => 
+            typeof item === 'string' ? { id: item, text: item } : item
+          );
+        }
+      });
+      setFormData(cleanEditData);
     }
-  }, [editData]);
+  }, [editData, headers]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleDeleteTag = (i: number, id: string) => {
+    const updatedTags = formData[id]?.filter((_: any, index: number) => index !== i) || [];
+    setFormData({
+      ...formData,
+      [id]: updatedTags.length > 0 ? updatedTags : [],
+    });
+    console.log(updatedTags)
+  };
+
+  const handleAdditionTag = (tag: any, id: string) => {
+    const updatedTags = [...(formData[id] || []), tag];
+    setFormData({
+      ...formData,
+      [id]: updatedTags.length > 0 ? updatedTags : [],
+    });
+    console.log(updatedTags)
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -49,6 +76,33 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
           className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
         />
       );
+    } else if (header.type === 'Tags') {
+      return (
+        <div
+          key={header.id}
+          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus-within:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus-within:border-primary"
+        >
+          <ReactTags
+            tags={formData[header.id] || []}
+            handleDelete={(i: number) => handleDeleteTag(i, header.id)}
+            handleAddition={(tag) => handleAdditionTag(tag, header.id)}
+            inputFieldPosition="inline"
+            autocomplete
+            classNames={{
+              root: 'react-tags__root',
+              rootFocused: 'react-tags__root--focused',
+              selected: 'react-tags__selected',
+              selectedTag: 'react-tags__selected-tag',
+              selectedTagName: 'react-tags__selected-tag-name',
+              search: 'react-tags__search',
+              searchInput: 'react-tags__search-input',
+              suggestions: 'react-tags__suggestions',
+              suggestionActive: 'react-tags__suggestion--active',
+              suggestionDisabled: 'react-tags__suggestion--disabled',
+            }}
+          />
+        </div>
+      );
     }
     return (
       <input
@@ -65,11 +119,11 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
-          <h3 className="font-medium text-black dark:text-white">Add New Item</h3>
+      <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
+          <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5.5 p-6.5">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           {headers
             .filter((header) => header.id !== 'id' && header.id !== 'actions')
             .map((header) => (
@@ -78,17 +132,17 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
                 {renderInputField(header)}
               </div>
             ))}
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-4">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
+              className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
             >
               取消
             </button>
             <button
               type="submit"
-              className="rounded-md border border-primary bg-primary py-2 px-4 text-white"
+              className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
             >
               {editData ? '更新' : '新增'}
             </button>

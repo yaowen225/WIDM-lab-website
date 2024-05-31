@@ -3,11 +3,11 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
-import { ActivityApi, Configuration } from '../../domain/api-client';
-import type { ActivityPostRequest } from 'domain/api-client';
+import { NewsApi, Configuration } from '../../domain/api-client';
+import type { NewsInput } from 'domain/api-client';
 
-const ActivityPage = () => {
-  const [activities, setActivities] = useState<any[]>([]);
+const NewsPage = () => {
+  const [news, setNews] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -17,18 +17,19 @@ const ActivityPage = () => {
 
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
-    { id: 'activity_title', Name: '標題', isShow: 'true', type: 'String' },
-    { id: 'activity_sub_title', Name: '副標題', isShow: 'true', type: 'String' },
+    { id: 'news_title', Name: '標題', isShow: 'true', type: 'String' },
+    { id: 'news_sub_title', Name: '副標題', isShow: 'true', type: 'String' },
+    { id: 'news_content', Name: '內容', isShow: 'true', type: 'String' },
     { id: 'actions', Name: 'Actions', isShow: 'false', type: 'Null' },
   ];
 
-  const fetchActivities = async () => {
+  const fetchNews = async () => {
     const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ActivityApi(configuration);
+    const apiClient = new NewsApi(configuration);
     try {
-      const response = await apiClient.activityGet();
+      const response = await apiClient.newsGet();
       const data: any = response.data.response;
-      setActivities(data);
+      setNews(data);
       console.log(data);
     } catch (error) {
       console.error('API 調用失敗:', (error as Error).message);
@@ -39,7 +40,7 @@ const ActivityPage = () => {
   };
 
   useEffect(() => {
-    fetchActivities();
+    fetchNews();
   }, []);
 
   const handleAddNewItem = () => {
@@ -56,22 +57,23 @@ const ActivityPage = () => {
     setIsAdding(false);
   };
 
-  const createActivitie = async (formData: { [key: string]: any }) => {
-    const newActivity: ActivityPostRequest = {
-      activity_title: formData.activity_title,
-      activity_sub_title: formData.activity_sub_title,
+  const createNews = async (formData: { [key: string]: any }) => {
+    const newNews: NewsInput = {
+      news_title: formData.news_title,
+      news_sub_title: formData.news_sub_title,
+      news_content: formData.news_content,
     };
 
     const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ActivityApi(configuration);
+    const apiClient = new NewsApi(configuration);
     try {
       if (editData) {
-        await apiClient.activityActivityIdPatch(editData.id, newActivity); // 使用 PATCH 方法更新資料
+        await apiClient.newsNewsIdPatch(editData.id, newNews); // 使用 PATCH 方法更新資料
       } else {
-        await apiClient.activityPost(newActivity); // 使用 POST 方法新增資料
+        await apiClient.newsPost(newNews); // 使用 POST 方法新增資料
       }
       setIsAdding(false);
-      fetchActivities();  // 新增或更新後重新獲取活動數據
+      fetchNews();  // 新增或更新後重新獲取新聞數據
       setSuccessMessage('更新成功!');
       setShowSuccessMessage(true); // 顯示成功消息
       setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
@@ -86,12 +88,12 @@ const ActivityPage = () => {
     }
   };
 
-  const deleteActivitie = async (id: number) => {
+  const deleteNews = async (id: number) => {
     const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ActivityApi(configuration);
+    const apiClient = new NewsApi(configuration);
     try {
-      await apiClient.activityActivityIdDelete(id);
-      fetchActivities(); // 刪除後重新獲取活動數據
+      await apiClient.newsNewsIdDelete(id);
+      fetchNews(); // 刪除後重新獲取新聞數據
       setSuccessMessage('刪除成功!');
       setShowSuccessMessage(true); // 顯示成功消息
       setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
@@ -108,7 +110,7 @@ const ActivityPage = () => {
 
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Activity" />
+      <Breadcrumb pageName="News" />
       <div className="flex justify-end mb-1">
         <button
           onClick={handleAddNewItem}
@@ -118,9 +120,9 @@ const ActivityPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} />
+        <DynamicTable data={news} headers={headers} onDelete={deleteNews} onEdit={handleEditItem} />
       </div>
-      {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />}
+      {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createNews} editData={editData} />}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
@@ -135,4 +137,4 @@ const ActivityPage = () => {
   );
 };
 
-export default ActivityPage;
+export default NewsPage;
