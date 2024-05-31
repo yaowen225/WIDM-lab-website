@@ -16,6 +16,7 @@ import Tables from './pages/Tables';
 import Activity from './pages/Activity';
 import News from './pages/News';
 import Paper from './pages/Paper';
+import Project from './pages/Project';
 import Member from './pages/Member';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
@@ -124,6 +125,15 @@ function App() {
             <>
               <PageTitle title="Paper | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Paper />
+            </>
+          }
+        />
+        <Route
+          path="/project"
+          element={
+            <>
+              <PageTitle title="Project | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Project />
             </>
           }
         />
