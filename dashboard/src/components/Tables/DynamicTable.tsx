@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaUpload } from 'react-icons/fa';
+import { LuImagePlus, LuImageMinus } from "react-icons/lu";
 
 interface TableProps {
   headers: Array<{ id: string; Name: string; isShow: string | boolean; type: string }>;
   data: Array<{ [key: string]: any }>;
   onDelete: (id: number) => void;
-  onEdit: (row: { [key: string]: any }) => void;  // 新增 onEdit 屬性
+  onEdit: (row: { [key: string]: any }) => void;
+  onUploadImage: (row: { [key: string]: any }) => void;  // 新增 onUploadImage 屬性
 }
 
-const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit }) => {
+const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, onUploadImage }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -63,6 +65,32 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit })
                         >
                           <FaTrashAlt />
                         </button>
+                      </div>
+                    ) : header.id === 'imageActions' ? (
+                      <div className="flex items-center space-x-3.5">
+                        <button className="hover:text-primary" onClick={() => onEdit(row)}>
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => handleDeleteClick(row.id)}
+                        >
+                          <FaTrashAlt />
+                        </button>
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => onUploadImage(row)}
+                        >
+                          <LuImagePlus />
+                        </button>
+                        {row[header.Name] !== null ? (
+                          <button
+                          className="hover:text-primary"
+                          onClick={() => onUploadImage(row)}
+                        >
+                          <LuImageMinus />
+                        </button>
+                        ) : null}
                       </div>
                     ) : (
                       <span className="text-black dark:text-white">

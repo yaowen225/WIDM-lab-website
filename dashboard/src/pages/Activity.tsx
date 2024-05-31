@@ -3,12 +3,14 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
-import { ActivityApi, Configuration } from '../../domain/api-client';
+import UploadImage from '../components/Forms/UploadImageForm';
+import { ActivityApi, ActivityImageApi, Configuration } from '../../domain/api-client';
 import type { ActivityPostRequest } from 'domain/api-client';
 
 const ActivityPage = () => {
   const [activities, setActivities] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -19,7 +21,7 @@ const ActivityPage = () => {
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
     { id: 'activity_title', Name: '標題', isShow: 'true', type: 'String' },
     { id: 'activity_sub_title', Name: '副標題', isShow: 'true', type: 'String' },
-    { id: 'actions', Name: 'Actions', isShow: 'false', type: 'Null' },
+    { id: 'imageActions', Name: 'activity_image', isShow: 'false', type: 'Null' },
   ];
 
   const fetchActivities = async () => {
@@ -52,8 +54,17 @@ const ActivityPage = () => {
     setIsAdding(true);
   };
 
+  const handleUploadImage = (row: { [key: string]: any }) => {
+    setEditData(row);
+    setIsUploading(true);
+  };
+
   const handleCloseForm = () => {
     setIsAdding(false);
+  };
+
+  const handleCloseUploadImage = () => {
+    setIsUploading(false);
   };
 
   const createActivitie = async (formData: { [key: string]: any }) => {
@@ -85,6 +96,29 @@ const ActivityPage = () => {
       }
     }
   };
+
+  const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
+    const configuration = new Configuration({ basePath: '/api' });
+    const apiClient = new ActivityImageApi(configuration);
+    try {
+      if (editData) {
+        await apiClient.activityActivityIdActivityImagePost(editData.id, formData.image);
+      }
+      setIsUploading(false);
+      fetchActivities();
+      setSuccessMessage('圖片上傳成功!');
+      setShowSuccessMessage(true);
+      setTimeout(() => setShowSuccessMessage(false), 3000);
+    } catch (error) {
+      console.error('圖片上傳失敗:', (error as Error).message);
+      setErrorMessage('圖片上傳失敗!');
+      setShowErrorMessage(true);
+      setTimeout(() => setShowErrorMessage(false), 3000);
+      if ((error as any).response) {
+        console.error('API Response Error:', (error as any).response.body);
+      }
+    }
+  };  
 
   const deleteActivitie = async (id: number) => {
     const configuration = new Configuration({ basePath: '/api' });
@@ -118,9 +152,10 @@ const ActivityPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} />
+        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} onUploadImage={handleUploadImage}/>
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />}
+      {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
