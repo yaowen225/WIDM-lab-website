@@ -6,6 +6,7 @@ chmod +x run_docker.sh
 ./run_docker.sh
 ```
 
+
 + Generate the Swagger file.
 The file settings are in custom-templates.
 ```
