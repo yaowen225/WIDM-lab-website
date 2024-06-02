@@ -120,7 +120,7 @@ const MemberPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={members} headers={headers} onDelete={deleteMember} onEdit={handleEditItem} />
+        <DynamicTable data={members} headers={headers} onDelete={deleteMember} onEdit={handleEditItem} onUploadImage={() => {}}/>
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createMember} editData={editData} />}
       {showSuccessMessage && (
