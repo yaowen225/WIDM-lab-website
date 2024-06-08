@@ -125,7 +125,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           {headers
-            .filter((header) => header.id !== 'id' && header.id !== 'actions' && header.id !== 'imageActions' && header.id !== 'attachmentActions')
+            .filter((header) => header.id !== 'id' && header.id !== 'actions' && header.id !== 'imageActions' && header.id !== 'imagesActions'  && header.id !== 'attachmentActions')
             .map((header) => (
               <div key={header.id}>
                 <label className="mb-3 block text-black dark:text-white">{header.Name}</label>

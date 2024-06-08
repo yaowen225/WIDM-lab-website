@@ -29,7 +29,7 @@ const DeleteFiles: React.FC<DeleteFileProps> = ({ onClose, action, id, fileId, f
 
   const handleDownloadClick = (fileId: string) => {
     const link = document.createElement('a');
-    link.href = `https://widm-back-end.nevercareu.space/${action}/${id}/${action}-file/${fileId}`;
+    link.href = `https://widm-back-end.nevercareu.space/${action}/${id}/${action}-attachment/${fileId}`;
     link.download = fileId;
     document.body.appendChild(link);
     link.click();
