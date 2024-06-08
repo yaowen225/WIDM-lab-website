@@ -189,23 +189,30 @@
     },
     "news": {
       "properties": {
-        "created_time": {
+        "description": {
           "type": "string"
         },
-        "id": {
-          "type": "integer"
-        },
-        "news_content": {
-          "type": "string"
-        },
-        "news_sub_title": {
-          "type": "string"
-        },
-        "news_title": {
-          "type": "string"
-        },
-        "updated_time": {
-          "type": "string"
+        "response": {
+          "properties": {
+            "created_time": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "news_content": {
+              "type": "string"
+            },
+            "news_sub_title": {
+              "type": "string"
+            },
+            "news_title": {
+              "type": "string"
+            },
+            "updated_time": {
+              "type": "string"
+            }
+          }
         }
       }
     },

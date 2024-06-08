@@ -432,37 +432,13 @@ export interface News {
      * @type {string}
      * @memberof News
      */
-    'created_time'?: string;
+    'description'?: string;
     /**
      * 
-     * @type {number}
+     * @type {NewsResponse}
      * @memberof News
      */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof News
-     */
-    'news_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof News
-     */
-    'news_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof News
-     */
-    'news_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof News
-     */
-    'updated_time'?: string;
+    'response'?: NewsResponse;
 }
 /**
  * 
@@ -573,6 +549,49 @@ export interface NewsInput {
 /**
  * 
  * @export
+ * @interface NewsResponse
+ */
+export interface NewsResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof NewsResponse
+     */
+    'created_time'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof NewsResponse
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewsResponse
+     */
+    'news_content'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewsResponse
+     */
+    'news_sub_title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewsResponse
+     */
+    'news_title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof NewsResponse
+     */
+    'updated_time'?: string;
+}
+/**
+ * 
+ * @export
  * @interface Newses
  */
 export interface Newses {
@@ -584,53 +603,10 @@ export interface Newses {
     'description'?: string;
     /**
      * 
-     * @type {Array<NewsesResponseInner>}
+     * @type {Array<NewsResponse>}
      * @memberof Newses
      */
-    'response'?: Array<NewsesResponseInner>;
-}
-/**
- * 
- * @export
- * @interface NewsesResponseInner
- */
-export interface NewsesResponseInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsesResponseInner
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewsesResponseInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsesResponseInner
-     */
-    'news_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsesResponseInner
-     */
-    'news_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsesResponseInner
-     */
-    'news_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsesResponseInner
-     */
-    'updated_time'?: string;
+    'response'?: Array<NewsResponse>;
 }
 /**
  * 

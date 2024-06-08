@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import NewsesResponseInner from './NewsesResponseInner';
+import NewsResponse from './NewsResponse';
 
 /**
  * The Newses model module.
@@ -52,7 +52,7 @@ class Newses {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
             if (data.hasOwnProperty('response')) {
-                obj['response'] = ApiClient.convertToType(data['response'], [NewsesResponseInner]);
+                obj['response'] = ApiClient.convertToType(data['response'], [NewsResponse]);
             }
         }
         return obj;
@@ -75,7 +75,7 @@ class Newses {
             }
             // validate the optional field `response` (array)
             for (const item of data['response']) {
-                NewsesResponseInner.validateJSON(item);
+                NewsResponse.validateJSON(item);
             };
         }
 
@@ -93,7 +93,7 @@ class Newses {
 Newses.prototype['description'] = undefined;
 
 /**
- * @member {Array.<module:model/NewsesResponseInner>} response
+ * @member {Array.<module:model/NewsResponse>} response
  */
 Newses.prototype['response'] = undefined;
 

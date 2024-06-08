@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import NewsResponse from './NewsResponse';
 
 /**
  * The News model module.
@@ -44,27 +45,14 @@ class News {
      * @return {module:model/News} The populated <code>News</code> instance.
      */
     static constructFromObject(data, obj) {
-        console.log(data);
         if (data) {
             obj = obj || new News();
 
-            if (data.hasOwnProperty('created_time')) {
-                obj['created_time'] = ApiClient.convertToType(data['created_time'], 'String');
+            if (data.hasOwnProperty('description')) {
+                obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
-            if (data.hasOwnProperty('news_content')) {
-                obj['news_content'] = ApiClient.convertToType(data['news_content'], 'String');
-            }
-            if (data.hasOwnProperty('news_sub_title')) {
-                obj['news_sub_title'] = ApiClient.convertToType(data['news_sub_title'], 'String');
-            }
-            if (data.hasOwnProperty('news_title')) {
-                obj['news_title'] = ApiClient.convertToType(data['news_title'], 'String');
-            }
-            if (data.hasOwnProperty('updated_time')) {
-                obj['updated_time'] = ApiClient.convertToType(data['updated_time'], 'String');
+            if (data.hasOwnProperty('response')) {
+                obj['response'] = NewsResponse.constructFromObject(data['response']);
             }
         }
         return obj;
@@ -77,24 +65,12 @@ class News {
      */
     static validateJSON(data) {
         // ensure the json data is a string
-        if (data['created_time'] && !(typeof data['created_time'] === 'string' || data['created_time'] instanceof String)) {
-            throw new Error("Expected the field `created_time` to be a primitive type in the JSON string but got " + data['created_time']);
+        if (data['description'] && !(typeof data['description'] === 'string' || data['description'] instanceof String)) {
+            throw new Error("Expected the field `description` to be a primitive type in the JSON string but got " + data['description']);
         }
-        // ensure the json data is a string
-        if (data['news_content'] && !(typeof data['news_content'] === 'string' || data['news_content'] instanceof String)) {
-            throw new Error("Expected the field `news_content` to be a primitive type in the JSON string but got " + data['news_content']);
-        }
-        // ensure the json data is a string
-        if (data['news_sub_title'] && !(typeof data['news_sub_title'] === 'string' || data['news_sub_title'] instanceof String)) {
-            throw new Error("Expected the field `news_sub_title` to be a primitive type in the JSON string but got " + data['news_sub_title']);
-        }
-        // ensure the json data is a string
-        if (data['news_title'] && !(typeof data['news_title'] === 'string' || data['news_title'] instanceof String)) {
-            throw new Error("Expected the field `news_title` to be a primitive type in the JSON string but got " + data['news_title']);
-        }
-        // ensure the json data is a string
-        if (data['updated_time'] && !(typeof data['updated_time'] === 'string' || data['updated_time'] instanceof String)) {
-            throw new Error("Expected the field `updated_time` to be a primitive type in the JSON string but got " + data['updated_time']);
+        // validate the optional field `response`
+        if (data['response']) { // data not null
+          NewsResponse.validateJSON(data['response']);
         }
 
         return true;
@@ -106,34 +82,14 @@ class News {
 
 
 /**
- * @member {String} created_time
+ * @member {String} description
  */
-News.prototype['created_time'] = undefined;
+News.prototype['description'] = undefined;
 
 /**
- * @member {Number} id
+ * @member {module:model/NewsResponse} response
  */
-News.prototype['id'] = undefined;
-
-/**
- * @member {String} news_content
- */
-News.prototype['news_content'] = undefined;
-
-/**
- * @member {String} news_sub_title
- */
-News.prototype['news_sub_title'] = undefined;
-
-/**
- * @member {String} news_title
- */
-News.prototype['news_title'] = undefined;
-
-/**
- * @member {String} updated_time
- */
-News.prototype['updated_time'] = undefined;
+News.prototype['response'] = undefined;
 
 
 

@@ -32,8 +32,8 @@ import NewsImage from './model/NewsImage';
 import NewsImageResponse from './model/NewsImageResponse';
 import NewsImages from './model/NewsImages';
 import NewsInput from './model/NewsInput';
+import NewsResponse from './model/NewsResponse';
 import Newses from './model/Newses';
-import NewsesResponseInner from './model/NewsesResponseInner';
 import Paper from './model/Paper';
 import PaperAttachment from './model/PaperAttachment';
 import PaperPaperIdPatchRequest from './model/PaperPaperIdPatchRequest';
@@ -223,16 +223,16 @@ export {
     NewsInput,
 
     /**
+     * The NewsResponse model constructor.
+     * @property {module:model/NewsResponse}
+     */
+    NewsResponse,
+
+    /**
      * The Newses model constructor.
      * @property {module:model/Newses}
      */
     Newses,
-
-    /**
-     * The NewsesResponseInner model constructor.
-     * @property {module:model/NewsesResponseInner}
-     */
-    NewsesResponseInner,
 
     /**
      * The Paper model constructor.
