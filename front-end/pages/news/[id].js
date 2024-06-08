@@ -16,9 +16,7 @@ const NewsDetail = () => {
       try {
         const apiClient = new NewsApi()
         const data = await apiClient.newsNewsIdGet(id)
-        console.log(id)
-        console.log(data)
-        setNews(data)
+        setNews(data.response)
       } catch (error) {
         console.error('API 調用失敗:', error.message)
         if (error.response) {
