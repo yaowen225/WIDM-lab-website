@@ -133,6 +133,15 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.MemberImageApi* | [**memberMemberIdMemberImageMemberImageUuidDelete**](docs/MemberImageApi.md#memberMemberIdMemberImageMemberImageUuidDelete) | **DELETE** /member/{member_id}/member-image/{member_image_uuid} | delete member image
 *WidmBackEnd.MemberImageApi* | [**memberMemberIdMemberImageMemberImageUuidGet**](docs/MemberImageApi.md#memberMemberIdMemberImageMemberImageUuidGet) | **GET** /member/{member_id}/member-image/{member_image_uuid} | get member images
 *WidmBackEnd.MemberImageApi* | [**memberMemberIdMemberImagePost**](docs/MemberImageApi.md#memberMemberIdMemberImagePost) | **POST** /member/{member_id}/member-image | post member image
+*WidmBackEnd.NewsApi* | [**newsGet**](docs/NewsApi.md#newsGet) | **GET** /news | get newses
+*WidmBackEnd.NewsApi* | [**newsNewsIdDelete**](docs/NewsApi.md#newsNewsIdDelete) | **DELETE** /news/{news_id} | delete news
+*WidmBackEnd.NewsApi* | [**newsNewsIdGet**](docs/NewsApi.md#newsNewsIdGet) | **GET** /news/{news_id} | get news
+*WidmBackEnd.NewsApi* | [**newsNewsIdPatch**](docs/NewsApi.md#newsNewsIdPatch) | **PATCH** /news/{news_id} | patch news
+*WidmBackEnd.NewsApi* | [**newsPost**](docs/NewsApi.md#newsPost) | **POST** /news | post news
+*WidmBackEnd.NewsImageApi* | [**newsImageGet**](docs/NewsImageApi.md#newsImageGet) | **GET** /news/image | get news images
+*WidmBackEnd.NewsImageApi* | [**newsImageNewsImageUuidDelete**](docs/NewsImageApi.md#newsImageNewsImageUuidDelete) | **DELETE** /news/image/{news_image_uuid} | delete news image
+*WidmBackEnd.NewsImageApi* | [**newsImageNewsImageUuidGet**](docs/NewsImageApi.md#newsImageNewsImageUuidGet) | **GET** /news/image/{news_image_uuid} | get news image
+*WidmBackEnd.NewsImageApi* | [**newsImagePost**](docs/NewsImageApi.md#newsImagePost) | **POST** /news/image | post news image
 *WidmBackEnd.PaperApi* | [**paperGet**](docs/PaperApi.md#paperGet) | **GET** /paper | get_papers
 *WidmBackEnd.PaperApi* | [**paperPaperIdDelete**](docs/PaperApi.md#paperPaperIdDelete) | **DELETE** /paper/{paper_id} | delete paper
 *WidmBackEnd.PaperApi* | [**paperPaperIdPatch**](docs/PaperApi.md#paperPaperIdPatch) | **PATCH** /paper/{paper_id} | patch paper
@@ -147,6 +156,15 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconPost**](docs/ProjectIconApi.md#projectProjectIdProjectIconPost) | **POST** /project/{project_id}/project-icon | post project icon
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconProjectIconUuidDelete**](docs/ProjectIconApi.md#projectProjectIdProjectIconProjectIconUuidDelete) | **DELETE** /project/{project_id}/project-icon/{project_icon_uuid} | delete project icon
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconProjectIconUuidGet**](docs/ProjectIconApi.md#projectProjectIdProjectIconProjectIconUuidGet) | **GET** /project/{project_id}/project-icon/{project_icon_uuid} | get project icon
+*WidmBackEnd.ProjectTaskApi* | [**projectProjectIdTaskGet**](docs/ProjectTaskApi.md#projectProjectIdTaskGet) | **GET** /project/{project_id}/task | get project tasks
+*WidmBackEnd.ProjectTaskApi* | [**projectProjectIdTaskPost**](docs/ProjectTaskApi.md#projectProjectIdTaskPost) | **POST** /project/{project_id}/task | post project task
+*WidmBackEnd.ProjectTaskApi* | [**projectProjectIdTaskProjectTaskIdDelete**](docs/ProjectTaskApi.md#projectProjectIdTaskProjectTaskIdDelete) | **DELETE** /project/{project_id}/task/{project_task_id} | delete project task
+*WidmBackEnd.ProjectTaskApi* | [**projectProjectIdTaskProjectTaskIdGet**](docs/ProjectTaskApi.md#projectProjectIdTaskProjectTaskIdGet) | **GET** /project/{project_id}/task/{project_task_id} | get project task
+*WidmBackEnd.ProjectTaskApi* | [**projectProjectIdTaskProjectTaskIdPatch**](docs/ProjectTaskApi.md#projectProjectIdTaskProjectTaskIdPatch) | **PATCH** /project/{project_id}/task/{project_task_id} | patch project task
+*WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImageGet**](docs/ProjectTaskImageApi.md#projectTaskImageGet) | **GET** /project/task/image | get project task images
+*WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImagePost**](docs/ProjectTaskImageApi.md#projectTaskImagePost) | **POST** /project/task/image | post project task image
+*WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImageProjectTaskImageUuidDelete**](docs/ProjectTaskImageApi.md#projectTaskImageProjectTaskImageUuidDelete) | **DELETE** /project/task/image/{project_task_image_uuid} | delete project task image
+*WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImageProjectTaskImageUuidGet**](docs/ProjectTaskImageApi.md#projectTaskImageProjectTaskImageUuidGet) | **GET** /project/task/image/{project_task_image_uuid} | get project task image
 
 
 ## Documentation for Models
@@ -165,6 +183,13 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.MemberResponse](docs/MemberResponse.md)
  - [WidmBackEnd.Members](docs/Members.md)
  - [WidmBackEnd.MembersResponseInner](docs/MembersResponseInner.md)
+ - [WidmBackEnd.News](docs/News.md)
+ - [WidmBackEnd.NewsImage](docs/NewsImage.md)
+ - [WidmBackEnd.NewsImageResponse](docs/NewsImageResponse.md)
+ - [WidmBackEnd.NewsImages](docs/NewsImages.md)
+ - [WidmBackEnd.NewsInput](docs/NewsInput.md)
+ - [WidmBackEnd.Newses](docs/Newses.md)
+ - [WidmBackEnd.NewsesResponseInner](docs/NewsesResponseInner.md)
  - [WidmBackEnd.Paper](docs/Paper.md)
  - [WidmBackEnd.PaperAttachment](docs/PaperAttachment.md)
  - [WidmBackEnd.PaperPaperIdPatchRequest](docs/PaperPaperIdPatchRequest.md)
@@ -177,6 +202,14 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.ProjectIconResponse](docs/ProjectIconResponse.md)
  - [WidmBackEnd.ProjectInput](docs/ProjectInput.md)
  - [WidmBackEnd.ProjectResponse](docs/ProjectResponse.md)
+ - [WidmBackEnd.ProjectTask](docs/ProjectTask.md)
+ - [WidmBackEnd.ProjectTaskImage](docs/ProjectTaskImage.md)
+ - [WidmBackEnd.ProjectTaskImages](docs/ProjectTaskImages.md)
+ - [WidmBackEnd.ProjectTaskInput](docs/ProjectTaskInput.md)
+ - [WidmBackEnd.ProjectTaskResponse](docs/ProjectTaskResponse.md)
+ - [WidmBackEnd.ProjectTasks](docs/ProjectTasks.md)
+ - [WidmBackEnd.ProjectTasksResponseInner](docs/ProjectTasksResponseInner.md)
+ - [WidmBackEnd.ProjectTasksResponseInnerChildrenInner](docs/ProjectTasksResponseInnerChildrenInner.md)
  - [WidmBackEnd.Projects](docs/Projects.md)
  - [WidmBackEnd.ProjectsResponseInner](docs/ProjectsResponseInner.md)
 

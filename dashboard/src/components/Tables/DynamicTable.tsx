@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { LuImagePlus, LuImageMinus } from "react-icons/lu";
+import { FiFilePlus, FiFileMinus } from "react-icons/fi";
 
 interface TableProps {
   headers: Array<{ id: string; Name: string; isShow: string | boolean; type: string }>;
   data: Array<{ [key: string]: any }>;
   onDelete: (id: number) => void;
   onEdit: (row: { [key: string]: any }) => void;
-  onUploadImage?: (row: { [key: string]: any }) => void;
-  onDeleteImages?: (row: { [key: string]: any }) => void; // 新增 onDeleteImages 屬性
+  onUploadFile?: (row: { [key: string]: any }) => void;
+  onDeleteFiles?: (row: { [key: string]: any }) => void;
 }
 
-const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, onUploadImage, onDeleteImages }) => {
+const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, onUploadFile, onDeleteFiles }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -67,7 +68,7 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                           <FaTrashAlt />
                         </button>
                       </div>
-                    ) : header.id === 'imageActions' && (onUploadImage || onDeleteImages) ? (
+                    ) : header.id === 'imageActions' && (onUploadFile || onDeleteFiles) ? (
                       <div className="flex items-center space-x-3.5">
                         {onEdit && (
                           <button className="hover:text-primary" onClick={() => onEdit(row)}>
@@ -82,20 +83,84 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                             <FaTrashAlt />
                           </button>
                         )}
-                        {onUploadImage && (
+                        {onUploadFile && !row[header.Name] && (
                           <button
                             className="hover:text-primary"
-                            onClick={() => onUploadImage(row)}
+                            onClick={() => onUploadFile(row)}
                           >
                             <LuImagePlus />
                           </button>
                         )}
-                        {onDeleteImages && row[header.Name] !== null && (
+                        {onDeleteFiles && row[header.Name] && (
                           <button
                             className="hover:text-primary"
-                            onClick={() => onDeleteImages(row)}
+                            onClick={() => onDeleteFiles(row)}
                           >
                             <LuImageMinus />
+                          </button>
+                        )}
+                      </div>
+                    ) : header.id === 'imagesActions' && (onUploadFile || onDeleteFiles) ? (
+                      <div className="flex items-center space-x-3.5">
+                        {onEdit && (
+                          <button className="hover:text-primary" onClick={() => onEdit(row)}>
+                            <FaEdit />
+                          </button>
+                        )}
+                        {(
+                          <button
+                            className="hover:text-primary"
+                            onClick={() => handleDeleteClick(row.id)}
+                          >
+                            <FaTrashAlt />
+                          </button>
+                        )}
+                        {onUploadFile && (
+                          <button
+                            className="hover:text-primary"
+                            onClick={() => onUploadFile(row)}
+                          >
+                            <LuImagePlus />
+                          </button>
+                        )}
+                        {onDeleteFiles && row[header.Name] != null && (
+                          <button
+                            className="hover:text-primary"
+                            onClick={() => onDeleteFiles(row)}
+                          >
+                            <LuImageMinus />
+                          </button>
+                        )}
+                      </div>
+                    ) : header.id === 'attachmentActions' ? (
+                      <div className="flex items-center space-x-3.5">
+                        {onEdit && (
+                          <button className="hover:text-primary" onClick={() => onEdit(row)}>
+                            <FaEdit />
+                          </button>
+                        )}
+                        {(
+                          <button
+                            className="hover:text-primary"
+                            onClick={() => handleDeleteClick(row.id)}
+                          >
+                            <FaTrashAlt />
+                          </button>
+                        )}
+                        {onUploadFile && !row[header.Name] && (
+                          <button
+                            className="hover:text-primary"
+                            onClick={() => onUploadFile(row)}
+                          >
+                            <FiFilePlus />
+                          </button>
+                        )}
+                        {onDeleteFiles && row[header.Name] && (
+                          <button
+                            className="hover:text-primary"
+                            onClick={() => onDeleteFiles(row)}
+                          >
+                            <FiFileMinus />
                           </button>
                         )}
                       </div>

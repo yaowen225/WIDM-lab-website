@@ -27,6 +27,13 @@ import MemberInput from './model/MemberInput';
 import MemberResponse from './model/MemberResponse';
 import Members from './model/Members';
 import MembersResponseInner from './model/MembersResponseInner';
+import News from './model/News';
+import NewsImage from './model/NewsImage';
+import NewsImageResponse from './model/NewsImageResponse';
+import NewsImages from './model/NewsImages';
+import NewsInput from './model/NewsInput';
+import Newses from './model/Newses';
+import NewsesResponseInner from './model/NewsesResponseInner';
 import Paper from './model/Paper';
 import PaperAttachment from './model/PaperAttachment';
 import PaperPaperIdPatchRequest from './model/PaperPaperIdPatchRequest';
@@ -39,16 +46,28 @@ import ProjectIcon from './model/ProjectIcon';
 import ProjectIconResponse from './model/ProjectIconResponse';
 import ProjectInput from './model/ProjectInput';
 import ProjectResponse from './model/ProjectResponse';
+import ProjectTask from './model/ProjectTask';
+import ProjectTaskImage from './model/ProjectTaskImage';
+import ProjectTaskImages from './model/ProjectTaskImages';
+import ProjectTaskInput from './model/ProjectTaskInput';
+import ProjectTaskResponse from './model/ProjectTaskResponse';
+import ProjectTasks from './model/ProjectTasks';
+import ProjectTasksResponseInner from './model/ProjectTasksResponseInner';
+import ProjectTasksResponseInnerChildrenInner from './model/ProjectTasksResponseInnerChildrenInner';
 import Projects from './model/Projects';
 import ProjectsResponseInner from './model/ProjectsResponseInner';
 import ActivityApi from './api/ActivityApi';
 import ActivityImageApi from './api/ActivityImageApi';
 import MemberApi from './api/MemberApi';
 import MemberImageApi from './api/MemberImageApi';
+import NewsApi from './api/NewsApi';
+import NewsImageApi from './api/NewsImageApi';
 import PaperApi from './api/PaperApi';
 import PaperAttachmentApi from './api/PaperAttachmentApi';
 import ProjectApi from './api/ProjectApi';
 import ProjectIconApi from './api/ProjectIconApi';
+import ProjectTaskApi from './api/ProjectTaskApi';
+import ProjectTaskImageApi from './api/ProjectTaskImageApi';
 
 
 /**
@@ -174,6 +193,48 @@ export {
     MembersResponseInner,
 
     /**
+     * The News model constructor.
+     * @property {module:model/News}
+     */
+    News,
+
+    /**
+     * The NewsImage model constructor.
+     * @property {module:model/NewsImage}
+     */
+    NewsImage,
+
+    /**
+     * The NewsImageResponse model constructor.
+     * @property {module:model/NewsImageResponse}
+     */
+    NewsImageResponse,
+
+    /**
+     * The NewsImages model constructor.
+     * @property {module:model/NewsImages}
+     */
+    NewsImages,
+
+    /**
+     * The NewsInput model constructor.
+     * @property {module:model/NewsInput}
+     */
+    NewsInput,
+
+    /**
+     * The Newses model constructor.
+     * @property {module:model/Newses}
+     */
+    Newses,
+
+    /**
+     * The NewsesResponseInner model constructor.
+     * @property {module:model/NewsesResponseInner}
+     */
+    NewsesResponseInner,
+
+    /**
      * The Paper model constructor.
      * @property {module:model/Paper}
      */
@@ -246,6 +307,54 @@ export {
     ProjectResponse,
 
     /**
+     * The ProjectTask model constructor.
+     * @property {module:model/ProjectTask}
+     */
+    ProjectTask,
+
+    /**
+     * The ProjectTaskImage model constructor.
+     * @property {module:model/ProjectTaskImage}
+     */
+    ProjectTaskImage,
+
+    /**
+     * The ProjectTaskImages model constructor.
+     * @property {module:model/ProjectTaskImages}
+     */
+    ProjectTaskImages,
+
+    /**
+     * The ProjectTaskInput model constructor.
+     * @property {module:model/ProjectTaskInput}
+     */
+    ProjectTaskInput,
+
+    /**
+     * The ProjectTaskResponse model constructor.
+     * @property {module:model/ProjectTaskResponse}
+     */
+    ProjectTaskResponse,
+
+    /**
+     * The ProjectTasks model constructor.
+     * @property {module:model/ProjectTasks}
+     */
+    ProjectTasks,
+
+    /**
+     * The ProjectTasksResponseInner model constructor.
+     * @property {module:model/ProjectTasksResponseInner}
+     */
+    ProjectTasksResponseInner,
+
+    /**
+     * The ProjectTasksResponseInnerChildrenInner model constructor.
+     * @property {module:model/ProjectTasksResponseInnerChildrenInner}
+     */
+    ProjectTasksResponseInnerChildrenInner,
+
+    /**
      * The Projects model constructor.
      * @property {module:model/Projects}
      */
@@ -282,6 +391,18 @@ export {
     MemberImageApi,
 
     /**
+    * The NewsApi service constructor.
+    * @property {module:api/NewsApi}
+    */
+    NewsApi,
+
+    /**
+    * The NewsImageApi service constructor.
+    * @property {module:api/NewsImageApi}
+    */
+    NewsImageApi,
+
+    /**
     * The PaperApi service constructor.
     * @property {module:api/PaperApi}
     */
@@ -303,5 +424,17 @@ export {
     * The ProjectIconApi service constructor.
     * @property {module:api/ProjectIconApi}
     */
-    ProjectIconApi
+    ProjectIconApi,
+
+    /**
+    * The ProjectTaskApi service constructor.
+    * @property {module:api/ProjectTaskApi}
+    */
+    ProjectTaskApi,
+
+    /**
+    * The ProjectTaskImageApi service constructor.
+    * @property {module:api/ProjectTaskImageApi}
+    */
+    ProjectTaskImageApi
 };

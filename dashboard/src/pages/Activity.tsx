@@ -4,7 +4,7 @@ import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
 import UploadImage from '../components/Forms/UploadImageForm';
-import DeleteImages from '../components/Forms/DeleteImages'; // 引入新的組件
+import DeleteImages from '../components/Forms/DeleteImages';
 import { ActivityApi, ActivityImageApi, Configuration } from '../../domain/api-client';
 import type { ActivityPostRequest } from 'domain/api-client';
 
@@ -12,7 +12,7 @@ const ActivityPage = () => {
   const [activities, setActivities] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [isDeletingImages, setIsDeletingImages] = useState(false); // 新增狀態管理
+  const [isDeletingImages, setIsDeletingImages] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -23,7 +23,7 @@ const ActivityPage = () => {
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
     { id: 'activity_title', Name: '標題', isShow: 'true', type: 'String' },
     { id: 'activity_sub_title', Name: '副標題', isShow: 'true', type: 'String' },
-    { id: 'imageActions', Name: 'activity_image', isShow: 'false', type: 'Null' },
+    { id: 'imagesActions', Name: 'activity_image', isShow: 'false', type: 'Null' },
   ];
 
   const fetchActivities = async () => {
@@ -131,11 +131,11 @@ const ActivityPage = () => {
     }
   };  
 
-  const handleDeleteImagesSubmit = async (activityId: number, imageId: string) => {
+  const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
     const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ActivityImageApi(configuration);
     try {
-      await apiClient.activityActivityIdActivityImageActivityImageUuidDelete(activityId, imageId);
+      await apiClient.activityActivityIdActivityImageActivityImageUuidDelete(id, imageId);
       setIsDeletingImages(false);
       fetchActivities();
       setSuccessMessage('圖片刪除成功!');
@@ -184,11 +184,11 @@ const ActivityPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} onUploadImage={handleUploadImage} onDeleteImages={handleDeleteImages} />
+        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} onUploadFile={handleUploadImage} onDeleteFiles={handleDeleteImages} />
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />}
       {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
-      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action={'activity'} activityId={editData?.id!} imagesId={editData?.activity_image}/>}
+      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action={'activity'} id={editData?.id!} imagesId={editData?.activity_image} onDeleteImage={handleDeleteImagesSubmit} />}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}

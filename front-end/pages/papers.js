@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
-import ListLayout from '@/layouts/PaperListLayout'
+import PaperListLayout from '@/layouts/PaperListLayout'
 import { PageSEO } from '@/components/SEO'
 import { PaperApi } from '../domain/api-client/src'
 
@@ -52,7 +52,7 @@ const Papers = () => {
   return (
     <>
       <PageSEO title={`Papers - ${siteMetadata.author}`} description={siteMetadata.description} />
-      <ListLayout
+      <PaperListLayout
         posts={posts}
         initialDisplayPosts={initialDisplayPosts}
         pagination={pagination}

@@ -50,6 +50,9 @@ class MemberResponse {
             if (data.hasOwnProperty('create_time')) {
                 obj['create_time'] = ApiClient.convertToType(data['create_time'], 'String');
             }
+            if (data.hasOwnProperty('member_character')) {
+                obj['member_character'] = ApiClient.convertToType(data['member_character'], 'String');
+            }
             if (data.hasOwnProperty('member_intro')) {
                 obj['member_intro'] = ApiClient.convertToType(data['member_intro'], 'String');
             }
@@ -72,6 +75,10 @@ class MemberResponse {
         // ensure the json data is a string
         if (data['create_time'] && !(typeof data['create_time'] === 'string' || data['create_time'] instanceof String)) {
             throw new Error("Expected the field `create_time` to be a primitive type in the JSON string but got " + data['create_time']);
+        }
+        // ensure the json data is a string
+        if (data['member_character'] && !(typeof data['member_character'] === 'string' || data['member_character'] instanceof String)) {
+            throw new Error("Expected the field `member_character` to be a primitive type in the JSON string but got " + data['member_character']);
         }
         // ensure the json data is a string
         if (data['member_intro'] && !(typeof data['member_intro'] === 'string' || data['member_intro'] instanceof String)) {
@@ -98,6 +105,11 @@ class MemberResponse {
  * @member {String} create_time
  */
 MemberResponse.prototype['create_time'] = undefined;
+
+/**
+ * @member {String} member_character
+ */
+MemberResponse.prototype['member_character'] = undefined;
 
 /**
  * @member {String} member_intro

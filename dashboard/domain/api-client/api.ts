@@ -2602,7 +2602,7 @@ export const NewsApiAxiosParamCreator = function (configuration?: Configuration)
          * @throws {RequiredError}
          */
         newsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/news/`;
+            const localVarPath = `/news`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -2743,7 +2743,7 @@ export const NewsApiAxiosParamCreator = function (configuration?: Configuration)
         newsPost: async (news: NewsInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'news' is not null or undefined
             assertParamExists('newsPost', 'news', news)
-            const localVarPath = `/news/`;
+            const localVarPath = `/news`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
