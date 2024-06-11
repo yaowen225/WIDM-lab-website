@@ -62,6 +62,9 @@ class ProjectsResponseInner {
             if (data.hasOwnProperty('project_github')) {
                 obj['project_github'] = ApiClient.convertToType(data['project_github'], 'String');
             }
+            if (data.hasOwnProperty('project_icon')) {
+                obj['project_icon'] = ApiClient.convertToType(data['project_icon'], 'String');
+            }
             if (data.hasOwnProperty('project_link')) {
                 obj['project_link'] = ApiClient.convertToType(data['project_link'], 'String');
             }
@@ -99,6 +102,10 @@ class ProjectsResponseInner {
         // ensure the json data is a string
         if (data['project_github'] && !(typeof data['project_github'] === 'string' || data['project_github'] instanceof String)) {
             throw new Error("Expected the field `project_github` to be a primitive type in the JSON string but got " + data['project_github']);
+        }
+        // ensure the json data is a string
+        if (data['project_icon'] && !(typeof data['project_icon'] === 'string' || data['project_icon'] instanceof String)) {
+            throw new Error("Expected the field `project_icon` to be a primitive type in the JSON string but got " + data['project_icon']);
         }
         // ensure the json data is a string
         if (data['project_link'] && !(typeof data['project_link'] === 'string' || data['project_link'] instanceof String)) {
@@ -149,6 +156,11 @@ ProjectsResponseInner.prototype['project_description'] = undefined;
  * @member {String} project_github
  */
 ProjectsResponseInner.prototype['project_github'] = undefined;
+
+/**
+ * @member {String} project_icon
+ */
+ProjectsResponseInner.prototype['project_icon'] = undefined;
 
 /**
  * @member {String} project_link

@@ -117,4 +117,3 @@ src/model/ProjectTasksResponseInner.js
 src/model/ProjectTasksResponseInnerChildrenInner.js
 src/model/Projects.js
 src/model/ProjectsResponseInner.js
-test/model/NewsResponse.spec.js

@@ -1366,6 +1366,12 @@ export interface ProjectsResponseInner {
      * @type {string}
      * @memberof ProjectsResponseInner
      */
+    'project_icon'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectsResponseInner
+     */
     'project_link'?: string;
     /**
      * 

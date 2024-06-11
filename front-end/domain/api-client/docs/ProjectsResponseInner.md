@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **memberImage** | **String** |  | [optional] 
 **projectDescription** | **String** |  | [optional] 
 **projectGithub** | **String** |  | [optional] 
+**projectIcon** | **String** |  | [optional] 
 **projectLink** | **String** |  | [optional] 
 **projectName** | **String** |  | [optional] 
 **projectTags** | **[String]** |  | [optional] 

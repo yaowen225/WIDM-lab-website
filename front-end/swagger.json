@@ -716,6 +716,9 @@
               "project_github": {
                 "type": "string"
               },
+              "project_icon": {
+                "type": "string"
+              },
               "project_link": {
                 "type": "string"
               },
