@@ -32,7 +32,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
     }
   }, [editData, headers]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -102,6 +102,18 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
             }}
           />
         </div>
+      );
+    } else if (header.type === 'Textarea') {
+      return (
+        <textarea
+          key={header.id}
+          name={header.id}
+          placeholder={header.Name}
+          value={formData[header.id] || ''}
+          onChange={handleChange}
+          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+          rows={4}
+        />
       );
     }
     return (

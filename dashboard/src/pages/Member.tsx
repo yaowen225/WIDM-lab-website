@@ -22,7 +22,7 @@ const MemberPage = () => {
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
     { id: 'member_name', Name: '名稱', isShow: 'true', type: 'String' },
-    { id: 'member_intro', Name: '介紹', isShow: 'true', type: 'String' },
+    { id: 'member_intro', Name: '介紹', isShow: 'true', type: 'Textarea' },
     { id: 'member_character', Name: '職位', isShow: 'true', type: 'String' },
     { id: 'imageActions', Name: 'member_image', isShow: 'false', type: 'Null' },
   ];

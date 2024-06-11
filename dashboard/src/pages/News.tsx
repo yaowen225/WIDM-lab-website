@@ -19,7 +19,7 @@ const NewsPage = () => {
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
     { id: 'news_title', Name: '標題', isShow: 'true', type: 'String' },
     { id: 'news_sub_title', Name: '副標題', isShow: 'true', type: 'String' },
-    { id: 'news_content', Name: '內容', isShow: 'true', type: 'String' },
+    { id: 'news_content', Name: '內容', isShow: 'true', type: 'Textarea' },
     { id: 'actions', Name: 'Actions', isShow: 'false', type: 'Null' },
   ];
 

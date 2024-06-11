@@ -17,7 +17,7 @@ const ProjectPage = () => {
 
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
-    { id: 'project_description', Name: '專案描述', isShow: 'true', type: 'String' },
+    { id: 'project_description', Name: '專案描述', isShow: 'true', type: 'Textarea' },
     { id: 'project_github', Name: 'GitHub 連結', isShow: 'true', type: 'String' },
     { id: 'project_link', Name: '專案連結', isShow: 'true', type: 'String' },
     { id: 'project_name', Name: '專案名稱', isShow: 'true', type: 'String' },

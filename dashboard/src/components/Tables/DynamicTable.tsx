@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { LuImagePlus, LuImageMinus } from "react-icons/lu";
 import { FiFilePlus, FiFileMinus } from "react-icons/fi";
+import { Tag } from 'antd';
 
 interface TableProps {
   headers: Array<{ id: string; Name: string; isShow: string | boolean; type: string }>;
@@ -56,6 +57,7 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
               <tr key={rowIndex} className="hover:bg-gray-50 dark:hover:bg-meta-4">
                 {headers.map((header) => (
                   <td key={header.id} className="border-b border-[#eee] py-5 px-4 dark:border-strokedark xl:pl-11">
+                    {/* header.id === 'actions' 新增 修改 刪除 */}
                     {header.id === 'actions' ? (
                       <div className="flex items-center space-x-3.5">
                         <button className="hover:text-primary" onClick={() => onEdit(row)}>
@@ -68,21 +70,19 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                           <FaTrashAlt />
                         </button>
                       </div>
-                    ) : header.id === 'imageActions' && (onUploadFile || onDeleteFiles) ? (
+                    ) : header.id === 'imageActions' && (onUploadFile || onDeleteFiles) ? ( 
                       <div className="flex items-center space-x-3.5">
                         {onEdit && (
                           <button className="hover:text-primary" onClick={() => onEdit(row)}>
                             <FaEdit />
                           </button>
                         )}
-                        {(
-                          <button
-                            className="hover:text-primary"
-                            onClick={() => handleDeleteClick(row.id)}
-                          >
-                            <FaTrashAlt />
-                          </button>
-                        )}
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => handleDeleteClick(row.id)}
+                        >
+                          <FaTrashAlt />
+                        </button>
                         {onUploadFile && !row[header.Name] && (
                           <button
                             className="hover:text-primary"
@@ -107,14 +107,12 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                             <FaEdit />
                           </button>
                         )}
-                        {(
-                          <button
-                            className="hover:text-primary"
-                            onClick={() => handleDeleteClick(row.id)}
-                          >
-                            <FaTrashAlt />
-                          </button>
-                        )}
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => handleDeleteClick(row.id)}
+                        >
+                          <FaTrashAlt />
+                        </button>
                         {onUploadFile && (
                           <button
                             className="hover:text-primary"
@@ -139,14 +137,12 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                             <FaEdit />
                           </button>
                         )}
-                        {(
-                          <button
-                            className="hover:text-primary"
-                            onClick={() => handleDeleteClick(row.id)}
-                          >
-                            <FaTrashAlt />
-                          </button>
-                        )}
+                        <button
+                          className="hover:text-primary"
+                          onClick={() => handleDeleteClick(row.id)}
+                        >
+                          <FaTrashAlt />
+                        </button>
                         {onUploadFile && !row[header.Name] && (
                           <button
                             className="hover:text-primary"
@@ -164,6 +160,14 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                           </button>
                         )}
                       </div>
+                    ) : header.type === 'Tags' ? (
+                      <div className="flex flex-wrap">
+                        {row[header.id].map((tag: string, index: number) => (
+                          <Tag key={index} className="mb-1 mr-1">
+                            {tag}
+                          </Tag>
+                        ))}
+                      </div>
                     ) : (
                       <span className="text-black dark:text-white">
                         {header.isShow === 'true' || header.isShow === true ? row[header.id] : ''}
@@ -177,6 +181,7 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
         </table>
       </div>
 
+      {/* 刪除用 */}
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded shadow-lg dark:bg-boxdark">
