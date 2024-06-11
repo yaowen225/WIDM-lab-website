@@ -3,13 +3,17 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
-import { ProjectApi, Configuration } from '../../domain/api-client';
+import UploadImage from '../components/Forms/UploadImageForm';
+import DeleteImages from '../components/Forms/DeleteImages';
+import { ProjectApi, Configuration, ProjectIconApi } from '../../domain/api-client';
 import type { ProjectInput } from 'domain/api-client';
 
 const ProjectPage = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [isDeletingImages, setIsDeletingImages] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
@@ -22,7 +26,7 @@ const ProjectPage = () => {
     { id: 'project_link', Name: '專案連結', isShow: 'true', type: 'String' },
     { id: 'project_name', Name: '專案名稱', isShow: 'true', type: 'String' },
     { id: 'project_tags', Name: '專案標籤', isShow: 'true', type: 'Tags' },
-    { id: 'actions', Name: 'Actions', isShow: 'false', type: 'Null' },
+    { id: 'imageActions', Name: 'project_icon', isShow: 'false', type: 'Null' },
   ];
 
   const fetchProjects = async () => {
@@ -35,6 +39,50 @@ const ProjectPage = () => {
       console.log(data);
     } catch (error) {
       console.error('API 調用失敗:', (error as Error).message);
+      if ((error as any).response) {
+        console.error('API Response Error:', (error as any).response.body);
+      }
+    }
+  };
+
+  const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
+    const configuration = new Configuration({ basePath: '/api' });
+    const apiClient = new ProjectIconApi(configuration);
+    try {
+      if (editData) {
+        await apiClient.projectProjectIdProjectIconPost(editData.id, formData.image);
+      }
+      setIsUploading(false);
+      fetchProjects();
+      setSuccessMessage('圖片上傳成功!');
+      setShowSuccessMessage(true);
+      setTimeout(() => setShowSuccessMessage(false), 3000);
+    } catch (error) {
+      console.error('圖片上傳失敗:', (error as Error).message);
+      setErrorMessage('圖片上傳失敗!');
+      setShowErrorMessage(true);
+      setTimeout(() => setShowErrorMessage(false), 3000);
+      if ((error as any).response) {
+        console.error('API Response Error:', (error as any).response.body);
+      }
+    }
+  };
+
+  const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
+    const configuration = new Configuration({ basePath: '/api' });
+    const apiClient = new ProjectIconApi(configuration);
+    try {
+      await apiClient.projectProjectIdProjectIconProjectIconUuidDelete(id, imageId);
+      setIsDeletingImages(false);
+      fetchProjects();
+      setSuccessMessage('圖片刪除成功!');
+      setShowSuccessMessage(true);
+      setTimeout(() => setShowSuccessMessage(false), 3000);
+    } catch (error) {
+      console.error('圖片刪除失敗:', (error as Error).message);
+      setErrorMessage('圖片刪除失敗!');
+      setShowErrorMessage(true);
+      setTimeout(() => setShowErrorMessage(false), 3000);
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -57,6 +105,24 @@ const ProjectPage = () => {
 
   const handleCloseForm = () => {
     setIsAdding(false);
+  };
+
+  const handleUploadImage = (row: { [key: string]: any }) => {
+    setEditData(row);
+    setIsUploading(true);
+  };
+
+  const handleDeleteImages = (row: { [key: string]: any }) => {
+    setEditData(row);
+    setIsDeletingImages(true);
+  };
+
+  const handleCloseUploadImage = () => {
+    setIsUploading(false);
+  };
+
+  const handleCloseDeleteImages = () => {
+    setIsDeletingImages(false);
   };
 
   const createProject = async (formData: { [key: string]: any }) => {
@@ -126,9 +192,11 @@ const ProjectPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={projects} headers={headers} onDelete={deleteProject} onEdit={handleEditItem} />
+        <DynamicTable data={projects} headers={headers} onDelete={deleteProject} onEdit={handleEditItem} onUploadFile={handleUploadImage} onDeleteFiles={handleDeleteImages} />
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createProject} editData={editData} />}
+      {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
+      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action_1={'project'} action_2={'project-icon'} id={editData?.id!} imageId={editData?.project_icon} onDeleteImage={handleDeleteImagesSubmit} />}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 interface DeleteImagesProps {
-  action: string;
+  action_1: string;
+  action_2: string;
   onClose: () => void;
   id: number;
   imagesId?: string[];
@@ -9,7 +10,7 @@ interface DeleteImagesProps {
   onDeleteImage: (id: number, imageId: string) => void;
 }
 
-const DeleteImages: React.FC<DeleteImagesProps> = ({ onClose, action, id, imageId, imagesId, onDeleteImage }) => {
+const DeleteImages: React.FC<DeleteImagesProps> = ({ onClose, action_1, action_2, id, imageId, imagesId, onDeleteImage }) => {
   const [confirmingDelete, setConfirmingDelete] = useState<string | null>(null);
 
   const handleDeleteClick = (imageId: string) => {
@@ -40,7 +41,7 @@ const DeleteImages: React.FC<DeleteImagesProps> = ({ onClose, action, id, imageI
               {imageId ? (
                 <div className="flex items-center justify-between">
                   <img
-                    src={`https://widm-back-end.nevercareu.space/${action}/${id}/${action}-image/${imageId}`}
+                    src={`https://widm-back-end.nevercareu.space/${action_1}/${id}/${action_2}/${imageId}`}
                     alt={`Image ${imageId}`}
                     className="w-60 h-60 object-cover"
                   />
@@ -55,7 +56,7 @@ const DeleteImages: React.FC<DeleteImagesProps> = ({ onClose, action, id, imageI
                 imagesId?.map(imageId => (
                   <div key={imageId} className="flex items-center justify-between">
                     <img
-                      src={`https://widm-back-end.nevercareu.space/${action}/${id}/${action}-image/${imageId}`}
+                      src={`https://widm-back-end.nevercareu.space/${action_1}/${id}/${action_2}/${imageId}`}
                       alt={`Image ${imageId}`}
                       className="w-60 h-60 object-cover"
                     />

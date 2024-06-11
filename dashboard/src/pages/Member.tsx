@@ -190,7 +190,7 @@ const MemberPage = () => {
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createMember} editData={editData} />}
       {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
-      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action={'member'} id={editData?.id!} imageId={editData?.member_image} onDeleteImage={handleDeleteImagesSubmit} />}
+      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action_1={'member'} action_2={'member-image'} id={editData?.id!} imageId={editData?.member_image} onDeleteImage={handleDeleteImagesSubmit} />}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
