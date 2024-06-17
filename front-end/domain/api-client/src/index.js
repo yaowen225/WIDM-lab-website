@@ -53,7 +53,6 @@ import ProjectTaskInput from './model/ProjectTaskInput';
 import ProjectTaskResponse from './model/ProjectTaskResponse';
 import ProjectTasks from './model/ProjectTasks';
 import ProjectTasksResponseInner from './model/ProjectTasksResponseInner';
-import ProjectTasksResponseInnerChildrenInner from './model/ProjectTasksResponseInnerChildrenInner';
 import Projects from './model/Projects';
 import ProjectsResponseInner from './model/ProjectsResponseInner';
 import ActivityApi from './api/ActivityApi';
@@ -347,12 +346,6 @@ export {
      * @property {module:model/ProjectTasksResponseInner}
      */
     ProjectTasksResponseInner,
-
-    /**
-     * The ProjectTasksResponseInnerChildrenInner model constructor.
-     * @property {module:model/ProjectTasksResponseInnerChildrenInner}
-     */
-    ProjectTasksResponseInnerChildrenInner,
 
     /**
      * The Projects model constructor.

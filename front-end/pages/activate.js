@@ -14,9 +14,7 @@ export const activate = () => {
       const apiClient = new ActivityApi()
       try {
         const data = await apiClient.activityGet()
-
         setActivates(data.response)
-        console.log(data.response)
       } catch (error) {
         console.error('API 調用失敗:', error.message)
         if (error.response) {

@@ -44,6 +44,7 @@ export const projects = () => {
             {projectsDatas.map((d) => (
               <ProjectCard
                 key={d.id}
+                project_id={d.id}
                 title={d.project_name}
                 description={d.project_description}
                 github={d.project_github}

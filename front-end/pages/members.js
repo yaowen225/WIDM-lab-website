@@ -48,7 +48,7 @@ export const Members = () => {
                     <img
                       src={`https://widm-back-end.nevercareu.space/member/${d.id}/member-image/${d.member_image}`}
                       alt="Member Icon"
-                      className="h-12 w-12 rounded-full"
+                      className="h-28 w-28 rounded-md"
                     />
                   </div>
                   <div className="flex flex-col p-3">

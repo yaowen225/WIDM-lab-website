@@ -54,7 +54,6 @@ docs/ProjectTaskInput.md
 docs/ProjectTaskResponse.md
 docs/ProjectTasks.md
 docs/ProjectTasksResponseInner.md
-docs/ProjectTasksResponseInnerChildrenInner.md
 docs/Projects.md
 docs/ProjectsResponseInner.md
 git_push.sh
@@ -114,6 +113,5 @@ src/model/ProjectTaskInput.js
 src/model/ProjectTaskResponse.js
 src/model/ProjectTasks.js
 src/model/ProjectTasksResponseInner.js
-src/model/ProjectTasksResponseInnerChildrenInner.js
 src/model/Projects.js
 src/model/ProjectsResponseInner.js

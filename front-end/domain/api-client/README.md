@@ -152,6 +152,7 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.ProjectApi* | [**projectGet**](docs/ProjectApi.md#projectGet) | **GET** /project | get projects
 *WidmBackEnd.ProjectApi* | [**projectPost**](docs/ProjectApi.md#projectPost) | **POST** /project | post project
 *WidmBackEnd.ProjectApi* | [**projectProjectIdDelete**](docs/ProjectApi.md#projectProjectIdDelete) | **DELETE** /project/{project_id} | delete project
+*WidmBackEnd.ProjectApi* | [**projectProjectIdGet**](docs/ProjectApi.md#projectProjectIdGet) | **GET** /project/{project_id} | get project
 *WidmBackEnd.ProjectApi* | [**projectProjectIdPatch**](docs/ProjectApi.md#projectProjectIdPatch) | **PATCH** /project/{project_id} | patch project
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconPost**](docs/ProjectIconApi.md#projectProjectIdProjectIconPost) | **POST** /project/{project_id}/project-icon | post project icon
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconProjectIconUuidDelete**](docs/ProjectIconApi.md#projectProjectIdProjectIconProjectIconUuidDelete) | **DELETE** /project/{project_id}/project-icon/{project_icon_uuid} | delete project icon
@@ -209,7 +210,6 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.ProjectTaskResponse](docs/ProjectTaskResponse.md)
  - [WidmBackEnd.ProjectTasks](docs/ProjectTasks.md)
  - [WidmBackEnd.ProjectTasksResponseInner](docs/ProjectTasksResponseInner.md)
- - [WidmBackEnd.ProjectTasksResponseInnerChildrenInner](docs/ProjectTasksResponseInnerChildrenInner.md)
  - [WidmBackEnd.Projects](docs/Projects.md)
  - [WidmBackEnd.ProjectsResponseInner](docs/ProjectsResponseInner.md)
 

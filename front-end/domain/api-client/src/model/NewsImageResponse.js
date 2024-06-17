@@ -47,8 +47,8 @@ class NewsImageResponse {
         if (data) {
             obj = obj || new NewsImageResponse();
 
-            if (data.hasOwnProperty('created_time')) {
-                obj['created_time'] = ApiClient.convertToType(data['created_time'], 'String');
+            if (data.hasOwnProperty('create_time')) {
+                obj['create_time'] = ApiClient.convertToType(data['create_time'], 'String');
             }
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
@@ -62,8 +62,8 @@ class NewsImageResponse {
             if (data.hasOwnProperty('image_uuid')) {
                 obj['image_uuid'] = ApiClient.convertToType(data['image_uuid'], 'String');
             }
-            if (data.hasOwnProperty('updated_time')) {
-                obj['updated_time'] = ApiClient.convertToType(data['updated_time'], 'String');
+            if (data.hasOwnProperty('update_time')) {
+                obj['update_time'] = ApiClient.convertToType(data['update_time'], 'String');
             }
         }
         return obj;
@@ -76,8 +76,8 @@ class NewsImageResponse {
      */
     static validateJSON(data) {
         // ensure the json data is a string
-        if (data['created_time'] && !(typeof data['created_time'] === 'string' || data['created_time'] instanceof String)) {
-            throw new Error("Expected the field `created_time` to be a primitive type in the JSON string but got " + data['created_time']);
+        if (data['create_time'] && !(typeof data['create_time'] === 'string' || data['create_time'] instanceof String)) {
+            throw new Error("Expected the field `create_time` to be a primitive type in the JSON string but got " + data['create_time']);
         }
         // ensure the json data is a string
         if (data['image_name'] && !(typeof data['image_name'] === 'string' || data['image_name'] instanceof String)) {
@@ -92,8 +92,8 @@ class NewsImageResponse {
             throw new Error("Expected the field `image_uuid` to be a primitive type in the JSON string but got " + data['image_uuid']);
         }
         // ensure the json data is a string
-        if (data['updated_time'] && !(typeof data['updated_time'] === 'string' || data['updated_time'] instanceof String)) {
-            throw new Error("Expected the field `updated_time` to be a primitive type in the JSON string but got " + data['updated_time']);
+        if (data['update_time'] && !(typeof data['update_time'] === 'string' || data['update_time'] instanceof String)) {
+            throw new Error("Expected the field `update_time` to be a primitive type in the JSON string but got " + data['update_time']);
         }
 
         return true;
@@ -105,9 +105,9 @@ class NewsImageResponse {
 
 
 /**
- * @member {String} created_time
+ * @member {String} create_time
  */
-NewsImageResponse.prototype['created_time'] = undefined;
+NewsImageResponse.prototype['create_time'] = undefined;
 
 /**
  * @member {Number} id
@@ -130,9 +130,9 @@ NewsImageResponse.prototype['image_path'] = undefined;
 NewsImageResponse.prototype['image_uuid'] = undefined;
 
 /**
- * @member {String} updated_time
+ * @member {String} update_time
  */
-NewsImageResponse.prototype['updated_time'] = undefined;
+NewsImageResponse.prototype['update_time'] = undefined;
 
 
 

@@ -13,6 +13,6 @@ Name | Type | Description | Notes
 **projectLink** | **String** |  | [optional] 
 **projectName** | **String** |  | [optional] 
 **projectTags** | **[String]** |  | [optional] 
-**updatedTime** | **String** |  | [optional] 
+**updateTime** | **String** |  | [optional] 
 
 

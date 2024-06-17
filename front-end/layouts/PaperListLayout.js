@@ -5,6 +5,7 @@ import Pagination from '@/components/Pagination'
 import formatDate from '@/lib/utils/formatDate'
 import { FaFileDownload } from 'react-icons/fa'
 import { PaperAttachmentApi } from 'domain/api-client/src'
+import { LuLink } from "react-icons/lu";
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -14,8 +15,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
   const [searchValue, setSearchValue] = useState('')
 
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent =
-      frontMatter.paper_title + frontMatter.paper_authors + frontMatter.paper_tags.join(' ')
+    const searchContent = frontMatter.paper_title + frontMatter.paper_authors + frontMatter.paper_tags.join(' ')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
@@ -103,16 +103,16 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                   <div className="space-y-5 xl:col-span-4">
                     <div className="space-y-1">
                       <div>
-                        <Link
-                          href={`${paper_link}`}
-                          className="group flex bg-transparent bg-opacity-20 px-2 "
-                        >
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <span className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500">
-                              {paper_title}
-                            </span>
-                          </h2>
-                        </Link>
+                        <h2 className="text-2xl font-bold leading-8 tracking-tight">
+                          <span className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500">
+                            {paper_title}
+                          </span>
+                        </h2>
+                        {paper_link && 
+                          <Link href={`${paper_link}`} className="group flex bg-transparent bg-opacity-20 px-2 " >
+                            <LuLink />
+                          </Link>
+                        }
                       </div>
                       <div className="flex flex-wrap">
                         {paper_tags.map((tag) => (

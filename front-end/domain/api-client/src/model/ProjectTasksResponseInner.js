@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import ProjectTasksResponseInnerChildrenInner from './ProjectTasksResponseInnerChildrenInner';
 
 /**
  * The ProjectTasksResponseInner model module.
@@ -49,10 +48,10 @@ class ProjectTasksResponseInner {
             obj = obj || new ProjectTasksResponseInner();
 
             if (data.hasOwnProperty('children')) {
-                obj['children'] = ApiClient.convertToType(data['children'], [ProjectTasksResponseInnerChildrenInner]);
+                obj['children'] = ApiClient.convertToType(data['children'], [Object]);
             }
-            if (data.hasOwnProperty('created_time')) {
-                obj['created_time'] = ApiClient.convertToType(data['created_time'], 'String');
+            if (data.hasOwnProperty('create_time')) {
+                obj['create_time'] = ApiClient.convertToType(data['create_time'], 'String');
             }
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
@@ -72,8 +71,8 @@ class ProjectTasksResponseInner {
             if (data.hasOwnProperty('project_task_title')) {
                 obj['project_task_title'] = ApiClient.convertToType(data['project_task_title'], 'String');
             }
-            if (data.hasOwnProperty('updated_time')) {
-                obj['updated_time'] = ApiClient.convertToType(data['updated_time'], 'String');
+            if (data.hasOwnProperty('update_time')) {
+                obj['update_time'] = ApiClient.convertToType(data['update_time'], 'String');
             }
         }
         return obj;
@@ -85,19 +84,13 @@ class ProjectTasksResponseInner {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>ProjectTasksResponseInner</code>.
      */
     static validateJSON(data) {
-        if (data['children']) { // data not null
-            // ensure the json data is an array
-            if (!Array.isArray(data['children'])) {
-                throw new Error("Expected the field `children` to be an array in the JSON data but got " + data['children']);
-            }
-            // validate the optional field `children` (array)
-            for (const item of data['children']) {
-                ProjectTasksResponseInnerChildrenInner.validateJSON(item);
-            };
+        // ensure the json data is an array
+        if (!Array.isArray(data['children'])) {
+            throw new Error("Expected the field `children` to be an array in the JSON data but got " + data['children']);
         }
         // ensure the json data is a string
-        if (data['created_time'] && !(typeof data['created_time'] === 'string' || data['created_time'] instanceof String)) {
-            throw new Error("Expected the field `created_time` to be a primitive type in the JSON string but got " + data['created_time']);
+        if (data['create_time'] && !(typeof data['create_time'] === 'string' || data['create_time'] instanceof String)) {
+            throw new Error("Expected the field `create_time` to be a primitive type in the JSON string but got " + data['create_time']);
         }
         // ensure the json data is a string
         if (data['project_task_content'] && !(typeof data['project_task_content'] === 'string' || data['project_task_content'] instanceof String)) {
@@ -112,8 +105,8 @@ class ProjectTasksResponseInner {
             throw new Error("Expected the field `project_task_title` to be a primitive type in the JSON string but got " + data['project_task_title']);
         }
         // ensure the json data is a string
-        if (data['updated_time'] && !(typeof data['updated_time'] === 'string' || data['updated_time'] instanceof String)) {
-            throw new Error("Expected the field `updated_time` to be a primitive type in the JSON string but got " + data['updated_time']);
+        if (data['update_time'] && !(typeof data['update_time'] === 'string' || data['update_time'] instanceof String)) {
+            throw new Error("Expected the field `update_time` to be a primitive type in the JSON string but got " + data['update_time']);
         }
 
         return true;
@@ -125,14 +118,14 @@ class ProjectTasksResponseInner {
 
 
 /**
- * @member {Array.<module:model/ProjectTasksResponseInnerChildrenInner>} children
+ * @member {Array.<Object>} children
  */
 ProjectTasksResponseInner.prototype['children'] = undefined;
 
 /**
- * @member {String} created_time
+ * @member {String} create_time
  */
-ProjectTasksResponseInner.prototype['created_time'] = undefined;
+ProjectTasksResponseInner.prototype['create_time'] = undefined;
 
 /**
  * @member {Number} id
@@ -165,9 +158,9 @@ ProjectTasksResponseInner.prototype['project_task_sub_title'] = undefined;
 ProjectTasksResponseInner.prototype['project_task_title'] = undefined;
 
 /**
- * @member {String} updated_time
+ * @member {String} update_time
  */
-ProjectTasksResponseInner.prototype['updated_time'] = undefined;
+ProjectTasksResponseInner.prototype['update_time'] = undefined;
 
 
 

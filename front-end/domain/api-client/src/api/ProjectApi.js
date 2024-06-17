@@ -167,6 +167,52 @@ export default class ProjectApi {
 
 
     /**
+     * get project
+     * @param {Number} projectId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Project} and HTTP response
+     */
+    projectProjectIdGetWithHttpInfo(projectId) {
+      let postBody = null;
+      // verify the required parameter 'projectId' is set
+      if (projectId === undefined || projectId === null) {
+        throw new Error("Missing the required parameter 'projectId' when calling projectProjectIdGet");
+      }
+
+      let pathParams = {
+        'project_id': projectId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['*/*'];
+      let returnType = Project;
+      return this.apiClient.callApi(
+        '/project/{project_id}', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null
+      );
+    }
+
+    /**
+     * get project
+     * @param {Number} projectId 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Project}
+     */
+    projectProjectIdGet(projectId) {
+      return this.projectProjectIdGetWithHttpInfo(projectId)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * patch project
      * @param {Number} projectId 
      * @param {Object} opts Optional parameters
