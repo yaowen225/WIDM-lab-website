@@ -470,7 +470,7 @@ export interface NewsImageResponse {
      * @type {string}
      * @memberof NewsImageResponse
      */
-    'created_time'?: string;
+    'create_time'?: string;
     /**
      * 
      * @type {number}
@@ -500,7 +500,7 @@ export interface NewsImageResponse {
      * @type {string}
      * @memberof NewsImageResponse
      */
-    'updated_time'?: string;
+    'update_time'?: string;
 }
 /**
  * 
@@ -557,7 +557,7 @@ export interface NewsResponse {
      * @type {string}
      * @memberof NewsResponse
      */
-    'created_time'?: string;
+    'create_time'?: string;
     /**
      * 
      * @type {number}
@@ -587,7 +587,7 @@ export interface NewsResponse {
      * @type {string}
      * @memberof NewsResponse
      */
-    'updated_time'?: string;
+    'update_time'?: string;
 }
 /**
  * 
@@ -916,7 +916,7 @@ export interface ProjectIconResponse {
      * @type {string}
      * @memberof ProjectIconResponse
      */
-    'created_time'?: string;
+    'create_time'?: string;
     /**
      * 
      * @type {string}
@@ -952,7 +952,7 @@ export interface ProjectIconResponse {
      * @type {string}
      * @memberof ProjectIconResponse
      */
-    'updated_time'?: string;
+    'update_time'?: string;
 }
 /**
  * 
@@ -1002,7 +1002,7 @@ export interface ProjectResponse {
      * @type {string}
      * @memberof ProjectResponse
      */
-    'created_time'?: string;
+    'create_time'?: string;
     /**
      * 
      * @type {number}
@@ -1044,7 +1044,7 @@ export interface ProjectResponse {
      * @type {string}
      * @memberof ProjectResponse
      */
-    'updated_time'?: string;
+    'update_time'?: string;
 }
 /**
  * 
@@ -1216,16 +1216,16 @@ export interface ProjectTasks {
 export interface ProjectTasksResponseInner {
     /**
      * 
-     * @type {Array<ProjectTasksResponseInnerChildrenInner>}
+     * @type {Array<object>}
      * @memberof ProjectTasksResponseInner
      */
-    'children'?: Array<ProjectTasksResponseInnerChildrenInner>;
+    'children'?: Array<object>;
     /**
      * 
      * @type {string}
      * @memberof ProjectTasksResponseInner
      */
-    'created_time'?: string;
+    'create_time'?: string;
     /**
      * 
      * @type {number}
@@ -1267,44 +1267,7 @@ export interface ProjectTasksResponseInner {
      * @type {string}
      * @memberof ProjectTasksResponseInner
      */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface ProjectTasksResponseInnerChildrenInner
- */
-export interface ProjectTasksResponseInnerChildrenInner {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_task_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_task_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_task_title'?: string;
+    'update_time'?: string;
 }
 /**
  * 
@@ -1390,7 +1353,7 @@ export interface ProjectsResponseInner {
      * @type {string}
      * @memberof ProjectsResponseInner
      */
-    'updated_time'?: string;
+    'update_time'?: string;
 }
 
 /**
@@ -3969,6 +3932,40 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @summary get project
+         * @param {number} projectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectProjectIdGet: async (projectId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'projectId' is not null or undefined
+            assertParamExists('projectProjectIdGet', 'projectId', projectId)
+            const localVarPath = `/project/{project_id}`
+                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary patch project
          * @param {number} projectId 
          * @param {ProjectInput} [project] project information
@@ -4055,6 +4052,19 @@ export const ProjectApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary get project
+         * @param {number} projectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectProjectIdGet(projectId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdGet(projectId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectProjectIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary patch project
          * @param {number} projectId 
          * @param {ProjectInput} [project] project information
@@ -4105,6 +4115,16 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
          */
         projectProjectIdDelete(projectId: number, options?: any): AxiosPromise<Project> {
             return localVarFp.projectProjectIdDelete(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get project
+         * @param {number} projectId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectProjectIdGet(projectId: number, options?: any): AxiosPromise<Project> {
+            return localVarFp.projectProjectIdGet(projectId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4160,6 +4180,18 @@ export class ProjectApi extends BaseAPI {
      */
     public projectProjectIdDelete(projectId: number, options?: RawAxiosRequestConfig) {
         return ProjectApiFp(this.configuration).projectProjectIdDelete(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary get project
+     * @param {number} projectId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectApi
+     */
+    public projectProjectIdGet(projectId: number, options?: RawAxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).projectProjectIdGet(projectId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

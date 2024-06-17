@@ -194,7 +194,7 @@
         },
         "response": {
           "properties": {
-            "created_time": {
+            "create_time": {
               "type": "string"
             },
             "id": {
@@ -209,7 +209,7 @@
             "news_title": {
               "type": "string"
             },
-            "updated_time": {
+            "update_time": {
               "type": "string"
             }
           }
@@ -223,7 +223,7 @@
         },
         "response": {
           "properties": {
-            "created_time": {
+            "create_time": {
               "type": "string"
             },
             "id": {
@@ -238,7 +238,7 @@
             "image_uuid": {
               "type": "string"
             },
-            "updated_time": {
+            "update_time": {
               "type": "string"
             }
           }
@@ -253,7 +253,7 @@
         "response": {
           "items": {
             "properties": {
-              "created_time": {
+              "create_time": {
                 "type": "string"
               },
               "id": {
@@ -268,7 +268,7 @@
               "image_uuid": {
                 "type": "string"
               },
-              "updated_time": {
+              "update_time": {
                 "type": "string"
               }
             }
@@ -298,7 +298,7 @@
         "response": {
           "items": {
             "properties": {
-              "created_time": {
+              "create_time": {
                 "type": "string"
               },
               "id": {
@@ -313,7 +313,7 @@
               "news_title": {
                 "type": "string"
               },
-              "updated_time": {
+              "update_time": {
                 "type": "string"
               }
             }
@@ -436,7 +436,7 @@
         },
         "response": {
           "properties": {
-            "created_time": {
+            "create_time": {
               "type": "string"
             },
             "id": {
@@ -460,7 +460,7 @@
               },
               "type": "array"
             },
-            "updated_time": {
+            "update_time": {
               "type": "string"
             }
           }
@@ -474,7 +474,7 @@
         },
         "response": {
           "properties": {
-            "created_time": {
+            "create_time": {
               "type": "string"
             },
             "icon_name": {
@@ -492,7 +492,7 @@
             "project_id": {
               "type": "integer"
             },
-            "updated_time": {
+            "update_time": {
               "type": "string"
             }
           }
@@ -563,7 +563,7 @@
         },
         "response": {
           "properties": {
-            "created_time": {
+            "create_time": {
               "type": "string"
             },
             "id": {
@@ -578,7 +578,7 @@
             "image_uuid": {
               "type": "string"
             },
-            "updated_time": {
+            "update_time": {
               "type": "string"
             }
           }
@@ -593,7 +593,7 @@
         "response": {
           "items": {
             "properties": {
-              "created_time": {
+              "create_time": {
                 "type": "string"
               },
               "id": {
@@ -608,7 +608,7 @@
               "image_uuid": {
                 "type": "string"
               },
-              "updated_time": {
+              "update_time": {
                 "type": "string"
               }
             }
@@ -643,27 +643,11 @@
             "properties": {
               "children": {
                 "items": {
-                  "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "project_id": {
-                      "type": "integer"
-                    },
-                    "project_task_content": {
-                      "type": "string"
-                    },
-                    "project_task_sub_title": {
-                      "type": "string"
-                    },
-                    "project_task_title": {
-                      "type": "string"
-                    }
-                  }
+                  "properties": null
                 },
                 "type": "array"
               },
-              "created_time": {
+              "create_time": {
                 "type": "string"
               },
               "id": {
@@ -684,7 +668,7 @@
               "project_task_title": {
                 "type": "string"
               },
-              "updated_time": {
+              "update_time": {
                 "type": "string"
               }
             }
@@ -731,7 +715,7 @@
                 },
                 "type": "array"
               },
-              "updated_time": {
+              "update_time": {
                 "type": "string"
               }
             }
@@ -1817,6 +1801,31 @@
           }
         },
         "summary": "delete project",
+        "tags": [
+          "project"
+        ]
+      },
+      "get": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "project_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "get project successfully",
+            "schema": {
+              "$ref": "#/definitions/project"
+            }
+          },
+          "404": {
+            "description": "project not found"
+          }
+        },
+        "summary": "get project",
         "tags": [
           "project"
         ]

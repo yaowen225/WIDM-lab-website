@@ -22,6 +22,7 @@ const PaperPage = () => {
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
     { id: 'paper_title', Name: '論文標題', isShow: 'true', type: 'String' },
+    { id: 'paper_link', Name: '論文連結', isShow: 'true', type: 'String' },
     { id: 'paper_origin', Name: '論文來源', isShow: 'true', type: 'String' },
     { id: 'paper_publish_year', Name: '論文發布年分', isShow: 'true', type: 'Number' },
     { id: 'paper_authors', Name: '論文作者', isShow: 'true', type: 'Tags' },
@@ -87,8 +88,8 @@ const PaperPage = () => {
       paper_title: formData.paper_title,
       paper_origin: formData.paper_origin,
       paper_publish_year: formData.paper_publish_year,
-      paper_authors: formData.paper_authors.map((author: { id: string; text: string; className: string }) => author.text),
-      paper_tags: formData.paper_tags.map((tag: { id: string; text: string; className: string }) => tag.text),
+      paper_authors: formData.paper_authors ? formData.paper_authors.map((author: { id: string; text: string; className: string }) => author.text) : null,
+      paper_tags: formData.paper_tags ? formData.paper_tags.map((tag: { id: string; text: string; className: string }) => tag.text) : null,
     };
     console.log(newPaper)
 
