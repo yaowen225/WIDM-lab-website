@@ -20,6 +20,12 @@ interface ProjectTask {
   children: ProjectTask[];
 }
 
+interface creatTaskData {
+  project_task_title: string,
+  project_task_sub_title: string,
+  project_task_content: string,
+}
+
 const ProjectPage = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [projectId, setProjectId] = useState(0);
@@ -84,7 +90,6 @@ const ProjectPage = () => {
   }, []);
 
   const onTreeSelect: TreeProps['onSelect'] = async (selectedKeys, info) => {
-    console.log(info.node.key);
     await fetchProjectsTask(info.node.key as number);
   };
 
@@ -134,6 +139,10 @@ const ProjectPage = () => {
 
   const handleDeleteProjectTask = async () => {
     if (projectTask) {
+      if (!window.confirm('確定要刪除此資料嗎?')) {
+        return;
+      }
+
       const configuration = new Configuration({ basePath: '/api' });
       const apiClient = new ProjectTaskApi(configuration);
       try {
@@ -168,32 +177,35 @@ const ProjectPage = () => {
     setIsModalVisible(false);
   };
 
-  const handleAddTask = async (selectedValue: string, taskDetails: any) => {
-    const [prefix, id] = selectedValue.split('-');
-    console.log(prefix, id);
-    
+  const handleAddTask = async (selectedValue: string, taskDetails: creatTaskData) => {
+    // 根據 selectedValue 設置 project_id 和 parent_id
+    let project_id = 0;
+    let parent_id = 0;
+    if (selectedValue.startsWith('project-')) {
+      project_id = parseInt(selectedValue.split('-')[1], 10);
+    } else if (selectedValue.startsWith('task-')) {
+      project_id = parseInt(selectedValue.split('-')[1], 10);
+      parent_id = parseInt(selectedValue.split('-')[2], 10);
+    }
+
     const newTask = {
-      project_id: parseInt(id, 10),
-      parent_id: 0,
-      project_task_title: taskDetails.title,
-      project_task_sub_title: taskDetails.subtitle,
-      project_task_content: taskDetails.content,
+      parent_id: parent_id,
+      project_task_title: taskDetails.project_task_title,
+      project_task_sub_title: taskDetails.project_task_sub_title,
+      project_task_content: taskDetails.project_task_content,
       create_time: new Date().toISOString(),
       update_time: new Date().toISOString(),
       children: [],
     };
-    if (prefix === 'task') {
-      newTask.parent_id = 0;
-    }
+
     const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectTaskApi(configuration);
     try {
-      // await apiClient.projectProjectIdTaskPost(parseInt(id, 10), newTask);
+      await apiClient.projectProjectIdTaskPost(project_id, newTask);
       setSuccessMessage('新增成功!');
       setShowSuccessMessage(true);
+      fetchProjectsTasks(project_id);
       setTimeout(() => setShowSuccessMessage(false), 3000);
-      fetchProjectsTasks(parseInt(id, 10));
-      handleCloseModal();
     } catch (error) {
       console.error('API 新增失敗:', (error as Error).message);
       setErrorMessage('新增失敗!');
@@ -203,6 +215,7 @@ const ProjectPage = () => {
         console.error('API Response Error:', (error as any).response.body);
       }
     }
+    handleCloseModal();
   };
 
   return (

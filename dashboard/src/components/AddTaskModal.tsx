@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, TreeSelect, Input, Form, Button } from 'antd';
+import { Modal, TreeSelect, Input, Form } from 'antd';
 import type { TreeNodeNormal } from 'antd/lib/tree/Tree';
 import { ProjectApi, Configuration, ProjectTaskApi } from '../../domain/api-client';
 
-interface Project {
-  id: number;
-  project_name: string;
-}
-
 interface Task {
   id: number;
+  project_id: number;
   project_task_title: string;
   children?: Task[];
 }
 
 interface AddTaskModalProps {
   open: boolean;
-  onOk: (selectedValue: string, taskDetails: any, rootId: number) => void;
+  onOk: (selectedValue: string, taskDetails: any) => void;
   onCancel: () => void;
 }
 
@@ -26,6 +22,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   const [taskTitle, setTaskTitle] = useState<string>('');
   const [taskSubtitle, setTaskSubtitle] = useState<string>('');
   const [taskContent, setTaskContent] = useState<string>('');
+  const [treeKey, setTreeKey] = useState<number>(0);
 
   const fetchProjects = async () => {
     const configuration = new Configuration({ basePath: '/api' });
@@ -61,15 +58,14 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   const formatTasks = (tasks: Task[]): TreeNodeNormal[] => {
     return tasks.map(task => ({
       title: task.project_task_title,
-      value: `task-${task.id}`,
-      key: `task-${task.id}`,
+      value: `task-${task.project_id}-${task.id}`,
+      key: `task-${task.project_id}-${task.id}`,
       isLeaf: !task.children || task.children.length === 0,
       children: task.children ? formatTasks(task.children) : [],
     }));
   };
 
   const onLoadData = async (treeNode: any) => {
-    console.log("123")
     const { value } = treeNode.props;
     const [prefix, id] = value.split('-');
     if (prefix === 'project') {
@@ -104,55 +100,33 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   };
 
   useEffect(() => {
-    if (open) {
-      onModalOpen();
-    } else {
-      // 重置狀態
-      setSelectedValue(undefined);
-      setTaskTitle('');
-      setTaskSubtitle('');
-      setTaskContent('');
-      setTreeData([]);
-    }
+    setTreeData([]);
+    onModalOpen();
+    setSelectedValue(undefined);
+    setTaskTitle('');
+    setTaskSubtitle('');
+    setTaskContent('');
+    setTreeKey(prevKey => prevKey + 1); // 更新 treeKey 強制重新渲染 TreeSelect
   }, [open]);
 
   const handleOk = () => {
     if (selectedValue && taskTitle && taskSubtitle && taskContent) {
       const taskDetails = {
-        title: taskTitle,
-        subtitle: taskSubtitle,
-        content: taskContent,
+        project_task_title: taskTitle,
+        project_task_sub_title: taskSubtitle,
+        project_task_content: taskContent,
       };
-      const rootId = findRootId(treeData, selectedValue);
-      // onOk(selectedValue, taskDetails, rootId);
+      onOk(selectedValue, taskDetails);
       setSelectedValue(undefined);
       setTaskTitle('');
       setTaskSubtitle('');
       setTaskContent('');
       setTreeData([]);
     } else {
-      // 提示用户填完所有字段
       alert("請填入必填欄位");
     }
   };
 
-  const findRootId = (tree: TreeNodeNormal[], value: string): number | undefined => {
-    for (const node of tree) {
-      if (node.key === value) {
-        const [prefix, id] = node.key.split('-');
-        if (prefix === 'project') {
-          return parseInt(id, 10);
-        }
-      }
-      if (node.children) {
-        const result = findRootId(node.children, value);
-        if (result !== undefined) {
-          return result;
-        }
-      }
-    }
-    return undefined;
-  };
 
   return (
     <Modal
@@ -171,6 +145,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
       okButtonProps={{ style: { backgroundColor: '#3c50e0', color: 'white' } }}
     >
       <TreeSelect
+        key={treeKey}
         showSearch
         style={{ width: '100%' }}
         value={selectedValue}
