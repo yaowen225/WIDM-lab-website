@@ -44,11 +44,14 @@ const NewsDetail = () => {
   }
 
   const markdownComponents = {
-    h1: ({node, ...props}) => <h1 className="my-4 text-4xl font-extrabold" {...props} />,
-    h2: ({ node, ...props }) => <h2 className="my-4 text-3xl font-bold" {...props} />,
-    h3: ({ node, ...props }) => <h3 className="my-4 text-2xl font-semibold" {...props} />,
-    h4: ({ node, ...props }) => <h4 className="my-4 text-xl font-medium" {...props} />,
+    h1: ({node, ...props}) => <h1 className="my-4 text-4xl font-extrabold border-t border-b border-gray-300 py-2" {...props} />,
+    h2: ({node, ...props}) => <h2 className="my-4 text-3xl font-bold border-t border-b border-gray-300 py-2" {...props} />,
+    h3: ({node, ...props}) => <h3 className="my-4 text-2xl font-semibold border-t border-b border-gray-300 py-2" {...props} />,
+    h4: ({node, ...props}) => <h4 className="my-4 text-xl font-medium border-t border-b border-gray-300 py-2" {...props} />,
+    h5: ({node, ...props}) => <h5 className="my-4 text-lg font-medium border-t border-b border-gray-300 py-2" {...props} />,
+    h6: ({node, ...props}) => <h6 className="my-4 text-sm font-medium border-t border-b border-gray-300 py-2" {...props} />,
     p:  ({ node, ...props }) => <p className="my-2 mt-4 text-base leading-7 text-gray-700" {...props} />,
+    a:  ({ node, ...props }) => <a className="my-1 mt-4 text-base leading-7 text-teal-600" {...props} />,
     ul: ({ node, ...props }) => <ul className="ml-5 list-disc" {...props} />,
     ol: ({ node, ...props }) => <ol className="ml-5 list-decimal" {...props} />,
     li: ({ node, ...props }) => <li className="mt-1" {...props} />,
@@ -74,23 +77,19 @@ const NewsDetail = () => {
       <PageSEO title={`News - ${siteMetadata.author}`} description={siteMetadata.description} />
       <article>
         <div className="flex items-center justify-between">
-          <h1 className="text-5xl font-extrabold text-teal-600/80 drop-shadow-lg">
-            {news.news_title}
-          </h1>
-          <button
-            onClick={() => router.back()}
-            className="p-2 border border-gray-400 rounded text-gray-600 hover:bg-gray-100"
-          >
+          <div style={{ flex: 1, textAlign: 'center' }}> {/* 讓 h1 標籤居中 */}
+            <h1 
+              style={{overflowWrap: 'anywhere'}}
+              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap"> {news.news_title}  </h1>
+          </div>
+          <button onClick={() => router.back()} className="p-2 border border-gray-400 rounded text-gray-600 hover:bg-gray-100">
             <IoMdReturnLeft size={24} />
           </button>
         </div>
         <hr className="my-4 border-gray-300" />
-        <div className="mt-4">
-          
+        <div className="mx-auto w-full max-w-4xl"> {/* 設置寬度並使其居中 */}
           <ReactMarkdown components={markdownComponents}>{news.news_content}</ReactMarkdown>
-          
         </div>
-        
       </article>
     </>
   )
