@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import { ProjectTaskApi } from 'domain/api-client/src'
+import { IoMdReturnLeft } from "react-icons/io"
 
 import Timeline from '@/components/Timeline'
 import { motion } from 'framer-motion'
@@ -48,9 +49,16 @@ const ProjectTask = () => {
       <PageSEO title={`Project Task - ${siteMetadata.author}`} description={siteMetadata.description} />
       <div className="mx-auto max-w-2xl">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-14">
-            Project Title.
-          </h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+              Projects
+            </h1>
+            <button onClick={() => router.back()} className="p-2 border border-gray-400 rounded text-gray-600 hover:bg-gray-100">
+              <IoMdReturnLeft size={24} />
+            </button>
+          </div>
+ 
+          
           <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
           Project description.
           </p>

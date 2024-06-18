@@ -5,6 +5,9 @@ import { IoIosSchool } from 'react-icons/io';
 import { FaFileAlt } from 'react-icons/fa';
 import { AiFillCode } from 'react-icons/ai';
 
+import Link from '@/components/Link'
+
+
 const IconMap = [
   <HiFolderAdd />,
   <IoIosSchool />,
@@ -26,25 +29,30 @@ function TimelineItem({ item, level = 0 }) {
 
   return (
     <>
-      <li className="mb-4 ml-8 rounded-md border border-gray-100 bg-white px-4 py-4 shadow-sm shadow-gray-300 dark:border-zinc-900 dark:bg-zinc-900 dark:shadow-none"
-          style={{ borderColor: backgroundColor, boxShadow: `0 2px 4px ${backgroundColor}` }}>
-        <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full"
-              style={{ backgroundColor: backgroundColor, ringColor: backgroundColor }}>
-          {icon}
-        </span>
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white">
-          {item.project_task_title}
-          {item.project_task_sub_title && (
-            <span className="mr-2 ml-3 rounded px-2.5 py-0.5 text-sm font-medium"
-                  style={{ backgroundColor: backgroundColor, color: '#FFFFFF' }}>
-              {item.project_task_sub_title}
-            </span>
-          )}
-        </h3>
-        <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-          updated by {item.update_time}
-        </time>
-      </li>
+      <Link
+        href={`/projectTasks/${item.project_id}/${item.id}`}
+        key={item.project_task_id}
+      >
+        <li className="mb-4 ml-8 rounded-md border border-gray-100 bg-white px-4 py-4 shadow-sm shadow-gray-300 dark:border-zinc-900 dark:bg-zinc-900 dark:shadow-none"
+            style={{ borderColor: backgroundColor, boxShadow: `0 2px 4px ${backgroundColor}` }}>
+          <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full"
+                style={{ backgroundColor: backgroundColor, ringColor: backgroundColor }}>
+            {icon}
+          </span>
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+            {item.project_task_title}
+            {item.project_task_sub_title && (
+              <span className="mr-2 ml-3 rounded px-2.5 py-0.5 text-sm font-medium"
+                    style={{ backgroundColor: backgroundColor, color: '#FFFFFF' }}>
+                {item.project_task_sub_title}
+              </span>
+            )}
+          </h3>
+          <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+            updated by {item.update_time}
+          </time>
+        </li>
+      </Link>
       {item.children.length != 0 && (
         <Disclosure>
           {({ open }) => (

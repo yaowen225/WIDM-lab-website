@@ -33,7 +33,6 @@ docs/Paper.md
 docs/PaperApi.md
 docs/PaperAttachment.md
 docs/PaperAttachmentApi.md
-docs/PaperPaperIdPatchRequest.md
 docs/PaperPostRequest.md
 docs/PaperResponse.md
 docs/Papers.md
@@ -96,7 +95,6 @@ src/model/NewsResponse.js
 src/model/Newses.js
 src/model/Paper.js
 src/model/PaperAttachment.js
-src/model/PaperPaperIdPatchRequest.js
 src/model/PaperPostRequest.js
 src/model/PaperResponse.js
 src/model/Papers.js

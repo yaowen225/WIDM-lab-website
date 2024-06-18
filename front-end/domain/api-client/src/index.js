@@ -36,7 +36,6 @@ import NewsResponse from './model/NewsResponse';
 import Newses from './model/Newses';
 import Paper from './model/Paper';
 import PaperAttachment from './model/PaperAttachment';
-import PaperPaperIdPatchRequest from './model/PaperPaperIdPatchRequest';
 import PaperPostRequest from './model/PaperPostRequest';
 import PaperResponse from './model/PaperResponse';
 import Papers from './model/Papers';
@@ -244,12 +243,6 @@ export {
      * @property {module:model/PaperAttachment}
      */
     PaperAttachment,
-
-    /**
-     * The PaperPaperIdPatchRequest model constructor.
-     * @property {module:model/PaperPaperIdPatchRequest}
-     */
-    PaperPaperIdPatchRequest,
 
     /**
      * The PaperPostRequest model constructor.

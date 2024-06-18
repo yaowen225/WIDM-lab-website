@@ -47,9 +47,6 @@ class PaperPostRequest {
         if (data) {
             obj = obj || new PaperPostRequest();
 
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
             if (data.hasOwnProperty('paper_authors')) {
                 obj['paper_authors'] = ApiClient.convertToType(data['paper_authors'], ['String']);
             }
@@ -106,11 +103,6 @@ class PaperPostRequest {
 }
 
 
-
-/**
- * @member {Number} id
- */
-PaperPostRequest.prototype['id'] = undefined;
 
 /**
  * @member {Array.<String>} paper_authors

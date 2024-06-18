@@ -105,7 +105,7 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.PaperApi();
 let paperId = 56; // Number | 
 let opts = {
-  'paper': new WidmBackEnd.PaperPaperIdPatchRequest() // PaperPaperIdPatchRequest | 
+  'paper': new WidmBackEnd.PaperPostRequest() // PaperPostRequest | 
 };
 apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
@@ -121,7 +121,7 @@ apiInstance.paperPaperIdPatch(paperId, opts).then((data) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **paperId** | **Number**|  | 
- **paper** | [**PaperPaperIdPatchRequest**](PaperPaperIdPatchRequest.md)|  | [optional] 
+ **paper** | [**PaperPostRequest**](PaperPostRequest.md)|  | [optional] 
 
 ### Return type
 

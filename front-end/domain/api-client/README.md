@@ -193,7 +193,6 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.Newses](docs/Newses.md)
  - [WidmBackEnd.Paper](docs/Paper.md)
  - [WidmBackEnd.PaperAttachment](docs/PaperAttachment.md)
- - [WidmBackEnd.PaperPaperIdPatchRequest](docs/PaperPaperIdPatchRequest.md)
  - [WidmBackEnd.PaperPostRequest](docs/PaperPostRequest.md)
  - [WidmBackEnd.PaperResponse](docs/PaperResponse.md)
  - [WidmBackEnd.Papers](docs/Papers.md)
