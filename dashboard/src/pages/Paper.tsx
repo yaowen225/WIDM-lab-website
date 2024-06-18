@@ -22,7 +22,7 @@ const PaperPage = () => {
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
     { id: 'paper_title', Name: '論文標題', isShow: 'true', type: 'String' },
-    { id: 'paper_link', Name: '論文連結', isShow: 'true', type: 'String' },
+    { id: 'paper_link', Name: '論文連結', isShow: 'true', type: 'String', isEnable: 'false' },
     { id: 'paper_origin', Name: '論文來源', isShow: 'true', type: 'String' },
     { id: 'paper_publish_year', Name: '論文發布年分', isShow: 'true', type: 'Number' },
     { id: 'paper_authors', Name: '論文作者', isShow: 'true', type: 'Tags' },
