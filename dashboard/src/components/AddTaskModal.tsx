@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, TreeSelect, Input, Form, Button } from 'antd';
 import type { TreeNodeNormal } from 'antd/lib/tree/Tree';
-import { ProjectApi, Configuration, ProjectTaskApi, ProjectTaskImageApi } from '../../domain/api-client';
+import { ProjectApi, Configuration, ProjectTaskApi } from '../../domain/api-client';
 import ReactMarkdown from 'react-markdown';
 import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -35,7 +35,6 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   const [taskContent, setTaskContent] = useState<string>('');
   const [treeKey, setTreeKey] = useState<number>(0);
   const [importImageOpen, setImportImageOpen] = useState(false);
-  const [imagesId, setImagesId] = useState<TaskImage[]>([]);
 
   const markdownComponents = {
     h1: ({node, ...props}: {node?: any, [key: string]: any}) => <h1 className="my-4 text-4xl font-extrabold border-t border-b border-gray-300 py-2" {...props} />,
@@ -88,23 +87,6 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
       const response = await apiClient.projectProjectIdTaskGet(id);
       const data: any = response.data.response;
       return data;
-    } catch (error) {
-      console.error('API 調用失敗:', (error as Error).message);
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
-      return [];
-    }
-  };
-
-  const fetchProjectsTaskImages = async () => {
-    const configuration = new Configuration({ basePath: '/api' });
-    const apiClient = new ProjectTaskImageApi(configuration);
-    try {
-      const response = await apiClient.projectTaskImageGet();
-      const data: any = response.data.response;
-      console.log(data);
-      setImagesId(data)
     } catch (error) {
       console.error('API 調用失敗:', (error as Error).message);
       if ((error as any).response) {
