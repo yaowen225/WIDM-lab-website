@@ -649,58 +649,9 @@ export interface PaperAttachment {
 /**
  * 
  * @export
- * @interface PaperPaperIdPatchRequest
- */
-export interface PaperPaperIdPatchRequest {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_authors'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_origin'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_publish_year'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_tags'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_title'?: string;
-}
-/**
- * 
- * @export
  * @interface PaperPostRequest
  */
 export interface PaperPostRequest {
-    /**
-     * 
-     * @type {number}
-     * @memberof PaperPostRequest
-     */
-    'id'?: number;
     /**
      * 
      * @type {Array<string>}
@@ -3311,11 +3262,11 @@ export const PaperApiAxiosParamCreator = function (configuration?: Configuration
          * 
          * @summary patch paper
          * @param {number} paperId 
-         * @param {PaperPaperIdPatchRequest} [paper] 
+         * @param {PaperPostRequest} [paper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paperPaperIdPatch: async (paperId: number, paper?: PaperPaperIdPatchRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        paperPaperIdPatch: async (paperId: number, paper?: PaperPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'paperId' is not null or undefined
             assertParamExists('paperPaperIdPatch', 'paperId', paperId)
             const localVarPath = `/paper/{paper_id}`
@@ -3418,11 +3369,11 @@ export const PaperApiFp = function(configuration?: Configuration) {
          * 
          * @summary patch paper
          * @param {number} paperId 
-         * @param {PaperPaperIdPatchRequest} [paper] 
+         * @param {PaperPostRequest} [paper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
+        async paperPaperIdPatch(paperId: number, paper?: PaperPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdPatch(paperId, paper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaperApi.paperPaperIdPatch']?.[localVarOperationServerIndex]?.url;
@@ -3474,11 +3425,11 @@ export const PaperApiFactory = function (configuration?: Configuration, basePath
          * 
          * @summary patch paper
          * @param {number} paperId 
-         * @param {PaperPaperIdPatchRequest} [paper] 
+         * @param {PaperPostRequest} [paper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: any): AxiosPromise<Paper> {
+        paperPaperIdPatch(paperId: number, paper?: PaperPostRequest, options?: any): AxiosPromise<Paper> {
             return localVarFp.paperPaperIdPatch(paperId, paper, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3528,12 +3479,12 @@ export class PaperApi extends BaseAPI {
      * 
      * @summary patch paper
      * @param {number} paperId 
-     * @param {PaperPaperIdPatchRequest} [paper] 
+     * @param {PaperPostRequest} [paper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaperApi
      */
-    public paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: RawAxiosRequestConfig) {
+    public paperPaperIdPatch(paperId: number, paper?: PaperPostRequest, options?: RawAxiosRequestConfig) {
         return PaperApiFp(this.configuration).paperPaperIdPatch(paperId, paper, options).then((request) => request(this.axios, this.basePath));
     }
 

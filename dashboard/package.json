@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.13.4",
+    "@types/react-syntax-highlighter": "^15.5.13",
     "antd": "^5.18.0",
     "apexcharts": "^3.41.0",
     "flatpickr": "^4.6.13",
@@ -27,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.14.2",
     "react-tag-input": "^6.10.2",
     "react-toastify": "^9.1.3",

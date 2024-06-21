@@ -6,8 +6,6 @@ const CustomLink = ({ href, ...rest }) => {
   const isAnchorLink = href && href.startsWith('#')
   const isValidHref = href && href.trim() !== '';
 
-  console.log(href, isInternalLink, isAnchorLink, isValidHref)
-
   if (isInternalLink) {
     return (
       <Link href={href}>

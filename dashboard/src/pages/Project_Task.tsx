@@ -5,6 +5,10 @@ import { Select, Tree, TreeProps } from 'antd';
 import { ProjectApi, Configuration, ProjectTaskApi } from '../../domain/api-client';
 import AddTaskModal from '../components/AddTaskModal';
 import { DownOutlined } from '@ant-design/icons';
+import ReactMarkdown from 'react-markdown';
+import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import ImportImageModal from '../components/ImportImageModal';
 
 const { Option } = Select;
 
@@ -26,6 +30,13 @@ interface creatTaskData {
   project_task_content: string,
 }
 
+interface TaskImage {
+  id: number;
+  image_name: string,
+  image_path: string,
+  image_uuid: string,
+}
+
 const ProjectPage = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [projectId, setProjectId] = useState(0);
@@ -36,7 +47,53 @@ const ProjectPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [importImageOpen, setImportImageOpen] = useState(false);
 
+  const markdownComponents = {
+    h1: ({node, ...props}: {node?: any, [key: string]: any}) => <h1 className="my-4 text-4xl font-extrabold border-t border-b border-gray-300 py-2" {...props} />,
+    h2: ({node, ...props}: {node?: any, [key: string]: any}) => <h2 className="my-4 text-3xl font-bold border-t border-b border-gray-300 py-2" {...props} />,
+    h3: ({node, ...props}: {node?: any, [key: string]: any}) => <h3 className="my-4 text-2xl font-semibold border-t border-b border-gray-300 py-2" {...props} />,
+    h4: ({node, ...props}: {node?: any, [key: string]: any}) => <h4 className="my-4 text-xl font-medium border-t border-b border-gray-300 py-2" {...props} />,
+    h5: ({node, ...props}: {node?: any, [key: string]: any}) => <h5 className="my-4 text-lg font-medium border-t border-b border-gray-300 py-2" {...props} />,
+    h6: ({node, ...props}: {node?: any, [key: string]: any}) => <h6 className="my-4 text-sm font-medium border-t border-b border-gray-300 py-2" {...props} />,
+    p:  ({ node, ...props }: {node?: any, [key: string]: any}) => <p className="my-2 mt-4 text-base leading-7 text-gray-700" {...props} />,
+    a:  ({ node, ...props }: {node?: any, [key: string]: any}) => <a className="my-1 mt-4 text-base leading-7 text-teal-600" {...props} />,
+    ul: ({ node, ...props }: {node?: any, [key: string]: any}) => <ul className="ml-5 list-disc" {...props} />,
+    ol: ({ node, ...props }: {node?: any, [key: string]: any}) => <ol className="ml-5 list-decimal" {...props} />,
+    li: ({ node, ...props }: {node?: any, [key: string]: any}) => <li className="mt-1" {...props} />,
+    code: ({ node, inline, className, children, ...props }: {node?: any, inline?: boolean, className?: string, children?: React.ReactNode, [key: string]: any}) => {
+      const match = /language-(\w+)/.exec(className || '')
+      return !inline && match ? (
+        <SyntaxHighlighter style={materialDark} language={match[1]} PreTag="div" {...props}>
+          {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
+      ) : (
+        <code className={className} {...props}>
+          {children}
+        </code>
+      )
+    },
+    img: ({ node, ...props }: {node?: any, [key: string]: any}) => (
+      <img {...props} style={{ minWidth: '60%', minHeight: '50%', maxWidth: '100%', maxHeight: '100%', margin: '0 auto' }} alt={props.alt} />
+    ),
+  };
+
+  const handleImportImageClick = () => {
+    setImportImageOpen(true);
+  }
+
+  const handleSelectImage = (image: TaskImage) => {
+    // 處理選中的圖片
+    console.log('選中的圖片:', image.image_uuid);
+    const imageMarkdown = `![${image.image_name}](https://widm-back-end.nevercareu.space/project/task/image/${image.image_uuid})`;
+    let newProjectTask = projectTask;
+    if(newProjectTask) {
+      newProjectTask.project_task_content += '\n' + imageMarkdown;
+    }
+    setProjectTask(newProjectTask);
+    setImportImageOpen(false);
+  }
+  
   const fetchProjects = async () => {
     const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectApi(configuration);
@@ -290,27 +347,39 @@ const ProjectPage = () => {
                       className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
                     />
                   </div>
-                  <div className="flex justify-end gap-4">
+                  <div className="flex justify-between gap-4">
                     <button
                       type="button"
-                      onClick={() => setProjectTask(null)}
-                      className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
+                      onClick={handleImportImageClick}
+                      className="rounded-md border border-stroke bg-primary py-3 px-6 text-black text-white"
                     >
-                      取消
+                      匯入圖片
                     </button>
-                    <button
-                      type="submit"
-                      className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
-                    >
-                      更新
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleDeleteProjectTask}
-                      className="rounded-md border border-red-600 bg-red-600 py-3 px-6 text-white"
-                    >
-                      刪除此任務
-                    </button>
+                    <div className="flex gap-4">
+                      <button
+                        type="button"
+                        onClick={() => setProjectTask(null)}
+                        className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
+                      >
+                        取消
+                      </button>
+                      <button
+                        type="submit"
+                        className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
+                      >
+                        更新
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleDeleteProjectTask}
+                        className="rounded-md border border-red-600 bg-red-600 py-3 px-6 text-white"
+                      >
+                        刪除此任務
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <ReactMarkdown components={markdownComponents}>{projectTask?.project_task_content || ''}</ReactMarkdown>
                   </div>
                 </form>
               </div>
@@ -328,6 +397,11 @@ const ProjectPage = () => {
           {errorMessage}
         </div>
       )}
+      <ImportImageModal 
+        open={importImageOpen} 
+        onClose={() => setImportImageOpen(false)} 
+        onSelectImage={handleSelectImage} 
+      />
     </DefaultLayout>
   );
 };

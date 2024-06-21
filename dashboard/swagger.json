@@ -1408,9 +1408,6 @@
             "name": "paper",
             "schema": {
               "properties": {
-                "id": {
-                  "type": "integer"
-                },
                 "paper_authors": {
                   "items": {
                     "type": "string"
