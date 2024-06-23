@@ -28,6 +28,7 @@
   "include": [
     "src",
     "src/lib.d.ts",
+    "src/vite-env.d.ts",  // 確保包含 vite-env.d.ts 文件
     "domain/api-client"  // 添加 domain/api-client 到 include 路徑
   ],
   "references": [{ "path": "./tsconfig.node.json" }]

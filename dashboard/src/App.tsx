@@ -21,8 +21,9 @@ import Project_Task from './pages/Project_Task';
 import Member from './pages/Member';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
+import Callback from './pages/Authentication/Callback'; // 新增這行
 
-function App() {
+const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
 
@@ -142,7 +143,7 @@ function App() {
           path="/project_task"
           element={
             <>
-              <PageTitle title="Project_Tasl | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <PageTitle title="Project Task | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <Project_Task />
             </>
           }
@@ -198,6 +199,15 @@ function App() {
             <>
               <PageTitle title="Signup | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <SignUp />
+            </>
+          }
+        />
+        <Route
+          path="/auth/callback"
+          element={
+            <>
+              <PageTitle title="Callback | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Callback />
             </>
           }
         />
