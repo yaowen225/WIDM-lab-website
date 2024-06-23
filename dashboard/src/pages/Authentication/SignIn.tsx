@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserManager, User } from 'oidc-client';
 import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../../layout/DefaultLayout';
@@ -6,9 +6,9 @@ import DefaultLayout from '../../layout/DefaultLayout';
 const userManager = new UserManager({
   authority: 'https://portal.ncu.edu.tw',
   client_id: import.meta.env.VITE_CLIENT_ID || '',
-  redirect_uri: import.meta.env.VITE_REDIRECT_URI || 'https://myapp.example.com/auth/callback',
+  redirect_uri: import.meta.env.VITE_REDIRECT_URI || '',
   response_type: 'code',
-  scope: 'openid profile email',
+  scope: 'identifier chinese-name',
   metadata: {
     authorization_endpoint: 'https://portal.ncu.edu.tw/oauth2/authorization',
     token_endpoint: 'https://portal.ncu.edu.tw/oauth2/token',
@@ -17,19 +17,28 @@ const userManager = new UserManager({
 });
 
 const SignIn: React.FC = () => {
+  const [user, setUser] = useState<User | null>(null);
+
   const handleLogin = () => {
     userManager.signinRedirect();
   };
 
   useEffect(() => {
-    userManager.signinRedirectCallback().then((user: User | null) => {
+    userManager.signinRedirectCallback().then(user => {
+      setUser(user);
       if (user) {
-        localStorage.setItem('access_token', user.access_token);
-        localStorage.setItem('id_token', user.id_token);
-        window.location.href = '/';
+        console.log('User logged in successfully:', user);
+        const identifier = user.profile.identifier;
+        const chineseName = user.profile['chinese-name'];
+
+        // 儲存到本地存儲
+        localStorage.setItem('identifier', identifier);
+        localStorage.setItem('chinese-name', chineseName);
+
+        // 你也可以選擇儲存到應用的狀態管理，例如 Redux
       }
-    }).catch((error) => {
-      console.error('Sign in error', error);
+    }).catch(error => {
+      console.error('Login failed: ', error);
     });
   }, []);
 
