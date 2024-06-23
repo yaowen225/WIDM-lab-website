@@ -1,21 +1,24 @@
 const siteMetadata = {
-  title: 'Blog | Parth Desai',
+  title: 'WIDM laboratory website',
   author: 'WIDM',
-  headerTitle: 'Mere Musings',
-  description: 'My personal blog where I share my musings',
-  snippets: 'Reuseable code snippets collected by Parth',
+  headerTitle: '',
+  description: 'Web Intelligence and Data Mining Laboratory (Web 智慧與資料探勘實驗室)',
+  snippets: '',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://musing.vercel.app',
-  siteRepo: 'https://github.com/pycoder2000/blog',
-  siteLogo: '/static/images/logo.png',
+  siteUrl: '',
+  siteRepo: '',
+  siteLogo: '',
   image: '/static/images/avatar.png',
-  socialBanner: '/static/images/twitter-card.png',
-  email: 'desaiparth2000@gmail.com',
-  github: 'https://github.com/pycoder2000',
-  twitter: 'https://twitter.com/_ParthDesai_',
-  linkedin: 'https://www.linkedin.com/in/parth-desai-2bb1b0160/',
-  website: 'https://parthdesai.vercel.app',
+  socialBanner: '',
+  email: '',
+  labName: 'Web 智慧與資料探勘實驗室',
+  address: '(320317) 桃園市中壢區中大路 300 號 工程五館三樓 B317-1',
+  contactNumber: '886-3-422-7151 #35348',
+  github: '',
+  twitter: '',
+  linkedin: '',
+  website: '',
   locale: 'en-US',
   analytics: {
     plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
@@ -46,7 +49,7 @@ const siteMetadata = {
     },
   },
   socialAccount: {
-    twitter: '_ParthDesai_',
+    twitter: '',
   },
 }
 

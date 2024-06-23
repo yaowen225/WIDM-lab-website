@@ -1,43 +1,48 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
-import Link from 'next/link'
+import Link from 'next/link';
 
-const CustomLink = ({ href, ...rest }) => {
-  const isInternalLink = href && href.startsWith('/')
-  const isAnchorLink = href && href.startsWith('#')
+const CustomLink = ({ href, newTab = false, ...rest }) => {
+  const isInternalLink = href && href.startsWith('/');
+  const isAnchorLink = href && href.startsWith('#');
   const isValidHref = href && href.trim() !== '';
 
+  const target = newTab ? '_blank' : '_self';
+  const rel = newTab ? 'noopener noreferrer' : '';
+
   if (isInternalLink) {
+    // Next.js Link does not support target; it must be applied to the <a> tag inside
     return (
       <Link href={href}>
-        <a {...rest} />
+        <a target={target} rel={rel} {...rest} />
       </Link>
-    )
+    );
   }
 
   if (isAnchorLink) {
-    return <a href={href} {...rest} />
+    return <a href={href} target={target} rel={rel} {...rest} />;
   }
 
-  if (isValidHref){
+  if (isValidHref) {
     return (
       <a
+        href={href}
         className="special-underline-new no-underline hover:text-gray-100 dark:hover:text-gray-100"
-        target="_blank"
-        rel="noopener noreferrer"
+        target={target}
+        rel={rel}
         {...rest}
       />
-    )
+    );
   }
 
   return (
     <a
       className="special-underline-new no-underline hover:text-gray-100 dark:hover:text-gray-100"
-      target="_blank"
-      rel="noopener noreferrer"
       href={href}
+      target={target}
+      rel={rel}
       {...rest}
     />
-  )
-}
+  );
+};
 
-export default CustomLink
+export default CustomLink;

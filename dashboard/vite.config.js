@@ -5,6 +5,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 export default defineConfig({
     plugins: [react()],
     server: {
+        host: '0.0.0.0',
         proxy: {
             '/api': {
                 target: 'https://widm-back-end.nevercareu.space',
