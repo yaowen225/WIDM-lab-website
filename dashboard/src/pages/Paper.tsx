@@ -83,15 +83,14 @@ const PaperPage = () => {
   };
 
   const createPaper = async (formData: { [key: string]: any }) => {
-    console.log(formData)
     const newPaper: PaperPostRequest = {
       paper_title: formData.paper_title,
+      paper_link: formData.paper_link,
       paper_origin: formData.paper_origin,
       paper_publish_year: formData.paper_publish_year,
       paper_authors: formData.paper_authors ? formData.paper_authors.map((author: { id: string; text: string; className: string }) => author.text) : null,
       paper_tags: formData.paper_tags ? formData.paper_tags.map((tag: { id: string; text: string; className: string }) => tag.text) : null,
     };
-    console.log(newPaper)
 
     const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new PaperApi(configuration);
@@ -121,7 +120,6 @@ const PaperPage = () => {
     const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new PaperAttachmentApi(configuration);
     try {
-      console.log(formData.attachment)
       if (editData) {
         await apiClient.paperPaperIdPaperAttachmentPost(editData.id, formData.attachment);
       }
@@ -145,7 +143,6 @@ const PaperPage = () => {
     const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new PaperAttachmentApi(configuration);
     try {
-      console.log(id, fileId);
       await apiClient.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(id, fileId);
       setIsDeletingFiles(false);
       fetchPapers(); // 刪除後重新獲取論文數據
