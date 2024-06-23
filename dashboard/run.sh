@@ -6,6 +6,9 @@ docker rm -f widm-dashboard-end || true
 docker build -t widm-dashboard-end .
 docker run -d -p 5173:5173 -v ${PWD}:/usr/src/app --name widm-dashboard-end widm-dashboard-end
 
+docker build -t dashboard . 
+docker run -p 5173:5173 dashboard
+
 # chmod +x run_docker.sh
 # ./run_docker.sh
 
