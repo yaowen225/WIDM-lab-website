@@ -6,11 +6,17 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         proxy: {
-            '/api': {
+            '/api2': {
                 target: 'https://widm-back-end.nevercareu.space',
                 changeOrigin: true,
+                rewrite: (path) => path.replace(/^\/api2/, ''),
+                secure: false
+            },
+            '/api': {
+                target: 'https://portal.ncu.edu.tw',
+                changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ''),
-                secure: false // 如果你的目標是 HTTPS，且沒有正確的證書，可以設置為 false
+                secure: false
             }
         }
     }

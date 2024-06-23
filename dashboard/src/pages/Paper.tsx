@@ -31,7 +31,7 @@ const PaperPage = () => {
   ];
 
   const fetchPapers = async () => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new PaperApi(configuration);
     try {
       const response = await apiClient.paperGet();
@@ -92,7 +92,7 @@ const PaperPage = () => {
       paper_tags: formData.paper_tags ? formData.paper_tags.map((tag: { id: string; text: string; className: string }) => tag.text) : null,
     };
 
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new PaperApi(configuration);
     try {
       if (editData) {
@@ -117,7 +117,7 @@ const PaperPage = () => {
   };
 
   const handleUploadAttachmentSubmit = async (formData: { [key: string]: any }) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new PaperAttachmentApi(configuration);
     try {
       if (editData) {
@@ -140,7 +140,7 @@ const PaperPage = () => {
   };
 
   const handleDeleteFileSubmit = async (id: number, fileId: string) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new PaperAttachmentApi(configuration);
     try {
       await apiClient.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(id, fileId);
@@ -161,7 +161,7 @@ const PaperPage = () => {
   };
 
   const deletePaper = async (id: number) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new PaperApi(configuration);
     try {
       await apiClient.paperPaperIdDelete(id);
