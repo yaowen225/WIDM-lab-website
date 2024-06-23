@@ -19,7 +19,7 @@ const ImportImageModal: React.FC<ImportImageModalProps> = ({ open, onClose, onSe
   const [images, setImages] = useState<TaskImage[]>([]);
 
   const fetchImages = async () => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new ProjectTaskImageApi(configuration);
     try {
       const response = await apiClient.projectTaskImageGet();

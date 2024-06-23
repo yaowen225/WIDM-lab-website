@@ -24,7 +24,7 @@ const NewsPage = () => {
   ];
 
   const fetchNews = async () => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new NewsApi(configuration);
     try {
       const response = await apiClient.newsGet();
@@ -64,7 +64,7 @@ const NewsPage = () => {
       news_content: formData.news_content,
     };
 
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new NewsApi(configuration);
     try {
       if (editData) {
@@ -89,7 +89,7 @@ const NewsPage = () => {
   };
 
   const deleteNews = async (id: number) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration({ basePath: '/api2' });
     const apiClient = new NewsApi(configuration);
     try {
       await apiClient.newsNewsIdDelete(id);
