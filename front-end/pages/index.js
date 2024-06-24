@@ -1,15 +1,80 @@
 import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import { getAllFilesFrontMatter } from '@/lib/mdx'
 import { RoughNotation } from 'react-rough-notation'
 
-export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog')
-  return { props: { posts } }
-}
+import React, { useState, useRef, useEffect } from 'react';
+import { IoMdReturnLeft } from "react-icons/io";
 
 export default function Home() {
+
+
+  function AutoResizeTextarea() {
+    const [text, setText] = useState("");
+    const [textareaHeight, setTextareaHeight] = useState('3rem');
+    const [isComposing, setIsComposing] = useState(false);  // 添加狀態來追踪組合輸入
+    const textareaRef = useRef(null);
+  
+    useEffect(() => {
+      textareaRef.current.style.height = "inherit";
+      const newHeight = `${textareaRef.current.scrollHeight}px`;
+      textareaRef.current.style.height = newHeight;
+      setTextareaHeight(newHeight);
+    }, [text]);
+  
+    const handleSubmit = () => {
+      setText("");
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter' && !event.shiftKey && !isComposing) {  // 使用 isComposing 狀態
+        event.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    const handleComposition = (event) => {
+      if (event.type === 'compositionstart') {
+        setIsComposing(true);
+      }
+      if (event.type === 'compositionend') {
+        setIsComposing(false);
+      }
+    };
+
+    return (
+      <div className="flex items-stretch space-x-2">
+        <textarea
+          ref={textareaRef}
+          className="bg-gray-100 border border-gray-300 rounded-l-md flex-1 py-4 px-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="輸入消息..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onCompositionStart={handleComposition}  // 監聽組合輸入開始
+          onCompositionEnd={handleComposition}    // 監聽組合輸入結束
+          style={{ minHeight: '3rem', maxHeight: '24rem' }}
+        />
+        <button
+          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-r-md"
+          onClick={handleSubmit}
+          type="button"
+          style={{
+            height: textareaHeight,
+            opacity: 0.7,
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            transition: 'opacity 0.3s ease, box-shadow 1s ease'
+          }}
+        >
+          <IoMdReturnLeft className="text-xl"/>
+      </button>
+      </div>
+    );
+}
+
+  
+  
+
 
   return (
     <>
@@ -154,19 +219,22 @@ export default function Home() {
               </div>
             </div>
           </div>
+
         </div>
 
-        <hr className="border-gray-200 dark:border-gray-700 pb-5" />
+        <AutoResizeTextarea></AutoResizeTextarea>
 
-        <h1 className='text-3xl font-extrabold mb-3 text-gray-800'>{siteMetadata.labName}</h1>
+        <hr className="border-gray-200 dark:border-gray-700 pb-5 mt-5" />
 
-        <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700'>位置</h2>
-        <p className='mb-4 text-gray-600'>{siteMetadata.address}</p>
+        <div>
+          <h1 className='text-3xl font-extrabold mb-3 text-gray-800'>{siteMetadata.labName}</h1>
 
-        <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700'>聯絡方式</h2>
-        <p className='text-xl text-gray-600'>{siteMetadata.contactNumber}</p>
+          <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700'>位置</h2>
+          <p className='mb-4 text-gray-600'>{siteMetadata.address}</p>
 
-      
+          <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700'>聯絡方式</h2>
+          <p className='text-xl text-gray-600'>{siteMetadata.contactNumber}</p>
+        </div>
       </div>
       
     </>
