@@ -7,17 +7,33 @@ const userManager = new UserManager({
   client_id: import.meta.env.VITE_CLIENT_ID || '',
   redirect_uri: import.meta.env.VITE_REDIRECT_URI || '',
   response_type: 'code',
-  scope: 'openid profile email',
+  scope: 'identifier chinese-name',
+  metadata: {
+    authorization_endpoint: 'https://portal.ncu.edu.tw/oauth2/authorization',
+    token_endpoint: 'https://portal.ncu.edu.tw/oauth2/token',
+    userinfo_endpoint: 'https://portal.ncu.edu.tw/apis/oauth/v1/info'
+  }
 });
 
 const Callback: React.FC = () => {
   useEffect(() => {
+    console.log('Callback component mounted');
+    
     userManager.signinRedirectCallback().then(user => {
-      console.log(user);
-      // 這裡可以將用戶信息保存到狀態或上下文中
+      console.log('User logged in successfully:', user);
+      // 導向回首頁
+      window.location.href = '/';
     }).catch(error => {
-      console.error(error);
+      console.error('Error during signin callback:', error);
+      // 顯示錯誤訊息
+      document.body.innerHTML = `<div style="color: red;">Error: ${error.message}</div>`;
     });
+
+    // 測試基本的重導向
+    setTimeout(() => {
+      console.log('Testing redirect to home page');
+      window.location.href = '/';
+    }, 5000); // 5秒後重導向首頁，測試用
   }, []);
 
   return (
