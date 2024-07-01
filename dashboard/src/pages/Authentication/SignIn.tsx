@@ -23,28 +23,9 @@ const SignIn: React.FC = () => {
     userManager.signinRedirect();
   };
 
-  useEffect(() => {
-    userManager.signinRedirectCallback().then(user => {
-      setUser(user);
-      if (user) {
-        console.log('User logged in successfully:', user);
-        const identifier = user.profile.identifier;
-        const chineseName = user.profile['chinese-name'];
-
-        // 儲存到本地存儲
-        localStorage.setItem('identifier', identifier);
-        localStorage.setItem('chinese-name', chineseName);
-
-        // 你也可以選擇儲存到應用的狀態管理，例如 Redux
-      }
-    }).catch(error => {
-      console.error('Login failed: ', error);
-    });
-  }, []);
 
   return (
-    <DefaultLayout>
-      <Breadcrumb pageName="Sign In" />
+    <>
       <div className="flex justify-center items-center h-100 bg-gray-100 dark:bg-gray-900 overflow-hidden">
         <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark max-w-lg w-full max-h-[70vh] overflow-y-auto">
           <div className="p-4 sm:p-12.5 xl:p-17.5 text-center">
@@ -62,7 +43,7 @@ const SignIn: React.FC = () => {
           </div>
         </div>
       </div>
-    </DefaultLayout>
+    </>
   );
 };
 
