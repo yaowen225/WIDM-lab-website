@@ -11,6 +11,7 @@ import Project from './pages/Project';
 import Project_Task from './pages/Project_Task';
 import Member from './pages/Member';
 import NotFound from './pages/NotFound'
+import Unauthorized from './pages/Unauthorized';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
@@ -29,6 +30,19 @@ const App: React.FC = () => {
             <SignIn />
           </>
         }
+      />
+      <Route
+        path="/auth/signin"
+        element={
+          <>
+            <PageTitle title="Sign In | WIDM" />
+            <SignIn />
+          </>
+        }
+      />
+      <Route
+        path="/loginFailed"
+        element={<Unauthorized />} // 401 頁面
       />
       <Route
         path="*"
