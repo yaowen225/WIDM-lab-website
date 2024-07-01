@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**projectGet**](ProjectApi.md#projectGet) | **GET** /project | get projects
 [**projectPost**](ProjectApi.md#projectPost) | **POST** /project | post project
 [**projectProjectIdDelete**](ProjectApi.md#projectProjectIdDelete) | **DELETE** /project/{project_id} | delete project
-[**projectProjectIdGet**](ProjectApi.md#projectProjectIdGet) | **GET** /project/{project_id} | get project
 [**projectProjectIdPatch**](ProjectApi.md#projectProjectIdPatch) | **PATCH** /project/{project_id} | patch project
 
 
@@ -108,48 +107,6 @@ import WidmBackEnd from 'widm_back_end';
 let apiInstance = new WidmBackEnd.ProjectApi();
 let projectId = 56; // Number | 
 apiInstance.projectProjectIdDelete(projectId).then((data) => {
-  console.log('API called successfully. Returned data: ' + data);
-}, (error) => {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **projectId** | **Number**|  | 
-
-### Return type
-
-[**Project**](Project.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
-## projectProjectIdGet
-
-> Project projectProjectIdGet(projectId)
-
-get project
-
-### Example
-
-```javascript
-import WidmBackEnd from 'widm_back_end';
-
-let apiInstance = new WidmBackEnd.ProjectApi();
-let projectId = 56; // Number | 
-apiInstance.projectProjectIdGet(projectId).then((data) => {
   console.log('API called successfully. Returned data: ' + data);
 }, (error) => {
   console.error(error);

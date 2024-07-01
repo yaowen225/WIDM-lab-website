@@ -74,8 +74,8 @@ class ProjectsResponseInner {
             if (data.hasOwnProperty('project_tags')) {
                 obj['project_tags'] = ApiClient.convertToType(data['project_tags'], ['String']);
             }
-            if (data.hasOwnProperty('update_time')) {
-                obj['update_time'] = ApiClient.convertToType(data['update_time'], 'String');
+            if (data.hasOwnProperty('updated_time')) {
+                obj['updated_time'] = ApiClient.convertToType(data['updated_time'], 'String');
             }
         }
         return obj;
@@ -120,8 +120,8 @@ class ProjectsResponseInner {
             throw new Error("Expected the field `project_tags` to be an array in the JSON data but got " + data['project_tags']);
         }
         // ensure the json data is a string
-        if (data['update_time'] && !(typeof data['update_time'] === 'string' || data['update_time'] instanceof String)) {
-            throw new Error("Expected the field `update_time` to be a primitive type in the JSON string but got " + data['update_time']);
+        if (data['updated_time'] && !(typeof data['updated_time'] === 'string' || data['updated_time'] instanceof String)) {
+            throw new Error("Expected the field `updated_time` to be a primitive type in the JSON string but got " + data['updated_time']);
         }
 
         return true;
@@ -178,9 +178,9 @@ ProjectsResponseInner.prototype['project_name'] = undefined;
 ProjectsResponseInner.prototype['project_tags'] = undefined;
 
 /**
- * @member {String} update_time
+ * @member {String} updated_time
  */
-ProjectsResponseInner.prototype['update_time'] = undefined;
+ProjectsResponseInner.prototype['updated_time'] = undefined;
 
 
 

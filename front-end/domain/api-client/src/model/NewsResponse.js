@@ -47,8 +47,8 @@ class NewsResponse {
         if (data) {
             obj = obj || new NewsResponse();
 
-            if (data.hasOwnProperty('create_time')) {
-                obj['create_time'] = ApiClient.convertToType(data['create_time'], 'String');
+            if (data.hasOwnProperty('created_time')) {
+                obj['created_time'] = ApiClient.convertToType(data['created_time'], 'String');
             }
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
@@ -62,8 +62,8 @@ class NewsResponse {
             if (data.hasOwnProperty('news_title')) {
                 obj['news_title'] = ApiClient.convertToType(data['news_title'], 'String');
             }
-            if (data.hasOwnProperty('update_time')) {
-                obj['update_time'] = ApiClient.convertToType(data['update_time'], 'String');
+            if (data.hasOwnProperty('updated_time')) {
+                obj['updated_time'] = ApiClient.convertToType(data['updated_time'], 'String');
             }
         }
         return obj;
@@ -76,8 +76,8 @@ class NewsResponse {
      */
     static validateJSON(data) {
         // ensure the json data is a string
-        if (data['create_time'] && !(typeof data['create_time'] === 'string' || data['create_time'] instanceof String)) {
-            throw new Error("Expected the field `create_time` to be a primitive type in the JSON string but got " + data['create_time']);
+        if (data['created_time'] && !(typeof data['created_time'] === 'string' || data['created_time'] instanceof String)) {
+            throw new Error("Expected the field `created_time` to be a primitive type in the JSON string but got " + data['created_time']);
         }
         // ensure the json data is a string
         if (data['news_content'] && !(typeof data['news_content'] === 'string' || data['news_content'] instanceof String)) {
@@ -92,8 +92,8 @@ class NewsResponse {
             throw new Error("Expected the field `news_title` to be a primitive type in the JSON string but got " + data['news_title']);
         }
         // ensure the json data is a string
-        if (data['update_time'] && !(typeof data['update_time'] === 'string' || data['update_time'] instanceof String)) {
-            throw new Error("Expected the field `update_time` to be a primitive type in the JSON string but got " + data['update_time']);
+        if (data['updated_time'] && !(typeof data['updated_time'] === 'string' || data['updated_time'] instanceof String)) {
+            throw new Error("Expected the field `updated_time` to be a primitive type in the JSON string but got " + data['updated_time']);
         }
 
         return true;
@@ -105,9 +105,9 @@ class NewsResponse {
 
 
 /**
- * @member {String} create_time
+ * @member {String} created_time
  */
-NewsResponse.prototype['create_time'] = undefined;
+NewsResponse.prototype['created_time'] = undefined;
 
 /**
  * @member {Number} id
@@ -130,9 +130,9 @@ NewsResponse.prototype['news_sub_title'] = undefined;
 NewsResponse.prototype['news_title'] = undefined;
 
 /**
- * @member {String} update_time
+ * @member {String} updated_time
  */
-NewsResponse.prototype['update_time'] = undefined;
+NewsResponse.prototype['updated_time'] = undefined;
 
 
 

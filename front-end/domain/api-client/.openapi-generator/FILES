@@ -33,6 +33,7 @@ docs/Paper.md
 docs/PaperApi.md
 docs/PaperAttachment.md
 docs/PaperAttachmentApi.md
+docs/PaperPaperIdPatchRequest.md
 docs/PaperPostRequest.md
 docs/PaperResponse.md
 docs/Papers.md
@@ -53,8 +54,12 @@ docs/ProjectTaskInput.md
 docs/ProjectTaskResponse.md
 docs/ProjectTasks.md
 docs/ProjectTasksResponseInner.md
+docs/ProjectTasksResponseInnerChildrenInner.md
 docs/Projects.md
 docs/ProjectsResponseInner.md
+docs/RetrievalApi.md
+docs/ScrapyingStatus.md
+docs/ScrapyingStatusResponse.md
 git_push.sh
 mocha.opts
 package.json
@@ -71,6 +76,7 @@ src/api/ProjectApi.js
 src/api/ProjectIconApi.js
 src/api/ProjectTaskApi.js
 src/api/ProjectTaskImageApi.js
+src/api/RetrievalApi.js
 src/index.js
 src/model/Activities.js
 src/model/ActivitiesResponseInner.js
@@ -95,6 +101,7 @@ src/model/NewsResponse.js
 src/model/Newses.js
 src/model/Paper.js
 src/model/PaperAttachment.js
+src/model/PaperPaperIdPatchRequest.js
 src/model/PaperPostRequest.js
 src/model/PaperResponse.js
 src/model/Papers.js
@@ -111,5 +118,11 @@ src/model/ProjectTaskInput.js
 src/model/ProjectTaskResponse.js
 src/model/ProjectTasks.js
 src/model/ProjectTasksResponseInner.js
+src/model/ProjectTasksResponseInnerChildrenInner.js
 src/model/Projects.js
 src/model/ProjectsResponseInner.js
+src/model/ScrapyingStatus.js
+src/model/ScrapyingStatusResponse.js
+test/api/RetrievalApi.spec.js
+test/model/ScrapyingStatus.spec.js
+test/model/ScrapyingStatusResponse.spec.js

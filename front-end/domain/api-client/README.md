@@ -152,7 +152,6 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.ProjectApi* | [**projectGet**](docs/ProjectApi.md#projectGet) | **GET** /project | get projects
 *WidmBackEnd.ProjectApi* | [**projectPost**](docs/ProjectApi.md#projectPost) | **POST** /project | post project
 *WidmBackEnd.ProjectApi* | [**projectProjectIdDelete**](docs/ProjectApi.md#projectProjectIdDelete) | **DELETE** /project/{project_id} | delete project
-*WidmBackEnd.ProjectApi* | [**projectProjectIdGet**](docs/ProjectApi.md#projectProjectIdGet) | **GET** /project/{project_id} | get project
 *WidmBackEnd.ProjectApi* | [**projectProjectIdPatch**](docs/ProjectApi.md#projectProjectIdPatch) | **PATCH** /project/{project_id} | patch project
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconPost**](docs/ProjectIconApi.md#projectProjectIdProjectIconPost) | **POST** /project/{project_id}/project-icon | post project icon
 *WidmBackEnd.ProjectIconApi* | [**projectProjectIdProjectIconProjectIconUuidDelete**](docs/ProjectIconApi.md#projectProjectIdProjectIconProjectIconUuidDelete) | **DELETE** /project/{project_id}/project-icon/{project_icon_uuid} | delete project icon
@@ -166,6 +165,9 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImagePost**](docs/ProjectTaskImageApi.md#projectTaskImagePost) | **POST** /project/task/image | post project task image
 *WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImageProjectTaskImageUuidDelete**](docs/ProjectTaskImageApi.md#projectTaskImageProjectTaskImageUuidDelete) | **DELETE** /project/task/image/{project_task_image_uuid} | delete project task image
 *WidmBackEnd.ProjectTaskImageApi* | [**projectTaskImageProjectTaskImageUuidGet**](docs/ProjectTaskImageApi.md#projectTaskImageProjectTaskImageUuidGet) | **GET** /project/task/image/{project_task_image_uuid} | get project task image
+*WidmBackEnd.RetrievalApi* | [**retrievalQueryGet**](docs/RetrievalApi.md#retrievalQueryGet) | **GET** /retrieval/query | chat retrieval augmented generation
+*WidmBackEnd.RetrievalApi* | [**retrievalScrapyingStatusGet**](docs/RetrievalApi.md#retrievalScrapyingStatusGet) | **GET** /retrieval/scrapying-status | check the status of scrapying
+*WidmBackEnd.RetrievalApi* | [**retrievalStartScrapyingGet**](docs/RetrievalApi.md#retrievalStartScrapyingGet) | **GET** /retrieval/start-scrapying | start scrapying
 
 
 ## Documentation for Models
@@ -193,6 +195,7 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.Newses](docs/Newses.md)
  - [WidmBackEnd.Paper](docs/Paper.md)
  - [WidmBackEnd.PaperAttachment](docs/PaperAttachment.md)
+ - [WidmBackEnd.PaperPaperIdPatchRequest](docs/PaperPaperIdPatchRequest.md)
  - [WidmBackEnd.PaperPostRequest](docs/PaperPostRequest.md)
  - [WidmBackEnd.PaperResponse](docs/PaperResponse.md)
  - [WidmBackEnd.Papers](docs/Papers.md)
@@ -209,8 +212,11 @@ Class | Method | HTTP request | Description
  - [WidmBackEnd.ProjectTaskResponse](docs/ProjectTaskResponse.md)
  - [WidmBackEnd.ProjectTasks](docs/ProjectTasks.md)
  - [WidmBackEnd.ProjectTasksResponseInner](docs/ProjectTasksResponseInner.md)
+ - [WidmBackEnd.ProjectTasksResponseInnerChildrenInner](docs/ProjectTasksResponseInnerChildrenInner.md)
  - [WidmBackEnd.Projects](docs/Projects.md)
  - [WidmBackEnd.ProjectsResponseInner](docs/ProjectsResponseInner.md)
+ - [WidmBackEnd.ScrapyingStatus](docs/ScrapyingStatus.md)
+ - [WidmBackEnd.ScrapyingStatusResponse](docs/ScrapyingStatusResponse.md)
 
 
 ## Documentation for Authorization

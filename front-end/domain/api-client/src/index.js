@@ -36,6 +36,7 @@ import NewsResponse from './model/NewsResponse';
 import Newses from './model/Newses';
 import Paper from './model/Paper';
 import PaperAttachment from './model/PaperAttachment';
+import PaperPaperIdPatchRequest from './model/PaperPaperIdPatchRequest';
 import PaperPostRequest from './model/PaperPostRequest';
 import PaperResponse from './model/PaperResponse';
 import Papers from './model/Papers';
@@ -52,8 +53,11 @@ import ProjectTaskInput from './model/ProjectTaskInput';
 import ProjectTaskResponse from './model/ProjectTaskResponse';
 import ProjectTasks from './model/ProjectTasks';
 import ProjectTasksResponseInner from './model/ProjectTasksResponseInner';
+import ProjectTasksResponseInnerChildrenInner from './model/ProjectTasksResponseInnerChildrenInner';
 import Projects from './model/Projects';
 import ProjectsResponseInner from './model/ProjectsResponseInner';
+import ScrapyingStatus from './model/ScrapyingStatus';
+import ScrapyingStatusResponse from './model/ScrapyingStatusResponse';
 import ActivityApi from './api/ActivityApi';
 import ActivityImageApi from './api/ActivityImageApi';
 import MemberApi from './api/MemberApi';
@@ -66,6 +70,7 @@ import ProjectApi from './api/ProjectApi';
 import ProjectIconApi from './api/ProjectIconApi';
 import ProjectTaskApi from './api/ProjectTaskApi';
 import ProjectTaskImageApi from './api/ProjectTaskImageApi';
+import RetrievalApi from './api/RetrievalApi';
 
 
 /**
@@ -245,6 +250,12 @@ export {
     PaperAttachment,
 
     /**
+     * The PaperPaperIdPatchRequest model constructor.
+     * @property {module:model/PaperPaperIdPatchRequest}
+     */
+    PaperPaperIdPatchRequest,
+
+    /**
      * The PaperPostRequest model constructor.
      * @property {module:model/PaperPostRequest}
      */
@@ -341,6 +352,12 @@ export {
     ProjectTasksResponseInner,
 
     /**
+     * The ProjectTasksResponseInnerChildrenInner model constructor.
+     * @property {module:model/ProjectTasksResponseInnerChildrenInner}
+     */
+    ProjectTasksResponseInnerChildrenInner,
+
+    /**
      * The Projects model constructor.
      * @property {module:model/Projects}
      */
@@ -351,6 +368,18 @@ export {
      * @property {module:model/ProjectsResponseInner}
      */
     ProjectsResponseInner,
+
+    /**
+     * The ScrapyingStatus model constructor.
+     * @property {module:model/ScrapyingStatus}
+     */
+    ScrapyingStatus,
+
+    /**
+     * The ScrapyingStatusResponse model constructor.
+     * @property {module:model/ScrapyingStatusResponse}
+     */
+    ScrapyingStatusResponse,
 
     /**
     * The ActivityApi service constructor.
@@ -422,5 +451,11 @@ export {
     * The ProjectTaskImageApi service constructor.
     * @property {module:api/ProjectTaskImageApi}
     */
-    ProjectTaskImageApi
+    ProjectTaskImageApi,
+
+    /**
+    * The RetrievalApi service constructor.
+    * @property {module:api/RetrievalApi}
+    */
+    RetrievalApi
 };

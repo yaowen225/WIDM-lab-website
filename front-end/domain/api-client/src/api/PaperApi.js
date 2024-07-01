@@ -14,6 +14,7 @@
 
 import ApiClient from "../ApiClient";
 import Paper from '../model/Paper';
+import PaperPaperIdPatchRequest from '../model/PaperPaperIdPatchRequest';
 import PaperPostRequest from '../model/PaperPostRequest';
 import Papers from '../model/Papers';
 
@@ -126,7 +127,7 @@ export default class PaperApi {
      * patch paper
      * @param {Number} paperId 
      * @param {Object} opts Optional parameters
-     * @param {module:model/PaperPostRequest} [paper] 
+     * @param {module:model/PaperPaperIdPatchRequest} [paper] 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/Paper} and HTTP response
      */
     paperPaperIdPatchWithHttpInfo(paperId, opts) {
@@ -162,7 +163,7 @@ export default class PaperApi {
      * patch paper
      * @param {Number} paperId 
      * @param {Object} opts Optional parameters
-     * @param {module:model/PaperPostRequest} opts.paper 
+     * @param {module:model/PaperPaperIdPatchRequest} opts.paper 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/Paper}
      */
     paperPaperIdPatch(paperId, opts) {

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**createTime** | **String** |  | [optional] 
+**createdTime** | **String** |  | [optional] 
 **id** | **Number** |  | [optional] 
 **imageName** | **String** |  | [optional] 
 **imagePath** | **String** |  | [optional] 
 **imageUuid** | **String** |  | [optional] 
-**updateTime** | **String** |  | [optional] 
+**updatedTime** | **String** |  | [optional] 
 
 

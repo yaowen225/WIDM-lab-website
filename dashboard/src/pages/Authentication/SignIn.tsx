@@ -17,12 +17,14 @@ const userManager = new UserManager({
 });
 
 const SignIn: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
 
   const handleLogin = () => {
     userManager.signinRedirect();
   };
 
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   return (
     <>

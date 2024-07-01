@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**createTime** | **String** |  | [optional] 
+**createdTime** | **String** |  | [optional] 
 **id** | **Number** |  | [optional] 
 **newsContent** | **String** |  | [optional] 
 **newsSubTitle** | **String** |  | [optional] 
 **newsTitle** | **String** |  | [optional] 
-**updateTime** | **String** |  | [optional] 
+**updatedTime** | **String** |  | [optional] 
 
 
