@@ -28,7 +28,7 @@ const MemberPage = () => {
   ];
 
   const fetchMembers = async () => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new MemberApi(configuration);
     try {
       const response = await apiClient.memberGet();
@@ -86,7 +86,7 @@ const MemberPage = () => {
       member_character: formData.member_character,
     };
 
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new MemberApi(configuration);
     try {
       if (editData) {
@@ -111,7 +111,7 @@ const MemberPage = () => {
   };
 
   const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new MemberImageApi(configuration);
     try {
       if (editData) {
@@ -134,7 +134,7 @@ const MemberPage = () => {
   };  
 
   const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new MemberImageApi(configuration);
     try {
       await apiClient.memberMemberIdMemberImageMemberImageUuidDelete(id, imageId);
@@ -155,7 +155,7 @@ const MemberPage = () => {
   };
 
   const deleteMember = async (id: number) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new MemberApi(configuration);
     try {
       await apiClient.memberMemberIdDelete(id);

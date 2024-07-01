@@ -13,8 +13,24 @@ import Member from './pages/Member';
 import NotFound from './pages/NotFound'
 import Unauthorized from './pages/Unauthorized';
 
+import { AuthApi } from '../domain/api-client/api';
+import { Configuration} from '../domain/api-client/configuration';
 const App: React.FC = () => {
   const { pathname } = useLocation();
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const user_info_get = async () => {
+    const configuration = new Configuration({ basePath: '/api' });
+    const apiClient = new AuthApi(configuration);
+    const response = await apiClient.authUserInfoGet()
+
+    console.log(response.data)
+  }
+  
+  useEffect(() => {
+    user_info_get()
+  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0);

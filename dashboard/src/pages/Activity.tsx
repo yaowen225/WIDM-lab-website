@@ -27,7 +27,7 @@ const ActivityPage = () => {
   ];
 
   const fetchActivities = async () => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ActivityApi(configuration);
     try {
       const response = await apiClient.activityGet();
@@ -84,7 +84,7 @@ const ActivityPage = () => {
       activity_sub_title: formData.activity_sub_title,
     };
 
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ActivityApi(configuration);
     try {
       if (editData) {
@@ -109,7 +109,7 @@ const ActivityPage = () => {
   };
 
   const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ActivityImageApi(configuration);
     try {
       if (editData) {
@@ -132,7 +132,7 @@ const ActivityPage = () => {
   };  
 
   const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ActivityImageApi(configuration);
     try {
       await apiClient.activityActivityIdActivityImageActivityImageUuidDelete(id, imageId);
@@ -153,7 +153,7 @@ const ActivityPage = () => {
   };
 
   const deleteActivitie = async (id: number) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ActivityApi(configuration);
     try {
       await apiClient.activityActivityIdDelete(id);

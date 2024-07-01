@@ -470,7 +470,7 @@ export interface NewsImageResponse {
      * @type {string}
      * @memberof NewsImageResponse
      */
-    'create_time'?: string;
+    'created_time'?: string;
     /**
      * 
      * @type {number}
@@ -500,7 +500,7 @@ export interface NewsImageResponse {
      * @type {string}
      * @memberof NewsImageResponse
      */
-    'update_time'?: string;
+    'updated_time'?: string;
 }
 /**
  * 
@@ -557,7 +557,7 @@ export interface NewsResponse {
      * @type {string}
      * @memberof NewsResponse
      */
-    'create_time'?: string;
+    'created_time'?: string;
     /**
      * 
      * @type {number}
@@ -587,7 +587,7 @@ export interface NewsResponse {
      * @type {string}
      * @memberof NewsResponse
      */
-    'update_time'?: string;
+    'updated_time'?: string;
 }
 /**
  * 
@@ -649,9 +649,58 @@ export interface PaperAttachment {
 /**
  * 
  * @export
+ * @interface PaperPaperIdPatchRequest
+ */
+export interface PaperPaperIdPatchRequest {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof PaperPaperIdPatchRequest
+     */
+    'paper_authors'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaperPaperIdPatchRequest
+     */
+    'paper_link'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaperPaperIdPatchRequest
+     */
+    'paper_origin'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof PaperPaperIdPatchRequest
+     */
+    'paper_publish_year'?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof PaperPaperIdPatchRequest
+     */
+    'paper_tags'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof PaperPaperIdPatchRequest
+     */
+    'paper_title'?: string;
+}
+/**
+ * 
+ * @export
  * @interface PaperPostRequest
  */
 export interface PaperPostRequest {
+    /**
+     * 
+     * @type {number}
+     * @memberof PaperPostRequest
+     */
+    'id'?: number;
     /**
      * 
      * @type {Array<string>}
@@ -867,7 +916,7 @@ export interface ProjectIconResponse {
      * @type {string}
      * @memberof ProjectIconResponse
      */
-    'create_time'?: string;
+    'created_time'?: string;
     /**
      * 
      * @type {string}
@@ -903,7 +952,7 @@ export interface ProjectIconResponse {
      * @type {string}
      * @memberof ProjectIconResponse
      */
-    'update_time'?: string;
+    'updated_time'?: string;
 }
 /**
  * 
@@ -953,7 +1002,7 @@ export interface ProjectResponse {
      * @type {string}
      * @memberof ProjectResponse
      */
-    'create_time'?: string;
+    'created_time'?: string;
     /**
      * 
      * @type {number}
@@ -995,7 +1044,7 @@ export interface ProjectResponse {
      * @type {string}
      * @memberof ProjectResponse
      */
-    'update_time'?: string;
+    'updated_time'?: string;
 }
 /**
  * 
@@ -1167,16 +1216,16 @@ export interface ProjectTasks {
 export interface ProjectTasksResponseInner {
     /**
      * 
-     * @type {Array<object>}
+     * @type {Array<ProjectTasksResponseInnerChildrenInner>}
      * @memberof ProjectTasksResponseInner
      */
-    'children'?: Array<object>;
+    'children'?: Array<ProjectTasksResponseInnerChildrenInner>;
     /**
      * 
      * @type {string}
      * @memberof ProjectTasksResponseInner
      */
-    'create_time'?: string;
+    'created_time'?: string;
     /**
      * 
      * @type {number}
@@ -1218,7 +1267,44 @@ export interface ProjectTasksResponseInner {
      * @type {string}
      * @memberof ProjectTasksResponseInner
      */
-    'update_time'?: string;
+    'updated_time'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ProjectTasksResponseInnerChildrenInner
+ */
+export interface ProjectTasksResponseInnerChildrenInner {
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectTasksResponseInnerChildrenInner
+     */
+    'id'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ProjectTasksResponseInnerChildrenInner
+     */
+    'project_id'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectTasksResponseInnerChildrenInner
+     */
+    'project_task_content'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectTasksResponseInnerChildrenInner
+     */
+    'project_task_sub_title'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProjectTasksResponseInnerChildrenInner
+     */
+    'project_task_title'?: string;
 }
 /**
  * 
@@ -1304,7 +1390,51 @@ export interface ProjectsResponseInner {
      * @type {string}
      * @memberof ProjectsResponseInner
      */
-    'update_time'?: string;
+    'updated_time'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ScrapyingStatus
+ */
+export interface ScrapyingStatus {
+    /**
+     * 
+     * @type {string}
+     * @memberof ScrapyingStatus
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {ScrapyingStatusResponse}
+     * @memberof ScrapyingStatus
+     */
+    'response'?: ScrapyingStatusResponse;
+}
+/**
+ * 
+ * @export
+ * @interface ScrapyingStatusResponse
+ */
+export interface ScrapyingStatusResponse {
+    /**
+     * 
+     * @type {string}
+     * @memberof ScrapyingStatusResponse
+     */
+    'end_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScrapyingStatusResponse
+     */
+    'start_time'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ScrapyingStatusResponse
+     */
+    'status'?: string;
 }
 
 /**
@@ -1891,6 +2021,251 @@ export class ActivityImageApi extends BaseAPI {
      */
     public activityActivityIdActivityImagePost(activityId: number, image: File, options?: RawAxiosRequestConfig) {
         return ActivityImageApiFp(this.configuration).activityActivityIdActivityImagePost(activityId, image, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * AuthApi - axios parameter creator
+ * @export
+ */
+export const AuthApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary log_out
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authLogOutGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auth/log_out`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Return To
+         * @param {string} code code
+         * @param {number} state state
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authReturnToGet: async (code: string, state: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'code' is not null or undefined
+            assertParamExists('authReturnToGet', 'code', code)
+            // verify required parameter 'state' is not null or undefined
+            assertParamExists('authReturnToGet', 'state', state)
+            const localVarPath = `/auth/return-to`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (code !== undefined) {
+                localVarQueryParameter['code'] = code;
+            }
+
+            if (state !== undefined) {
+                localVarQueryParameter['state'] = state;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary User Info
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authUserInfoGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auth/user_info`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AuthApi - functional programming interface
+ * @export
+ */
+export const AuthApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary log_out
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authLogOutGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authLogOutGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authLogOutGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary Return To
+         * @param {string} code code
+         * @param {number} state state
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authReturnToGet(code: string, state: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authReturnToGet(code, state, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authReturnToGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary User Info
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authUserInfoGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authUserInfoGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['AuthApi.authUserInfoGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * AuthApi - factory interface
+ * @export
+ */
+export const AuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuthApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary log_out
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authLogOutGet(options?: any): AxiosPromise<void> {
+            return localVarFp.authLogOutGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Return To
+         * @param {string} code code
+         * @param {number} state state
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authReturnToGet(code: string, state: number, options?: any): AxiosPromise<void> {
+            return localVarFp.authReturnToGet(code, state, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary User Info
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authUserInfoGet(options?: any): AxiosPromise<void> {
+            return localVarFp.authUserInfoGet(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AuthApi - object-oriented interface
+ * @export
+ * @class AuthApi
+ * @extends {BaseAPI}
+ */
+export class AuthApi extends BaseAPI {
+    /**
+     * 
+     * @summary log_out
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authLogOutGet(options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authLogOutGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Return To
+     * @param {string} code code
+     * @param {number} state state
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authReturnToGet(code: string, state: number, options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authReturnToGet(code, state, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary User Info
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthApi
+     */
+    public authUserInfoGet(options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authUserInfoGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -3262,11 +3637,11 @@ export const PaperApiAxiosParamCreator = function (configuration?: Configuration
          * 
          * @summary patch paper
          * @param {number} paperId 
-         * @param {PaperPostRequest} [paper] 
+         * @param {PaperPaperIdPatchRequest} [paper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paperPaperIdPatch: async (paperId: number, paper?: PaperPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        paperPaperIdPatch: async (paperId: number, paper?: PaperPaperIdPatchRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'paperId' is not null or undefined
             assertParamExists('paperPaperIdPatch', 'paperId', paperId)
             const localVarPath = `/paper/{paper_id}`
@@ -3369,11 +3744,11 @@ export const PaperApiFp = function(configuration?: Configuration) {
          * 
          * @summary patch paper
          * @param {number} paperId 
-         * @param {PaperPostRequest} [paper] 
+         * @param {PaperPaperIdPatchRequest} [paper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async paperPaperIdPatch(paperId: number, paper?: PaperPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
+        async paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdPatch(paperId, paper, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PaperApi.paperPaperIdPatch']?.[localVarOperationServerIndex]?.url;
@@ -3425,11 +3800,11 @@ export const PaperApiFactory = function (configuration?: Configuration, basePath
          * 
          * @summary patch paper
          * @param {number} paperId 
-         * @param {PaperPostRequest} [paper] 
+         * @param {PaperPaperIdPatchRequest} [paper] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        paperPaperIdPatch(paperId: number, paper?: PaperPostRequest, options?: any): AxiosPromise<Paper> {
+        paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: any): AxiosPromise<Paper> {
             return localVarFp.paperPaperIdPatch(paperId, paper, options).then((request) => request(axios, basePath));
         },
         /**
@@ -3479,12 +3854,12 @@ export class PaperApi extends BaseAPI {
      * 
      * @summary patch paper
      * @param {number} paperId 
-     * @param {PaperPostRequest} [paper] 
+     * @param {PaperPaperIdPatchRequest} [paper] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PaperApi
      */
-    public paperPaperIdPatch(paperId: number, paper?: PaperPostRequest, options?: RawAxiosRequestConfig) {
+    public paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: RawAxiosRequestConfig) {
         return PaperApiFp(this.configuration).paperPaperIdPatch(paperId, paper, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -3883,40 +4258,6 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary get project
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdGet: async (projectId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdGet', 'projectId', projectId)
-            const localVarPath = `/project/{project_id}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary patch project
          * @param {number} projectId 
          * @param {ProjectInput} [project] project information
@@ -4003,19 +4344,6 @@ export const ProjectApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary get project
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdGet(projectId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdGet(projectId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectProjectIdGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @summary patch project
          * @param {number} projectId 
          * @param {ProjectInput} [project] project information
@@ -4066,16 +4394,6 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
          */
         projectProjectIdDelete(projectId: number, options?: any): AxiosPromise<Project> {
             return localVarFp.projectProjectIdDelete(projectId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get project
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdGet(projectId: number, options?: any): AxiosPromise<Project> {
-            return localVarFp.projectProjectIdGet(projectId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4131,18 +4449,6 @@ export class ProjectApi extends BaseAPI {
      */
     public projectProjectIdDelete(projectId: number, options?: RawAxiosRequestConfig) {
         return ProjectApiFp(this.configuration).projectProjectIdDelete(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get project
-     * @param {number} projectId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApi
-     */
-    public projectProjectIdGet(projectId: number, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectProjectIdGet(projectId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5164,6 +5470,241 @@ export class ProjectTaskImageApi extends BaseAPI {
      */
     public projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid: string, options?: RawAxiosRequestConfig) {
         return ProjectTaskImageApiFp(this.configuration).projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * RetrievalApi - axios parameter creator
+ * @export
+ */
+export const RetrievalApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary chat retrieval augmented generation
+         * @param {string} queryString query string
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievalQueryGet: async (queryString: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'queryString' is not null or undefined
+            assertParamExists('retrievalQueryGet', 'queryString', queryString)
+            const localVarPath = `/retrieval/query`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (queryString !== undefined) {
+                localVarQueryParameter['query_string'] = queryString;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary check the status of scrapying
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievalScrapyingStatusGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/retrieval/scrapying-status`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary start scrapying
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievalStartScrapyingGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/retrieval/start-scrapying`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * RetrievalApi - functional programming interface
+ * @export
+ */
+export const RetrievalApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RetrievalApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary chat retrieval augmented generation
+         * @param {string} queryString query string
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrievalQueryGet(queryString: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievalQueryGet(queryString, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RetrievalApi.retrievalQueryGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary check the status of scrapying
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrievalScrapyingStatusGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScrapyingStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievalScrapyingStatusGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RetrievalApi.retrievalScrapyingStatusGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary start scrapying
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async retrievalStartScrapyingGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScrapyingStatus>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievalStartScrapyingGet(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['RetrievalApi.retrievalStartScrapyingGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * RetrievalApi - factory interface
+ * @export
+ */
+export const RetrievalApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RetrievalApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary chat retrieval augmented generation
+         * @param {string} queryString query string
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievalQueryGet(queryString: string, options?: any): AxiosPromise<void> {
+            return localVarFp.retrievalQueryGet(queryString, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary check the status of scrapying
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievalScrapyingStatusGet(options?: any): AxiosPromise<ScrapyingStatus> {
+            return localVarFp.retrievalScrapyingStatusGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary start scrapying
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        retrievalStartScrapyingGet(options?: any): AxiosPromise<ScrapyingStatus> {
+            return localVarFp.retrievalStartScrapyingGet(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * RetrievalApi - object-oriented interface
+ * @export
+ * @class RetrievalApi
+ * @extends {BaseAPI}
+ */
+export class RetrievalApi extends BaseAPI {
+    /**
+     * 
+     * @summary chat retrieval augmented generation
+     * @param {string} queryString query string
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RetrievalApi
+     */
+    public retrievalQueryGet(queryString: string, options?: RawAxiosRequestConfig) {
+        return RetrievalApiFp(this.configuration).retrievalQueryGet(queryString, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary check the status of scrapying
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RetrievalApi
+     */
+    public retrievalScrapyingStatusGet(options?: RawAxiosRequestConfig) {
+        return RetrievalApiFp(this.configuration).retrievalScrapyingStatusGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary start scrapying
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof RetrievalApi
+     */
+    public retrievalStartScrapyingGet(options?: RawAxiosRequestConfig) {
+        return RetrievalApiFp(this.configuration).retrievalStartScrapyingGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

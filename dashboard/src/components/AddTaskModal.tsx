@@ -66,7 +66,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   };
 
   const fetchProjects = async () => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectApi(configuration);
     try {
       const response = await apiClient.projectGet();
@@ -81,7 +81,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   };
 
   const fetchProjectsTasks = async (id: number): Promise<Task[]> => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectTaskApi(configuration);
     try {
       const response = await apiClient.projectProjectIdTaskGet(id);

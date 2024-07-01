@@ -95,7 +95,7 @@ const ProjectPage = () => {
   }
   
   const fetchProjects = async () => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectApi(configuration);
     try {
       const response = await apiClient.projectGet();
@@ -111,7 +111,7 @@ const ProjectPage = () => {
   };
 
   const fetchProjectsTasks = async (id: number) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectTaskApi(configuration);
     try {
       const response = await apiClient.projectProjectIdTaskGet(id);
@@ -127,7 +127,7 @@ const ProjectPage = () => {
   };
 
   const fetchProjectsTask = async (projectTaskId: number) => {
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectTaskApi(configuration);
     try {
       const response = await apiClient.projectProjectIdTaskProjectTaskIdGet(projectId, projectTaskId);
@@ -174,7 +174,7 @@ const ProjectPage = () => {
         project_task_content: (event.target as any).project_task_content.value,
       };
 
-      const configuration = new Configuration({ basePath: '/api2' });
+      const configuration = new Configuration({ basePath: '/api' });
       const apiClient = new ProjectTaskApi(configuration);
       try {
         await apiClient.projectProjectIdTaskProjectTaskIdPatch(projectId, projectTask.id, updatedTask);
@@ -200,7 +200,7 @@ const ProjectPage = () => {
         return;
       }
 
-      const configuration = new Configuration({ basePath: '/api2' });
+      const configuration = new Configuration({ basePath: '/api' });
       const apiClient = new ProjectTaskApi(configuration);
       try {
         await apiClient.projectProjectIdTaskProjectTaskIdDelete(projectId, projectTask.id);
@@ -255,7 +255,7 @@ const ProjectPage = () => {
       children: [],
     };
 
-    const configuration = new Configuration({ basePath: '/api2' });
+    const configuration = new Configuration({ basePath: '/api' });
     const apiClient = new ProjectTaskApi(configuration);
     try {
       await apiClient.projectProjectIdTaskPost(project_id, newTask);
