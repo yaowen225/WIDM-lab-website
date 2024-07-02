@@ -189,18 +189,6 @@ export default function Home() {
           </div>
 
           <div>
-            {/* <CSSTransition
-              in={responseHistory === ""}
-              timeout={300}
-              nodeRef={nodeRef}
-              classNames={{
-                enter: 'fade-enter',
-                enterActive: 'fade-enter-active',
-                exit: 'fade-exit',
-                exitActive: 'fade-exit-active'
-              }}
-              unmountOnExit
-            > */}
               <div ref={nodeRef}>
                 {responseHistory === "" ? (
                   <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">
@@ -211,7 +199,6 @@ export default function Home() {
                   <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">{responseHistory}</p>
                 )}
               </div>
-            {/* </CSSTransition> */}
 
             <div className="hidden pt-10 text-lg leading-7 text-slate-600 dark:text-slate-300 md:block">
               你可以透過下面的 {' '}
@@ -256,6 +243,7 @@ export default function Home() {
           <p className='text-xl text-gray-600'>{siteMetadata.contactNumber}</p>
         </div>
       </div>
+
       <style jsx>{`
         .fade-enter {
           opacity: 0;
