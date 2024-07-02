@@ -30,7 +30,7 @@ const ProjectPage = () => {
   ];
 
   const fetchProjects = async () => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration();
     const apiClient = new ProjectApi(configuration);
     try {
       const response = await apiClient.projectGet();
@@ -46,7 +46,7 @@ const ProjectPage = () => {
   };
 
   const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration();
     const apiClient = new ProjectIconApi(configuration);
     try {
       if (editData) {
@@ -69,7 +69,7 @@ const ProjectPage = () => {
   };
 
   const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration();
     const apiClient = new ProjectIconApi(configuration);
     try {
       await apiClient.projectProjectIdProjectIconProjectIconUuidDelete(id, imageId);
@@ -136,7 +136,7 @@ const ProjectPage = () => {
     };
     console.log(newProject)
 
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration();
     const apiClient = new ProjectApi(configuration);
     try {
       if (editData) {
@@ -161,7 +161,7 @@ const ProjectPage = () => {
   };
 
   const deleteProject = async (id: number) => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration();
     const apiClient = new ProjectApi(configuration);
     try {
       await apiClient.projectProjectIdDelete(id);

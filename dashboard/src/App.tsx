@@ -21,7 +21,7 @@ const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const user_info_get = async () => {
-    const configuration = new Configuration({ basePath: '/api' });
+    const configuration = new Configuration();
     const apiClient = new AuthApi(configuration);
     const response = await apiClient.authUserInfoGet()
 
@@ -36,7 +36,7 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  return true ? (
+  return false ? (
     <Routes>
       <Route
         index
