@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/logo.svg';
+import { AuthApi } from '../../../domain/api-client/api';
+import { Configuration } from '../../../domain/api-client/configuration';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -19,6 +21,24 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === 'true'
   );
+
+  const userInfoLogout = async () => {
+    try {
+        const configuration = new Configuration({
+          baseOptions: {
+              withCredentials: true,
+          }
+        });
+        const apiClient = new AuthApi(configuration);
+        await apiClient.authLogOutGet()
+
+        window.location.href = '/';
+        
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+    } finally {
+    }
+  }
 
   // close on click outside
   useEffect(() => {
@@ -424,8 +444,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </li>
               {/* <!-- Menu Item Project_Task --> */}
               <li>
-                <NavLink
-                  to="/auth/signin"
+                <button
+                  onClick={userInfoLogout}
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('signin') && 'bg-graydark dark:bg-meta-4'
                   }`}
@@ -459,8 +479,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       </clipPath>
                     </defs>
                   </svg>
-                  Sign In
-                </NavLink>
+                  Sign Out
+                </button>
               </li>
             </ul>
           </div>

@@ -2,11 +2,12 @@
 # sudo kill -9 $(sudo lsof -i :5173 | grep LISTEN | awk '{print $2}')
 # npm start
 
-docker rm -f widm-dashboard-end || true
+docker rm -f widm-dashboard-end
 docker build -t widm-dashboard-end .
 docker run -d -p 5173:5173 -v ${PWD}:/usr/src/app --name widm-dashboard-end widm-dashboard-end
 
-docker build -t dashboard . 
+docker rm -f widm-dashboard-end
+docker build -t widm-dashboard-end .
 docker run -p 5173:5173 widm-dashboard-end
 
 # chmod +x run_docker.sh
