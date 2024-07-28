@@ -2,14 +2,71 @@ import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { RoughNotation } from 'react-rough-notation'
-import { CSSTransition } from 'react-transition-group';
-import React, { useState, useRef, useEffect } from 'react';
 import { IoMdReturnLeft } from "react-icons/io";
+import React, { useState, useRef, useEffect } from 'react';
 import { RetrievalApi } from 'domain/api-client/src';
+import eventBus from '../utils/eventBus';
 
 export default function Home() {
-  const [responseHistory, setResponseHistory] = useState("");
+  const [messages, setMessages] = useState([]);
   const nodeRef = useRef(null);
+  const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    const savedMessages = localStorage.getItem('chatMessages');
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+    eventBus.on('refreshMessages', loadMessagesFromStorage); // 訂閱刷新消息事件
+    return () => {
+      eventBus.off('refreshMessages', loadMessagesFromStorage); // 清除訂閱
+    };
+  }, []);
+
+  const loadMessagesFromStorage = () => {
+    const savedMessages = localStorage.getItem('chatMessages');
+    if (savedMessages) {
+      setMessages(JSON.parse(savedMessages));
+    }
+  };
+
+  useEffect(() => {
+    if (messages.length > 10) {
+      setMessages((prevMessages) => prevMessages.slice(1));
+    }
+    localStorage.setItem('chatMessages', JSON.stringify(messages));
+  }, [messages]);
+
+  useEffect(() => {
+    if (nodeRef.current) {
+      nodeRef.current.scrollTop = nodeRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  const handleSubmitMessage = async (current_text) => {
+    const timestamp = new Date().toLocaleString(); // 獲取當前時間
+    const newMessage = { sender: 'user', text: current_text };
+    const timeMessage = { sender: 'time', text: timestamp };
+    const updatedMessages = [...messages, timeMessage, newMessage];
+    if (updatedMessages.length > 15) {
+      updatedMessages.shift();
+      updatedMessages.shift(); // 移除最舊的訊息
+    }
+    setMessages(updatedMessages);
+    localStorage.setItem('chatMessages', JSON.stringify(updatedMessages)); // 更新 localStorage
+    eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
+
+    const apiClient = new RetrievalApi();
+    const data = await apiClient.retrievalQueryGetWithHttpInfo(current_text);
+    const responseMessage = { sender: 'api', text: data.response.text };
+    const finalMessages = [...updatedMessages, responseMessage];
+    if (finalMessages.length > 15) {
+      finalMessages.shift(); // 移除最舊的訊息
+    }
+    setMessages(finalMessages);
+    localStorage.setItem('chatMessages', JSON.stringify(finalMessages)); // 更新 localStorage
+    eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
+  };
 
   function AutoResizeTextarea() {
     const [text, setText] = useState("");
@@ -24,13 +81,9 @@ export default function Home() {
       setTextareaHeight(newHeight);
     }, [text]);
 
-    const handleSubmit = async () => {
-      const current_text = text;
+    const handleSubmit = () => {
+      handleSubmitMessage(text);
       setText("");
-
-      const apiClient = new RetrievalApi();
-      const data = await apiClient.retrievalQueryGetWithHttpInfo(current_text);
-      setResponseHistory(data.response.text);
     };
 
     const handleKeyDown = (event) => {
@@ -53,7 +106,7 @@ export default function Home() {
       <div className="flex items-stretch space-x-2">
         <textarea
           ref={textareaRef}
-          className="bg-gray-100 border border-gray-300 rounded-l-md flex-1 py-4 px-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="bg-gray-100 dark:bg-black border border-gray-300 rounded-l-md flex-1 py-4 px-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           placeholder="輸入消息..."
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -90,9 +143,9 @@ export default function Home() {
           </h1>
         </div>
 
-        <div className="mb-12 flex flex-col items-center gap-x-12 xl:flex-row">
-          {/* 旁邊的 hyper link */}
-          <div className="flex items-center justify-center">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 xl:flex-row item-center">
+          
+          <div className="col-span-1 flex items-center justify-center">
             <div className="grid grid-cols-1 grid-rows-3 gap-8 py-12">
               <div className="my-2 grid items-start gap-8">
                 <div className="group relative">
@@ -123,7 +176,8 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
-              <div className="my-2 grid items-start gap-8">
+
+              <div className="my-2 grid items-start gap-8 ">
                 <div className="group relative">
                   <div className="animate-tilt absolute -inset-0.5 rounded-lg bg-gradient-to-r from-fuchsia-600 to-emerald-600 opacity-50 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
                   <Link href="https://sites.google.com/site/jahuichang/" newTab={true}>
@@ -142,7 +196,7 @@ export default function Home() {
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={2}
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                            d="M12 14l9-5-9-5-9 5-9-5 9 5-9-5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
                           />
                         </svg>
                         <span className="pr-6 text-gray-900 dark:text-gray-100">Our Advisor</span>
@@ -154,7 +208,9 @@ export default function Home() {
                   </Link>
                 </div>
               </div>
+
               <div className="my-2 grid items-start gap-8">
+
                 <div className="group relative">
                   <div className="animate-tilt absolute -inset-0.5 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 opacity-50 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
                   <Link href="https://calendar.google.com/calendar/u/3/embed?color=%23668CD9&color=%23D96666&color=%23E0C240&src=g.ncu.edu.tw_q7ilmj1v5cd4agv6p1a4j0kn60@group.calendar.google.com&src=gpq4ghafoa05a1cig7g5kk8alk@group.calendar.google.com&src=rj4ap5ceilcs5cmhro5g3vaslc@group.calendar.google.com&csspa=1" newTab={true}>
@@ -176,7 +232,7 @@ export default function Home() {
                         </svg>
                         <span className="pr-6 text-gray-900 dark:text-gray-100">
                           Our Schedule!&nbsp;&nbsp;&nbsp;
-                        </span>
+                        </span                      >
                       </span>
                       <span className="pl-6 text-primary-400 transition duration-200 group-hover:text-gray-900 dark:group-hover:text-gray-100">
                         Check&nbsp;&rarr;
@@ -188,59 +244,67 @@ export default function Home() {
             </div>
           </div>
 
-          <div>
-              <div ref={nodeRef}>
-                {responseHistory === "" ? (
-                  <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">
-                    {`Welcome to ${siteMetadata.description}. `}
-                    在這裏，你有什麼想知道的嗎？
-                  </p>
-                ) : (
-                  <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">{responseHistory}</p>
-                )}
-              </div>
-
-            <div className="hidden pt-10 text-lg leading-7 text-slate-600 dark:text-slate-300 md:block">
-              你可以透過下面的 {' '}
-              <RoughNotation
-                animate="true"
-                type="highlight"
-                show={true}
-                color="#DE1D8D"
-                animationDelay={1000}
-                animationDuration={2500}
-                className="text-slate-200"
-              >
-                對話框&nbsp;
-              </RoughNotation>
-              問我任何你想知道關於 WIDM 實驗室的事情！
-              <div className="mt-8 text-slate-600 dark:text-slate-400">
-                <span className="text-sm">Press</span>{' '}
-                <span className="rounded-md bg-gray-300 p-1 text-sm text-gray-900 dark:bg-gray-400">
-                  ⌘
-                </span>{' '}
-                <span className="text-sm">+ </span>
-                <span className="rounded-md bg-gray-300 p-1 text-sm text-gray-900 dark:bg-gray-400">
-                  K
-                </span>{' '}
-                <span className="text-sm">to find the menu list!</span>
-              </div>
+          <div className="col-span-1 xl:col-span-2 content-center">
+            <div ref={nodeRef} className="mb-6 w-full max-w-full overflow-y-auto max-h-96 bg-white dark:bg-black p-4 rounded-md custom-scrollbar">
+              {messages.length === 0 ? (
+                <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">
+                  {`Welcome to ${siteMetadata.description}. `}
+                  在這裏，你有什麼想知道的嗎？
+                </p>
+              ) : (
+                messages.map((msg, index) => (
+                  <div key={index}>
+                    <div className={`flex ${msg.sender === 'user' ? 'justify-end' : msg.sender === 'api' ? 'justify-start' : ''}`}>
+                    <div
+                      className={`inline-block p-2 my-2 rounded-md ${msg.sender === 'user' ? 'bg-blue-100/70 dark:bg-gradient-to-r dark:from-pink-600 dark:to-purple-600 text-left' :  msg.sender === 'api' ? 'bg-gray-100/70 dark:bg-gradient-to-r dark:from-green-600 dark:to-blue-600 text-left' : ''}`}
+                      style={{ maxWidth: '80%', wordBreak: 'break-word' }}
+                    >
+                        {msg.sender !== 'time' && (
+                          <p className="text-gray-800 dark:text-gray-100">{msg.text}</p>
+                        )}
+                      </div>
+                    </div>
+                    {msg.sender === 'time' && (
+                      <div className="flex justify-center">
+                        <p className="text-xs text-gray-500 mb-1">{msg.text}</p>
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+              <div ref={messagesEndRef} />
             </div>
           </div>
+
         </div>
 
+        <div className="hidden mb-2 pt-2 text-lg leading-6 text-slate-600 dark:text-slate-300 md:block">
+          你可以透過下面的 {' '}
+          <RoughNotation
+            animate="true"
+            type="highlight"
+            show={true}
+            color="#DE1D8D"
+            animationDelay={1000}
+            animationDuration={2500}
+            className="text-slate-200"
+          >
+            對話框&nbsp;
+          </RoughNotation>
+          問我任何你想知道關於 WIDM 實驗室的事情！
+        </div>
         <AutoResizeTextarea />
 
         <hr className="border-gray-200 dark:border-gray-700 pb-5 mt-5" />
 
         <div>
-          <h1 className='text-3xl font-extrabold mb-3 text-gray-800'>{siteMetadata.labName}</h1>
+          <h1 className='text-3xl font-extrabold mb-3 text-gray-800 dark:text-gray-500'>{siteMetadata.labName}</h1>
 
-          <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700'>位置</h2>
-          <p className='mb-4 text-gray-600'>{siteMetadata.address}</p>
+          <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700 dark:text-gray-500'>位置</h2>
+          <p className='mb-4 text-gray-600 dark:text-gray-500'>{siteMetadata.address}</p>
 
-          <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700'>聯絡方式</h2>
-          <p className='text-xl text-gray-600'>{siteMetadata.contactNumber}</p>
+          <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700 dark:text-gray-500'>聯絡方式</h2>
+          <p className='text-xl text-gray-600 dark:text-gray-500'>{siteMetadata.contactNumber}</p>
         </div>
       </div>
 
