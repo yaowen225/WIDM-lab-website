@@ -9,6 +9,7 @@ import News from './pages/News';
 import Paper from './pages/Paper';
 import Project from './pages/Project';
 import Project_Task from './pages/Project_Task';
+import Project_Task_Image from './pages/Project_Task_Image';
 import Member from './pages/Member';
 import NotFound from './pages/NotFound'
 import Unauthorized from './pages/Unauthorized';
@@ -52,7 +53,7 @@ const App: React.FC = () => {
     return <div>Loading...</div>; // 顯示加載指示器直到API調用完成
   }
 
-  return isAuthenticated ? (
+  return true ? (
     <Routes>
       <Route
         index
@@ -69,6 +70,7 @@ const App: React.FC = () => {
       <Route path="/paper" element={<Paper />} />
       <Route path="/project" element={<Project />} />
       <Route path="/project_task" element={<Project_Task />} />
+      <Route path="/project_task_image" element={<Project_Task_Image />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   ) : (
