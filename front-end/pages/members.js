@@ -3,6 +3,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Link from '@/components/Link'
 import { MemberApi } from '../domain/api-client/src'
+import { Icon } from '@iconify/react';
 
 export const Members = () => {
   const [members, setMembers] = useState([])
@@ -12,9 +13,7 @@ export const Members = () => {
       const apiClient = new MemberApi()
       try {
         const data = await apiClient.memberGet()
-
         setMembers(data.response)
-        console.log(data.response)
       } catch (error) {
         console.error('API 調用失敗:', error.message)
         if (error.response) {
@@ -40,16 +39,19 @@ export const Members = () => {
             {members.map((d, index) => (
               <Link
                 key={index}
-                href={d.href}
                 className="group mb-4 w-full cursor-pointer rounded-xl p-6 backdrop-filter transition duration-100 hover:scale-[1.02] hover:bg-gray-300 hover:bg-opacity-40 dark:hover:bg-gray-500 dark:hover:bg-opacity-40 md:w-1/2"
               >
                 <div className="flex items-center justify-start">
                   <div className="flex-shrink-0 p-3 font-sans text-gray-700 dark:text-gray-50 ">
-                    <img
-                      src={`https://widm-back-end.nevercareu.space/member/${d.id}/member-image/${d.member_image}`}
-                      alt="Member Icon"
-                      className="h-28 w-28 rounded-md"
-                    />
+                    {d.member_image ? (
+                      <img
+                        src={`https://widm-back-end.nevercareu.space/member/${d.id}/member-image/${d.member_image}`}
+                        alt="Member Icon"
+                        className="h-28 w-28 rounded-md"
+                      />
+                    ) : (
+                      <Icon icon="charm:person" style={{ color: 'black', height: '7rem', width: '7rem' }} />
+                    )}
                   </div>
                   <div className="flex flex-col p-3">
                     <h3 className="truncate text-sm font-bold leading-5 text-gray-800 dark:text-white sm:text-base lg:text-base">
