@@ -6,6 +6,7 @@ import { IoMdReturnLeft } from "react-icons/io";
 import React, { useState, useRef, useEffect } from 'react';
 import { RetrievalApi } from 'domain/api-client/src';
 import eventBus from '../utils/eventBus';
+import { Icon } from '@iconify/react';
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -44,22 +45,27 @@ export default function Home() {
   }, [messages]);
 
   const handleSubmitMessage = async (current_text) => {
+    
     const timestamp = new Date().toLocaleString(); // 獲取當前時間
     const newMessage = { sender: 'user', text: current_text };
     const timeMessage = { sender: 'time', text: timestamp };
-    const updatedMessages = [...messages, timeMessage, newMessage];
+    const tempMessage = { sender: 'api', text: 'loading' }; // 等待回應的符號...
+    const updatedMessages = [...messages, timeMessage, newMessage, tempMessage];
     if (updatedMessages.length > 15) {
       updatedMessages.shift();
       updatedMessages.shift(); // 移除最舊的訊息
     }
+
     setMessages(updatedMessages);
     localStorage.setItem('chatMessages', JSON.stringify(updatedMessages)); // 更新 localStorage
     eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
 
+    // - Response
     const apiClient = new RetrievalApi();
     const data = await apiClient.retrievalQueryGetWithHttpInfo(current_text);
     const responseMessage = { sender: 'api', text: data.response.text };
-    const finalMessages = [...updatedMessages, responseMessage];
+    const finalMessages = [...updatedMessages.slice(0, -1), responseMessage]; // 排除回覆符號，在新增回覆訊息
+
     if (finalMessages.length > 15) {
       finalMessages.shift(); // 移除最舊的訊息
     }
@@ -136,12 +142,15 @@ export default function Home() {
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div>
+      
         <div className="pt-10">
           <h1 className="pb-6 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Hello, Here's &nbsp;
             <span className="text-primary-color-500 dark:text-primary-color-dark-500">WIDM</span>
           </h1>
         </div>
+
+        <hr style={{paddingBottom: '20px'}}></hr>
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 xl:flex-row item-center">
           
@@ -249,7 +258,7 @@ export default function Home() {
               {messages.length === 0 ? (
                 <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">
                   {`Welcome to ${siteMetadata.description}. `}
-                  在這裏，你有什麼想知道的嗎？
+                  在這裏，你有什麼想知道的嗎？ 
                 </p>
               ) : (
                 messages.map((msg, index) => (
@@ -260,7 +269,9 @@ export default function Home() {
                       style={{ maxWidth: '80%', wordBreak: 'break-word' }}
                     >
                         {msg.sender !== 'time' && (
-                          <p className="text-gray-800 dark:text-gray-100">{msg.text}</p>
+                          <p className="text-gray-800 dark:text-gray-100">
+                            {msg.text === 'loading' ? <Icon icon="svg-spinners:3-dots-bounce" style={{'color': 'black'}} /> : msg.text}
+                          </p>
                         )}
                       </div>
                     </div>
@@ -279,7 +290,7 @@ export default function Home() {
         </div>
 
         <div className="hidden mb-2 pt-2 text-lg leading-6 text-slate-600 dark:text-slate-300 md:block">
-          你可以透過下面的 {' '}
+          你可以透過下面的 {' '} 
           <RoughNotation
             animate="true"
             type="highlight"
@@ -296,10 +307,8 @@ export default function Home() {
         <AutoResizeTextarea />
 
         <hr className="border-gray-200 dark:border-gray-700 pb-5 mt-5" />
-
         <div>
           <h1 className='text-3xl font-extrabold mb-3 text-gray-800 dark:text-gray-500'>{siteMetadata.labName}</h1>
-
           <h2 className='text-2xl font-semibold mt-5 mb-2 text-gray-700 dark:text-gray-500'>位置</h2>
           <p className='mb-4 text-gray-600 dark:text-gray-500'>{siteMetadata.address}</p>
 
