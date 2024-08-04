@@ -31,10 +31,9 @@ const NewsPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const config = React.useMemo(
-		() => ({
+    () => ({
       readonly: false,
-      height: '100%',
-      width: '100%',
+      height: '500px',
       uploader: {
         url: 'http://localhost:3000/upload',
         filesVariableName: () => 'file',
@@ -42,36 +41,17 @@ const NewsPage = () => {
         pathVariableName: 'path',
         format: 'json',
         method: 'POST',
-        // insertImageAsBase64URI: true,
       },
       filebrowser: {
         ajax: {
           url: 'http://localhost:3000/files',
           method: 'GET',
-          headers: {
-            // 可根據需求添加自定義 headers
-          },
         },
         permissions: {
           create: true,
           remove: true,
           rename: true,
           download: true,
-        },
-        permissionsPresets: {
-          allowFiles: true,
-          allowFileMove: true,
-          allowFileUpload: true,
-          allowFileUploadRemote: true,
-          // allowFileRemove: true,
-          // allowFileRename: true,
-          // allowFolders: true,
-          // allowFolderCreate: true,
-          // allowFolderMove: true,
-          // allowFolderRemove: true,
-          // allowFolderRename: true,
-          allowImageResize: true,
-          allowImageCrop: true
         },
         fileRemove: {
           url: 'http://localhost:3000/deleteImage',
@@ -80,8 +60,8 @@ const NewsPage = () => {
         },
       },
     }),
-		[]
-	);
+    []
+  );
 
   const headers: Header[] = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
@@ -98,7 +78,6 @@ const NewsPage = () => {
       const response = await apiClient.newsGet();
       const data: any = response.data.response;
       setNews(data);
-      console.log(data);
     } catch (error) {
       console.error('API 調用失敗:', (error as Error).message);
       if ((error as any).response) {
@@ -178,13 +157,13 @@ const NewsPage = () => {
 
   const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData }) => {
     const [formData, setFormData] = useState<{ [key: string]: any }>({});
-
+  
     useEffect(() => {
       if (editData) {
         const cleanEditData = { ...editData };
         headers.forEach((header) => {
           if (header.type === 'Tags' && editData[header.id]) {
-            cleanEditData[header.id] = editData[header.id].map((item: any) => 
+            cleanEditData[header.id] = editData[header.id].map((item: any) =>
               typeof item === 'string' ? { id: item, text: item } : item
             );
           }
@@ -192,27 +171,27 @@ const NewsPage = () => {
         setFormData(cleanEditData);
       }
     }, [editData, headers]);
-
+  
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormData({
         ...formData,
         [e.target.name]: e.target.value,
       });
     };
-
+  
     const handleEditorChange = (value: string, name: string) => {
       setFormData({
         ...formData,
         [name]: value,
       });
     };
-
+  
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
       onSubmit(formData);
       onClose();
     };
-
+  
     const renderInputField = (header: Header) => {
       if (header.type === 'Textarea') {
         return (
@@ -226,7 +205,7 @@ const NewsPage = () => {
             rows={4}
           />
         );
-      } else if (header.type === 'jodit') {``
+      } else if (header.type === 'jodit') {
         return (
           <JoditEditor
             key={header.id}
@@ -248,16 +227,16 @@ const NewsPage = () => {
         />
       );
     };
-
+  
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
             <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>
           </div>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8 max-h-[80vh] overflow-y-auto">
             {headers
-              .filter((header) => header.id !== 'id' && header.id !== 'actions' && header.id !== 'imageActions' && header.id !== 'imagesActions'  && header.id !== 'attachmentActions')
+              .filter((header) => header.id !== 'id' && header.id !== 'actions' && header.id !== 'imageActions' && header.id !== 'imagesActions' && header.id !== 'attachmentActions')
               .map((header) => (
                 <div key={header.id}>
                   <label className="mb-3 block text-black dark:text-white">{header.Name}</label>
@@ -284,6 +263,7 @@ const NewsPage = () => {
       </div>
     );
   };
+  
 
   return (
     <DefaultLayout>
