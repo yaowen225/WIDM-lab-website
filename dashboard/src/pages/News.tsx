@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { WithContext as ReactTags } from 'react-tag-input';
 import JoditEditor from 'jodit-react';
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
@@ -34,7 +33,8 @@ const NewsPage = () => {
   const config = React.useMemo(
 		() => ({
       readonly: false,
-      height: 400,
+      height: '100%',
+      width: '100%',
       uploader: {
         url: 'http://localhost:3000/upload',
         filesVariableName: () => 'file',
@@ -47,7 +47,7 @@ const NewsPage = () => {
       filebrowser: {
         ajax: {
           url: 'http://localhost:3000/files',
-          method: 'POST',
+          method: 'GET',
           headers: {
             // 可根據需求添加自定義 headers
           },
@@ -74,8 +74,8 @@ const NewsPage = () => {
           allowImageCrop: true
         },
         fileRemove: {
-          url: 'http://localhost:3000/delete',
-          method: 'POST',
+          url: 'http://localhost:3000/deleteImage',
+          method: 'DELETE',
           contentType: 'application/json',
         },
       },
@@ -200,24 +200,6 @@ const NewsPage = () => {
       });
     };
 
-    const handleDeleteTag = (i: number, id: string) => {
-      const updatedTags = formData[id]?.filter((_: any, index: number) => index !== i) || [];
-      setFormData({
-        ...formData,
-        [id]: updatedTags.length > 0 ? updatedTags : [],
-      });
-      console.log(updatedTags)
-    };
-
-    const handleAdditionTag = (tag: any, id: string) => {
-      const updatedTags = [...(formData[id] || []), tag];
-      setFormData({
-        ...formData,
-        [id]: updatedTags.length > 0 ? updatedTags : [],
-      });
-      console.log(updatedTags)
-    };
-
     const handleEditorChange = (value: string, name: string) => {
       setFormData({
         ...formData,
@@ -232,46 +214,7 @@ const NewsPage = () => {
     };
 
     const renderInputField = (header: Header) => {
-      if (header.type === 'Number') {
-        return (
-          <input
-            key={header.id}
-            type="number"
-            name={header.id}
-            placeholder={header.Name}
-            value={formData[header.id] || ''}
-            onChange={handleChange}
-            className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-          />
-        );
-      } else if (header.type === 'Tags') {
-        return (
-          <div
-            key={header.id}
-            className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus-within:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus-within:border-primary"
-          >
-            <ReactTags
-              tags={formData[header.id] || []}
-              handleDelete={(i: number) => handleDeleteTag(i, header.id)}
-              handleAddition={(tag) => handleAdditionTag(tag, header.id)}
-              inputFieldPosition="inline"
-              autocomplete
-              classNames={{
-                root: 'react-tags__root',
-                rootFocused: 'react-tags__root--focused',
-                selected: 'react-tags__selected',
-                selectedTag: 'react-tags__selected-tag',
-                selectedTagName: 'react-tags__selected-tag-name',
-                search: 'react-tags__search',
-                searchInput: 'react-tags__search-input',
-                suggestions: 'react-tags__suggestions',
-                suggestionActive: 'react-tags__suggestion--active',
-                suggestionDisabled: 'react-tags__suggestion--disabled',
-              }}
-            />
-          </div>
-        );
-      } else if (header.type === 'Textarea') {
+      if (header.type === 'Textarea') {
         return (
           <textarea
             key={header.id}
@@ -287,7 +230,7 @@ const NewsPage = () => {
         return (
           <JoditEditor
             key={header.id}
-            value={formData[header.id] || ''}
+            value={formData[header.id]}
             onBlur={(value) => handleEditorChange(value, header.id)}
             config={config}
           />

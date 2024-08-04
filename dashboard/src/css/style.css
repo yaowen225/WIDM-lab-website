@@ -211,71 +211,134 @@ span.flatpickr-weekday,
 }
 
 /* 自定義樣式 */
-.ReactTags__root {
-  display: flex;
-  flex-wrap: wrap;
-  border: none; 
-  width: 100%;
+.container {
+  margin: auto;
+  width: 50%;
 }
 
-.ReactTags__root--focused {
-  outline: none;
+.ReactTags__tags {
+  position: relative;
+}
+
+.ReactTags__clearAll {
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  background: #f88d8d;
+  color: #fff;
   border: none;
+}
+
+.ReactTags__tagInput {
+  border-radius: 0.375rem; /* 與其他 input 元素的邊框圓角一致 */
+  display: inline-block;
+  width: 100%; /* 設定寬度，使其填滿父容器 */
+
+  input.ReactTags__tagInputField {
+    height: 2.25rem; /* 與其他 input 元素的高度一致 */
+    margin: 0;
+    padding: 0.75rem 1rem; /* 與其他 input 元素的內邊距一致 */
+    font-size: 1rem; /* 與其他 input 元素的字體大小一致 */
+    border: 1.5px solid #eee; /* 與其他 input 元素的邊框一致 */
+    width: 100%; /* 設定寬度，使其填滿父容器 */
+    border-radius: 0.375rem; /* 與其他 input 元素的邊框圓角一致 */
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+
+    &:focus {
+      border-color: #3182ce; /* 聚焦時的邊框顏色 */
+    }
+  }
+}
+
+.ReactTags__editInput {
+  border-radius: 0.375rem; /* 與其他 input 元素的邊框圓角一致 */
+}
+
+.ReactTags__editTagInput {
+  display: inline-flex;
 }
 
 .ReactTags__selected {
   display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-  width: 100%;
-}
+  flex-wrap: wrap; /* 使標籤在換行時排列整齊 */
+  margin-top: 0.5rem; /* 與其他 input 元素的間距一致 */
 
-.ReactTags__tag {
-  border-radius: 2px;
-  display: inline-block;
-  padding: 5px;
-  margin-right: 5px;
-}
+  span.ReactTags__tag {
+    border: 1px solid #ddd;
+    background: #63bcfd;
+    color: #fff;
+    font-size: 1rem; /* 與其他 input 元素的字體大小一致 */
+    padding: 0.5rem; /* 與其他 input 元素的內邊距一致 */
+    margin: 0.25rem; /* 與其他 input 元素的間距一致 */
+    border-radius: 0.375rem; /* 與其他 input 元素的邊框圓角一致 */
+    display: flex;
+    align-items: center;
+  }
 
-.ReactTags__selected-tag-name {
-  margin-right: 10px;
-}
-
-.ReactTags__search {
-  flex-grow: 1;
-  width: 100%;
-}
-
-.ReactTags__search-input {
-  border: none;
-  outline: none;
-  padding: 5px;
-  font-size: 1rem;
-  width: 100%;
-  
+  .ReactTags__remove {
+    color: #aaa;
+    cursor: pointer;
+    display: flex;
+    margin-left: 0.5rem; /* 與標籤內邊距一致 */
+  }
 }
 
 .ReactTags__suggestions {
   position: absolute;
-  z-index: 1000;
-  border: 1px solid #ddd;
-  background: #fff;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  max-height: 150px;
-  overflow-y: auto;
-  width: 100%;
+
+  ul {
+    list-style-type: none;
+    box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
+    background: white;
+    width: 100%; /* 使建議列表與輸入框寬度一致 */
+    padding: 0.5rem 0; /* 與其他 input 元素的內邊距一致 */
+    margin: 0;
+    border-radius: 0.375rem; /* 與其他 input 元素的邊框圓角一致 */
+    z-index: 1000;
+  }
+
+  li {
+    padding: 0.5rem 1rem; /* 與其他 input 元素的內邊距一致 */
+    margin: 0;
+    text-align: left;
+
+    mark {
+      text-decoration: underline;
+      background: none;
+    }
+
+    &.ReactTags__activeSuggestion {
+      background: #4dabf7;
+      color: #fff;
+      cursor: pointer;
+
+      span mark {
+        color: #fff;
+      }
+    }
+  }
 }
 
-.ReactTags__suggestion--active {
-  background: #b7cfe0;
+.ReactTags__remove {
+  border: none;
   cursor: pointer;
+  background: none;
+  color: #fff;
+  padding: 5px;
 }
 
-.ReactTags__suggestion--disabled {
-  color: #ddd;
-  cursor: not-allowed;
+.ReactTags__error {
+  color: #e03131;
+  font-size: 1rem; /* 與其他 input 元素的字體大小一致 */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    padding: 0 5px;
+  }
 }
 
 
