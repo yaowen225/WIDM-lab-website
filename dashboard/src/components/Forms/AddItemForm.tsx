@@ -105,6 +105,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
             handleDrag={(tag, currPos, newPos) => handleDragTag(tag, currPos, newPos, header.id)}
             onTagUpdate={(index, newTag) => onTagUpdate(index, newTag, header.id)}
             inputFieldPosition="top"
+            editable // TODO: 編輯tag的css要調整
           />
         </div>
       );

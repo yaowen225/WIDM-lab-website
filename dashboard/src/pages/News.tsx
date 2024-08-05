@@ -59,6 +59,7 @@ const NewsPage = () => {
           contentType: 'application/json',
         },
       },
+      removeButtons: ['file', 'video'],
     }),
     []
   );
