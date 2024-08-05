@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { LuImagePlus, LuImageMinus } from "react-icons/lu";
+import { FaEdit, FaTrashAlt, FaLink } from 'react-icons/fa';
+import { LuImage, LuImagePlus, LuImageMinus } from "react-icons/lu";
 import { FiFilePlus, FiFileMinus } from "react-icons/fi";
 import { Tag } from 'antd';
 
@@ -19,9 +19,10 @@ interface TableProps {
   onEdit: (row: { [key: string]: any }) => void;
   onUploadFile?: (row: { [key: string]: any }) => void;
   onDeleteFiles?: (row: { [key: string]: any }) => void;
+  onEditImage?: (row: { [key: string]: any }) => void;
 }
 
-const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, onUploadFile, onDeleteFiles }) => {
+const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, onUploadFile, onDeleteFiles, onEditImage }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -90,17 +91,17 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                         </button>
                         {onUploadFile && !row[header.Name] && (
                           <button className="hover:text-primary" onClick={() => onUploadFile(row)}>
-                            <LuImagePlus />
+                            <LuImagePlus className="text-green-500"/>
                           </button>
                         )}
                         {onDeleteFiles && row[header.Name] && (
                           <button className="hover:text-primary" onClick={() => onDeleteFiles(row)}>
-                            <LuImageMinus />
+                            <LuImageMinus className="text-red-500"/>
                           </button>
                         )}
                       </div>
                     )}
-                    {header.id === 'imagesActions' && (onUploadFile || onDeleteFiles) && (
+                    {header.id === 'imagesActions' && (onUploadFile || onDeleteFiles || onEditImage) && (
                       <div className="flex items-center space-x-3.5">
                         {onEdit && (
                           <button className="hover:text-primary" onClick={() => onEdit(row)}>
@@ -112,12 +113,17 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                         </button>
                         {onUploadFile && (
                           <button className="hover:text-primary" onClick={() => onUploadFile(row)}>
-                            <LuImagePlus />
+                            <LuImagePlus className="text-green-500"/>
                           </button>
                         )}
                         {onDeleteFiles && row[header.Name] != null && (
                           <button className="hover:text-primary" onClick={() => onDeleteFiles(row)}>
-                            <LuImageMinus />
+                            <LuImageMinus className="text-red-500"/>
+                          </button>
+                        )}
+                        {onEditImage && row[header.Name] != null && (
+                          <button className="hover:text-primary" onClick={() => onEditImage(row)}>
+                            <LuImage />
                           </button>
                         )}
                       </div>
@@ -152,6 +158,10 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                           </Tag>
                         )) : <></>}
                       </div>
+                    ) : header.type === 'Url' ? (
+                      <a href={row[header.id]} target="_blank" rel="noopener noreferrer" className="text-blue-500 flex justify-center items-center">
+                        <FaLink />
+                      </a>
                     ) : (
                       <span className="text-black dark:text-white">
                         {row[header.id]}

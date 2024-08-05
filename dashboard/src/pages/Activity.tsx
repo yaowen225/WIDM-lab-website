@@ -3,16 +3,14 @@ import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
-import UploadImage from '../components/Forms/UploadImageForm';
-import DeleteImages from '../components/Forms/DeleteImages';
+import ImageManagement from '../components/Forms/ImageManagement';
 import { ActivityApi, ActivityImageApi, Configuration } from '../../domain/api-client';
 import type { ActivityPostRequest } from 'domain/api-client';
 
 const ActivityPage = () => {
   const [activities, setActivities] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const [isDeletingImages, setIsDeletingImages] = useState(false);
+  const [isEditImages, setIsEditImages] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -33,6 +31,7 @@ const ActivityPage = () => {
       const response = await apiClient.activityGet();
       const data: any = response.data.response;
       setActivities(data);
+      setEditData(data.find((item: { [key: string]: any }) => item.id === editData?.id) || null);
       console.log(data);
     } catch (error) {
       console.error('API 調用失敗:', (error as Error).message);
@@ -56,26 +55,18 @@ const ActivityPage = () => {
     setIsAdding(true);
   };
 
-  const handleUploadImage = (row: { [key: string]: any }) => {
+  const handleEditImages = (row: { [key: string]: any }) => {
     setEditData(row);
-    setIsUploading(true);
+    console.log(row);
+    setIsEditImages(true);
   };
 
-  const handleDeleteImages = (row: { [key: string]: any }) => {
-    setEditData(row);
-    setIsDeletingImages(true);
+  const handleCloseEditImages = () => {
+    setIsEditImages(false);
   };
 
   const handleCloseForm = () => {
     setIsAdding(false);
-  };
-
-  const handleCloseUploadImage = () => {
-    setIsUploading(false);
-  };
-
-  const handleCloseDeleteImages = () => {
-    setIsDeletingImages(false);
   };
 
   const createActivitie = async (formData: { [key: string]: any }) => {
@@ -115,8 +106,8 @@ const ActivityPage = () => {
       if (editData) {
         await apiClient.activityActivityIdActivityImagePost(editData.id, formData.image);
       }
-      setIsUploading(false);
       fetchActivities();
+      updateImagesId(editData!.id);
       setSuccessMessage('圖片上傳成功!');
       setShowSuccessMessage(true);
       setTimeout(() => setShowSuccessMessage(false), 3000);
@@ -136,8 +127,8 @@ const ActivityPage = () => {
     const apiClient = new ActivityImageApi(configuration);
     try {
       await apiClient.activityActivityIdActivityImageActivityImageUuidDelete(id, imageId);
-      setIsDeletingImages(false);
       fetchActivities();
+      updateImagesId(id);
       setSuccessMessage('圖片刪除成功!');
       setShowSuccessMessage(true);
       setTimeout(() => setShowSuccessMessage(false), 3000);
@@ -172,6 +163,13 @@ const ActivityPage = () => {
     }
   };
 
+  const updateImagesId = (id: number) => {
+    const updatedActivity = activities.find(activity => activity.id === id);
+    if (updatedActivity) {
+      setEditData({ ...editData, activity_image: updatedActivity.activity_image });
+    }
+  };
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Activity" />
@@ -184,11 +182,10 @@ const ActivityPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} onUploadFile={handleUploadImage} onDeleteFiles={handleDeleteImages} />
+        <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} onEditImage={handleEditImages}/>
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />}
-      {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
-      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action_1={'activity'} action_2={'activity-image'} id={editData?.id!} imagesId={editData?.activity_image} onDeleteImage={handleDeleteImagesSubmit} />}
+      {isEditImages && <ImageManagement onClose={handleCloseEditImages} action_1={'activity'} action_2={'activity-image'} id={editData?.id!} imagesId={editData?.activity_image} onUploadImage={handleUploadImageSubmit} onDeleteImage={handleDeleteImagesSubmit}/>}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}
