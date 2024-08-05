@@ -76,6 +76,7 @@ const ProjectPage = () => {
           contentType: 'application/json',
         },
       },
+      removeButtons: ['file', 'video'],
     }),
     []
   );
