@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import PageTitle from './components/PageTitle';
 import SignIn from './pages/Authentication/SignIn';
-import ECommerce from './pages/Dashboard/ECommerce';
+import HomePage from './pages/HomePage';
 import Activity from './pages/Activity';
 import News from './pages/News';
 import Paper from './pages/Paper';
@@ -60,7 +60,7 @@ const App: React.FC = () => {
         element={
           <>
             <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-            <ECommerce />
+            <HomePage />
           </>
         }
       />
