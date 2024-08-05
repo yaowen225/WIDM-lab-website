@@ -49,6 +49,8 @@ export const projects = () => {
                 description={d.project_description}
                 github={d.project_github}
                 tags={d.project_tags}
+                icon={d.project_icon}
+                project_link={d.project_link}
               />
             ))}
           </div>
