@@ -126,6 +126,9 @@ Class | Method | HTTP request | Description
 *WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImageActivityImageUuidDelete**](docs/ActivityImageApi.md#activityActivityIdActivityImageActivityImageUuidDelete) | **DELETE** /activity/{activity_id}/activity-image/{activity_image_uuid} | delete activity image
 *WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImageActivityImageUuidGet**](docs/ActivityImageApi.md#activityActivityIdActivityImageActivityImageUuidGet) | **GET** /activity/{activity_id}/activity-image/{activity_image_uuid} | get activity image
 *WidmBackEnd.ActivityImageApi* | [**activityActivityIdActivityImagePost**](docs/ActivityImageApi.md#activityActivityIdActivityImagePost) | **POST** /activity/{activity_id}/activity-image | post activity image
+*WidmBackEnd.AuthApi* | [**authLogOutGet**](docs/AuthApi.md#authLogOutGet) | **GET** /auth/log_out | log_out
+*WidmBackEnd.AuthApi* | [**authReturnToGet**](docs/AuthApi.md#authReturnToGet) | **GET** /auth/return-to | Return To
+*WidmBackEnd.AuthApi* | [**authUserInfoGet**](docs/AuthApi.md#authUserInfoGet) | **GET** /auth/user_info | User Info
 *WidmBackEnd.MemberApi* | [**memberGet**](docs/MemberApi.md#memberGet) | **GET** /member | get members
 *WidmBackEnd.MemberApi* | [**memberMemberIdDelete**](docs/MemberApi.md#memberMemberIdDelete) | **DELETE** /member/{member_id} | delete member
 *WidmBackEnd.MemberApi* | [**memberMemberIdPatch**](docs/MemberApi.md#memberMemberIdPatch) | **PATCH** /member/{member_id} | patch member
