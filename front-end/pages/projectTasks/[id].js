@@ -17,9 +17,12 @@ const ProjectTask = () => {
   useEffect(() => {
     const fetchProjectTask = async () => { 
       try { 
-        const apiClient = new ProjectTaskApi()
-        const data = await apiClient.projectProjectIdTaskGet(id)
-
+        const response = await fetch(`https://widm-back-end.nevercareu.space/project/${id}/task`)
+        if (!response.ok) {
+          throw new Error(`API 調用失敗: ${response.statusText}`)
+        }
+        const data = await response.json()
+    
         setProjectTasks(data.response)
         console.log(data.response)
       } catch (error) {
@@ -31,9 +34,7 @@ const ProjectTask = () => {
       }
     }
 
-    if (id) {
-      fetchProjectTask() 
-    }
+    if (id) { fetchProjectTask()  }
   }, [id])
 
   if (error) {
@@ -57,10 +58,9 @@ const ProjectTask = () => {
               <IoMdReturnLeft size={24} />
             </button>
           </div>
- 
           
           <p className="text-md leading-7 text-gray-500 dark:text-gray-400">
-          Project description.
+            Project description.
           </p>
         </div>
         <motion.div

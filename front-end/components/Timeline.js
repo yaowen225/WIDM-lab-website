@@ -27,6 +27,8 @@ function TimelineItem({ item, level = 0 }) {
   const icon = IconMap[level % IconMap.length];
   const backgroundColor = colorMap[level % colorMap.length]; // 獲取對應層級的背景顏色
 
+  console.log("item", item)
+
   return (
     <>
       <Link
@@ -39,15 +41,18 @@ function TimelineItem({ item, level = 0 }) {
                 style={{ backgroundColor: backgroundColor, ringColor: backgroundColor }}>
             {icon}
           </span>
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
             {item.project_task_title}
-            {item.project_task_sub_title && (
-              <span className="mr-2 ml-3 rounded px-2.5 py-0.5 text-sm font-medium"
+            
+          </h2>
+          <p className='mt-1 mb-3 '>{
+            item.project_task_sub_title && (
+              <span className="mt-2 mb-3 rounded px-2.5 py-0.5 text-sm font-medium"
                     style={{ backgroundColor: backgroundColor, color: '#FFFFFF' }}>
                 {item.project_task_sub_title}
               </span>
             )}
-          </h3>
+          </p>
           <time className="text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
             updated by {item.update_time}
           </time>
