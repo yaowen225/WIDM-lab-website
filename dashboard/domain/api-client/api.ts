@@ -315,6 +315,12 @@ export interface MemberInput {
      * @memberof MemberInput
      */
     'member_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberInput
+     */
+    'member_name_en'?: string;
 }
 /**
  * 
@@ -346,6 +352,12 @@ export interface MemberResponse {
      * @memberof MemberResponse
      */
     'member_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    'member_name_en'?: string;
     /**
      * 
      * @type {string}
@@ -414,6 +426,12 @@ export interface MembersResponseInner {
      * @memberof MembersResponseInner
      */
     'member_name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MembersResponseInner
+     */
+    'member_name_en'?: string;
     /**
      * 
      * @type {string}

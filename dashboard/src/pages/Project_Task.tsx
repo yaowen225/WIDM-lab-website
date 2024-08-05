@@ -5,10 +5,8 @@ import { Select, Tree, TreeProps } from 'antd';
 import { ProjectApi, Configuration, ProjectTaskApi } from '../../domain/api-client';
 import AddTaskModal from '../components/AddTaskModal';
 import { DownOutlined } from '@ant-design/icons';
-import ReactMarkdown from 'react-markdown';
-import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import ImportImageModal from '../components/ImportImageModal';
+import JoditEditor from 'jodit-react';
 
 const { Option } = Select;
 
@@ -49,51 +47,54 @@ const ProjectPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [importImageOpen, setImportImageOpen] = useState(false);
 
-  const markdownComponents = {
-    h1: ({node, ...props}: {node?: any, [key: string]: any}) => <h1 className="my-4 text-4xl font-extrabold border-t border-b border-gray-300 py-2" {...props} />,
-    h2: ({node, ...props}: {node?: any, [key: string]: any}) => <h2 className="my-4 text-3xl font-bold border-t border-b border-gray-300 py-2" {...props} />,
-    h3: ({node, ...props}: {node?: any, [key: string]: any}) => <h3 className="my-4 text-2xl font-semibold border-t border-b border-gray-300 py-2" {...props} />,
-    h4: ({node, ...props}: {node?: any, [key: string]: any}) => <h4 className="my-4 text-xl font-medium border-t border-b border-gray-300 py-2" {...props} />,
-    h5: ({node, ...props}: {node?: any, [key: string]: any}) => <h5 className="my-4 text-lg font-medium border-t border-b border-gray-300 py-2" {...props} />,
-    h6: ({node, ...props}: {node?: any, [key: string]: any}) => <h6 className="my-4 text-sm font-medium border-t border-b border-gray-300 py-2" {...props} />,
-    p:  ({ node, ...props }: {node?: any, [key: string]: any}) => <p className="my-2 mt-4 text-base leading-7 text-gray-700" {...props} />,
-    a:  ({ node, ...props }: {node?: any, [key: string]: any}) => <a className="my-1 mt-4 text-base leading-7 text-teal-600" {...props} />,
-    ul: ({ node, ...props }: {node?: any, [key: string]: any}) => <ul className="ml-5 list-disc" {...props} />,
-    ol: ({ node, ...props }: {node?: any, [key: string]: any}) => <ol className="ml-5 list-decimal" {...props} />,
-    li: ({ node, ...props }: {node?: any, [key: string]: any}) => <li className="mt-1" {...props} />,
-    code: ({ node, inline, className, children, ...props }: {node?: any, inline?: boolean, className?: string, children?: React.ReactNode, [key: string]: any}) => {
-      const match = /language-(\w+)/.exec(className || '')
-      return !inline && match ? (
-        <SyntaxHighlighter style={materialDark} language={match[1]} PreTag="div" {...props}>
-          {String(children).replace(/\n$/, '')}
-        </SyntaxHighlighter>
-      ) : (
-        <code className={className} {...props}>
-          {children}
-        </code>
-      )
-    },
-    img: ({ node, ...props }: {node?: any, [key: string]: any}) => (
-      <img {...props} style={{ minWidth: '60%', minHeight: '50%', maxWidth: '100%', maxHeight: '100%', margin: '0 auto' }} alt={props.alt} />
-    ),
-  };
+  const config = React.useMemo(
+    () => ({
+      readonly: false,
+      height: '1000px',
+      uploader: {
+        url: 'http://localhost:3000/upload',
+        filesVariableName: () => 'file',
+        withCredentials: false,
+        pathVariableName: 'path',
+        format: 'json',
+        method: 'POST',
+      },
+      filebrowser: {
+        ajax: {
+          url: 'http://localhost:3000/files',
+          method: 'GET',
+        },
+        permissions: {
+          create: true,
+          remove: true,
+          rename: true,
+          download: true,
+        },
+        fileRemove: {
+          url: 'http://localhost:3000/deleteImage',
+          method: 'DELETE',
+          contentType: 'application/json',
+        },
+      },
+    }),
+    []
+  );
 
   const handleImportImageClick = () => {
     setImportImageOpen(true);
   }
 
   const handleSelectImage = (image: TaskImage) => {
-    // 處理選中的圖片
     console.log('選中的圖片:', image.image_uuid);
     const imageMarkdown = `![${image.image_name}](https://widm-back-end.nevercareu.space/project/task/image/${image.image_uuid})`;
     let newProjectTask = projectTask;
-    if(newProjectTask) {
+    if (newProjectTask) {
       newProjectTask.project_task_content += '\n' + imageMarkdown;
     }
     setProjectTask(newProjectTask);
     setImportImageOpen(false);
   }
-  
+
   const fetchProjects = async () => {
     const configuration = new Configuration();
     const apiClient = new ProjectApi(configuration);
@@ -153,7 +154,7 @@ const ProjectPage = () => {
   const handleSelectChange = (id: number) => {
     fetchProjectsTasks(id);
     setProjectId(id);
-    setProjectTask(null); // Clear the right panel when a new project is selected
+    setProjectTask(null);
   };
 
   const convertToTreeData = (tasks: ProjectTask[]): { title: string; key: number; children: any[] }[] => {
@@ -171,7 +172,7 @@ const ProjectPage = () => {
         ...projectTask,
         project_task_title: (event.target as any).project_task_title.value,
         project_task_sub_title: (event.target as any).project_task_sub_title.value,
-        project_task_content: (event.target as any).project_task_content.value,
+        project_task_content: projectTask.project_task_content, // 直接使用狀態中的內容
       };
 
       const configuration = new Configuration();
@@ -208,7 +209,7 @@ const ProjectPage = () => {
         setShowSuccessMessage(true);
         setTimeout(() => setShowSuccessMessage(false), 3000);
         fetchProjectsTasks(projectId);
-        setProjectTask(null); // Clear the form after deletion
+        setProjectTask(null);
       } catch (error) {
         console.error('API 刪除失敗:', (error as Error).message);
         setErrorMessage('刪除失敗!');
@@ -235,7 +236,6 @@ const ProjectPage = () => {
   };
 
   const handleAddTask = async (selectedValue: string, taskDetails: creatTaskData) => {
-    // 根據 selectedValue 設置 project_id 和 parent_id
     let project_id = 0;
     let parent_id = 0;
     if (selectedValue.startsWith('project-')) {
@@ -273,6 +273,12 @@ const ProjectPage = () => {
       }
     }
     handleCloseModal();
+  };
+
+  const handleEditorBlur = (newContent: string) => {
+    if (projectTask) {
+      setProjectTask({ ...projectTask, project_task_content: newContent });
+    }
   };
 
   return (
@@ -340,11 +346,11 @@ const ProjectPage = () => {
                   </div>
                   <div>
                     <label className="mb-3 block text-black dark:text-white">內容</label>
-                    <textarea
-                      name="project_task_content"
-                      value={projectTask?.project_task_content || ''}
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+                    <JoditEditor
+                      key={projectTask.id}
+                      value={projectTask?.project_task_content}
+                      config={config}
+                      onBlur={(newContent) => handleEditorBlur(newContent)}
                     />
                   </div>
                   <div className="flex justify-between gap-4">
@@ -377,9 +383,6 @@ const ProjectPage = () => {
                         刪除此任務
                       </button>
                     </div>
-                  </div>
-                  <div className="mt-4">
-                    <ReactMarkdown components={markdownComponents}>{projectTask?.project_task_content || ''}</ReactMarkdown>
                   </div>
                 </form>
               </div>
