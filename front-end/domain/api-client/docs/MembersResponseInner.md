@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **memberImage** | **String** |  | [optional] 
 **memberIntro** | **String** |  | [optional] 
 **memberName** | **String** |  | [optional] 
+**memberNameEn** | **String** |  | [optional] 
 **updateTime** | **String** |  | [optional] 
 
 

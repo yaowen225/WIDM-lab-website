@@ -11,6 +11,7 @@ docs/ActivityImageApi.md
 docs/ActivityImageResponse.md
 docs/ActivityPostRequest.md
 docs/ActivityResponse.md
+docs/AuthApi.md
 docs/Member.md
 docs/MemberApi.md
 docs/MemberImage.md
@@ -66,6 +67,7 @@ package.json
 src/ApiClient.js
 src/api/ActivityApi.js
 src/api/ActivityImageApi.js
+src/api/AuthApi.js
 src/api/MemberApi.js
 src/api/MemberImageApi.js
 src/api/NewsApi.js
@@ -123,6 +125,4 @@ src/model/Projects.js
 src/model/ProjectsResponseInner.js
 src/model/ScrapyingStatus.js
 src/model/ScrapyingStatusResponse.js
-test/api/RetrievalApi.spec.js
-test/model/ScrapyingStatus.spec.js
-test/model/ScrapyingStatusResponse.spec.js
+test/api/AuthApi.spec.js

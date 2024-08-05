@@ -60,6 +60,7 @@ import ScrapyingStatus from './model/ScrapyingStatus';
 import ScrapyingStatusResponse from './model/ScrapyingStatusResponse';
 import ActivityApi from './api/ActivityApi';
 import ActivityImageApi from './api/ActivityImageApi';
+import AuthApi from './api/AuthApi';
 import MemberApi from './api/MemberApi';
 import MemberImageApi from './api/MemberImageApi';
 import NewsApi from './api/NewsApi';
@@ -392,6 +393,12 @@ export {
     * @property {module:api/ActivityImageApi}
     */
     ActivityImageApi,
+
+    /**
+    * The AuthApi service constructor.
+    * @property {module:api/AuthApi}
+    */
+    AuthApi,
 
     /**
     * The MemberApi service constructor.

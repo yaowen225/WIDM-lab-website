@@ -3,7 +3,7 @@ import Tag from '@/components/Tag'
 import { useState } from 'react'
 import Pagination from '@/components/Pagination'
 import formatDate from '@/lib/utils/formatDate'
-import { FaFileDownload } from 'react-icons/fa'
+import { FaFileDownload, FaExternalLinkAlt } from 'react-icons/fa'
 import { PaperAttachmentApi } from 'domain/api-client/src'
 import { LuLink } from "react-icons/lu";
 
@@ -15,7 +15,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
   const [searchValue, setSearchValue] = useState('')
 
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.paper_title + frontMatter.paper_authors + frontMatter.paper_tags.join(' ')
+    const searchContent = frontMatter.paper_title + frontMatter.paper_authors // + frontMatter.paper_tags.join(' ')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
@@ -105,27 +105,49 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       <div>
                         <h2 className="text-2xl font-bold leading-8 tracking-tight">
                           <span className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500">
-                            {paper_title}
+                            {paper_title} 
                           </span>
                         </h2>
-                        {paper_link && 
-                          <Link href={`${paper_link}`} className="group flex bg-transparent bg-opacity-20 px-2 " >
-                            <LuLink />
-                          </Link>
-                        }
                       </div>
+
+
+                      {/* <div>{paper_origin}</div> */}
+
                       <div className="flex flex-wrap">
                         {paper_tags.map((tag) => (
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
-                      <div>{paper_origin}</div>
-                      <div className="prose flex max-w-none justify-between pt-5 text-gray-500 dark:text-gray-400">
-                        <p>Author: {paper_authors}</p>
-                        <FaFileDownload
-                          className="cursor-pointer text-4xl"
-                          onClick={() => download_attachment(id, paper_attachment)}
-                        />
+
+                      <div className="prose flex max-w-none justify-between pt-2 text-gray-500 dark:text-gray-400">
+                        <p>Author: {paper_authors.join(', ')}</p>
+                        <div className='flex gap-4'>
+
+                          <div className='text-2xl font-bold content-center text-cyan-600/70	'>{paper_origin}</div>
+
+                          <FaExternalLinkAlt
+                            className={`cursor-pointer text-4xl ${
+                              paper_link === '' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
+                            }`}
+                            onClick={() => {
+                              window.open(paper_link, '_blank');
+                            }}
+                            style={{ pointerEvents: paper_link === '' ? 'none' : 'auto' }}
+                          />
+
+                          <FaFileDownload
+                            className={`cursor-pointer text-4xl ${
+                              paper_attachment === '' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
+                            }`}
+                            onClick={() => {
+                              if (!paper_attachment === '') {
+                                download_attachment(id, paper_attachment);
+                              }
+                            }}
+                            style={{ pointerEvents: paper_attachment === '' ? 'none' : 'auto' }}
+                          />
+                          
+                        </div>
                       </div>
                     </div>
                   </div>

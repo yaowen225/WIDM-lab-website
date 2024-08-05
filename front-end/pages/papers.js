@@ -33,6 +33,7 @@ const Papers = () => {
           currentPage: 1,
           totalPages: Math.ceil(papersWithId.length / POSTS_PER_PAGE),
         })
+        
       } catch (error) {
         console.error('API 調用失敗:', error.message)
         if (error.response) {
