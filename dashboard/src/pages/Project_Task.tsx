@@ -298,7 +298,7 @@ const ProjectPage = () => {
         onOk={handleAddTask}
         onCancel={handleCloseModal}
       />
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 mt-5">
         <div className="relative rounded-sm border border-stroke bg-white px-5 pt-6 pb-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-6">
           <div className="max-w-full overflow-x-auto">
             <Select
