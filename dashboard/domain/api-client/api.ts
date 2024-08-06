@@ -26,195 +26,71 @@ import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerM
 /**
  * 
  * @export
- * @interface Activities
+ * @interface Image
  */
-export interface Activities {
+export interface Image {
     /**
      * 
      * @type {string}
-     * @memberof Activities
+     * @memberof Image
      */
     'description'?: string;
     /**
      * 
-     * @type {Array<ActivitiesResponseInner>}
-     * @memberof Activities
+     * @type {ImageResponse}
+     * @memberof Image
      */
-    'response'?: Array<ActivitiesResponseInner>;
+    'response'?: ImageResponse;
 }
 /**
  * 
  * @export
- * @interface ActivitiesResponseInner
+ * @interface ImageResponse
  */
-export interface ActivitiesResponseInner {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ActivitiesResponseInner
-     */
-    'activity_image'?: Array<string>;
+export interface ImageResponse {
     /**
      * 
      * @type {string}
-     * @memberof ActivitiesResponseInner
-     */
-    'activity_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivitiesResponseInner
-     */
-    'activity_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivitiesResponseInner
+     * @memberof ImageResponse
      */
     'create_time'?: string;
     /**
      * 
      * @type {number}
-     * @memberof ActivitiesResponseInner
+     * @memberof ImageResponse
      */
     'id'?: number;
     /**
      * 
      * @type {string}
-     * @memberof ActivitiesResponseInner
-     */
-    'update_time'?: string;
-}
-/**
- * 
- * @export
- * @interface Activity
- */
-export interface Activity {
-    /**
-     * 
-     * @type {string}
-     * @memberof Activity
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {ActivityResponse}
-     * @memberof Activity
-     */
-    'response'?: ActivityResponse;
-}
-/**
- * 
- * @export
- * @interface ActivityImage
- */
-export interface ActivityImage {
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityImage
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {ActivityImageResponse}
-     * @memberof ActivityImage
-     */
-    'response'?: ActivityImageResponse;
-}
-/**
- * 
- * @export
- * @interface ActivityImageResponse
- */
-export interface ActivityImageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof ActivityImageResponse
-     */
-    'activity_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityImageResponse
-     */
-    'create_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityImageResponse
+     * @memberof ImageResponse
      */
     'image_name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ActivityImageResponse
-     */
-    'image_uuid'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityImageResponse
+     * @memberof ImageResponse
      */
     'update_time'?: string;
 }
 /**
  * 
  * @export
- * @interface ActivityPostRequest
+ * @interface Images
  */
-export interface ActivityPostRequest {
+export interface Images {
     /**
      * 
      * @type {string}
-     * @memberof ActivityPostRequest
+     * @memberof Images
      */
-    'activity_sub_title': string;
+    'description'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof ActivityPostRequest
+     * @type {Array<ImageResponse>}
+     * @memberof Images
      */
-    'activity_title': string;
-}
-/**
- * 
- * @export
- * @interface ActivityResponse
- */
-export interface ActivityResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityResponse
-     */
-    'activity_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityResponse
-     */
-    'activity_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityResponse
-     */
-    'create_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ActivityResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ActivityResponse
-     */
-    'update_time'?: string;
+    'response'?: Array<ImageResponse>;
 }
 /**
  * 
@@ -238,62 +114,6 @@ export interface Member {
 /**
  * 
  * @export
- * @interface MemberImage
- */
-export interface MemberImage {
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberImage
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {MemberImageResponse}
-     * @memberof MemberImage
-     */
-    'response'?: MemberImageResponse;
-}
-/**
- * 
- * @export
- * @interface MemberImageResponse
- */
-export interface MemberImageResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberImageResponse
-     */
-    'create_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof MemberImageResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberImageResponse
-     */
-    'image_uuid'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof MemberImageResponse
-     */
-    'member_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof MemberImageResponse
-     */
-    'update_time'?: string;
-}
-/**
- * 
- * @export
  * @interface MemberInput
  */
 export interface MemberInput {
@@ -302,25 +122,31 @@ export interface MemberInput {
      * @type {string}
      * @memberof MemberInput
      */
-    'member_character'?: string;
+    'graduate_year'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberInput
      */
-    'member_intro'?: string;
+    'intro'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberInput
      */
-    'member_name'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberInput
      */
-    'member_name_en'?: string;
+    'name_en'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberInput
+     */
+    'position'?: string;
 }
 /**
  * 
@@ -339,25 +165,37 @@ export interface MemberResponse {
      * @type {string}
      * @memberof MemberResponse
      */
-    'member_character'?: string;
+    'graduate_year'?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof MemberResponse
+     */
+    'id'?: number;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    'member_intro'?: string;
+    'intro'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    'member_name'?: string;
+    'name'?: string;
     /**
      * 
      * @type {string}
      * @memberof MemberResponse
      */
-    'member_name_en'?: string;
+    'name_en'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof MemberResponse
+     */
+    'position'?: string;
     /**
      * 
      * @type {string}
@@ -379,1168 +217,26 @@ export interface Members {
     'description'?: string;
     /**
      * 
-     * @type {Array<MembersResponseInner>}
+     * @type {Array<MemberResponse>}
      * @memberof Members
      */
-    'response'?: Array<MembersResponseInner>;
-}
-/**
- * 
- * @export
- * @interface MembersResponseInner
- */
-export interface MembersResponseInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'create_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof MembersResponseInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'member_character'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'member_image'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'member_intro'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'member_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'member_name_en'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof MembersResponseInner
-     */
-    'update_time'?: string;
-}
-/**
- * 
- * @export
- * @interface News
- */
-export interface News {
-    /**
-     * 
-     * @type {string}
-     * @memberof News
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {NewsResponse}
-     * @memberof News
-     */
-    'response'?: NewsResponse;
-}
-/**
- * 
- * @export
- * @interface NewsImage
- */
-export interface NewsImage {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImage
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {NewsImageResponse}
-     * @memberof NewsImage
-     */
-    'response'?: NewsImageResponse;
-}
-/**
- * 
- * @export
- * @interface NewsImageResponse
- */
-export interface NewsImageResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImageResponse
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewsImageResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImageResponse
-     */
-    'image_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImageResponse
-     */
-    'image_path'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImageResponse
-     */
-    'image_uuid'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImageResponse
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface NewsImages
- */
-export interface NewsImages {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsImages
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<NewsImageResponse>}
-     * @memberof NewsImages
-     */
-    'response'?: Array<NewsImageResponse>;
-}
-/**
- * 
- * @export
- * @interface NewsInput
- */
-export interface NewsInput {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsInput
-     */
-    'news_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsInput
-     */
-    'news_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsInput
-     */
-    'news_title'?: string;
-}
-/**
- * 
- * @export
- * @interface NewsResponse
- */
-export interface NewsResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsResponse
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof NewsResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsResponse
-     */
-    'news_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsResponse
-     */
-    'news_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsResponse
-     */
-    'news_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof NewsResponse
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface Newses
- */
-export interface Newses {
-    /**
-     * 
-     * @type {string}
-     * @memberof Newses
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<NewsResponse>}
-     * @memberof Newses
-     */
-    'response'?: Array<NewsResponse>;
-}
-/**
- * 
- * @export
- * @interface Paper
- */
-export interface Paper {
-    /**
-     * 
-     * @type {string}
-     * @memberof Paper
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {PaperResponse}
-     * @memberof Paper
-     */
-    'response'?: PaperResponse;
-}
-/**
- * 
- * @export
- * @interface PaperAttachment
- */
-export interface PaperAttachment {
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperAttachment
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {MemberImageResponse}
-     * @memberof PaperAttachment
-     */
-    'response'?: MemberImageResponse;
-}
-/**
- * 
- * @export
- * @interface PaperPaperIdPatchRequest
- */
-export interface PaperPaperIdPatchRequest {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_authors'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_origin'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_publish_year'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_tags'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPaperIdPatchRequest
-     */
-    'paper_title'?: string;
-}
-/**
- * 
- * @export
- * @interface PaperPostRequest
- */
-export interface PaperPostRequest {
-    /**
-     * 
-     * @type {number}
-     * @memberof PaperPostRequest
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PaperPostRequest
-     */
-    'paper_authors'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPostRequest
-     */
-    'paper_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPostRequest
-     */
-    'paper_origin'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaperPostRequest
-     */
-    'paper_publish_year'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PaperPostRequest
-     */
-    'paper_tags'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperPostRequest
-     */
-    'paper_title'?: string;
-}
-/**
- * 
- * @export
- * @interface PaperResponse
- */
-export interface PaperResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperResponse
-     */
-    'create_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperResponse
-     */
-    'paper_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperResponse
-     */
-    'paper_origin'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PaperResponse
-     */
-    'paper_publish_year'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperResponse
-     */
-    'paper_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaperResponse
-     */
-    'update_time'?: string;
-}
-/**
- * 
- * @export
- * @interface Papers
- */
-export interface Papers {
-    /**
-     * 
-     * @type {string}
-     * @memberof Papers
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<PapersResponseInner>}
-     * @memberof Papers
-     */
-    'response'?: Array<PapersResponseInner>;
-}
-/**
- * 
- * @export
- * @interface PapersResponseInner
- */
-export interface PapersResponseInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof PapersResponseInner
-     */
-    'create_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PapersResponseInner
-     */
-    'paper_attachment'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PapersResponseInner
-     */
-    'paper_authors'?: Array<string>;
-    /**
-     * 
-     * @type {number}
-     * @memberof PapersResponseInner
-     */
-    'paper_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PapersResponseInner
-     */
-    'paper_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PapersResponseInner
-     */
-    'paper_origin'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof PapersResponseInner
-     */
-    'paper_publish_year'?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PapersResponseInner
-     */
-    'paper_tags'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof PapersResponseInner
-     */
-    'paper_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof PapersResponseInner
-     */
-    'update_time'?: string;
-}
-/**
- * 
- * @export
- * @interface Project
- */
-export interface Project {
-    /**
-     * 
-     * @type {string}
-     * @memberof Project
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {ProjectResponse}
-     * @memberof Project
-     */
-    'response'?: ProjectResponse;
-}
-/**
- * 
- * @export
- * @interface ProjectIcon
- */
-export interface ProjectIcon {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectIcon
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {ProjectIconResponse}
-     * @memberof ProjectIcon
-     */
-    'response'?: ProjectIconResponse;
-}
-/**
- * 
- * @export
- * @interface ProjectIconResponse
- */
-export interface ProjectIconResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectIconResponse
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectIconResponse
-     */
-    'icon_name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectIconResponse
-     */
-    'icon_path'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectIconResponse
-     */
-    'icon_uuid'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectIconResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectIconResponse
-     */
-    'project_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectIconResponse
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface ProjectInput
- */
-export interface ProjectInput {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectInput
-     */
-    'project_description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectInput
-     */
-    'project_github'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectInput
-     */
-    'project_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectInput
-     */
-    'project_name'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ProjectInput
-     */
-    'project_tags'?: Array<string>;
-}
-/**
- * 
- * @export
- * @interface ProjectResponse
- */
-export interface ProjectResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectResponse
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectResponse
-     */
-    'project_description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectResponse
-     */
-    'project_github'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectResponse
-     */
-    'project_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectResponse
-     */
-    'project_name'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ProjectResponse
-     */
-    'project_tags'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectResponse
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface ProjectTask
- */
-export interface ProjectTask {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTask
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {ProjectTaskResponse}
-     * @memberof ProjectTask
-     */
-    'response'?: ProjectTaskResponse;
-}
-/**
- * 
- * @export
- * @interface ProjectTaskImage
- */
-export interface ProjectTaskImage {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskImage
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {NewsImageResponse}
-     * @memberof ProjectTaskImage
-     */
-    'response'?: NewsImageResponse;
-}
-/**
- * 
- * @export
- * @interface ProjectTaskImages
- */
-export interface ProjectTaskImages {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskImages
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<NewsImageResponse>}
-     * @memberof ProjectTaskImages
-     */
-    'response'?: Array<NewsImageResponse>;
-}
-/**
- * 
- * @export
- * @interface ProjectTaskInput
- */
-export interface ProjectTaskInput {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTaskInput
-     */
-    'parent_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskInput
-     */
-    'project_task_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskInput
-     */
-    'project_task_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskInput
-     */
-    'project_task_title'?: string;
-}
-/**
- * 
- * @export
- * @interface ProjectTaskResponse
- */
-export interface ProjectTaskResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskResponse
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTaskResponse
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTaskResponse
-     */
-    'parent_id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTaskResponse
-     */
-    'project_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskResponse
-     */
-    'project_task_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskResponse
-     */
-    'project_task_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskResponse
-     */
-    'project_task_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTaskResponse
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface ProjectTasks
- */
-export interface ProjectTasks {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasks
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<ProjectTasksResponseInner>}
-     * @memberof ProjectTasks
-     */
-    'response'?: Array<ProjectTasksResponseInner>;
-}
-/**
- * 
- * @export
- * @interface ProjectTasksResponseInner
- */
-export interface ProjectTasksResponseInner {
-    /**
-     * 
-     * @type {Array<ProjectTasksResponseInnerChildrenInner>}
-     * @memberof ProjectTasksResponseInner
-     */
-    'children'?: Array<ProjectTasksResponseInnerChildrenInner>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInner
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInner
-     */
-    'parent_id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInner
-     */
-    'project_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInner
-     */
-    'project_task_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInner
-     */
-    'project_task_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInner
-     */
-    'project_task_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInner
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface ProjectTasksResponseInnerChildrenInner
- */
-export interface ProjectTasksResponseInnerChildrenInner {
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_task_content'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_task_sub_title'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectTasksResponseInnerChildrenInner
-     */
-    'project_task_title'?: string;
-}
-/**
- * 
- * @export
- * @interface Projects
- */
-export interface Projects {
-    /**
-     * 
-     * @type {string}
-     * @memberof Projects
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {Array<ProjectsResponseInner>}
-     * @memberof Projects
-     */
-    'response'?: Array<ProjectsResponseInner>;
-}
-/**
- * 
- * @export
- * @interface ProjectsResponseInner
- */
-export interface ProjectsResponseInner {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'created_time'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ProjectsResponseInner
-     */
-    'id'?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'member_image'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'project_description'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'project_github'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'project_icon'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'project_link'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'project_name'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ProjectsResponseInner
-     */
-    'project_tags'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProjectsResponseInner
-     */
-    'updated_time'?: string;
-}
-/**
- * 
- * @export
- * @interface ScrapyingStatus
- */
-export interface ScrapyingStatus {
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapyingStatus
-     */
-    'description'?: string;
-    /**
-     * 
-     * @type {ScrapyingStatusResponse}
-     * @memberof ScrapyingStatus
-     */
-    'response'?: ScrapyingStatusResponse;
-}
-/**
- * 
- * @export
- * @interface ScrapyingStatusResponse
- */
-export interface ScrapyingStatusResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapyingStatusResponse
-     */
-    'end_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapyingStatusResponse
-     */
-    'start_time'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapyingStatusResponse
-     */
-    'status'?: string;
+    'response'?: Array<MemberResponse>;
 }
 
 /**
- * ActivityApi - axios parameter creator
+ * ImageApi - axios parameter creator
  * @export
  */
-export const ActivityApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ImageApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary delete activity
-         * @param {number} activityId 
+         * @summary get member images
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityActivityIdDelete: async (activityId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activityId' is not null or undefined
-            assertParamExists('activityActivityIdDelete', 'activityId', activityId)
-            const localVarPath = `/activity/{activity_id}`
-                .replace(`{${"activity_id"}}`, encodeURIComponent(String(activityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary patch activity
-         * @param {number} activityId 
-         * @param {ActivityPostRequest} [activity] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityActivityIdPatch: async (activityId: number, activity?: ActivityPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activityId' is not null or undefined
-            assertParamExists('activityActivityIdPatch', 'activityId', activityId)
-            const localVarPath = `/activity/{activity_id}`
-                .replace(`{${"activity_id"}}`, encodeURIComponent(String(activityId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(activity, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get activity
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activity`;
+        imageGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/image`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1565,233 +261,16 @@ export const ActivityApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary post activity
-         * @param {ActivityPostRequest} [activity] 
+         * @summary delete image
+         * @param {number} imageId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityPost: async (activity?: ActivityPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/activity`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(activity, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ActivityApi - functional programming interface
- * @export
- */
-export const ActivityApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ActivityApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary delete activity
-         * @param {number} activityId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async activityActivityIdDelete(activityId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Activity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityActivityIdDelete(activityId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityApi.activityActivityIdDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary patch activity
-         * @param {number} activityId 
-         * @param {ActivityPostRequest} [activity] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async activityActivityIdPatch(activityId: number, activity?: ActivityPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Activity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityActivityIdPatch(activityId, activity, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityApi.activityActivityIdPatch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get activity
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async activityGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Activities>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityApi.activityGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post activity
-         * @param {ActivityPostRequest} [activity] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async activityPost(activity?: ActivityPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Activity>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityPost(activity, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityApi.activityPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ActivityApi - factory interface
- * @export
- */
-export const ActivityApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ActivityApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary delete activity
-         * @param {number} activityId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityActivityIdDelete(activityId: number, options?: any): AxiosPromise<Activity> {
-            return localVarFp.activityActivityIdDelete(activityId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary patch activity
-         * @param {number} activityId 
-         * @param {ActivityPostRequest} [activity] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityActivityIdPatch(activityId: number, activity?: ActivityPostRequest, options?: any): AxiosPromise<Activity> {
-            return localVarFp.activityActivityIdPatch(activityId, activity, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get activity
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityGet(options?: any): AxiosPromise<Activities> {
-            return localVarFp.activityGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post activity
-         * @param {ActivityPostRequest} [activity] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityPost(activity?: ActivityPostRequest, options?: any): AxiosPromise<Activity> {
-            return localVarFp.activityPost(activity, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ActivityApi - object-oriented interface
- * @export
- * @class ActivityApi
- * @extends {BaseAPI}
- */
-export class ActivityApi extends BaseAPI {
-    /**
-     * 
-     * @summary delete activity
-     * @param {number} activityId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ActivityApi
-     */
-    public activityActivityIdDelete(activityId: number, options?: RawAxiosRequestConfig) {
-        return ActivityApiFp(this.configuration).activityActivityIdDelete(activityId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary patch activity
-     * @param {number} activityId 
-     * @param {ActivityPostRequest} [activity] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ActivityApi
-     */
-    public activityActivityIdPatch(activityId: number, activity?: ActivityPostRequest, options?: RawAxiosRequestConfig) {
-        return ActivityApiFp(this.configuration).activityActivityIdPatch(activityId, activity, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get activity
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ActivityApi
-     */
-    public activityGet(options?: RawAxiosRequestConfig) {
-        return ActivityApiFp(this.configuration).activityGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post activity
-     * @param {ActivityPostRequest} [activity] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ActivityApi
-     */
-    public activityPost(activity?: ActivityPostRequest, options?: RawAxiosRequestConfig) {
-        return ActivityApiFp(this.configuration).activityPost(activity, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ActivityImageApi - axios parameter creator
- * @export
- */
-export const ActivityImageApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary delete activity image
-         * @param {number} activityId 
-         * @param {string} activityImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        activityActivityIdActivityImageActivityImageUuidDelete: async (activityId: number, activityImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activityId' is not null or undefined
-            assertParamExists('activityActivityIdActivityImageActivityImageUuidDelete', 'activityId', activityId)
-            // verify required parameter 'activityImageUuid' is not null or undefined
-            assertParamExists('activityActivityIdActivityImageActivityImageUuidDelete', 'activityImageUuid', activityImageUuid)
-            const localVarPath = `/activity/{activity_id}/activity-image/{activity_image_uuid}`
-                .replace(`{${"activity_id"}}`, encodeURIComponent(String(activityId)))
-                .replace(`{${"activity_image_uuid"}}`, encodeURIComponent(String(activityImageUuid)));
+        imageImageIdDelete: async (imageId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'imageId' is not null or undefined
+            assertParamExists('imageImageIdDelete', 'imageId', imageId)
+            const localVarPath = `/image/{image_id}`
+                .replace(`{${"image_id"}}`, encodeURIComponent(String(imageId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1816,20 +295,16 @@ export const ActivityImageApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary get activity image
-         * @param {number} activityId 
-         * @param {string} activityImageUuid 
+         * @summary get image
+         * @param {number} imageId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityActivityIdActivityImageActivityImageUuidGet: async (activityId: number, activityImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activityId' is not null or undefined
-            assertParamExists('activityActivityIdActivityImageActivityImageUuidGet', 'activityId', activityId)
-            // verify required parameter 'activityImageUuid' is not null or undefined
-            assertParamExists('activityActivityIdActivityImageActivityImageUuidGet', 'activityImageUuid', activityImageUuid)
-            const localVarPath = `/activity/{activity_id}/activity-image/{activity_image_uuid}`
-                .replace(`{${"activity_id"}}`, encodeURIComponent(String(activityId)))
-                .replace(`{${"activity_image_uuid"}}`, encodeURIComponent(String(activityImageUuid)));
+        imageImageIdGet: async (imageId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'imageId' is not null or undefined
+            assertParamExists('imageImageIdGet', 'imageId', imageId)
+            const localVarPath = `/image/{image_id}`
+                .replace(`{${"image_id"}}`, encodeURIComponent(String(imageId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1854,19 +329,15 @@ export const ActivityImageApiAxiosParamCreator = function (configuration?: Confi
         },
         /**
          * 
-         * @summary post activity image
-         * @param {number} activityId 
+         * @summary post member image
          * @param {File} image 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityActivityIdActivityImagePost: async (activityId: number, image: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'activityId' is not null or undefined
-            assertParamExists('activityActivityIdActivityImagePost', 'activityId', activityId)
+        imagePost: async (image: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'image' is not null or undefined
-            assertParamExists('activityActivityIdActivityImagePost', 'image', image)
-            const localVarPath = `/activity/{activity_id}/activity-image`
-                .replace(`{${"activity_id"}}`, encodeURIComponent(String(activityId)));
+            assertParamExists('imagePost', 'image', image)
+            const localVarPath = `/image`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1901,389 +372,167 @@ export const ActivityImageApiAxiosParamCreator = function (configuration?: Confi
 };
 
 /**
- * ActivityImageApi - functional programming interface
+ * ImageApi - functional programming interface
  * @export
  */
-export const ActivityImageApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ActivityImageApiAxiosParamCreator(configuration)
+export const ImageApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ImageApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary delete activity image
-         * @param {number} activityId 
-         * @param {string} activityImageUuid 
+         * @summary get member images
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async activityActivityIdActivityImageActivityImageUuidDelete(activityId: number, activityImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ActivityImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid, options);
+        async imageGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Images>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageGet(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityImageApi.activityActivityIdActivityImageActivityImageUuidDelete']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageGet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary get activity image
-         * @param {number} activityId 
-         * @param {string} activityImageUuid 
+         * @summary delete image
+         * @param {number} imageId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async activityActivityIdActivityImageActivityImageUuidGet(activityId: number, activityImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid, options);
+        async imageImageIdDelete(imageId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageImageIdDelete(imageId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityImageApi.activityActivityIdActivityImageActivityImageUuidGet']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageImageIdDelete']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * 
-         * @summary post activity image
-         * @param {number} activityId 
+         * @summary get image
+         * @param {number} imageId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async imageImageIdGet(imageId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imageImageIdGet(imageId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imageImageIdGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary post member image
          * @param {File} image 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async activityActivityIdActivityImagePost(activityId: number, image: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ActivityImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.activityActivityIdActivityImagePost(activityId, image, options);
+        async imagePost(image: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Image>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.imagePost(image, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ActivityImageApi.activityActivityIdActivityImagePost']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ImageApi.imagePost']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * ActivityImageApi - factory interface
+ * ImageApi - factory interface
  * @export
  */
-export const ActivityImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ActivityImageApiFp(configuration)
+export const ImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ImageApiFp(configuration)
     return {
         /**
          * 
-         * @summary delete activity image
-         * @param {number} activityId 
-         * @param {string} activityImageUuid 
+         * @summary get member images
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityActivityIdActivityImageActivityImageUuidDelete(activityId: number, activityImageUuid: string, options?: any): AxiosPromise<ActivityImage> {
-            return localVarFp.activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid, options).then((request) => request(axios, basePath));
+        imageGet(options?: any): AxiosPromise<Images> {
+            return localVarFp.imageGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary get activity image
-         * @param {number} activityId 
-         * @param {string} activityImageUuid 
+         * @summary delete image
+         * @param {number} imageId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityActivityIdActivityImageActivityImageUuidGet(activityId: number, activityImageUuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid, options).then((request) => request(axios, basePath));
+        imageImageIdDelete(imageId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.imageImageIdDelete(imageId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @summary post activity image
-         * @param {number} activityId 
+         * @summary get image
+         * @param {number} imageId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        imageImageIdGet(imageId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.imageImageIdGet(imageId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary post member image
          * @param {File} image 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        activityActivityIdActivityImagePost(activityId: number, image: File, options?: any): AxiosPromise<ActivityImage> {
-            return localVarFp.activityActivityIdActivityImagePost(activityId, image, options).then((request) => request(axios, basePath));
+        imagePost(image: File, options?: any): AxiosPromise<Image> {
+            return localVarFp.imagePost(image, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * ActivityImageApi - object-oriented interface
+ * ImageApi - object-oriented interface
  * @export
- * @class ActivityImageApi
+ * @class ImageApi
  * @extends {BaseAPI}
  */
-export class ActivityImageApi extends BaseAPI {
+export class ImageApi extends BaseAPI {
     /**
      * 
-     * @summary delete activity image
-     * @param {number} activityId 
-     * @param {string} activityImageUuid 
+     * @summary get member images
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ActivityImageApi
+     * @memberof ImageApi
      */
-    public activityActivityIdActivityImageActivityImageUuidDelete(activityId: number, activityImageUuid: string, options?: RawAxiosRequestConfig) {
-        return ActivityImageApiFp(this.configuration).activityActivityIdActivityImageActivityImageUuidDelete(activityId, activityImageUuid, options).then((request) => request(this.axios, this.basePath));
+    public imageGet(options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary get activity image
-     * @param {number} activityId 
-     * @param {string} activityImageUuid 
+     * @summary delete image
+     * @param {number} imageId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ActivityImageApi
+     * @memberof ImageApi
      */
-    public activityActivityIdActivityImageActivityImageUuidGet(activityId: number, activityImageUuid: string, options?: RawAxiosRequestConfig) {
-        return ActivityImageApiFp(this.configuration).activityActivityIdActivityImageActivityImageUuidGet(activityId, activityImageUuid, options).then((request) => request(this.axios, this.basePath));
+    public imageImageIdDelete(imageId: number, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageImageIdDelete(imageId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @summary post activity image
-     * @param {number} activityId 
+     * @summary get image
+     * @param {number} imageId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ImageApi
+     */
+    public imageImageIdGet(imageId: number, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imageImageIdGet(imageId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary post member image
      * @param {File} image 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ActivityImageApi
+     * @memberof ImageApi
      */
-    public activityActivityIdActivityImagePost(activityId: number, image: File, options?: RawAxiosRequestConfig) {
-        return ActivityImageApiFp(this.configuration).activityActivityIdActivityImagePost(activityId, image, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * AuthApi - axios parameter creator
- * @export
- */
-export const AuthApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary log_out
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authLogOutGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/auth/log_out`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary Return To
-         * @param {string} code code
-         * @param {number} state state
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authReturnToGet: async (code: string, state: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'code' is not null or undefined
-            assertParamExists('authReturnToGet', 'code', code)
-            // verify required parameter 'state' is not null or undefined
-            assertParamExists('authReturnToGet', 'state', state)
-            const localVarPath = `/auth/return-to`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (code !== undefined) {
-                localVarQueryParameter['code'] = code;
-            }
-
-            if (state !== undefined) {
-                localVarQueryParameter['state'] = state;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary User Info
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authUserInfoGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/auth/user_info`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * AuthApi - functional programming interface
- * @export
- */
-export const AuthApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = AuthApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary log_out
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authLogOutGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authLogOutGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthApi.authLogOutGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary Return To
-         * @param {string} code code
-         * @param {number} state state
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authReturnToGet(code: string, state: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authReturnToGet(code, state, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthApi.authReturnToGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary User Info
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authUserInfoGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authUserInfoGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AuthApi.authUserInfoGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * AuthApi - factory interface
- * @export
- */
-export const AuthApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AuthApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary log_out
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authLogOutGet(options?: any): AxiosPromise<void> {
-            return localVarFp.authLogOutGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Return To
-         * @param {string} code code
-         * @param {number} state state
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authReturnToGet(code: string, state: number, options?: any): AxiosPromise<void> {
-            return localVarFp.authReturnToGet(code, state, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary User Info
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authUserInfoGet(options?: any): AxiosPromise<void> {
-            return localVarFp.authUserInfoGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * AuthApi - object-oriented interface
- * @export
- * @class AuthApi
- * @extends {BaseAPI}
- */
-export class AuthApi extends BaseAPI {
-    /**
-     * 
-     * @summary log_out
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    public authLogOutGet(options?: RawAxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authLogOutGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Return To
-     * @param {string} code code
-     * @param {number} state state
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    public authReturnToGet(code: string, state: number, options?: RawAxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authReturnToGet(code, state, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary User Info
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    public authUserInfoGet(options?: RawAxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authUserInfoGet(options).then((request) => request(this.axios, this.basePath));
+    public imagePost(image: File, options?: RawAxiosRequestConfig) {
+        return ImageApiFp(this.configuration).imagePost(image, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -2353,6 +602,85 @@ export const MemberApiAxiosParamCreator = function (configuration?: Configuratio
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary get member images
+         * @param {number} memberId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        memberMemberIdMemberImageGet: async (memberId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberId' is not null or undefined
+            assertParamExists('memberMemberIdMemberImageGet', 'memberId', memberId)
+            const localVarPath = `/member/{member_id}/member-image`
+                .replace(`{${"member_id"}}`, encodeURIComponent(String(memberId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary post member image
+         * @param {number} memberId 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        memberMemberIdMemberImagePost: async (memberId: number, image: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'memberId' is not null or undefined
+            assertParamExists('memberMemberIdMemberImagePost', 'memberId', memberId)
+            // verify required parameter 'image' is not null or undefined
+            assertParamExists('memberMemberIdMemberImagePost', 'image', image)
+            const localVarPath = `/member/{member_id}/member-image`
+                .replace(`{${"member_id"}}`, encodeURIComponent(String(memberId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (image !== undefined) { 
+                localVarFormParams.append('image', image as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -2468,6 +796,33 @@ export const MemberApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary get member images
+         * @param {number} memberId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async memberMemberIdMemberImageGet(memberId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.memberMemberIdMemberImageGet(memberId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MemberApi.memberMemberIdMemberImageGet']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary post member image
+         * @param {number} memberId 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async memberMemberIdMemberImagePost(memberId: number, image: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Member>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.memberMemberIdMemberImagePost(memberId, image, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['MemberApi.memberMemberIdMemberImagePost']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @summary patch member
          * @param {number} memberId 
          * @param {MemberInput} [member] 
@@ -2521,6 +876,27 @@ export const MemberApiFactory = function (configuration?: Configuration, basePat
          */
         memberMemberIdDelete(memberId: number, options?: any): AxiosPromise<Member> {
             return localVarFp.memberMemberIdDelete(memberId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary get member images
+         * @param {number} memberId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        memberMemberIdMemberImageGet(memberId: number, options?: any): AxiosPromise<void> {
+            return localVarFp.memberMemberIdMemberImageGet(memberId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary post member image
+         * @param {number} memberId 
+         * @param {File} image 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        memberMemberIdMemberImagePost(memberId: number, image: File, options?: any): AxiosPromise<Member> {
+            return localVarFp.memberMemberIdMemberImagePost(memberId, image, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -2578,6 +954,31 @@ export class MemberApi extends BaseAPI {
 
     /**
      * 
+     * @summary get member images
+     * @param {number} memberId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MemberApi
+     */
+    public memberMemberIdMemberImageGet(memberId: number, options?: RawAxiosRequestConfig) {
+        return MemberApiFp(this.configuration).memberMemberIdMemberImageGet(memberId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary post member image
+     * @param {number} memberId 
+     * @param {File} image 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MemberApi
+     */
+    public memberMemberIdMemberImagePost(memberId: number, image: File, options?: RawAxiosRequestConfig) {
+        return MemberApiFp(this.configuration).memberMemberIdMemberImagePost(memberId, image, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary patch member
      * @param {number} memberId 
      * @param {MemberInput} [member] 
@@ -2599,3130 +1000,6 @@ export class MemberApi extends BaseAPI {
      */
     public memberPost(member?: MemberInput, options?: RawAxiosRequestConfig) {
         return MemberApiFp(this.configuration).memberPost(member, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * MemberImageApi - axios parameter creator
- * @export
- */
-export const MemberImageApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary delete member image
-         * @param {number} memberId 
-         * @param {string} memberImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        memberMemberIdMemberImageMemberImageUuidDelete: async (memberId: number, memberImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'memberId' is not null or undefined
-            assertParamExists('memberMemberIdMemberImageMemberImageUuidDelete', 'memberId', memberId)
-            // verify required parameter 'memberImageUuid' is not null or undefined
-            assertParamExists('memberMemberIdMemberImageMemberImageUuidDelete', 'memberImageUuid', memberImageUuid)
-            const localVarPath = `/member/{member_id}/member-image/{member_image_uuid}`
-                .replace(`{${"member_id"}}`, encodeURIComponent(String(memberId)))
-                .replace(`{${"member_image_uuid"}}`, encodeURIComponent(String(memberImageUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get member images
-         * @param {number} memberId 
-         * @param {string} memberImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        memberMemberIdMemberImageMemberImageUuidGet: async (memberId: number, memberImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'memberId' is not null or undefined
-            assertParamExists('memberMemberIdMemberImageMemberImageUuidGet', 'memberId', memberId)
-            // verify required parameter 'memberImageUuid' is not null or undefined
-            assertParamExists('memberMemberIdMemberImageMemberImageUuidGet', 'memberImageUuid', memberImageUuid)
-            const localVarPath = `/member/{member_id}/member-image/{member_image_uuid}`
-                .replace(`{${"member_id"}}`, encodeURIComponent(String(memberId)))
-                .replace(`{${"member_image_uuid"}}`, encodeURIComponent(String(memberImageUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post member image
-         * @param {number} memberId 
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        memberMemberIdMemberImagePost: async (memberId: number, image: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'memberId' is not null or undefined
-            assertParamExists('memberMemberIdMemberImagePost', 'memberId', memberId)
-            // verify required parameter 'image' is not null or undefined
-            assertParamExists('memberMemberIdMemberImagePost', 'image', image)
-            const localVarPath = `/member/{member_id}/member-image`
-                .replace(`{${"member_id"}}`, encodeURIComponent(String(memberId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (image !== undefined) { 
-                localVarFormParams.append('image', image as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * MemberImageApi - functional programming interface
- * @export
- */
-export const MemberImageApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = MemberImageApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary delete member image
-         * @param {number} memberId 
-         * @param {string} memberImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async memberMemberIdMemberImageMemberImageUuidDelete(memberId: number, memberImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaperAttachment>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MemberImageApi.memberMemberIdMemberImageMemberImageUuidDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get member images
-         * @param {number} memberId 
-         * @param {string} memberImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async memberMemberIdMemberImageMemberImageUuidGet(memberId: number, memberImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MemberImageApi.memberMemberIdMemberImageMemberImageUuidGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post member image
-         * @param {number} memberId 
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async memberMemberIdMemberImagePost(memberId: number, image: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MemberImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.memberMemberIdMemberImagePost(memberId, image, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['MemberImageApi.memberMemberIdMemberImagePost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * MemberImageApi - factory interface
- * @export
- */
-export const MemberImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = MemberImageApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary delete member image
-         * @param {number} memberId 
-         * @param {string} memberImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        memberMemberIdMemberImageMemberImageUuidDelete(memberId: number, memberImageUuid: string, options?: any): AxiosPromise<PaperAttachment> {
-            return localVarFp.memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get member images
-         * @param {number} memberId 
-         * @param {string} memberImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        memberMemberIdMemberImageMemberImageUuidGet(memberId: number, memberImageUuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post member image
-         * @param {number} memberId 
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        memberMemberIdMemberImagePost(memberId: number, image: File, options?: any): AxiosPromise<MemberImage> {
-            return localVarFp.memberMemberIdMemberImagePost(memberId, image, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * MemberImageApi - object-oriented interface
- * @export
- * @class MemberImageApi
- * @extends {BaseAPI}
- */
-export class MemberImageApi extends BaseAPI {
-    /**
-     * 
-     * @summary delete member image
-     * @param {number} memberId 
-     * @param {string} memberImageUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MemberImageApi
-     */
-    public memberMemberIdMemberImageMemberImageUuidDelete(memberId: number, memberImageUuid: string, options?: RawAxiosRequestConfig) {
-        return MemberImageApiFp(this.configuration).memberMemberIdMemberImageMemberImageUuidDelete(memberId, memberImageUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get member images
-     * @param {number} memberId 
-     * @param {string} memberImageUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MemberImageApi
-     */
-    public memberMemberIdMemberImageMemberImageUuidGet(memberId: number, memberImageUuid: string, options?: RawAxiosRequestConfig) {
-        return MemberImageApiFp(this.configuration).memberMemberIdMemberImageMemberImageUuidGet(memberId, memberImageUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post member image
-     * @param {number} memberId 
-     * @param {File} image 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof MemberImageApi
-     */
-    public memberMemberIdMemberImagePost(memberId: number, image: File, options?: RawAxiosRequestConfig) {
-        return MemberImageApiFp(this.configuration).memberMemberIdMemberImagePost(memberId, image, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * NewsApi - axios parameter creator
- * @export
- */
-export const NewsApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary get newses
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/news`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete news
-         * @param {number} newsId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsNewsIdDelete: async (newsId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'newsId' is not null or undefined
-            assertParamExists('newsNewsIdDelete', 'newsId', newsId)
-            const localVarPath = `/news/{news_id}`
-                .replace(`{${"news_id"}}`, encodeURIComponent(String(newsId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get news
-         * @param {number} newsId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsNewsIdGet: async (newsId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'newsId' is not null or undefined
-            assertParamExists('newsNewsIdGet', 'newsId', newsId)
-            const localVarPath = `/news/{news_id}`
-                .replace(`{${"news_id"}}`, encodeURIComponent(String(newsId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary patch news
-         * @param {number} newsId 
-         * @param {NewsInput} news 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsNewsIdPatch: async (newsId: number, news: NewsInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'newsId' is not null or undefined
-            assertParamExists('newsNewsIdPatch', 'newsId', newsId)
-            // verify required parameter 'news' is not null or undefined
-            assertParamExists('newsNewsIdPatch', 'news', news)
-            const localVarPath = `/news/{news_id}`
-                .replace(`{${"news_id"}}`, encodeURIComponent(String(newsId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(news, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post news
-         * @param {NewsInput} news 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsPost: async (news: NewsInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'news' is not null or undefined
-            assertParamExists('newsPost', 'news', news)
-            const localVarPath = `/news`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(news, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * NewsApi - functional programming interface
- * @export
- */
-export const NewsApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = NewsApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary get newses
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Newses>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsApi.newsGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete news
-         * @param {number} newsId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsNewsIdDelete(newsId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<News>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsNewsIdDelete(newsId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsApi.newsNewsIdDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get news
-         * @param {number} newsId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsNewsIdGet(newsId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<News>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsNewsIdGet(newsId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsApi.newsNewsIdGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary patch news
-         * @param {number} newsId 
-         * @param {NewsInput} news 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsNewsIdPatch(newsId: number, news: NewsInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<News>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsNewsIdPatch(newsId, news, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsApi.newsNewsIdPatch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post news
-         * @param {NewsInput} news 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsPost(news: NewsInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<News>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsPost(news, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsApi.newsPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * NewsApi - factory interface
- * @export
- */
-export const NewsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = NewsApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary get newses
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsGet(options?: any): AxiosPromise<Newses> {
-            return localVarFp.newsGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete news
-         * @param {number} newsId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsNewsIdDelete(newsId: number, options?: any): AxiosPromise<News> {
-            return localVarFp.newsNewsIdDelete(newsId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get news
-         * @param {number} newsId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsNewsIdGet(newsId: number, options?: any): AxiosPromise<News> {
-            return localVarFp.newsNewsIdGet(newsId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary patch news
-         * @param {number} newsId 
-         * @param {NewsInput} news 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsNewsIdPatch(newsId: number, news: NewsInput, options?: any): AxiosPromise<News> {
-            return localVarFp.newsNewsIdPatch(newsId, news, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post news
-         * @param {NewsInput} news 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsPost(news: NewsInput, options?: any): AxiosPromise<News> {
-            return localVarFp.newsPost(news, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * NewsApi - object-oriented interface
- * @export
- * @class NewsApi
- * @extends {BaseAPI}
- */
-export class NewsApi extends BaseAPI {
-    /**
-     * 
-     * @summary get newses
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApi
-     */
-    public newsGet(options?: RawAxiosRequestConfig) {
-        return NewsApiFp(this.configuration).newsGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete news
-     * @param {number} newsId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApi
-     */
-    public newsNewsIdDelete(newsId: number, options?: RawAxiosRequestConfig) {
-        return NewsApiFp(this.configuration).newsNewsIdDelete(newsId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get news
-     * @param {number} newsId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApi
-     */
-    public newsNewsIdGet(newsId: number, options?: RawAxiosRequestConfig) {
-        return NewsApiFp(this.configuration).newsNewsIdGet(newsId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary patch news
-     * @param {number} newsId 
-     * @param {NewsInput} news 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApi
-     */
-    public newsNewsIdPatch(newsId: number, news: NewsInput, options?: RawAxiosRequestConfig) {
-        return NewsApiFp(this.configuration).newsNewsIdPatch(newsId, news, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post news
-     * @param {NewsInput} news 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApi
-     */
-    public newsPost(news: NewsInput, options?: RawAxiosRequestConfig) {
-        return NewsApiFp(this.configuration).newsPost(news, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * NewsImageApi - axios parameter creator
- * @export
- */
-export const NewsImageApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary get news images
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImageGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/news/image`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete news image
-         * @param {string} newsImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImageNewsImageUuidDelete: async (newsImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'newsImageUuid' is not null or undefined
-            assertParamExists('newsImageNewsImageUuidDelete', 'newsImageUuid', newsImageUuid)
-            const localVarPath = `/news/image/{news_image_uuid}`
-                .replace(`{${"news_image_uuid"}}`, encodeURIComponent(String(newsImageUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get news image
-         * @param {string} newsImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImageNewsImageUuidGet: async (newsImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'newsImageUuid' is not null or undefined
-            assertParamExists('newsImageNewsImageUuidGet', 'newsImageUuid', newsImageUuid)
-            const localVarPath = `/news/image/{news_image_uuid}`
-                .replace(`{${"news_image_uuid"}}`, encodeURIComponent(String(newsImageUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post news image
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImagePost: async (image: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'image' is not null or undefined
-            assertParamExists('newsImagePost', 'image', image)
-            const localVarPath = `/news/image`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (image !== undefined) { 
-                localVarFormParams.append('image', image as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * NewsImageApi - functional programming interface
- * @export
- */
-export const NewsImageApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = NewsImageApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary get news images
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsImageGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewsImages>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsImageGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsImageApi.newsImageGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete news image
-         * @param {string} newsImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsImageNewsImageUuidDelete(newsImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewsImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsImageNewsImageUuidDelete(newsImageUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsImageApi.newsImageNewsImageUuidDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get news image
-         * @param {string} newsImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsImageNewsImageUuidGet(newsImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsImageNewsImageUuidGet(newsImageUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsImageApi.newsImageNewsImageUuidGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post news image
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async newsImagePost(image: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<NewsImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.newsImagePost(image, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['NewsImageApi.newsImagePost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * NewsImageApi - factory interface
- * @export
- */
-export const NewsImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = NewsImageApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary get news images
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImageGet(options?: any): AxiosPromise<NewsImages> {
-            return localVarFp.newsImageGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete news image
-         * @param {string} newsImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImageNewsImageUuidDelete(newsImageUuid: string, options?: any): AxiosPromise<NewsImage> {
-            return localVarFp.newsImageNewsImageUuidDelete(newsImageUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get news image
-         * @param {string} newsImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImageNewsImageUuidGet(newsImageUuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.newsImageNewsImageUuidGet(newsImageUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post news image
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        newsImagePost(image: File, options?: any): AxiosPromise<NewsImage> {
-            return localVarFp.newsImagePost(image, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * NewsImageApi - object-oriented interface
- * @export
- * @class NewsImageApi
- * @extends {BaseAPI}
- */
-export class NewsImageApi extends BaseAPI {
-    /**
-     * 
-     * @summary get news images
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsImageApi
-     */
-    public newsImageGet(options?: RawAxiosRequestConfig) {
-        return NewsImageApiFp(this.configuration).newsImageGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete news image
-     * @param {string} newsImageUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsImageApi
-     */
-    public newsImageNewsImageUuidDelete(newsImageUuid: string, options?: RawAxiosRequestConfig) {
-        return NewsImageApiFp(this.configuration).newsImageNewsImageUuidDelete(newsImageUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get news image
-     * @param {string} newsImageUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsImageApi
-     */
-    public newsImageNewsImageUuidGet(newsImageUuid: string, options?: RawAxiosRequestConfig) {
-        return NewsImageApiFp(this.configuration).newsImageNewsImageUuidGet(newsImageUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post news image
-     * @param {File} image 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsImageApi
-     */
-    public newsImagePost(image: File, options?: RawAxiosRequestConfig) {
-        return NewsImageApiFp(this.configuration).newsImagePost(image, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * PaperApi - axios parameter creator
- * @export
- */
-export const PaperApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary get_papers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/paper`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete paper
-         * @param {number} paperId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdDelete: async (paperId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'paperId' is not null or undefined
-            assertParamExists('paperPaperIdDelete', 'paperId', paperId)
-            const localVarPath = `/paper/{paper_id}`
-                .replace(`{${"paper_id"}}`, encodeURIComponent(String(paperId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary patch paper
-         * @param {number} paperId 
-         * @param {PaperPaperIdPatchRequest} [paper] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPatch: async (paperId: number, paper?: PaperPaperIdPatchRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'paperId' is not null or undefined
-            assertParamExists('paperPaperIdPatch', 'paperId', paperId)
-            const localVarPath = `/paper/{paper_id}`
-                .replace(`{${"paper_id"}}`, encodeURIComponent(String(paperId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(paper, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post paper
-         * @param {PaperPostRequest} [paper] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPost: async (paper?: PaperPostRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/paper`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(paper, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * PaperApi - functional programming interface
- * @export
- */
-export const PaperApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PaperApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary get_papers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Papers>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperApi.paperGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete paper
-         * @param {number} paperId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperPaperIdDelete(paperId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdDelete(paperId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperApi.paperPaperIdDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary patch paper
-         * @param {number} paperId 
-         * @param {PaperPaperIdPatchRequest} [paper] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdPatch(paperId, paper, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperApi.paperPaperIdPatch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post paper
-         * @param {PaperPostRequest} [paper] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperPost(paper?: PaperPostRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Paper>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperPost(paper, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperApi.paperPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * PaperApi - factory interface
- * @export
- */
-export const PaperApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PaperApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary get_papers
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperGet(options?: any): AxiosPromise<Papers> {
-            return localVarFp.paperGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete paper
-         * @param {number} paperId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdDelete(paperId: number, options?: any): AxiosPromise<Paper> {
-            return localVarFp.paperPaperIdDelete(paperId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary patch paper
-         * @param {number} paperId 
-         * @param {PaperPaperIdPatchRequest} [paper] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: any): AxiosPromise<Paper> {
-            return localVarFp.paperPaperIdPatch(paperId, paper, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post paper
-         * @param {PaperPostRequest} [paper] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPost(paper?: PaperPostRequest, options?: any): AxiosPromise<Paper> {
-            return localVarFp.paperPost(paper, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * PaperApi - object-oriented interface
- * @export
- * @class PaperApi
- * @extends {BaseAPI}
- */
-export class PaperApi extends BaseAPI {
-    /**
-     * 
-     * @summary get_papers
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperApi
-     */
-    public paperGet(options?: RawAxiosRequestConfig) {
-        return PaperApiFp(this.configuration).paperGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete paper
-     * @param {number} paperId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperApi
-     */
-    public paperPaperIdDelete(paperId: number, options?: RawAxiosRequestConfig) {
-        return PaperApiFp(this.configuration).paperPaperIdDelete(paperId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary patch paper
-     * @param {number} paperId 
-     * @param {PaperPaperIdPatchRequest} [paper] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperApi
-     */
-    public paperPaperIdPatch(paperId: number, paper?: PaperPaperIdPatchRequest, options?: RawAxiosRequestConfig) {
-        return PaperApiFp(this.configuration).paperPaperIdPatch(paperId, paper, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post paper
-     * @param {PaperPostRequest} [paper] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperApi
-     */
-    public paperPost(paper?: PaperPostRequest, options?: RawAxiosRequestConfig) {
-        return PaperApiFp(this.configuration).paperPost(paper, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * PaperAttachmentApi - axios parameter creator
- * @export
- */
-export const PaperAttachmentApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary delete paper attachment
-         * @param {number} paperId 
-         * @param {string} paperAttachmentUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPaperAttachmentPaperAttachmentUuidDelete: async (paperId: number, paperAttachmentUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'paperId' is not null or undefined
-            assertParamExists('paperPaperIdPaperAttachmentPaperAttachmentUuidDelete', 'paperId', paperId)
-            // verify required parameter 'paperAttachmentUuid' is not null or undefined
-            assertParamExists('paperPaperIdPaperAttachmentPaperAttachmentUuidDelete', 'paperAttachmentUuid', paperAttachmentUuid)
-            const localVarPath = `/paper/{paper_id}/paper-attachment/{paper_attachment_uuid}`
-                .replace(`{${"paper_id"}}`, encodeURIComponent(String(paperId)))
-                .replace(`{${"paper_attachment_uuid"}}`, encodeURIComponent(String(paperAttachmentUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get paper attachment
-         * @param {number} paperId 
-         * @param {string} paperAttachmentUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPaperAttachmentPaperAttachmentUuidGet: async (paperId: number, paperAttachmentUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'paperId' is not null or undefined
-            assertParamExists('paperPaperIdPaperAttachmentPaperAttachmentUuidGet', 'paperId', paperId)
-            // verify required parameter 'paperAttachmentUuid' is not null or undefined
-            assertParamExists('paperPaperIdPaperAttachmentPaperAttachmentUuidGet', 'paperAttachmentUuid', paperAttachmentUuid)
-            const localVarPath = `/paper/{paper_id}/paper-attachment/{paper_attachment_uuid}`
-                .replace(`{${"paper_id"}}`, encodeURIComponent(String(paperId)))
-                .replace(`{${"paper_attachment_uuid"}}`, encodeURIComponent(String(paperAttachmentUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post paper attachment
-         * @param {number} paperId 
-         * @param {File} paperAttachment 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPaperAttachmentPost: async (paperId: number, paperAttachment: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'paperId' is not null or undefined
-            assertParamExists('paperPaperIdPaperAttachmentPost', 'paperId', paperId)
-            // verify required parameter 'paperAttachment' is not null or undefined
-            assertParamExists('paperPaperIdPaperAttachmentPost', 'paperAttachment', paperAttachment)
-            const localVarPath = `/paper/{paper_id}/paper-attachment`
-                .replace(`{${"paper_id"}}`, encodeURIComponent(String(paperId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (paperAttachment !== undefined) { 
-                localVarFormParams.append('paper_attachment', paperAttachment as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * PaperAttachmentApi - functional programming interface
- * @export
- */
-export const PaperAttachmentApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = PaperAttachmentApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary delete paper attachment
-         * @param {number} paperId 
-         * @param {string} paperAttachmentUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId: number, paperAttachmentUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaperAttachment>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperAttachmentApi.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get paper attachment
-         * @param {number} paperId 
-         * @param {string} paperAttachmentUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId: number, paperAttachmentUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperAttachmentApi.paperPaperIdPaperAttachmentPaperAttachmentUuidGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post paper attachment
-         * @param {number} paperId 
-         * @param {File} paperAttachment 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async paperPaperIdPaperAttachmentPost(paperId: number, paperAttachment: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaperAttachment>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.paperPaperIdPaperAttachmentPost(paperId, paperAttachment, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PaperAttachmentApi.paperPaperIdPaperAttachmentPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * PaperAttachmentApi - factory interface
- * @export
- */
-export const PaperAttachmentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = PaperAttachmentApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary delete paper attachment
-         * @param {number} paperId 
-         * @param {string} paperAttachmentUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId: number, paperAttachmentUuid: string, options?: any): AxiosPromise<PaperAttachment> {
-            return localVarFp.paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get paper attachment
-         * @param {number} paperId 
-         * @param {string} paperAttachmentUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId: number, paperAttachmentUuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post paper attachment
-         * @param {number} paperId 
-         * @param {File} paperAttachment 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        paperPaperIdPaperAttachmentPost(paperId: number, paperAttachment: File, options?: any): AxiosPromise<PaperAttachment> {
-            return localVarFp.paperPaperIdPaperAttachmentPost(paperId, paperAttachment, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * PaperAttachmentApi - object-oriented interface
- * @export
- * @class PaperAttachmentApi
- * @extends {BaseAPI}
- */
-export class PaperAttachmentApi extends BaseAPI {
-    /**
-     * 
-     * @summary delete paper attachment
-     * @param {number} paperId 
-     * @param {string} paperAttachmentUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperAttachmentApi
-     */
-    public paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId: number, paperAttachmentUuid: string, options?: RawAxiosRequestConfig) {
-        return PaperAttachmentApiFp(this.configuration).paperPaperIdPaperAttachmentPaperAttachmentUuidDelete(paperId, paperAttachmentUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get paper attachment
-     * @param {number} paperId 
-     * @param {string} paperAttachmentUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperAttachmentApi
-     */
-    public paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId: number, paperAttachmentUuid: string, options?: RawAxiosRequestConfig) {
-        return PaperAttachmentApiFp(this.configuration).paperPaperIdPaperAttachmentPaperAttachmentUuidGet(paperId, paperAttachmentUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post paper attachment
-     * @param {number} paperId 
-     * @param {File} paperAttachment 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PaperAttachmentApi
-     */
-    public paperPaperIdPaperAttachmentPost(paperId: number, paperAttachment: File, options?: RawAxiosRequestConfig) {
-        return PaperAttachmentApiFp(this.configuration).paperPaperIdPaperAttachmentPost(paperId, paperAttachment, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ProjectApi - axios parameter creator
- * @export
- */
-export const ProjectApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary get projects
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/project`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post project
-         * @param {ProjectInput} [project] project information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectPost: async (project?: ProjectInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/project`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete project
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdDelete: async (projectId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdDelete', 'projectId', projectId)
-            const localVarPath = `/project/{project_id}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary patch project
-         * @param {number} projectId 
-         * @param {ProjectInput} [project] project information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdPatch: async (projectId: number, project?: ProjectInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdPatch', 'projectId', projectId)
-            const localVarPath = `/project/{project_id}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(project, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ProjectApi - functional programming interface
- * @export
- */
-export const ProjectApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProjectApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary get projects
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Projects>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post project
-         * @param {ProjectInput} [project] project information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectPost(project?: ProjectInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectPost(project, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete project
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdDelete(projectId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdDelete(projectId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectProjectIdDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary patch project
-         * @param {number} projectId 
-         * @param {ProjectInput} [project] project information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdPatch(projectId: number, project?: ProjectInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Project>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdPatch(projectId, project, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectProjectIdPatch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ProjectApi - factory interface
- * @export
- */
-export const ProjectApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProjectApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary get projects
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectGet(options?: any): AxiosPromise<Projects> {
-            return localVarFp.projectGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post project
-         * @param {ProjectInput} [project] project information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectPost(project?: ProjectInput, options?: any): AxiosPromise<Project> {
-            return localVarFp.projectPost(project, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete project
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdDelete(projectId: number, options?: any): AxiosPromise<Project> {
-            return localVarFp.projectProjectIdDelete(projectId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary patch project
-         * @param {number} projectId 
-         * @param {ProjectInput} [project] project information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdPatch(projectId: number, project?: ProjectInput, options?: any): AxiosPromise<Project> {
-            return localVarFp.projectProjectIdPatch(projectId, project, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ProjectApi - object-oriented interface
- * @export
- * @class ProjectApi
- * @extends {BaseAPI}
- */
-export class ProjectApi extends BaseAPI {
-    /**
-     * 
-     * @summary get projects
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApi
-     */
-    public projectGet(options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post project
-     * @param {ProjectInput} [project] project information
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApi
-     */
-    public projectPost(project?: ProjectInput, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectPost(project, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete project
-     * @param {number} projectId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApi
-     */
-    public projectProjectIdDelete(projectId: number, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectProjectIdDelete(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary patch project
-     * @param {number} projectId 
-     * @param {ProjectInput} [project] project information
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectApi
-     */
-    public projectProjectIdPatch(projectId: number, project?: ProjectInput, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectProjectIdPatch(projectId, project, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ProjectIconApi - axios parameter creator
- * @export
- */
-export const ProjectIconApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary post project icon
-         * @param {number} projectId 
-         * @param {File} projectIcon 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdProjectIconPost: async (projectId: number, projectIcon: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdProjectIconPost', 'projectId', projectId)
-            // verify required parameter 'projectIcon' is not null or undefined
-            assertParamExists('projectProjectIdProjectIconPost', 'projectIcon', projectIcon)
-            const localVarPath = `/project/{project_id}/project-icon`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (projectIcon !== undefined) { 
-                localVarFormParams.append('project_icon', projectIcon as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete project icon
-         * @param {number} projectId 
-         * @param {string} projectIconUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdProjectIconProjectIconUuidDelete: async (projectId: number, projectIconUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdProjectIconProjectIconUuidDelete', 'projectId', projectId)
-            // verify required parameter 'projectIconUuid' is not null or undefined
-            assertParamExists('projectProjectIdProjectIconProjectIconUuidDelete', 'projectIconUuid', projectIconUuid)
-            const localVarPath = `/project/{project_id}/project-icon/{project_icon_uuid}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)))
-                .replace(`{${"project_icon_uuid"}}`, encodeURIComponent(String(projectIconUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get project icon
-         * @param {number} projectId 
-         * @param {string} projectIconUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdProjectIconProjectIconUuidGet: async (projectId: number, projectIconUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdProjectIconProjectIconUuidGet', 'projectId', projectId)
-            // verify required parameter 'projectIconUuid' is not null or undefined
-            assertParamExists('projectProjectIdProjectIconProjectIconUuidGet', 'projectIconUuid', projectIconUuid)
-            const localVarPath = `/project/{project_id}/project-icon/{project_icon_uuid}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)))
-                .replace(`{${"project_icon_uuid"}}`, encodeURIComponent(String(projectIconUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ProjectIconApi - functional programming interface
- * @export
- */
-export const ProjectIconApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProjectIconApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary post project icon
-         * @param {number} projectId 
-         * @param {File} projectIcon 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdProjectIconPost(projectId: number, projectIcon: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectIcon>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdProjectIconPost(projectId, projectIcon, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectIconApi.projectProjectIdProjectIconPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete project icon
-         * @param {number} projectId 
-         * @param {string} projectIconUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdProjectIconProjectIconUuidDelete(projectId: number, projectIconUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectIcon>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdProjectIconProjectIconUuidDelete(projectId, projectIconUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectIconApi.projectProjectIdProjectIconProjectIconUuidDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get project icon
-         * @param {number} projectId 
-         * @param {string} projectIconUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdProjectIconProjectIconUuidGet(projectId: number, projectIconUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdProjectIconProjectIconUuidGet(projectId, projectIconUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectIconApi.projectProjectIdProjectIconProjectIconUuidGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ProjectIconApi - factory interface
- * @export
- */
-export const ProjectIconApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProjectIconApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary post project icon
-         * @param {number} projectId 
-         * @param {File} projectIcon 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdProjectIconPost(projectId: number, projectIcon: File, options?: any): AxiosPromise<ProjectIcon> {
-            return localVarFp.projectProjectIdProjectIconPost(projectId, projectIcon, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete project icon
-         * @param {number} projectId 
-         * @param {string} projectIconUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdProjectIconProjectIconUuidDelete(projectId: number, projectIconUuid: string, options?: any): AxiosPromise<ProjectIcon> {
-            return localVarFp.projectProjectIdProjectIconProjectIconUuidDelete(projectId, projectIconUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get project icon
-         * @param {number} projectId 
-         * @param {string} projectIconUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdProjectIconProjectIconUuidGet(projectId: number, projectIconUuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.projectProjectIdProjectIconProjectIconUuidGet(projectId, projectIconUuid, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ProjectIconApi - object-oriented interface
- * @export
- * @class ProjectIconApi
- * @extends {BaseAPI}
- */
-export class ProjectIconApi extends BaseAPI {
-    /**
-     * 
-     * @summary post project icon
-     * @param {number} projectId 
-     * @param {File} projectIcon 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectIconApi
-     */
-    public projectProjectIdProjectIconPost(projectId: number, projectIcon: File, options?: RawAxiosRequestConfig) {
-        return ProjectIconApiFp(this.configuration).projectProjectIdProjectIconPost(projectId, projectIcon, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete project icon
-     * @param {number} projectId 
-     * @param {string} projectIconUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectIconApi
-     */
-    public projectProjectIdProjectIconProjectIconUuidDelete(projectId: number, projectIconUuid: string, options?: RawAxiosRequestConfig) {
-        return ProjectIconApiFp(this.configuration).projectProjectIdProjectIconProjectIconUuidDelete(projectId, projectIconUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get project icon
-     * @param {number} projectId 
-     * @param {string} projectIconUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectIconApi
-     */
-    public projectProjectIdProjectIconProjectIconUuidGet(projectId: number, projectIconUuid: string, options?: RawAxiosRequestConfig) {
-        return ProjectIconApiFp(this.configuration).projectProjectIdProjectIconProjectIconUuidGet(projectId, projectIconUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ProjectTaskApi - axios parameter creator
- * @export
- */
-export const ProjectTaskApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary get project tasks
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskGet: async (projectId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdTaskGet', 'projectId', projectId)
-            const localVarPath = `/project/{project_id}/task`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post project task
-         * @param {number} projectId 
-         * @param {ProjectTaskInput} [projectTask] project task information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskPost: async (projectId: number, projectTask?: ProjectTaskInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdTaskPost', 'projectId', projectId)
-            const localVarPath = `/project/{project_id}/task`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(projectTask, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskProjectTaskIdDelete: async (projectId: number, projectTaskId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdTaskProjectTaskIdDelete', 'projectId', projectId)
-            // verify required parameter 'projectTaskId' is not null or undefined
-            assertParamExists('projectProjectIdTaskProjectTaskIdDelete', 'projectTaskId', projectTaskId)
-            const localVarPath = `/project/{project_id}/task/{project_task_id}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)))
-                .replace(`{${"project_task_id"}}`, encodeURIComponent(String(projectTaskId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskProjectTaskIdGet: async (projectId: number, projectTaskId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdTaskProjectTaskIdGet', 'projectId', projectId)
-            // verify required parameter 'projectTaskId' is not null or undefined
-            assertParamExists('projectProjectIdTaskProjectTaskIdGet', 'projectTaskId', projectTaskId)
-            const localVarPath = `/project/{project_id}/task/{project_task_id}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)))
-                .replace(`{${"project_task_id"}}`, encodeURIComponent(String(projectTaskId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary patch project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {ProjectTaskInput} [projectTask] project task information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskProjectTaskIdPatch: async (projectId: number, projectTaskId: number, projectTask?: ProjectTaskInput, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectProjectIdTaskProjectTaskIdPatch', 'projectId', projectId)
-            // verify required parameter 'projectTaskId' is not null or undefined
-            assertParamExists('projectProjectIdTaskProjectTaskIdPatch', 'projectTaskId', projectTaskId)
-            const localVarPath = `/project/{project_id}/task/{project_task_id}`
-                .replace(`{${"project_id"}}`, encodeURIComponent(String(projectId)))
-                .replace(`{${"project_task_id"}}`, encodeURIComponent(String(projectTaskId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(projectTask, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ProjectTaskApi - functional programming interface
- * @export
- */
-export const ProjectTaskApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProjectTaskApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary get project tasks
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdTaskGet(projectId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTasks>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdTaskGet(projectId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskApi.projectProjectIdTaskGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post project task
-         * @param {number} projectId 
-         * @param {ProjectTaskInput} [projectTask] project task information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdTaskPost(projectId: number, projectTask?: ProjectTaskInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTask>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdTaskPost(projectId, projectTask, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskApi.projectProjectIdTaskPost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdTaskProjectTaskIdDelete(projectId: number, projectTaskId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTask>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdTaskProjectTaskIdDelete(projectId, projectTaskId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskApi.projectProjectIdTaskProjectTaskIdDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdTaskProjectTaskIdGet(projectId: number, projectTaskId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTask>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdTaskProjectTaskIdGet(projectId, projectTaskId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskApi.projectProjectIdTaskProjectTaskIdGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary patch project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {ProjectTaskInput} [projectTask] project task information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectProjectIdTaskProjectTaskIdPatch(projectId: number, projectTaskId: number, projectTask?: ProjectTaskInput, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTask>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectProjectIdTaskProjectTaskIdPatch(projectId, projectTaskId, projectTask, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskApi.projectProjectIdTaskProjectTaskIdPatch']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ProjectTaskApi - factory interface
- * @export
- */
-export const ProjectTaskApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProjectTaskApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary get project tasks
-         * @param {number} projectId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskGet(projectId: number, options?: any): AxiosPromise<ProjectTasks> {
-            return localVarFp.projectProjectIdTaskGet(projectId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post project task
-         * @param {number} projectId 
-         * @param {ProjectTaskInput} [projectTask] project task information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskPost(projectId: number, projectTask?: ProjectTaskInput, options?: any): AxiosPromise<ProjectTask> {
-            return localVarFp.projectProjectIdTaskPost(projectId, projectTask, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskProjectTaskIdDelete(projectId: number, projectTaskId: number, options?: any): AxiosPromise<ProjectTask> {
-            return localVarFp.projectProjectIdTaskProjectTaskIdDelete(projectId, projectTaskId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskProjectTaskIdGet(projectId: number, projectTaskId: number, options?: any): AxiosPromise<ProjectTask> {
-            return localVarFp.projectProjectIdTaskProjectTaskIdGet(projectId, projectTaskId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary patch project task
-         * @param {number} projectId 
-         * @param {number} projectTaskId 
-         * @param {ProjectTaskInput} [projectTask] project task information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectProjectIdTaskProjectTaskIdPatch(projectId: number, projectTaskId: number, projectTask?: ProjectTaskInput, options?: any): AxiosPromise<ProjectTask> {
-            return localVarFp.projectProjectIdTaskProjectTaskIdPatch(projectId, projectTaskId, projectTask, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ProjectTaskApi - object-oriented interface
- * @export
- * @class ProjectTaskApi
- * @extends {BaseAPI}
- */
-export class ProjectTaskApi extends BaseAPI {
-    /**
-     * 
-     * @summary get project tasks
-     * @param {number} projectId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskApi
-     */
-    public projectProjectIdTaskGet(projectId: number, options?: RawAxiosRequestConfig) {
-        return ProjectTaskApiFp(this.configuration).projectProjectIdTaskGet(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post project task
-     * @param {number} projectId 
-     * @param {ProjectTaskInput} [projectTask] project task information
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskApi
-     */
-    public projectProjectIdTaskPost(projectId: number, projectTask?: ProjectTaskInput, options?: RawAxiosRequestConfig) {
-        return ProjectTaskApiFp(this.configuration).projectProjectIdTaskPost(projectId, projectTask, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete project task
-     * @param {number} projectId 
-     * @param {number} projectTaskId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskApi
-     */
-    public projectProjectIdTaskProjectTaskIdDelete(projectId: number, projectTaskId: number, options?: RawAxiosRequestConfig) {
-        return ProjectTaskApiFp(this.configuration).projectProjectIdTaskProjectTaskIdDelete(projectId, projectTaskId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get project task
-     * @param {number} projectId 
-     * @param {number} projectTaskId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskApi
-     */
-    public projectProjectIdTaskProjectTaskIdGet(projectId: number, projectTaskId: number, options?: RawAxiosRequestConfig) {
-        return ProjectTaskApiFp(this.configuration).projectProjectIdTaskProjectTaskIdGet(projectId, projectTaskId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary patch project task
-     * @param {number} projectId 
-     * @param {number} projectTaskId 
-     * @param {ProjectTaskInput} [projectTask] project task information
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskApi
-     */
-    public projectProjectIdTaskProjectTaskIdPatch(projectId: number, projectTaskId: number, projectTask?: ProjectTaskInput, options?: RawAxiosRequestConfig) {
-        return ProjectTaskApiFp(this.configuration).projectProjectIdTaskProjectTaskIdPatch(projectId, projectTaskId, projectTask, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * ProjectTaskImageApi - axios parameter creator
- * @export
- */
-export const ProjectTaskImageApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary get project task images
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImageGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/project/task/image`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary post project task image
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImagePost: async (image: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'image' is not null or undefined
-            assertParamExists('projectTaskImagePost', 'image', image)
-            const localVarPath = `/project/task/image`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
-
-
-            if (image !== undefined) { 
-                localVarFormParams.append('image', image as any);
-            }
-    
-    
-            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = localVarFormParams;
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary delete project task image
-         * @param {string} projectTaskImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImageProjectTaskImageUuidDelete: async (projectTaskImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectTaskImageUuid' is not null or undefined
-            assertParamExists('projectTaskImageProjectTaskImageUuidDelete', 'projectTaskImageUuid', projectTaskImageUuid)
-            const localVarPath = `/project/task/image/{project_task_image_uuid}`
-                .replace(`{${"project_task_image_uuid"}}`, encodeURIComponent(String(projectTaskImageUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary get project task image
-         * @param {string} projectTaskImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImageProjectTaskImageUuidGet: async (projectTaskImageUuid: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectTaskImageUuid' is not null or undefined
-            assertParamExists('projectTaskImageProjectTaskImageUuidGet', 'projectTaskImageUuid', projectTaskImageUuid)
-            const localVarPath = `/project/task/image/{project_task_image_uuid}`
-                .replace(`{${"project_task_image_uuid"}}`, encodeURIComponent(String(projectTaskImageUuid)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * ProjectTaskImageApi - functional programming interface
- * @export
- */
-export const ProjectTaskImageApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProjectTaskImageApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary get project task images
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectTaskImageGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTaskImages>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectTaskImageGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskImageApi.projectTaskImageGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary post project task image
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectTaskImagePost(image: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTaskImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectTaskImagePost(image, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskImageApi.projectTaskImagePost']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary delete project task image
-         * @param {string} projectTaskImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectTaskImageProjectTaskImageUuidDelete(projectTaskImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectTaskImage>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectTaskImageProjectTaskImageUuidDelete(projectTaskImageUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskImageApi.projectTaskImageProjectTaskImageUuidDelete']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary get project task image
-         * @param {string} projectTaskImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProjectTaskImageApi.projectTaskImageProjectTaskImageUuidGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * ProjectTaskImageApi - factory interface
- * @export
- */
-export const ProjectTaskImageApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProjectTaskImageApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary get project task images
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImageGet(options?: any): AxiosPromise<ProjectTaskImages> {
-            return localVarFp.projectTaskImageGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary post project task image
-         * @param {File} image 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImagePost(image: File, options?: any): AxiosPromise<ProjectTaskImage> {
-            return localVarFp.projectTaskImagePost(image, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary delete project task image
-         * @param {string} projectTaskImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImageProjectTaskImageUuidDelete(projectTaskImageUuid: string, options?: any): AxiosPromise<ProjectTaskImage> {
-            return localVarFp.projectTaskImageProjectTaskImageUuidDelete(projectTaskImageUuid, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary get project task image
-         * @param {string} projectTaskImageUuid 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid: string, options?: any): AxiosPromise<void> {
-            return localVarFp.projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * ProjectTaskImageApi - object-oriented interface
- * @export
- * @class ProjectTaskImageApi
- * @extends {BaseAPI}
- */
-export class ProjectTaskImageApi extends BaseAPI {
-    /**
-     * 
-     * @summary get project task images
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskImageApi
-     */
-    public projectTaskImageGet(options?: RawAxiosRequestConfig) {
-        return ProjectTaskImageApiFp(this.configuration).projectTaskImageGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary post project task image
-     * @param {File} image 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskImageApi
-     */
-    public projectTaskImagePost(image: File, options?: RawAxiosRequestConfig) {
-        return ProjectTaskImageApiFp(this.configuration).projectTaskImagePost(image, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary delete project task image
-     * @param {string} projectTaskImageUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskImageApi
-     */
-    public projectTaskImageProjectTaskImageUuidDelete(projectTaskImageUuid: string, options?: RawAxiosRequestConfig) {
-        return ProjectTaskImageApiFp(this.configuration).projectTaskImageProjectTaskImageUuidDelete(projectTaskImageUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary get project task image
-     * @param {string} projectTaskImageUuid 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ProjectTaskImageApi
-     */
-    public projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid: string, options?: RawAxiosRequestConfig) {
-        return ProjectTaskImageApiFp(this.configuration).projectTaskImageProjectTaskImageUuidGet(projectTaskImageUuid, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * RetrievalApi - axios parameter creator
- * @export
- */
-export const RetrievalApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * 
-         * @summary chat retrieval augmented generation
-         * @param {string} queryString query string
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrievalQueryGet: async (queryString: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'queryString' is not null or undefined
-            assertParamExists('retrievalQueryGet', 'queryString', queryString)
-            const localVarPath = `/retrieval/query`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            if (queryString !== undefined) {
-                localVarQueryParameter['query_string'] = queryString;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary check the status of scrapying
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrievalScrapyingStatusGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/retrieval/scrapying-status`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @summary start scrapying
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrievalStartScrapyingGet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/retrieval/start-scrapying`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
-};
-
-/**
- * RetrievalApi - functional programming interface
- * @export
- */
-export const RetrievalApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = RetrievalApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * 
-         * @summary chat retrieval augmented generation
-         * @param {string} queryString query string
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async retrievalQueryGet(queryString: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievalQueryGet(queryString, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RetrievalApi.retrievalQueryGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary check the status of scrapying
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async retrievalScrapyingStatusGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScrapyingStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievalScrapyingStatusGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RetrievalApi.retrievalScrapyingStatusGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @summary start scrapying
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async retrievalStartScrapyingGet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ScrapyingStatus>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.retrievalStartScrapyingGet(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['RetrievalApi.retrievalStartScrapyingGet']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
-
-/**
- * RetrievalApi - factory interface
- * @export
- */
-export const RetrievalApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = RetrievalApiFp(configuration)
-    return {
-        /**
-         * 
-         * @summary chat retrieval augmented generation
-         * @param {string} queryString query string
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrievalQueryGet(queryString: string, options?: any): AxiosPromise<void> {
-            return localVarFp.retrievalQueryGet(queryString, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary check the status of scrapying
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrievalScrapyingStatusGet(options?: any): AxiosPromise<ScrapyingStatus> {
-            return localVarFp.retrievalScrapyingStatusGet(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary start scrapying
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        retrievalStartScrapyingGet(options?: any): AxiosPromise<ScrapyingStatus> {
-            return localVarFp.retrievalStartScrapyingGet(options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * RetrievalApi - object-oriented interface
- * @export
- * @class RetrievalApi
- * @extends {BaseAPI}
- */
-export class RetrievalApi extends BaseAPI {
-    /**
-     * 
-     * @summary chat retrieval augmented generation
-     * @param {string} queryString query string
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RetrievalApi
-     */
-    public retrievalQueryGet(queryString: string, options?: RawAxiosRequestConfig) {
-        return RetrievalApiFp(this.configuration).retrievalQueryGet(queryString, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary check the status of scrapying
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RetrievalApi
-     */
-    public retrievalScrapyingStatusGet(options?: RawAxiosRequestConfig) {
-        return RetrievalApiFp(this.configuration).retrievalScrapyingStatusGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary start scrapying
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RetrievalApi
-     */
-    public retrievalStartScrapyingGet(options?: RawAxiosRequestConfig) {
-        return RetrievalApiFp(this.configuration).retrievalStartScrapyingGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
