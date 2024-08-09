@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
 import Logo from '../../images/logo/logo.svg';
-import { AuthApi } from '../../../domain/api-client/api';
+// import { AuthApi } from '../../../domain/api-client/api';
 import { Configuration } from '../../../domain/api-client/configuration';
 
 interface SidebarProps {
@@ -29,8 +29,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               withCredentials: true,
           }
         });
-        const apiClient = new AuthApi(configuration);
-        await apiClient.authLogOutGet()
+        // const apiClient = new AuthApi(configuration);
+        // await apiClient.authLogOutGet()
 
         window.location.href = '/';
         

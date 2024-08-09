@@ -4,15 +4,15 @@ import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
 import UploadImage from '../components/Forms/UploadImageForm';
-import DeleteImages from '../components/Forms/DeleteImages';
-import { MemberApi, Configuration, MemberImageApi } from '../../domain/api-client';
-import type { MemberInput, MembersResponseInner } from 'domain/api-client';
+// import DeleteImages from '../components/Forms/DeleteImages';
+import { MemberApi, Configuration } from '../../domain/api-client';
+import type { MemberInput, MemberResponse } from 'domain/api-client';
 
 const MemberPage = () => {
-  const [members, setMembers] = useState<MembersResponseInner[]>([]);
+  const [members, setMembers] = useState<MemberResponse[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [isDeletingImages, setIsDeletingImages] = useState(false);
+  // const [isDeletingImages, setIsDeletingImages] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -21,11 +21,12 @@ const MemberPage = () => {
   
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
-    { id: 'member_name', Name: '名稱', isShow: 'true', type: 'String' },
-    { id: 'member_name_en', Name: '英文名稱', isShow: 'true', type: 'String' },
-    { id: 'member_intro', Name: '介紹', isShow: 'true', type: 'Textarea' },
-    { id: 'member_character', Name: '職位', isShow: 'true', type: 'String' },
-    { id: 'imageActions', Name: 'member_image', isShow: 'false', type: 'Null' },
+    { id: 'name', Name: '名稱', isShow: 'true', type: 'String' },
+    { id: 'name_en', Name: '英文名稱', isShow: 'true', type: 'String' },
+    { id: 'intro', Name: '介紹', isShow: 'true', type: 'Textarea' },
+    { id: 'character', Name: '職位', isShow: 'true', type: 'String' },
+    { id: 'graduate_year', Name: '畢業時間', isShow: 'true', type: 'String' },
+    { id: 'imageActions', Name: 'image', isShow: 'false', type: 'Null' },
   ];
 
   const fetchMembers = async () => {
@@ -33,7 +34,7 @@ const MemberPage = () => {
     const apiClient = new MemberApi(configuration);
     try {
       const response = await apiClient.memberGet();
-      const data = response.data.response as MembersResponseInner[];
+      const data = response.data.response as MemberResponse[];
       setMembers(data);
       console.log(data);
     } catch (error) {
@@ -63,10 +64,10 @@ const MemberPage = () => {
     setIsUploading(true);
   };
 
-  const handleDeleteImages = (row: { [key: string]: any }) => {
-    setEditData(row);
-    setIsDeletingImages(true);
-  };
+  // const handleDeleteImages = (row: { [key: string]: any }) => {
+  //   setEditData(row);
+  //   setIsDeletingImages(true);
+  // };
 
   const handleCloseForm = () => {
     setIsAdding(false);
@@ -76,16 +77,17 @@ const MemberPage = () => {
     setIsUploading(false);
   };
 
-  const handleCloseDeleteImages = () => {
-    setIsDeletingImages(false);
-  };
+  // const handleCloseDeleteImages = () => {
+  //   setIsDeletingImages(false);
+  // };
 
   const createMember = async (formData: { [key: string]: any }) => {
     const newMember: MemberInput = {
-      member_name: formData.member_name,
-      member_name_en: formData.member_name_en,
-      member_intro: formData.member_intro,
-      member_character: formData.member_character,
+      name: formData.name,
+      name_en: formData.name_en,
+      intro: formData.intro,
+      position: formData.position,
+      graduate_year: formData.graduate_year || ""
     };
 
     const configuration = new Configuration();
@@ -114,7 +116,7 @@ const MemberPage = () => {
 
   const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
     const configuration = new Configuration();
-    const apiClient = new MemberImageApi(configuration);
+    const apiClient = new MemberApi(configuration);
     try {
       if (editData) {
         await apiClient.memberMemberIdMemberImagePost(editData.id, formData.image);
@@ -135,26 +137,26 @@ const MemberPage = () => {
     }
   };  
 
-  const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
-    const configuration = new Configuration();
-    const apiClient = new MemberImageApi(configuration);
-    try {
-      await apiClient.memberMemberIdMemberImageMemberImageUuidDelete(id, imageId);
-      setIsDeletingImages(false);
-      fetchMembers();
-      setSuccessMessage('圖片刪除成功!');
-      setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 3000);
-    } catch (error) {
-      console.error('圖片刪除失敗:', (error as Error).message);
-      setErrorMessage('圖片刪除失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
-    }
-  };
+  // const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
+  //   const configuration = new Configuration();
+  //   const apiClient = new MemberApi(configuration);
+  //   try {
+  //     await apiClient.memberMemberIdMemberImageMemberImageUuidDelete(id, imageId);
+  //     setIsDeletingImages(false);
+  //     fetchMembers();
+  //     setSuccessMessage('圖片刪除成功!');
+  //     setShowSuccessMessage(true);
+  //     setTimeout(() => setShowSuccessMessage(false), 3000);
+  //   } catch (error) {
+  //     console.error('圖片刪除失敗:', (error as Error).message);
+  //     setErrorMessage('圖片刪除失敗!');
+  //     setShowErrorMessage(true);
+  //     setTimeout(() => setShowErrorMessage(false), 3000);
+  //     if ((error as any).response) {
+  //       console.error('API Response Error:', (error as any).response.body);
+  //     }
+  //   }
+  // };
 
   const deleteMember = async (id: number) => {
     const configuration = new Configuration();
@@ -188,11 +190,11 @@ const MemberPage = () => {
         </button>
       </div>
       <div className="flex flex-col gap-6">
-        <DynamicTable data={members} headers={headers} onDelete={deleteMember} onEdit={handleEditItem} onUploadFile={handleUploadImage} onDeleteFiles={handleDeleteImages} />
+        <DynamicTable data={members} headers={headers} onDelete={deleteMember} onEdit={handleEditItem} onUploadFile={handleUploadImage} />
       </div>
       {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createMember} editData={editData} />}
       {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
-      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action_1={'member'} action_2={'member-image'} id={editData?.id!} imageId={editData?.member_image} onDeleteImage={handleDeleteImagesSubmit} />}
+      {/* {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action_1={'member'} action_2={'member-image'} id={editData?.id!} imageId={editData?.image} onDeleteImage={handleDeleteImagesSubmit} />} */}
       {showSuccessMessage && (
         <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
           {successMessage}

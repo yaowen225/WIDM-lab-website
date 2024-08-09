@@ -178,7 +178,7 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
 
       {/* 刪除用 */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded shadow-lg dark:bg-boxdark">
             <h3 className="mb-4 text-black dark:text-white">確定刪除此筆資料?</h3>
             <div className="flex justify-end space-x-4">

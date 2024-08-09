@@ -136,7 +136,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
           <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>

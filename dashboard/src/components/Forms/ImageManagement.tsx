@@ -62,7 +62,7 @@ const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, action_1, ac
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
           <h3 className="text-lg font-medium text-black dark:text-white">Images Management</h3>
@@ -117,7 +117,7 @@ const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, action_1, ac
         </div>
       </div>
       {confirmingDelete && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="w-96 rounded-sm border border-stroke bg-white p-6 shadow-default dark:border-strokedark dark:bg-boxdark">
             <h3 className="text-lg font-medium text-black dark:text-white mb-4">確認刪除</h3>
             <p className="mb-4 text-black dark:text-white">是否確定刪除此圖片?</p>
