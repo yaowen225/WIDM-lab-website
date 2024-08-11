@@ -38,7 +38,7 @@ const UploadImage: React.FC<UploadImageProps> = ({ onClose, onSubmit }) => {
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           <div>
-            <label className="mb-3 block text-black dark:text-white">圖片</label>
+            <label className="mb-3 block text-black dark:text-white">圖片 (會覆蓋原有圖片)</label>
             <input
               type="file"
               accept="image/*"

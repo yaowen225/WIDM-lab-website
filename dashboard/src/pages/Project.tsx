@@ -4,59 +4,148 @@ import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
 import UploadImage from '../components/Forms/UploadImageForm';
-import DeleteImages from '../components/Forms/DeleteImages';
-import { ProjectApi, Configuration, ProjectIconApi } from '../../domain/api-client';
-import type { ProjectInput } from 'domain/api-client';
+import { Spin } from 'antd';
+import { defaultHttp } from '../utils/http';
+import { processDataRoutes } from '../routes/api';
+import { storedHeaders } from '../utils/storedHeaders';
+import { handleErrorResponse } from '../utils';
 
 const ProjectPage = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [isAdding, setIsAdding] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [isDeletingImages, setIsDeletingImages] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // - Loading
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingStates, setLoadingStates] = useState({});    // 儲存各個API的loading狀態
+  useEffect(() => {   // 當任何一個API的loading狀態改變時，更新isLoading
+    const anyLoading = Object.values(loadingStates).some(state => state);
+    setIsLoading(anyLoading);
+  }, [loadingStates]);
+
   const headers = [
-    { id: 'id', Name: 'Id', isShow: 'true', isEnable: "false", type: 'Number' },
-    { id: 'project_name', Name: '專案名稱', isShow: 'true', type: 'String' },
-    { id: 'project_description', Name: '專案描述', isShow: 'true', type: 'Textarea' },
-    { id: 'project_github', Name: 'GitHub 連結', isShow: 'true', type: 'Url' },
-    { id: 'project_link', Name: '專案連結', isShow: 'true', type: 'Url' },
-    { id: 'project_tags', Name: '專案標籤', isShow: 'true', type: 'Tags' },
-    { id: 'imageActions', Name: 'project_icon', isShow: 'false', type: 'Null' },
+    { id: 'id', Name: 'Id', isShow: 'false', isEnable: "false", type: 'Number' },
+    { id: 'name', Name: '專案名稱', isShow: 'true', type: 'String' },
+    { id: 'description', Name: '專案描述', isShow: 'true', type: 'Textarea' },
+    { id: 'github', Name: 'GitHub 連結', isShow: 'true', type: 'Url' },
+    { id: 'link', Name: '專案連結', isShow: 'true', type: 'Url' },
+    { id: 'tags', Name: '專案標籤', isShow: 'true', type: 'Tags' },
+    { id: 'members', Name: '人員', isShow: 'true', type: 'Tags' },
+    { id: 'imageActions', Name: 'project-icon', isShow: 'false', type: 'Null' },
   ];
 
   const fetchProjects = async () => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectApi(configuration);
     try {
-      const response = await apiClient.projectGet();
-      const data: any = response.data.response;
+      setLoadingStates(prev => ({ ...prev, fetchProjects: true }));
+      const response = await defaultHttp.get(processDataRoutes.project, {
+        headers: storedHeaders()
+      });
+      const data = response.data.response;
       setProjects(data);
       console.log(data);
     } catch (error) {
-      console.error('API 調用失敗:', (error as Error).message);
+      handleErrorResponse(error);
+    } finally {
+      setLoadingStates(prev => ({ ...prev, fetchProjects: false }));
+    }
+  };
+
+  const createProject = async (formData: { [key: string]: any }) => {
+    try {
+      setLoadingStates(prev => ({ ...prev, createProject: true }));
+      const newProject = {
+        name: formData.name,
+        description: formData.description,
+        github: formData.github,
+        link: formData.link,
+        tags: formData.tags.map((tag: { id: string; text: string; className: string }) => tag.text),
+        members: formData.members.map((member: { id: string; text: string; className: string }) => member.text),
+      };
+
+      let response;
+      if (editData) {
+        response = await defaultHttp.patch(`${processDataRoutes.project}/${editData.id}`, newProject, { headers: storedHeaders() });
+      } else {
+        response = await defaultHttp.post(processDataRoutes.project, newProject, { headers: storedHeaders() });
+      }
+      setIsAdding(false);
+      fetchProjects();  // 新增或更新後重新獲取成員數據
+      setSuccessMessage('更新成功!');
+      setShowSuccessMessage(true); // 顯示成功消息
+      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+    } catch (error) {
+      console.error('API 創建失敗:', (error as Error).message);
+      setErrorMessage('更新失敗!');
+      setShowErrorMessage(true); // 顯示錯誤消息
+      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
+    } finally {
+      setLoadingStates(prev => ({ ...prev, createProject: false }));
+    }
+  };
+
+  const deleteProject = async (id: number) => {
+    try {
+      setLoadingStates(prev => ({ ...prev, deleteProject: true }));
+      await defaultHttp.delete(`${processDataRoutes.project}/${id}`, { headers: storedHeaders() });
+      fetchProjects(); // 刪除後重新獲取成員數據
+      setSuccessMessage('刪除成功!');
+      setShowSuccessMessage(true); // 顯示成功消息
+      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+    } catch (error) {
+      console.error('API 刪除失敗:', (error as Error).message);
+      setErrorMessage('刪除失敗!');
+      setShowErrorMessage(true); // 顯示錯誤消息
+      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      if ((error as any).response) {
+        console.error('API Response Error:', (error as any).response.body);
+      }
+    } finally {
+      setLoadingStates(prev => ({ ...prev, deleteProject: false }));
     }
   };
 
   const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectIconApi(configuration);
     try {
+      setLoadingStates(prev => ({ ...prev, handleUploadImageSubmit: true }));
       if (editData) {
-        await apiClient.projectProjectIdProjectIconPost(editData.id, formData.image);
+        const projectIconUrl = `${processDataRoutes.project}/${editData.id}/project-icon`;
+        const uploadFormData = new FormData();
+  
+        // 確保圖片文件被添加到 FormData 中
+        if (formData.image) {
+          uploadFormData.append('image', formData.image);
+        }
+        const response = await defaultHttp.post(projectIconUrl, uploadFormData);
+        if (response.status === 200) {
+          await fetchProjects();
+
+          console.log(projects);
+  
+          // 為了強制圖片刷新，添加一個隨機的 query 參數
+          const updatedProjects = projects.map(project => {
+            if (project.id === editData.id) {
+              project.imageUrl = `${projectIconUrl}`;
+            }
+            return project;
+          });
+          console.log(updatedProjects);
+          setProjects(updatedProjects);
+  
+          setSuccessMessage('圖片上傳成功!');
+          setShowSuccessMessage(true);
+          setTimeout(() => setShowSuccessMessage(false), 3000);
+        } else {
+          throw new Error('圖片上傳失敗!');
+        }
       }
-      setIsUploading(false);
-      fetchProjects();
-      setSuccessMessage('圖片上傳成功!');
-      setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 3000);
     } catch (error) {
       console.error('圖片上傳失敗:', (error as Error).message);
       setErrorMessage('圖片上傳失敗!');
@@ -65,33 +154,10 @@ const ProjectPage = () => {
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
+    } finally {
+      setLoadingStates(prev => ({ ...prev, handleUploadImageSubmit: false }));
     }
   };
-
-  const handleDeleteImagesSubmit = async (id: number, imageId: string) => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectIconApi(configuration);
-    try {
-      await apiClient.projectProjectIdProjectIconProjectIconUuidDelete(id, imageId);
-      setIsDeletingImages(false);
-      fetchProjects();
-      setSuccessMessage('圖片刪除成功!');
-      setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 3000);
-    } catch (error) {
-      console.error('圖片刪除失敗:', (error as Error).message);
-      setErrorMessage('圖片刪除失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
-    }
-  };
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
 
   const handleAddNewItem = () => {
     setEditData(null); // 新增時清空 editData
@@ -112,102 +178,43 @@ const ProjectPage = () => {
     setIsUploading(true);
   };
 
-  const handleDeleteImages = (row: { [key: string]: any }) => {
-    setEditData(row);
-    setIsDeletingImages(true);
-  };
-
   const handleCloseUploadImage = () => {
     setIsUploading(false);
   };
 
-  const handleCloseDeleteImages = () => {
-    setIsDeletingImages(false);
-  };
-
-  const createProject = async (formData: { [key: string]: any }) => {
-    console.log(formData)
-    const newProject: ProjectInput = {
-      project_description: formData.project_description,
-      project_github: formData.project_github,
-      project_link: formData.project_link,
-      project_name: formData.project_name,
-      project_tags: formData.project_tags.map((tag: { id: string; text: string; className: string }) => tag.text),
-    };
-    console.log(newProject)
-
-    const configuration = new Configuration();
-    const apiClient = new ProjectApi(configuration);
-    try {
-      if (editData) {
-        await apiClient.projectProjectIdPatch(editData.id, newProject); // 使用 PATCH 方法更新資料
-      } else {
-        await apiClient.projectPost(newProject); // 使用 POST 方法新增資料
-      }
-      setIsAdding(false);
-      fetchProjects();  // 新增或更新後重新獲取專案數據
-      setSuccessMessage('更新成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
-    } catch (error) {
-      console.error('API 創建失敗:', (error as Error).message);
-      setErrorMessage('更新失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
-    }
-  };
-
-  const deleteProject = async (id: number) => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectApi(configuration);
-    try {
-      await apiClient.projectProjectIdDelete(id);
-      fetchProjects(); // 刪除後重新獲取專案數據
-      setSuccessMessage('刪除成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
-    } catch (error) {
-      console.error('API 刪除失敗:', (error as Error).message);
-      setErrorMessage('刪除失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
-    }
-  };
+  useEffect(() => {
+    fetchProjects();
+  }, []);
 
   return (
-    <DefaultLayout>
-      <Breadcrumb pageName="Project" />
-      <div className="flex justify-end mb-1">
-        <button
-          onClick={handleAddNewItem}
-          className="inline-flex items-center justify-center rounded-md border border-meta-3 py-1 px-3 text-center font-medium text-meta-3 hover:bg-opacity-90"
-        >
-          新增
-        </button>
-      </div>
-      <div className="flex flex-col gap-6">
-        <DynamicTable data={projects} headers={headers} onDelete={deleteProject} onEdit={handleEditItem} onUploadFile={handleUploadImage} onDeleteFiles={handleDeleteImages} />
-      </div>
-      {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createProject} editData={editData} />}
-      {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
-      {isDeletingImages && <DeleteImages onClose={handleCloseDeleteImages} action_1={'project'} action_2={'project-icon'} id={editData?.id!} imageId={editData?.project_icon} onDeleteImage={handleDeleteImagesSubmit} />}
-      {showSuccessMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-          {successMessage}
+    <Spin spinning={isLoading} tip="Loading...">
+      <DefaultLayout>
+        <Breadcrumb pageName="Project" />
+        <div className="flex justify-end mb-1">
+          <button
+            onClick={handleAddNewItem}
+            className="inline-flex items-center justify-center rounded-md border border-meta-3 py-1 px-3 text-center font-medium text-meta-3 hover:bg-opacity-90"
+          >
+            新增
+          </button>
         </div>
-      )}
-      {showErrorMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
-          {errorMessage}
+        <div className="flex flex-col gap-6">
+          <DynamicTable page={'project'} data={projects} headers={headers} onDelete={deleteProject} onEdit={handleEditItem} onUploadFile={handleUploadImage} />
         </div>
-      )}
-    </DefaultLayout>
+        {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createProject} editData={editData} />}
+        {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
+        {showSuccessMessage && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+            {successMessage}
+          </div>
+        )}
+        {showErrorMessage && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
+            {errorMessage}
+          </div>
+        )}
+      </DefaultLayout>
+    </Spin>
   );
 };
 

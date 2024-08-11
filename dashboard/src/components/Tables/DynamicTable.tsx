@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrashAlt, FaLink } from 'react-icons/fa';
 import { LuImage, LuImagePlus, LuImageMinus } from "react-icons/lu";
 import { FiFilePlus, FiFileMinus } from "react-icons/fi";
+import { MdOutlineFileDownload } from "react-icons/md";
 import { Tag } from 'antd';
 
 type HeaderType = {
@@ -10,21 +11,30 @@ type HeaderType = {
   isShow: string;
   type: string;
   isEnable?: string;
+  data?: any;
 };
 
 interface TableProps {
+  page?: string; // 這個參數是用來判斷是哪個頁面的表單
   headers: Array<HeaderType>;
   data: Array<{ [key: string]: any }>;
   onDelete: (id: number) => void;
   onEdit: (row: { [key: string]: any }) => void;
   onUploadFile?: (row: { [key: string]: any }) => void;
   onDeleteFiles?: (row: { [key: string]: any }) => void;
+  onDownloadFile?: (row: { [key: string]: any }) => void;
   onEditImage?: (row: { [key: string]: any }) => void;
 }
 
-const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, onUploadFile, onDeleteFiles, onEditImage }) => {
+const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onEdit, onUploadFile, onDeleteFiles, onDownloadFile, onEditImage }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [imageUpdate, setImageUpdate] = useState(0);
+
+  useEffect(() => {
+    console.log(data);
+    setImageUpdate(prev => prev + 1); // 更新狀態
+  } , [data]);
 
   const handleDeleteClick = (id: number) => {
     setSelectedId(id);
@@ -49,11 +59,11 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
-            <tr className="bg-gray-2 text-left dark:bg-meta-4">
-              {headers.map((header) => (
+            <tr key={`outtr-${page}`} className="bg-gray-2 text-left dark:bg-meta-4">
+              {headers.map((header, rowIndex) => (
                 (!header.isEnable || header.isEnable === 'true') ? (
                 <th
-                  key={header.id}
+                  key={`outth-${header.Name}-${rowIndex}`}
                   scope="col"
                   className="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11"
                 >
@@ -64,10 +74,10 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
           {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className="hover:bg-gray-50 dark:hover:bg-meta-4">
+            <tr key={`intr-${row}-${rowIndex}`} className="hover:bg-gray-50 dark:hover:bg-meta-4">
               {headers.map((header) => (
                 (!header.isEnable || header.isEnable === 'true') ? (
-                  <td key={header.id} className="border-b border-[#eee] py-5 px-4 dark:border-strokedark xl:pl-11">
+                  <td key={`intd-${rowIndex}-${header.id}`} className="border-b border-[#eee] py-5 px-4 dark:border-strokedark xl:pl-11">
                     {/* header.id === 'actions' 新增 修改 刪除 */}
                     {header.id === 'actions' && (
                       <div className="flex items-center space-x-3.5">
@@ -99,6 +109,15 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                             <LuImageMinus className="text-red-500"/>
                           </button>
                         )}
+                        <img
+                          key={imageUpdate}
+                          src={row.imageUrl ? row.imageUrl : `https://widm-back-end.nevercareu.space/${page}/${row['id']}/${header.Name}`}
+                          className="w-10 h-10 object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                          }}
+                        />
                       </div>
                     )}
                     {header.id === 'imagesActions' && (onUploadFile || onDeleteFiles || onEditImage) && (
@@ -148,18 +167,25 @@ const DynamicTable: React.FC<TableProps> = ({ headers, data, onDelete, onEdit, o
                             <FiFileMinus />
                           </button>
                         )}
+                        {onDownloadFile && row[`${page}_existed`] && (
+                          <button className="hover:text-primary" onClick={() => onDownloadFile(row)}>
+                            <MdOutlineFileDownload 
+                              style={{ fontSize: '20px', color: '#0066FF' }}
+                            />
+                          </button>
+                        )}
                       </div>
                     )}
                     {header.type === 'Tags' ? (
                       <div className="flex flex-wrap">
                         {row[header.id] ? row[header.id].map((tag: string, index: number) => (
-                          <Tag key={index} className="mb-1 mr-1">
+                          <Tag key={`tag-${row}-${rowIndex}-${tag}-${index}`} className="mb-1 mr-1">
                             {tag}
                           </Tag>
                         )) : <></>}
                       </div>
                     ) : header.type === 'Url' ? (
-                      <a href={row[header.id]} target="_blank" rel="noopener noreferrer" className="text-blue-500 flex justify-center items-center">
+                      <a href={row[header.id]} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                         <FaLink />
                       </a>
                     ) : (

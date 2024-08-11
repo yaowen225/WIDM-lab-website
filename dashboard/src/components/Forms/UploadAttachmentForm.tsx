@@ -38,7 +38,7 @@ const UploadAttachmentForm: React.FC<UploadAttachmentProps> = ({ onClose, onSubm
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           <div>
-            <label className="mb-3 block text-black dark:text-white">附件</label>
+            <label className="mb-3 block text-black dark:text-white">附檔 (會覆蓋原有檔案)</label>
             <input
               type="file"
               accept="*/*"

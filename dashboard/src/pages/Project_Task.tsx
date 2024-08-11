@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import { Select, Tree, TreeProps } from 'antd';
-import { ProjectApi, Configuration, ProjectTaskApi } from '../../domain/api-client';
 import AddTaskModal from '../components/AddTaskModal';
 import { DownOutlined } from '@ant-design/icons';
-import ImportImageModal from '../components/ImportImageModal';
+// import ImportImageModal from '../components/ImportImageModal';
 import JoditEditor from 'jodit-react';
+import { WithContext as ReactTags } from 'react-tag-input';
+import { Spin } from 'antd';
+import { defaultHttp } from '../utils/http';
+import { processDataRoutes } from '../routes/api';
+import { storedHeaders } from '../utils/storedHeaders';
+import { handleErrorResponse } from '../utils';
 
 const { Option } = Select;
 
@@ -14,25 +19,28 @@ interface ProjectTask {
   id: number;
   parent_id: number;
   project_id: number;
-  project_task_content: string;
-  project_task_sub_title: string;
-  project_task_title: string;
+  content: string;
+  sub_title: string;
+  title: string;
   create_time: string;
   update_time: string;
   children: ProjectTask[];
+  members: Tag[];
+  papers: Tag[];
 }
 
 interface creatTaskData {
-  project_task_title: string,
-  project_task_sub_title: string,
-  project_task_content: string,
+  title: string,
+  sub_title: string,
+  content: string,
+  members: [],
+  papers: [],
 }
 
-interface TaskImage {
-  id: number;
-  image_name: string,
-  image_path: string,
-  image_uuid: string,
+interface Tag {
+  id: string;
+  className: string;
+  [key: string]: string;
 }
 
 const ProjectPage = () => {
@@ -45,7 +53,14 @@ const ProjectPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [importImageOpen, setImportImageOpen] = useState(false);
+
+   // - Loading
+   const [isLoading, setIsLoading] = useState(false);
+   const [loadingStates, setLoadingStates] = useState({});    // 儲存各個API的loading狀態
+   useEffect(() => {   // 當任何一個API的loading狀態改變時，更新isLoading
+     const anyLoading = Object.values(loadingStates).some(state => state);
+     setIsLoading(anyLoading);
+   }, [loadingStates]);
 
   const config = React.useMemo(
     () => ({
@@ -81,105 +96,137 @@ const ProjectPage = () => {
     []
   );
 
-  const handleImportImageClick = () => {
-    setImportImageOpen(true);
-  }
-
-  const handleSelectImage = (image: TaskImage) => {
-    console.log('選中的圖片:', image.image_uuid);
-    const imageMarkdown = `![${image.image_name}](https://widm-back-end.nevercareu.space/project/task/image/${image.image_uuid})`;
-    let newProjectTask = projectTask;
-    if (newProjectTask) {
-      newProjectTask.project_task_content += '\n' + imageMarkdown;
-    }
-    setProjectTask(newProjectTask);
-    setImportImageOpen(false);
-  }
-
   const fetchProjects = async () => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectApi(configuration);
     try {
-      const response = await apiClient.projectGet();
-      const data: any = response.data.response;
+      setLoadingStates(prev => ({ ...prev, fetchProjects: true }));
+      const response = await defaultHttp.get(processDataRoutes.project, {
+        headers: storedHeaders()
+      });
+      const data = response.data.response;
       setProjects(data);
       console.log(data);
     } catch (error) {
-      console.error('API 調用失敗:', (error as Error).message);
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
+      handleErrorResponse(error);
+    } finally {
+      setLoadingStates(prev => ({ ...prev, fetchProjects: false }));
     }
   };
 
   const fetchProjectsTasks = async (id: number) => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectTaskApi(configuration);
     try {
-      const response = await apiClient.projectProjectIdTaskGet(id);
-      const data: any = response.data.response;
+      setLoadingStates(prev => ({ ...prev, fetchProjectsTasks: true }));
+      const response = await defaultHttp.get(`${processDataRoutes.project}/${id}/task`, {
+        headers: storedHeaders()
+      });
+      const data = response.data.response;
       setProjectTasks(data);
-      console.log(data);
     } catch (error) {
-      console.error('API 調用失敗:', (error as Error).message);
+        handleErrorResponse(error);
+        console.error('API 調用失敗:', (error as Error).message);
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
+    } finally {
+      setLoadingStates(prev => ({ ...prev, fetchProjectsTasks: false }));
     }
   };
 
   const fetchProjectsTask = async (projectTaskId: number) => {
-    const configuration = new Configuration();
-    const apiClient = new ProjectTaskApi(configuration);
     try {
-      const response = await apiClient.projectProjectIdTaskProjectTaskIdGet(projectId, projectTaskId);
-      const data: any = response.data.response;
-      setProjectTask(data);
-      console.log(data);
+      setLoadingStates(prev => ({ ...prev, fetchProjectsTask: true }));
+      const response = await defaultHttp.get(`${processDataRoutes.project}/${projectId}/task/${projectTaskId}`, {
+        headers: storedHeaders()
+      });
+      const data = response.data.response;
+      // 重組 members
+      const transformedMembers = data.members.map((member: string, index: number) => ({
+        id: (index + 1).toString(),
+        text: member,
+        className: ''
+      }));
+
+      // 重組 papers
+      const transformedPapers = data.papers.map((paper: string, index: number) => ({
+        id: (index + 1).toString(),
+        text: paper,
+        className: ''
+      }));
+
+      // 更新 projectTask
+      setProjectTask({
+        ...data,
+        members: transformedMembers,
+        papers: transformedPapers
+      });
     } catch (error) {
-      console.error('API 調用失敗:', (error as Error).message);
+        handleErrorResponse(error);
+        console.error('API 調用失敗:', (error as Error).message);
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
+    } finally {
+      setLoadingStates(prev => ({ ...prev, fetchProjectsTask: false }));
     }
   };
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  const handleAddTask = async (selectedValue: string, taskDetails: creatTaskData) => {
+    try {
+      setLoadingStates(prev => ({ ...prev, handleAddTask: true }));
+      let project_id = 0;
+      let parent_id = 0;
+      if (selectedValue.startsWith('project-')) {
+        project_id = parseInt(selectedValue.split('-')[1], 10);
+      } else if (selectedValue.startsWith('task-')) {
+        project_id = parseInt(selectedValue.split('-')[1], 10);
+        parent_id = parseInt(selectedValue.split('-')[2], 10);
+      }
 
-  const onTreeSelect: TreeProps['onSelect'] = async (selectedKeys, info) => {
-    await fetchProjectsTask(info.node.key as number);
-  };
-
-  const handleSelectChange = (id: number) => {
-    fetchProjectsTasks(id);
-    setProjectId(id);
-    setProjectTask(null);
-  };
-
-  const convertToTreeData = (tasks: ProjectTask[]): { title: string; key: number; children: any[] }[] => {
-    return tasks.map(task => ({
-      title: task.project_task_title,
-      key: task.id,
-      children: convertToTreeData(task.children || [])
-    }));
+      const newTask = {
+        parent_id: parent_id,
+        title: taskDetails.title,
+        sub_title: taskDetails.sub_title,
+        content: taskDetails.content,
+        members: taskDetails.members,
+        papers: taskDetails.papers,
+        create_time: new Date().toISOString(),
+        update_time: new Date().toISOString(),
+        children: [],
+      };
+    
+      await defaultHttp.post(`${processDataRoutes.project}/${project_id}/task`, newTask, { headers: storedHeaders() });
+      setSuccessMessage('新增成功!');
+      setShowSuccessMessage(true);
+      fetchProjectsTasks(project_id);
+      setTimeout(() => setShowSuccessMessage(false), 3000);
+    } catch (error) {
+      console.error('API 新增失敗:', (error as Error).message);
+      setErrorMessage('新增失敗!');
+      setShowErrorMessage(true);
+      setTimeout(() => setShowErrorMessage(false), 3000);
+      if ((error as any).response) {
+        console.error('API Response Error:', (error as any).response.body);
+      }
+    } finally {
+      handleCloseModal();
+      setLoadingStates(prev => ({ ...prev, handleAddTask: false }));
+    }
   };
 
   const handleSubmitTaskUpdate = async (event: React.FormEvent) => {
     event.preventDefault();
     if (projectTask) {
-      const updatedTask: ProjectTask = {
-        ...projectTask,
-        project_task_title: (event.target as any).project_task_title.value,
-        project_task_sub_title: (event.target as any).project_task_sub_title.value,
-        project_task_content: projectTask.project_task_content, // 直接使用狀態中的內容
-      };
-
-      const configuration = new Configuration();
-      const apiClient = new ProjectTaskApi(configuration);
       try {
-        await apiClient.projectProjectIdTaskProjectTaskIdPatch(projectId, projectTask.id, updatedTask);
+        setLoadingStates(prev => ({ ...prev, handleSubmitTaskUpdate: true }));
+        const updatedTask = {
+          ...projectTask,
+          title: (event.target as any).title.value,
+          sub_title: (event.target as any).sub_title.value,
+          content: projectTask.content, // 直接使用狀態中的內容
+          members: projectTask.members.map(tag => tag.text),
+          papers: projectTask.papers.map(tag => tag.text),
+        };
+      
+        await defaultHttp.patch(`${processDataRoutes.project}/${projectId}/task/${projectTask.id}`, updatedTask, { headers: storedHeaders() });
         setSuccessMessage('更新成功!');
         setShowSuccessMessage(true);
         setTimeout(() => setShowSuccessMessage(false), 3000);
@@ -192,35 +239,45 @@ const ProjectPage = () => {
         if ((error as any).response) {
           console.error('API Response Error:', (error as any).response.body);
         }
+      } finally {
+        setLoadingStates(prev => ({ ...prev, handleSubmitTaskUpdate: false }));
       }
     }
   };
 
   const handleDeleteProjectTask = async () => {
     if (projectTask) {
-      if (!window.confirm('確定要刪除此資料嗎?')) {
-        return;
-      }
-
-      const configuration = new Configuration();
-      const apiClient = new ProjectTaskApi(configuration);
       try {
-        await apiClient.projectProjectIdTaskProjectTaskIdDelete(projectId, projectTask.id);
+        setLoadingStates(prev => ({ ...prev, handleDeleteProjectTask: true }));
+        if (!window.confirm('確定要刪除此資料嗎?')) {
+          return;
+        }
+        await defaultHttp.delete(`${processDataRoutes.project}/${projectId}/task/${projectTask.id}`, { headers: storedHeaders() });
         setSuccessMessage('刪除成功!');
-        setShowSuccessMessage(true);
-        setTimeout(() => setShowSuccessMessage(false), 3000);
+        setShowSuccessMessage(true); // 顯示成功消息
+        setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
         fetchProjectsTasks(projectId);
         setProjectTask(null);
       } catch (error) {
         console.error('API 刪除失敗:', (error as Error).message);
         setErrorMessage('刪除失敗!');
-        setShowErrorMessage(true);
-        setTimeout(() => setShowErrorMessage(false), 3000);
+        setShowErrorMessage(true); // 顯示錯誤消息
+        setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
         if ((error as any).response) {
           console.error('API Response Error:', (error as any).response.body);
         }
+      } finally {
+        setLoadingStates(prev => ({ ...prev, handleDeleteProjectTask: false }));
       }
     }
+  };
+
+  const convertToTreeData = (tasks: ProjectTask[]): { title: string; key: number; children: any[] }[] => {
+    return tasks.map(task => ({
+      title: task.title,
+      key: task.id,
+      children: convertToTreeData(task.children || [])
+    }));
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -236,177 +293,207 @@ const ProjectPage = () => {
     setIsModalVisible(false);
   };
 
-  const handleAddTask = async (selectedValue: string, taskDetails: creatTaskData) => {
-    let project_id = 0;
-    let parent_id = 0;
-    if (selectedValue.startsWith('project-')) {
-      project_id = parseInt(selectedValue.split('-')[1], 10);
-    } else if (selectedValue.startsWith('task-')) {
-      project_id = parseInt(selectedValue.split('-')[1], 10);
-      parent_id = parseInt(selectedValue.split('-')[2], 10);
-    }
-
-    const newTask = {
-      parent_id: parent_id,
-      project_task_title: taskDetails.project_task_title,
-      project_task_sub_title: taskDetails.project_task_sub_title,
-      project_task_content: taskDetails.project_task_content,
-      create_time: new Date().toISOString(),
-      update_time: new Date().toISOString(),
-      children: [],
-    };
-
-    const configuration = new Configuration();
-    const apiClient = new ProjectTaskApi(configuration);
-    try {
-      await apiClient.projectProjectIdTaskPost(project_id, newTask);
-      setSuccessMessage('新增成功!');
-      setShowSuccessMessage(true);
-      fetchProjectsTasks(project_id);
-      setTimeout(() => setShowSuccessMessage(false), 3000);
-    } catch (error) {
-      console.error('API 新增失敗:', (error as Error).message);
-      setErrorMessage('新增失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
-      if ((error as any).response) {
-        console.error('API Response Error:', (error as any).response.body);
-      }
-    }
-    handleCloseModal();
-  };
-
   const handleEditorBlur = (newContent: string) => {
     if (projectTask) {
-      setProjectTask({ ...projectTask, project_task_content: newContent });
+      setProjectTask({ ...projectTask, content: newContent });
     }
   };
 
+  const onTreeSelect: TreeProps['onSelect'] = async (selectedKeys, info) => {
+    await fetchProjectsTask(info.node.key as number);
+  };
+
+  const handleSelectChange = (id: number) => {
+    fetchProjectsTasks(id);
+    setProjectId(id);
+    setProjectTask(null);
+  };
+
+  const handleDeleteMmeberTag = (i: number) => {
+    if (projectTask) {
+      const updatedTags = projectTask.members.filter((tag, index) => index !== i);
+      setProjectTask({ ...projectTask, members: updatedTags });
+    }
+  };
+
+  const handleAdditionMemberTag = (tag: Tag) => {
+    if (projectTask) {
+      const updatedTags = [...(projectTask.members || []), tag];
+      setProjectTask({ ...projectTask, members: updatedTags });
+    }
+  };
+
+  const handleDragMemberTag = (tag: any, currPos: number, newPos: number) => {
+    if (projectTask) {
+      const newTags = projectTask.members.slice();
+      newTags.splice(currPos, 1);
+      newTags.splice(newPos, 0, tag);
+      setProjectTask({ ...projectTask, members: newTags });
+    }
+  };
+
+  const handleDeletePaperTag = (i: number) => {
+    if (projectTask) {
+      const updatedTags = projectTask.papers.filter((tag, index) => index !== i);
+      setProjectTask({ ...projectTask, papers: updatedTags });
+    }
+  };
+
+  const handleAdditionPaperTag = (tag: Tag) => {
+    if (projectTask) {
+      const updatedTags = [...(projectTask.papers || []), tag];
+      setProjectTask({ ...projectTask, papers: updatedTags });
+    }
+  };
+
+  const handleDragPaperTag = (tag: any, currPos: number, newPos: number) => {
+    if (projectTask) {
+      const newTags = projectTask.papers.slice();
+      newTags.splice(currPos, 1);
+      newTags.splice(newPos, 0, tag);
+      setProjectTask({ ...projectTask, papers: newTags });
+    }
+  };
+
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
   return (
-    <DefaultLayout>
-      <Breadcrumb pageName="Project_Task" />
-      <div className="flex justify-end mb-1">
-        <button
-          onClick={handleOpenModal}
-          className="inline-flex items-center justify-center rounded-md border border-meta-3 py-1 px-3 text-center font-medium text-meta-3 hover:bg-opacity-90"
-        >
-          新增 Task
-        </button>
-      </div>
-      <AddTaskModal
-        open={isModalVisible}
-        onOk={handleAddTask}
-        onCancel={handleCloseModal}
-      />
-      <div className="flex flex-col gap-6 mt-5">
-        <div className="relative rounded-sm border border-stroke bg-white px-5 pt-6 pb-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-6">
-          <div className="max-w-full overflow-x-auto">
-            <Select
-              style={{ width: 200 }}
-              placeholder="Select a project"
-              onChange={handleSelectChange}
-            >
-              {projects.map((project) => (
-                <Option key={project.id} value={project.id}>
-                  {project.project_name}
-                </Option>
-              ))}
-            </Select>
-          </div>
-          <div className="mt-4 flex">
-            {projectTasks.length !== 0 || projectId === 0 ?
-              <Tree
-                showLine
-                switcherIcon={<DownOutlined />}
-                treeData={convertToTreeData(projectTasks)}
-                onSelect={onTreeSelect}
-                className="flex-grow"
-              /> : <div>No Data</div>}
-            {projectTask && (
-              <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6 ml-4">
-                <form onSubmit={handleSubmitTaskUpdate} className="flex flex-col gap-6">
-                  <div>
-                    <label className="mb-3 block text-black dark:text-white">標題</label>
-                    <input
-                      type="text"
-                      name="project_task_title"
-                      value={projectTask?.project_task_title || ''}
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-3 block text-black dark:text-white">副標題</label>
-                    <input
-                      type="text"
-                      name="project_task_sub_title"
-                      value={projectTask?.project_task_sub_title || ''}
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-3 block text-black dark:text-white">內容</label>
-                    <JoditEditor
-                      key={projectTask.id}
-                      value={projectTask?.project_task_content}
-                      config={config}
-                      onBlur={(newContent) => handleEditorBlur(newContent)}
-                    />
-                  </div>
-                  <div className="flex justify-between gap-4">
-                    <button
-                      type="button"
-                      onClick={handleImportImageClick}
-                      className="rounded-md border border-stroke bg-primary py-3 px-6 text-black text-white"
-                    >
-                      匯入圖片
-                    </button>
-                    <div className="flex gap-4">
+    <Spin spinning={isLoading} tip="Loading...">
+      <DefaultLayout>
+        <Breadcrumb pageName="Project_Task" />
+        <div className="flex justify-end mb-1">
+          <button
+            onClick={handleOpenModal}
+            className="inline-flex items-center justify-center rounded-md border border-meta-3 py-1 px-3 text-center font-medium text-meta-3 hover:bg-opacity-90"
+          >
+            新增 Task
+          </button>
+        </div>
+        <AddTaskModal
+          open={isModalVisible}
+          onOk={handleAddTask}
+          onCancel={handleCloseModal}
+        />
+        <div className="flex flex-col gap-6 mt-5">
+          <div className="relative rounded-sm border border-stroke bg-white px-5 pt-6 pb-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-6">
+            <div className="max-w-full overflow-x-auto">
+              <Select
+                style={{ width: 200 }}
+                placeholder="Select a project"
+                onChange={handleSelectChange}
+              >
+                {projects.map((project) => (
+                  <Option key={project.id} value={project.id}>
+                    {project.name}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            <div className="mt-4 flex">
+              {projectTasks.length !== 0 || projectId === 0 ?
+                <Tree
+                  showLine
+                  switcherIcon={<DownOutlined />}
+                  treeData={convertToTreeData(projectTasks)}
+                  onSelect={onTreeSelect}
+                  className="flex-grow"
+                /> : <div>No Data</div>}
+              {projectTask && (
+                <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6 ml-4">
+                  <form onSubmit={handleSubmitTaskUpdate} className="flex flex-col gap-6">
+                    <div>
+                      <label className="mb-3 block text-black dark:text-white">標題</label>
+                      <input
+                        type="text"
+                        name="title"
+                        value={projectTask?.title || ''}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-3 block text-black dark:text-white">副標題</label>
+                      <input
+                        type="text"
+                        name="sub_title"
+                        value={projectTask?.sub_title || ''}
+                        onChange={handleInputChange}
+                        className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-3 block text-black dark:text-white">成員</label>
+                      <ReactTags
+                        tags={projectTask?.members || []}
+                        handleDelete={handleDeleteMmeberTag}
+                        handleAddition={handleAdditionMemberTag}
+                        handleDrag={handleDragMemberTag}
+                        inputFieldPosition="top"
+                        editable
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-3 block text-black dark:text-white">論文</label>
+                      <ReactTags
+                        tags={projectTask?.papers || []}
+                        handleDelete={handleDeletePaperTag}
+                        handleAddition={handleAdditionPaperTag}
+                        handleDrag={handleDragPaperTag}
+                        inputFieldPosition="top"
+                        editable
+                      />
+                    </div>
+                    <div>
+                      <label className="mb-3 block text-black dark:text-white">內容</label>
+                      <JoditEditor
+                        value={projectTask?.content}
+                        config={config}
+                        onBlur={(newContent) => handleEditorBlur(newContent)}
+                      />
+                    </div>
+                    <div className="flex justify-end gap-4">
                       <button
                         type="button"
                         onClick={() => setProjectTask(null)}
-                        className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
+                        className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
                       >
                         取消
                       </button>
                       <button
                         type="submit"
-                        className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
+                        className="rounded-md border border-primary bg-primary py-2 px-4 text-white"
                       >
                         更新
                       </button>
                       <button
                         type="button"
                         onClick={handleDeleteProjectTask}
-                        className="rounded-md border border-red-600 bg-red-600 py-3 px-6 text-white"
+                        className="rounded-md border border-red-600 bg-red-600 py-2 px-4 text-white"
                       >
                         刪除此任務
                       </button>
                     </div>
-                  </div>
-                </form>
-              </div>
-            )}
+                  </form>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      {showSuccessMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-          {successMessage}
-        </div>
-      )}
-      {showErrorMessage && (
-        <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
-          {errorMessage}
-        </div>
-      )}
-      <ImportImageModal 
-        open={importImageOpen} 
-        onClose={() => setImportImageOpen(false)} 
-        onSelectImage={handleSelectImage} 
-      />
-    </DefaultLayout>
+        {showSuccessMessage && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
+            {successMessage}
+          </div>
+        )}
+        {showErrorMessage && (
+          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
+            {errorMessage}
+          </div>
+        )}
+      </DefaultLayout>
+    </Spin>
   );
 };
 

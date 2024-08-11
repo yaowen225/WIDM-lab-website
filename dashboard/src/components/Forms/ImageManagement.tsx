@@ -4,22 +4,23 @@ interface ImageManagementProps {
   action_1: string;
   action_2: string;
   id: number;
-  imagesId?: string[];
+  initialImagesId?: number[];
   imageId?: string;
   onUploadImage: (formData: { [key: string]: any }) => void;
-  onDeleteImage: (id: number, imageId: string) => void;
+  onDeleteImage: (id: number, imageId: number) => void;
   onClose: () => void;
 }
 
-const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, action_1, action_2, id, imagesId: initialImagesId, onUploadImage, onDeleteImage }) => {
+const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, action_1, action_2, id, initialImagesId, onUploadImage, onDeleteImage }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagesId, setImagesId] = useState<string[]>(initialImagesId || []);
-  const [confirmingDelete, setConfirmingDelete] = useState<string | null>(null);
+  const [imagesId, setImagesId] = useState<number[]>(initialImagesId || []);
+  const [confirmingDelete, setConfirmingDelete] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setImagesId(initialImagesId || []);
+    console.log(initialImagesId);
   }, [initialImagesId]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +46,7 @@ const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, action_1, ac
     }
   };
 
-  const handleDeleteClick = (imageId: string) => {
+  const handleDeleteClick = (imageId: number) => {
     setConfirmingDelete(imageId);
   };
 

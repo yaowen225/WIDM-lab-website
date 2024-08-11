@@ -1,20 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
+import { DatePicker } from 'antd';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
 
 interface Header {
   id: string;
   Name: string;
   isShow: string | boolean;
   type: string;
+  data?: any;
+  dateType?: [PickerMode, string];
 }
 
-interface AddItemFormProps {
+interface AddItemFormProps
+ {
   headers: Header[];
   onClose: () => void;
   onSubmit: (formData: { [key: string]: any }) => void;
   editData?: { [key: string]: any } | null;
 }
 
+type PickerMode = 'date' | 'week' | 'month' | 'quarter' | 'year'; // 定義PickerMode類型
+
+// dateType固定寫 'date' | 'week' | 'month' | 'quarter' | 'year'
 const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>({});
 
@@ -30,9 +41,11 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
       });
       setFormData(cleanEditData);
     }
-  }, [editData, headers]);
+  }, [editData]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -121,6 +134,39 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
           rows={4}
         />
       );
+    } else if (header.type === 'Date') { // 要先設定 formatDate 和 picker
+      return (
+        <DatePicker
+          format={header.dateType?.[1]}
+          key={header.id}
+          value={formData[header.id] ? dayjs(formData[header.id], header.dateType?.[1]) : null}
+          onChange={(date, dateString) => {
+            setFormData({
+              ...formData,
+              [header.id]: date ? date.format(header.dateType?.[1]) : undefined,
+            });
+          }}
+          picker={header.dateType?.[0]}
+          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+        />
+      );
+    } else if (header.type === 'Select') { // 要先設定header.data
+      return (
+        <select
+          key={header.id}
+          name={header.id}
+          value={formData[header.id] || ''}
+          onChange={handleChange}
+          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+        >
+          <option value="" disabled>{`選擇${header.Name}`}</option>
+          {header.data?.map((option: string) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      );
     }
     return (
       <input
@@ -137,16 +183,25 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
 
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+      <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark overflow-y-auto max-h-[90%]">
         <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
           <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           {headers
-            .filter((header) => header.id !== 'id' && header.id !== 'actions' && header.id !== 'imageActions' && header.id !== 'imagesActions'  && header.id !== 'attachmentActions')
+            .filter(
+              (header) => // 關閉id為這些的欄位
+                header.id !== 'id' &&
+                header.id !== 'actions' &&
+                header.id !== 'imageActions' &&
+                header.id !== 'imagesActions' &&
+                header.id !== 'attachmentActions'
+            )
             .map((header) => (
               <div key={header.id}>
-                <label className="mb-3 block text-black dark:text-white">{header.Name}</label>
+                <label className="mb-3 block text-black dark:text-white">
+                  {header.Name}
+                </label>
                 {renderInputField(header)}
               </div>
             ))}

@@ -9,13 +9,12 @@ import News from './pages/News';
 import Paper from './pages/Paper';
 import Project from './pages/Project';
 import Project_Task from './pages/Project_Task';
-import Project_Task_Image from './pages/Project_Task_Image';
 import Member from './pages/Member';
 import NotFound from './pages/NotFound'
 import Unauthorized from './pages/Unauthorized';
 
 // import { AuthApi } from '../domain/api-client/api';
-import { Configuration} from '../domain/api-client/configuration';
+// import { Configuration} from '../domain/api-client/configuration';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
@@ -25,11 +24,11 @@ const App: React.FC = () => {
 
   const user_info_get = async () => {
     try {
-        const configuration = new Configuration({
-          baseOptions: {
-              withCredentials: true,
-          }
-        });
+        // const configuration = new Configuration({
+        //   baseOptions: {
+        //       withCredentials: true,
+        //   }
+        // });
         // const apiClient = new AuthApi(configuration);
         // const response = await apiClient.authUserInfoGet();
         
@@ -64,13 +63,12 @@ const App: React.FC = () => {
           </>
         }
       />
-      {/* <Route path="/activity" element={<Activity />} /> */}
+      <Route path="/activity" element={<Activity />} />
       <Route path="/member" element={<Member />} />
       {/* <Route path="/news" element={<News />} /> */}
-      {/* <Route path="/paper" element={<Paper />} /> */}
-      {/* <Route path="/project" element={<Project />} /> */}
-      {/* <Route path="/project_task" element={<Project_Task />} /> */}
-      {/* <Route path="/project_task_image" element={<Project_Task_Image />} /> */}
+      <Route path="/paper" element={<Paper />} />
+      <Route path="/project" element={<Project />} />
+      <Route path="/project_task" element={<Project_Task />} />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   ) : (
