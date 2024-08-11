@@ -13,10 +13,10 @@ import { format } from 'date-fns'
  */
 export default function Tweet({
   id,
-  activity_title,
-  activity_sub_title,
+  title,
+  sub_title,
   create_time,
-  activity_image,
+  images,
 }) {
   
   return (
@@ -35,7 +35,7 @@ export default function Tweet({
             className="flex text-xl items-center font-bold leading-5 !text-gray-900 dark:!text-gray-100 "
             title="WIDM"
           >
-            {activity_title}
+            {title}
           </p>
           <span className="text-sm mt-1 !text-gray-500" title={`@ Web Intelligence and Data Mining Laboratory`}>
             @Web Intelligence and Data Mining Laboratory
@@ -46,17 +46,17 @@ export default function Tweet({
       
       
       <div className="mt-4 mb-1 whitespace-pre-wrap leading-normal !text-gray-700 dark:!text-gray-200">
-        {activity_sub_title}
+        {sub_title}
       </div>
-      {activity_image && activity_image.length ? (
+      {images && images.length ? (
         <div className="my-2">
           <Slide transitionDuration={500}>
-            {activity_image.map((image) => (
-              <div className="each-slide" key={image}>
+            {images.map((image) => (
+              <div className="each-slide" key={image} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Image
-                  alt={activity_title}
+                  alt={title}
                   src={`https://widm-back-end.nevercareu.space/activity/${id}/activity-image/${image}`}
-                  width={600}  
+                  width={650}  
                   height={400}
                   className="rounded"
                 />

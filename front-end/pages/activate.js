@@ -2,27 +2,27 @@ import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Activate from '@/components/Activate'
-import { ActivityApi } from '../domain/api-client/src'
 import { Slide } from 'react-slideshow-image';
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
 
 export const activate = () => {
 
   const [activates, setActivates] = useState([])
 
-  useEffect(() => {
-    const fetchActivates = async () => {
-      const apiClient = new ActivityApi()
-      try {
-        const data = await apiClient.activityGet()
-        setActivates(data.response)
-      } catch (error) {
-        console.error('API 調用失敗:', error.message)
-        if (error.response) {
-          console.error('API Response Error:', error.response.body)
-        }
+  const fetchActivates = async () => {
+    try {
+      const response = await defaultHttp.get(processDataRoutes.activity);
+      setActivates(response.data.response)
+    } catch (error) {
+      console.error('API 調用失敗:', error.message)
+      if (error.response) {
+        console.error('API Response Error:', error.response.body)
       }
     }
+  }
 
+  useEffect(() => {
     fetchActivates()
   }, [])
 

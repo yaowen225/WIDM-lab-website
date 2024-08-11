@@ -2,11 +2,12 @@ import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { RoughNotation } from 'react-rough-notation'
-import { IoMdReturnLeft } from "react-icons/io";
-import React, { useState, useRef, useEffect } from 'react';
-import { RetrievalApi } from 'domain/api-client/src';
-import eventBus from '../utils/eventBus';
-import { Icon } from '@iconify/react';
+import { IoMdReturnLeft } from "react-icons/io"
+import React, { useState, useRef, useEffect } from 'react'
+import eventBus from '../utils/eventBus'
+import { Icon } from '@iconify/react'
+import { defaultHttp } from '../utils/http'
+import { processDataRoutes } from '../routes/api'
 
 export default function Home() {
   const [messages, setMessages] = useState([]);
@@ -61,9 +62,12 @@ export default function Home() {
     eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
 
     // - Response
-    const apiClient = new RetrievalApi();
-    const data = await apiClient.retrievalQueryGetWithHttpInfo(current_text);
-    const responseMessage = { sender: 'api', text: data.response.text };
+    const data = await defaultHttp.get(`${processDataRoutes.retrieval}/query`, {
+      params: {
+        query_string: current_text
+      }
+    });
+    const responseMessage = { sender: 'api', text: data.data };
     const finalMessages = [...updatedMessages.slice(0, -1), responseMessage]; // 排除回覆符號，在新增回覆訊息
 
     if (finalMessages.length > 15) {

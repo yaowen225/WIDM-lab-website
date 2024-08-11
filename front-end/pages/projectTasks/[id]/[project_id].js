@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import { ProjectTaskApi } from 'domain/api-client/src'
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
 import { IoMdReturnLeft } from "react-icons/io"
 import ReactMarkdown from 'react-markdown'
 
@@ -15,23 +17,23 @@ const ProjectTask = () => {
   const [projectTasks, setProjectTasks] = useState(null)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchProjectTask = async () => {
-      try {
-        const apiClient = new ProjectTaskApi()
-        const data = await apiClient.projectProjectIdTaskProjectTaskIdGetWithHttpInfo(id, project_id)
-
-        setProjectTasks(data.response.body.response)
-        console.log(data.response.body.response)
-      } catch (error) {
-        console.error('API 調用失敗:', error.message)
-        if (error.response) {
-          console.error('API Response Error:', error.response.body)
-        }
-        setError(error.message)
+  const fetchProjectTask = async () => {
+    try {
+      const apiClient = new ProjectTaskApi()
+      const data = await apiClient.projectProjectIdTaskProjectTaskIdGetWithHttpInfo(id, project_id)
+      const response = await defaultHttp.get(`${processDataRoutes.project}/${id}/task/${project_id}`);
+      setProjectTasks(response.data.response)
+      console.log(response.data.response)
+    } catch (error) {
+      console.error('API 調用失敗:', error.message)
+      if (error.response) {
+        console.error('API Response Error:', error.response.body)
       }
+      setError(error.message)
     }
+  }
 
+  useEffect(() => {
     if (id) {
       fetchProjectTask()
     }

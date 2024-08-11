@@ -2,29 +2,26 @@ import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import ProjectCard from '@/components/ProjectCard'
 import { PageSEO } from '@/components/SEO'
-import { ProjectApi } from 'domain/api-client/src'
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
   
 export const projects = () => {
-
   const [projectsDatas, setProjectsData] = useState([])
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      const apiClient = new ProjectApi()
-      try {
-        const data = await apiClient.projectGet()
-
-        setProjectsData(data.response)
-        console.log(data.response)
-      } catch (error) {
-        console.error('API 調用失敗:', error.message)
-        if (error.response) {
-          console.error('API Response Error:', error.response.body)
-        }
+  const fetchProjects = async () => {
+    try {
+      const response = await defaultHttp.get(processDataRoutes.project);
+      setProjectsData(response.data.response);
+    } catch (error) {
+      console.error('API 調用失敗:', error.message);
+      if (error.response) {
+        console.error('API Response Error:', error.response.body);
       }
     }
+  }
 
-    fetchProjects()
+  useEffect(() => {
+    fetchProjects();
   }, [])
 
   return (

@@ -28,14 +28,16 @@ const ProjectCard = ({ key, project_id, title, description, imgSrc, project_link
           </Link>
 
           <div className="flex flex-row justify-between">
-            <div className="text-sm text-gray-400">
-              {tags.map((tag, index) => (
-                <span key={index}>
-                  {tag}
-                  {index < tags.length - 1 && ' \u2022 '}
-                </span>
-              ))}
-            </div>
+            {tags && tags.length > 0 && (
+              <div className="text-sm text-gray-400">
+                {tags.map((tag, index) => (
+                  <span key={index}>
+                    {tag}
+                    {index < tags.length - 1 && ' \u2022 '}
+                  </span>
+                ))}
+              </div>
+            )}
             <div className="flex flex-row justify-between">
               <div className="mx-1.5">
                 {project_link ? <SocialIcon kind="website" href={project_link} size="6" /> : null}

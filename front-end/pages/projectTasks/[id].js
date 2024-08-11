@@ -2,7 +2,8 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
-import { ProjectTaskApi } from 'domain/api-client/src'
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
 import { IoMdReturnLeft } from "react-icons/io"
 
 import Timeline from '@/components/Timeline'
@@ -11,30 +12,26 @@ import { motion } from 'framer-motion'
 const ProjectTask = () => {
   const router = useRouter()
   const { id, title, description } = router.query;
-  const [projectTasks, setProjectTasks] = useState(null)
-  const [error, setError] = useState(null) 
+  const [projectTasks, setProjectTasks] = useState(null);
+  const [error, setError] = useState(null);
+
+  const fetchProjectTask = async () => { 
+    try { 
+      const response = await defaultHttp.get(`${processDataRoutes.project}/${id}/task`);
+      setProjectTasks(response.data.response);
+    } catch (error) {
+      console.error('API 調用失敗:', error.message);
+      if (error.response) {
+        console.error('API Response Error:', error.response.body);
+      }
+      setError(error.message);
+    }
+  }
 
   useEffect(() => {
-    const fetchProjectTask = async () => { 
-      try { 
-        const response = await fetch(`https://widm-back-end.nevercareu.space/project/${id}/task`)
-        if (!response.ok) {
-          throw new Error(`API 調用失敗: ${response.statusText}`)
-        }
-        const data = await response.json()
-    
-        setProjectTasks(data.response)
-        console.log(data.response)
-      } catch (error) {
-        console.error('API 調用失敗:', error.message)
-        if (error.response) {
-          console.error('API Response Error:', error.response.body)
-        }
-        setError(error.message)
-      }
-    }
-
-    if (id) { fetchProjectTask()  }
+    if (id) {
+      fetchProjectTask();
+    };
   }, [id])
 
   if (error) {
