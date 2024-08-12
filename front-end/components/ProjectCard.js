@@ -2,7 +2,7 @@ import SocialIcon from './social-icons'
 import Link from '@/components/Link'
 import FolderIcon from './icon'
 
-const ProjectCard = ({ key, project_id, title, description, imgSrc, project_link, github, tags, icon }) => (
+const ProjectCard = ({ key, project_id, title, description, project_link, github, tags, icon }) => (
   
   <div className="md p-4 md:w-1/2" style={{ maxWidth: '544px' }}>
       <div className="h-full transform overflow-hidden rounded-md border-2 border-solid border-gray-200 bg-transparent bg-opacity-20 transition duration-500 hover:scale-105 hover:rounded-md hover:border-primary-500 hover:bg-gray-200 dark:border-gray-700 dark:hover:border-primary-500 dark:hover:bg-gray-800">
@@ -16,8 +16,9 @@ const ProjectCard = ({ key, project_id, title, description, imgSrc, project_link
             <div className="flex justify-center my-2 w-full">
               <img 
                 className="w-36 invert-0 dark:invert"
-                src={`https://widm-back-end.nevercareu.space/project/1/project-icon/${icon}`} 
+                src={`https://widm-back-end.nevercareu.space/project/${project_id}/project-icon`} 
                 alt="Project Icon" 
+                onError={(e) => e.target.style.display = 'none'} 
               />
             </div>
           </div>

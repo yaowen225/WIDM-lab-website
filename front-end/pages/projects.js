@@ -42,12 +42,12 @@ export const projects = () => {
               <ProjectCard
                 key={d.id}
                 project_id={d.id}
-                title={d.project_name}
-                description={d.project_description}
-                github={d.project_github}
-                tags={d.project_tags}
-                icon={d.project_icon}
-                project_link={d.project_link}
+                title={d.name}
+                description={d.description}
+                github={d.github}
+                tags={d.tags}
+                icon={d.icon}
+                project_link={d.link}
               />
             ))}
           </div>

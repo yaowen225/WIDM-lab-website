@@ -4,8 +4,8 @@ import { useState } from 'react'
 import Pagination from '@/components/Pagination'
 import formatDate from '@/lib/utils/formatDate'
 import { FaFileDownload, FaExternalLinkAlt } from 'react-icons/fa'
-import { PaperAttachmentApi } from 'domain/api-client/src'
-import { LuLink } from "react-icons/lu";
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
 
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -15,29 +15,52 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
   const [searchValue, setSearchValue] = useState('')
 
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.paper_title + frontMatter.paper_authors // + frontMatter.paper_tags.join(' ')
+    const searchContent = frontMatter.title + frontMatter.authors // + frontMatter.tags.join(' ')
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
-  const download_attachment = async (id, attachment) => {
-    const download_url = `https://widm-back-end.nevercareu.space/paper/${id}/paper-attachment/${attachment}`
+  const download_attachment = async (id) => {
     try {
-      const apiClient = new PaperAttachmentApi()
-      await apiClient.paperPaperIdPaperAttachmentPaperAttachmentUuidGetWithHttpInfo(id, attachment)
-      window.location.href = download_url
-      toast.success('Download!', { progressBar: false })
-    } catch (error) {
-      toast.error('Download Error!', { progressBar: false })
-      console.error('Download Error:', error.message)
-      if (error.response) {
-        console.error('API Response Error:', error.response.body)
+      console.log('Download:', id);
+      const response = await defaultHttp.get(`${processDataRoutes.paper}/${id}/paper-attachment`, {
+        responseType: 'blob',
+      });
+  
+      // 從 Content-Disposition 標頭中提取文件名
+      const contentDisposition = response.headers['content-disposition'];
+      let fileName = 'downloaded-file'; // 設定一個預設的檔名
+
+      if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+        const fileNameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+        if (fileNameMatch != null && fileNameMatch[1]) {
+          fileName = fileNameMatch[1].replace(/['"]/g, '');
+        }
       }
-      setError(error.message)
+  
+      const blob = new Blob([response.data], { type: response.data.type });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;  // 使用從 header 中提取的文件名
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+  
+      toast.success('Download!', { progressBar: false });
+    } catch (error) {
+      toast.error('Download Error!', { progressBar: false });
+      console.error('Download Error:', error.message);
+      if (error.response) {
+        console.error('API Response Error:', error.response.body);
+      }
+      setError(error.message);
     }
-  }
+  };
+  
 
   const displayPosts =
     initialDisplayPosts.length > 0 && !searchValue ? initialDisplayPosts : filteredBlogPosts
+
+  console.log('displayPosts:', displayPosts)
 
   return (
     <>
@@ -77,13 +100,13 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
               id,
               uniqueId,
               create_time,
-              paper_attachment,
-              paper_authors,
-              paper_link,
-              paper_origin,
-              paper_publish_year,
-              paper_tags,
-              paper_title,
+              paper_existed,
+              authors,
+              link,
+              origin,
+              publish_year,
+              tags,
+              title,
               update_time,
             } = frontMatter
 
@@ -95,7 +118,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                 <article className="space-y-2 bg-transparent bg-opacity-20 p-2 transition duration-200 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 xl:grid xl:grid-cols-2 xl:items-baseline xl:space-y-3">
                   <dl>
                     <dd className="text-sm font-normal leading-6 text-gray-500 dark:text-gray-400">
-                      <a>Publish Year {paper_publish_year}</a>
+                      <a>Publish Year {publish_year}</a>
                       {' • － '}
                       <time dateTime={update_time}>Update by {formatDate(update_time)}</time>
                     </dd>
@@ -105,48 +128,47 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       <div>
                         <h2 className="text-2xl font-bold leading-8 tracking-tight">
                           <span className="text-gray-900 transition duration-500 ease-in-out hover:text-primary-500 dark:text-gray-100 dark:hover:text-primary-500">
-                            {paper_title} 
+                            {title} 
                           </span>
                         </h2>
                       </div>
 
 
-                      {/* <div>{paper_origin}</div> */}
+                      {/* <div>{origin}</div> */}
 
                       <div className="flex flex-wrap">
-                        {paper_tags.map((tag) => (
+                        {tags.map((tag) => (
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
 
                       <div className="prose flex max-w-none justify-between pt-2 text-gray-500 dark:text-gray-400">
-                        <p>Author: {paper_authors.join(', ')}</p>
+                        <p>Author: {authors.join(', ')}</p>
                         <div className='flex gap-4'>
 
-                          <div className='text-2xl font-bold content-center text-cyan-600/70	'>{paper_origin}</div>
+                          <div className='text-2xl font-bold content-center text-cyan-600/70	'>{origin}</div>
 
                           <FaExternalLinkAlt
                             className={`cursor-pointer text-4xl ${
-                              paper_link === '' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
+                              link === '' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
                             }`}
                             onClick={() => {
-                              window.open(paper_link, '_blank');
+                              window.open(link, '_blank');
                             }}
-                            style={{ pointerEvents: paper_link === '' ? 'none' : 'auto' }}
+                            style={{ pointerEvents: link === '' ? 'none' : 'auto' }}
                           />
 
                           <FaFileDownload
                             className={`cursor-pointer text-4xl ${
-                              paper_attachment === '' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
+                              paper_existed === 'true' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
                             }`}
                             onClick={() => {
-                              if (!paper_attachment === '') {
-                                download_attachment(id, paper_attachment);
+                              if (paper_existed !== 'true') {
+                                download_attachment(id);
                               }
                             }}
-                            style={{ pointerEvents: paper_attachment === '' ? 'none' : 'auto' }}
+                            style={{ pointerEvents: paper_existed === '' ? 'none' : 'auto' }}
                           />
-                          
                         </div>
                       </div>
                     </div>
