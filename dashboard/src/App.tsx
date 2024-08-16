@@ -19,7 +19,7 @@ import Unauthorized from './pages/Unauthorized';
 const App: React.FC = () => {
   const { pathname } = useLocation();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
 
   const user_info_get = async () => {
@@ -65,7 +65,7 @@ const App: React.FC = () => {
       />
       <Route path="/activity" element={<Activity />} />
       <Route path="/member" element={<Member />} />
-      {/* <Route path="/news" element={<News />} /> */}
+      <Route path="/news" element={<News />} />
       <Route path="/paper" element={<Paper />} />
       <Route path="/project" element={<Project />} />
       <Route path="/project_task" element={<Project_Task />} />
