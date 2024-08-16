@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { NewsApi } from '../../domain/api-client/src'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import { IoMdReturnLeft } from "react-icons/io"
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
 
 const NewsDetail = () => {
   const router = useRouter()
@@ -11,22 +12,21 @@ const NewsDetail = () => {
   const [news, setNews] = useState(null)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchNewsDetail = async () => {
-      try {
-        const apiClient = new NewsApi()
-        const data = await apiClient.newsNewsIdGet(id)
-        setNews(data.response)
-        console.log(data.response)
-      } catch (error) {
-        console.error('API 調用失敗:', error.message)
-        if (error.response) {
-          console.error('API Response Error:', error.response.body)
-        }
-        setError(error.message)
+  const fetchNewsDetail = async () => {
+    try {
+      const response = await defaultHttp.get(`${processDataRoutes.news}/${id}`);
+      setNews(response.data.response)
+      console.log(response.data.response)
+    } catch (error) {
+      console.error('API 調用失敗:', error.message)
+      if (error.response) {
+        console.error('API Response Error:', error.response.body)
       }
+      setError(error.message)
     }
+  }
 
+  useEffect(() => {
     if (id) {
       fetchNewsDetail()
     }
@@ -50,7 +50,7 @@ const NewsDetail = () => {
               style={{ overflowWrap: 'anywhere' }}
               className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap"
             >
-              {news.news_title}
+              {news.title}
             </h1>
           </div>
           <button onClick={() => router.back()} className="p-2 border border-gray-400 rounded text-gray-600 hover:bg-gray-100">
@@ -58,7 +58,7 @@ const NewsDetail = () => {
           </button>
         </div>
         <hr className="my-4 border-gray-300" />
-        <div className="mx-auto w-full max-w-4xl" dangerouslySetInnerHTML={{ __html: news.news_content }} />
+        <div className="mx-auto w-full max-w-4xl" dangerouslySetInnerHTML={{ __html: news.content }} />
       </article>
     </>
   )

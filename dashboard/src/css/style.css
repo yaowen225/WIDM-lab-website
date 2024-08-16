@@ -345,3 +345,32 @@ span.flatpickr-weekday,
 [x-cloak] {
   display: none !important;
 }
+
+
+.jodit-wysiwyg ul {
+  list-style-type: disc; /* 無序列表使用圓點 */
+  margin-left: 10px; /* 調整縮進 */
+  padding-left: 10px; /* 確保內縮距離 */
+}
+
+.jodit-wysiwyg ol {
+  list-style-type: decimal; /* 有序列表使用數字 */
+  margin-left: 10px; /* 調整縮進 */
+  padding-left: 10px; /* 確保內縮距離 */
+}
+
+ol {
+  list-style-type: decimal !important;
+  margin-left: 10px; /* 調整縮進 */
+  padding-left: 10px; /* 確保內縮距離 */
+}
+
+ul {
+  list-style-type: disc !important;
+  margin-left: 10px; /* 調整縮進 */
+  padding-left: 10px; /* 確保內縮距離 */
+}
+
+menu {
+  list-style-type: none; /* 或你希望的其他样式 */
+}

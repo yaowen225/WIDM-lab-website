@@ -85,7 +85,7 @@ const NewsPage = () => {
 
   const fetchNews = async () => {
     try {
-      setLoadingStates(prev => ({ ...prev, fetchActivities: true }));
+      setLoadingStates(prev => ({ ...prev, fetchNews: true }));
       const response = await defaultHttp.get(processDataRoutes.news, {
           headers: storedHeaders()
       });
@@ -94,12 +94,13 @@ const NewsPage = () => {
     } catch (error) {
       handleErrorResponse(error);
     } finally {
-      setLoadingStates(prev => ({ ...prev, fetchActivities: false }));
+      setLoadingStates(prev => ({ ...prev, fetchNews: false }));
     }
   };
 
   const createNews = async (formData: { [key: string]: any }) => {
     try {
+      setLoadingStates(prev => ({ ...prev, createNews: true }));
       const newNews = {
         title: formData.title,
         sub_title: formData.sub_title,
@@ -125,13 +126,13 @@ const NewsPage = () => {
         console.error('API Response Error:', (error as any).response.body);
       }
     } finally {
-      setLoadingStates(prev => ({ ...prev, createActivitie: false }));
+      setLoadingStates(prev => ({ ...prev, createNews: false }));
     }
   };
 
   const deleteNews = async (id: number) => {
     try {
-      setLoadingStates(prev => ({ ...prev, deleteActivitie: true }));
+      setLoadingStates(prev => ({ ...prev, deleteNews: true }));
       await defaultHttp.delete(`${processDataRoutes.news}/${id}`, { headers: storedHeaders() });
       fetchNews(); // 刪除後重新獲取成員數據
       setSuccessMessage('刪除成功!');
@@ -146,7 +147,7 @@ const NewsPage = () => {
         console.error('API Response Error:', (error as any).response.body);
       }
     } finally {
-      setLoadingStates(prev => ({ ...prev, deleteActivitie: false }));
+      setLoadingStates(prev => ({ ...prev, deleteNews: false }));
     }
   };
 

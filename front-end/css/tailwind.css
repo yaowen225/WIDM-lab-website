@@ -73,3 +73,19 @@ input:-webkit-autofill:focus {
 ::selection {
   background: #de1d8d;
 }
+
+ol {
+  list-style-type: decimal !important;
+  margin-left: 10px; /* 調整縮進 */
+  padding-left: 10px; /* 確保內縮距離 */
+}
+
+ul {
+  list-style-type: disc !important;
+  margin-left: 10px; /* 調整縮進 */
+  padding-left: 10px; /* 確保內縮距離 */
+}
+
+menu {
+  list-style-type: none; /* 或你希望的其他样式 */
+}

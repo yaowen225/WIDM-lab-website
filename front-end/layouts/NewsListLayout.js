@@ -1,14 +1,11 @@
 import Link from '@/components/Link'
-import Tag from '@/components/Tag'
 import { useState } from 'react'
 import Pagination from '@/components/Pagination'
-import formatDate from '@/lib/utils/formatDate'
-import ViewCounter from '@/components/ViewCounter'
 
 export default function ListLayout({ posts, title, initialDisplayPosts = [], pagination }) {
   const [searchValue, setSearchValue] = useState('')
   const filteredBlogPosts = posts.filter((frontMatter) => {
-    const searchContent = frontMatter.news_title + frontMatter.news_sub_title
+    const searchContent = frontMatter.title + frontMatter.sub_title
     return searchContent.toLowerCase().includes(searchValue.toLowerCase())
   })
 
@@ -52,7 +49,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
         <ul>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
-            const { id, uniqueId, news_sub_title, news_title, news_content } = frontMatter
+            const { id, uniqueId, sub_title, title, content } = frontMatter
             return (
               <Link
                 href={`/news/${id}`}
@@ -65,10 +62,10 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       <div className="space-y-1">
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            {news_title}
+                            {title}
                           </h2>
                         </div>
-                        <div>{news_sub_title}</div>
+                        <div>{sub_title}</div>
                       </div>
                     </div>
                   </article>
