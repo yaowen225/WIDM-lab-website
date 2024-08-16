@@ -67,7 +67,7 @@ const ProjectPage = () => {
       readonly: false,
       height: '1000px',
       uploader: {
-        url: 'http://localhost:3000/upload',
+        url: 'https://widm-back-end.nevercareu.space/image',
         filesVariableName: () => 'file',
         withCredentials: false,
         pathVariableName: 'path',
@@ -76,7 +76,7 @@ const ProjectPage = () => {
       },
       filebrowser: {
         ajax: {
-          url: 'http://localhost:3000/files',
+          url: 'https://widm-back-end.nevercareu.space/image',
           method: 'GET',
         },
         permissions: {
@@ -86,7 +86,7 @@ const ProjectPage = () => {
           download: true,
         },
         fileRemove: {
-          url: 'http://localhost:3000/deleteImage',
+          url: 'https://widm-back-end.nevercareu.space/image',
           method: 'DELETE',
           contentType: 'application/json',
         },
