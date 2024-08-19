@@ -62,12 +62,12 @@ export default function Home() {
     eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
 
     // - Response
-    const data = await defaultHttp.get(`${processDataRoutes.retrieval}/query`, {
+    const response = await defaultHttp.get(`${processDataRoutes.retrieval}/query`, {
       params: {
         query_string: current_text
       }
     });
-    const responseMessage = { sender: 'api', text: data.data };
+    const responseMessage = { sender: 'api', text: response.data };
     const finalMessages = [...updatedMessages.slice(0, -1), responseMessage]; // 排除回覆符號，在新增回覆訊息
 
     if (finalMessages.length > 15) {

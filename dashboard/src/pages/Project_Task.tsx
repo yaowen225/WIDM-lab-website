@@ -4,7 +4,6 @@ import DefaultLayout from '../layout/DefaultLayout';
 import { Select, Tree, TreeProps } from 'antd';
 import AddTaskModal from '../components/AddTaskModal';
 import { DownOutlined } from '@ant-design/icons';
-// import ImportImageModal from '../components/ImportImageModal';
 import JoditEditor from 'jodit-react';
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Spin } from 'antd';
@@ -55,12 +54,12 @@ const ProjectPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
    // - Loading
-   const [isLoading, setIsLoading] = useState(false);
-   const [loadingStates, setLoadingStates] = useState({});    // 儲存各個API的loading狀態
-   useEffect(() => {   // 當任何一個API的loading狀態改變時，更新isLoading
-     const anyLoading = Object.values(loadingStates).some(state => state);
-     setIsLoading(anyLoading);
-   }, [loadingStates]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingStates, setLoadingStates] = useState({});    // 儲存各個API的loading狀態
+  useEffect(() => {   // 當任何一個API的loading狀態改變時，更新isLoading
+    const anyLoading = Object.values(loadingStates).some(state => state);
+    setIsLoading(anyLoading);
+  }, [loadingStates]);
 
   const config = React.useMemo(
     () => ({
@@ -405,13 +404,16 @@ const ProjectPage = () => {
                 <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark p-6 ml-4">
                   <form onSubmit={handleSubmitTaskUpdate} className="flex flex-col gap-6">
                     <div>
-                      <label className="mb-3 block text-black dark:text-white">標題</label>
+                      <label className="mb-3 block text-black dark:text-white">
+                        <span className="text-red-500">* </span>標題
+                      </label>
                       <input
                         type="text"
                         name="title"
                         value={projectTask?.title || ''}
                         onChange={handleInputChange}
                         className="block w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100"
+                        required
                       />
                     </div>
                     <div>

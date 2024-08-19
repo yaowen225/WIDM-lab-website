@@ -30,7 +30,7 @@ const ProjectPage = () => {
 
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'false', isEnable: "false", type: 'Number' },
-    { id: 'name', Name: '專案名稱', isShow: 'true', type: 'String' },
+    { id: 'name', Name: '專案名稱', isShow: 'true', type: 'String', required: 'true' },
     { id: 'description', Name: '專案描述', isShow: 'true', type: 'Textarea' },
     { id: 'github', Name: 'GitHub 連結', isShow: 'true', type: 'Url' },
     { id: 'link', Name: '專案連結', isShow: 'true', type: 'Url' },
@@ -60,11 +60,11 @@ const ProjectPage = () => {
       setLoadingStates(prev => ({ ...prev, createProject: true }));
       const newProject = {
         name: formData.name,
-        description: formData.description,
-        github: formData.github,
-        link: formData.link,
-        tags: formData.tags.map((tag: { id: string; text: string; className: string }) => tag.text),
-        members: formData.members.map((member: { id: string; text: string; className: string }) => member.text),
+        description: formData.description || '',
+        github: formData.github || '',
+        link: formData.link || '',
+        tags: formData.tags ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : null,
+        members: formData.members ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : null,
       };
 
       let response;

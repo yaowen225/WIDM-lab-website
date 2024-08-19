@@ -3,6 +3,7 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import JoditEditor from 'jodit-react';
 
 dayjs.extend(customParseFormat);
 
@@ -13,25 +14,28 @@ interface Header {
   type: string;
   data?: any;
   dateType?: [PickerMode, string];
+  required?: string;
 }
 
-interface AddItemFormProps
-{
+interface AddItemFormProps {
   headers: Header[];
   onClose: () => void;
   onSubmit: (formData: { [key: string]: any }) => void;
   editData?: { [key: string]: any } | null;
+  joditConfig?: any;
 }
 
 type PickerMode = 'date' | 'week' | 'month' | 'quarter' | 'year'; // 定義PickerMode類型
 
-// dateType固定寫 'date' | 'week' | 'month' | 'quarter' | 'year'
-const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData }) => {
+const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData, joditConfig }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>(() => {
-    // 初始化 formData 根據 headers 設置預設值
     const initialData: { [key: string]: any } = {};
     headers.forEach(header => {
-      initialData[header.id] = null
+      if (header.type === 'Date') {
+        initialData[header.id] = dayjs().format(header.dateType?.[1] || 'YYYY-MM-DD');
+      } else {
+        initialData[header.id] = null;
+      }
     });
     return initialData;
   });
@@ -41,7 +45,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
       const cleanEditData = { ...editData };
       headers.forEach((header) => {
         if (header.type === 'Tags' && editData[header.id]) {
-          cleanEditData[header.id] = editData[header.id].map((item: any) => 
+          cleanEditData[header.id] = editData[header.id].map((item: any) =>
             typeof item === 'string' ? { id: item, text: item } : item
           );
         }
@@ -98,21 +102,36 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // 檢查所有必填項是否填寫
+    for (const header of headers) {
+      if (header.required === 'true' && !formData[header.id]) {
+        alert(`${header.Name} 是必填項`);
+        return;
+      }
+    }
+
     onSubmit(formData);
     onClose();
   };
 
   const renderInputField = (header: Header) => {
+    const commonProps = {
+      name: header.id,
+      placeholder: header.Name,
+      value: formData[header.id] || '',
+      onChange: handleChange,
+      required: header.required === 'true',
+      className:
+        "w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+    };
+
     if (header.type === 'Number') {
       return (
         <input
           key={header.id}
           type="number"
-          name={header.id}
-          placeholder={header.Name}
-          value={formData[header.id] || ''}
-          onChange={handleChange}
-          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+          {...commonProps}
         />
       );
     } else if (header.type === 'Tags') {
@@ -125,7 +144,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
             handleDrag={(tag, currPos, newPos) => handleDragTag(tag, currPos, newPos, header.id)}
             onTagUpdate={(index, newTag) => onTagUpdate(index, newTag, header.id)}
             inputFieldPosition="top"
-            editable // TODO: 編輯tag的css要調整
+            editable
           />
         </div>
       );
@@ -133,20 +152,16 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
       return (
         <textarea
           key={header.id}
-          name={header.id}
-          placeholder={header.Name}
-          value={formData[header.id] || ''}
-          onChange={handleChange}
-          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+          {...commonProps}
           rows={4}
         />
       );
-    } else if (header.type === 'Date') { // 要先設定 formatDate 和 picker
+    } else if (header.type === 'Date') {
       return (
         <DatePicker
           format={header.dateType?.[1]}
           key={header.id}
-          value={formData[header.id] ? dayjs(formData[header.id], header.dateType?.[1]) : null}
+          value={formData[header.id] ? dayjs(formData[header.id], header.dateType?.[1]) : dayjs()}
           onChange={(date, dateString) => {
             setFormData({
               ...formData,
@@ -154,17 +169,14 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
             });
           }}
           picker={header.dateType?.[0]}
-          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+          className={commonProps.className}
         />
       );
-    } else if (header.type === 'Select') { // 要先設定header.data
+    } else if (header.type === 'Select') {
       return (
         <select
           key={header.id}
-          name={header.id}
-          value={formData[header.id] || ''}
-          onChange={handleChange}
-          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+          {...commonProps}
         >
           <option value="" disabled>{`選擇${header.Name}`}</option>
           {header.data?.map((option: string) => (
@@ -174,16 +186,24 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
           ))}
         </select>
       );
+    } else if (header.type === 'jodit') {
+      return (
+        <JoditEditor
+          key={header.id}
+          value={formData[header.id]}
+          onBlur={(newContent) => setFormData({
+            ...formData,
+            [header.id]: newContent,
+          })}
+          config={joditConfig}
+        />
+      );
     }
     return (
       <input
         key={header.id}
         type="text"
-        name={header.id}
-        placeholder={header.Name}
-        value={formData[header.id] || ''}
-        onChange={handleChange}
-        className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+        {...commonProps}
       />
     );
   };
@@ -197,7 +217,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
         <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
           {headers
             .filter(
-              (header) => // 關閉id為這些的欄位
+              (header) =>
                 header.id !== 'id' &&
                 header.id !== 'actions' &&
                 header.id !== 'imageActions' &&
@@ -207,6 +227,9 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
             .map((header) => (
               <div key={header.id}>
                 <label className="mb-3 block text-black dark:text-white">
+                  {header.required === 'true' && (
+                    <span className="text-red-500">* </span>
+                  )}
                   {header.Name}
                 </label>
                 {renderInputField(header)}

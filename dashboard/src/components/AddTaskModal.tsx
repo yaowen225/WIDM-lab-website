@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, TreeSelect, Input, Form } from 'antd';
 import type { TreeNodeNormal } from 'antd/lib/tree/Tree';
-import ReactMarkdown from 'react-markdown';
-import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { WithContext as ReactTags } from 'react-tag-input';
 import { Spin } from 'antd';
 import { defaultHttp } from '../utils/http';
 import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
 import { handleErrorResponse } from '../utils';
-// import { set } from 'jodit/esm/core/helpers';
+import JoditEditor from 'jodit-react';
 
 interface Task {
   id: number;
@@ -49,34 +46,39 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
     setIsLoading(anyLoading);
   }, [loadingStates]);
 
-  const markdownComponents = {
-    h1: ({node, ...props}: {node?: any, [key: string]: any}) => <h1 className="my-4 text-4xl font-extrabold border-t border-b border-gray-300 py-2" {...props} />,
-    h2: ({node, ...props}: {node?: any, [key: string]: any}) => <h2 className="my-4 text-3xl font-bold border-t border-b border-gray-300 py-2" {...props} />,
-    h3: ({node, ...props}: {node?: any, [key: string]: any}) => <h3 className="my-4 text-2xl font-semibold border-t border-b border-gray-300 py-2" {...props} />,
-    h4: ({node, ...props}: {node?: any, [key: string]: any}) => <h4 className="my-4 text-xl font-medium border-t border-b border-gray-300 py-2" {...props} />,
-    h5: ({node, ...props}: {node?: any, [key: string]: any}) => <h5 className="my-4 text-lg font-medium border-t border-b border-gray-300 py-2" {...props} />,
-    h6: ({node, ...props}: {node?: any, [key: string]: any}) => <h6 className="my-4 text-sm font-medium border-t border-b border-gray-300 py-2" {...props} />,
-    p:  ({ node, ...props }: {node?: any, [key: string]: any}) => <p className="my-2 mt-4 text-base leading-7 text-gray-700" {...props} />,
-    a:  ({ node, ...props }: {node?: any, [key: string]: any}) => <a className="my-1 mt-4 text-base leading-7 text-teal-600" {...props} />,
-    ul: ({ node, ...props }: {node?: any, [key: string]: any}) => <ul className="ml-5 list-disc" {...props} />,
-    ol: ({ node, ...props }: {node?: any, [key: string]: any}) => <ol className="ml-5 list-decimal" {...props} />,
-    li: ({ node, ...props }: {node?: any, [key: string]: any}) => <li className="mt-1" {...props} />,
-    code: ({ node, inline, className, children, ...props }: {node?: any, inline?: boolean, className?: string, children?: React.ReactNode, [key: string]: any}) => {
-      const match = /language-(\w+)/.exec(className || '')
-      return !inline && match ? (
-        <SyntaxHighlighter style={materialDark} language={match[1]} PreTag="div" {...props}>
-          {String(children).replace(/\n$/, '')}
-        </SyntaxHighlighter>
-      ) : (
-        <code className={className} {...props}>
-          {children}
-        </code>
-      )
-    },
-    img: ({ node, ...props }: {node?: any, [key: string]: any}) => (
-      <img {...props} style={{ minWidth: '60%', minHeight: '50%', maxWidth: '100%', maxHeight: '100%', margin: '0 auto' }} alt={props.alt} />
-    ),
-  };
+  const config = React.useMemo(
+    () => ({
+      readonly: false,
+      height: '1000px',
+      uploader: {
+        url: 'https://widm-back-end.nevercareu.space/image',
+        filesVariableName: () => 'file',
+        withCredentials: false,
+        pathVariableName: 'path',
+        format: 'json',
+        method: 'POST',
+      },
+      filebrowser: {
+        ajax: {
+          url: 'https://widm-back-end.nevercareu.space/image',
+          method: 'GET',
+        },
+        permissions: {
+          create: true,
+          remove: true,
+          rename: true,
+          download: true,
+        },
+        fileRemove: {
+          url: 'https://widm-back-end.nevercareu.space/image',
+          method: 'DELETE',
+          contentType: 'application/json',
+        },
+      },
+      removeButtons: ['file', 'video'],
+    }),
+    []
+  );
 
   const fetchProjects = async () => {
     try {
@@ -206,7 +208,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
   }, [open]);
 
   const handleOk = () => {
-    if (selectedValue && taskTitle && taskSubtitle && taskContent) {
+    if (selectedValue && taskTitle) {
       const taskDetails = {
         title: taskTitle,
         sub_title: taskSubtitle,
@@ -266,7 +268,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
             <Form.Item label="標題" required>
               <Input value={taskTitle} onChange={(e) => setTaskTitle(e.target.value)} />
             </Form.Item>
-            <Form.Item label="副標題" required>
+            <Form.Item label="副標題">
               <Input value={taskSubtitle} onChange={(e) => setTaskSubtitle(e.target.value)} />
             </Form.Item>
             <Form.Item label="成員">
@@ -289,12 +291,13 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
                 editable
               />
             </Form.Item>
-            <Form.Item label="內容" required>
-              <Input.TextArea value={taskContent} onChange={(e) => setTaskContent(e.target.value)} />
+            <Form.Item label="內容">
+              <JoditEditor
+                value={taskContent}
+                config={config}
+                onBlur={(newContent) => setTaskContent(newContent)}
+              />
             </Form.Item>
-            <div className="mt-4">
-              <ReactMarkdown components={markdownComponents}>{taskContent || ''}</ReactMarkdown>
-            </div>
           </Form>
         )}
       </Modal>

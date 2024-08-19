@@ -77,9 +77,9 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
             <tr key={`intr-${row}-${rowIndex}`} className="hover:bg-gray-50 dark:hover:bg-meta-4">
               {headers.map((header) => (
                 (!header.isEnable || header.isEnable === 'true') ? (
-                  <td key={`intd-${rowIndex}-${header.id}`} className="border-b border-[#eee] py-5 px-4 dark:border-strokedark xl:pl-11">
+                  <td key={`intd-${rowIndex}-${header.id}`} className="border-b border-[#eee] py-5 px-5 dark:border-strokedark xl:pl-11">
                     {/* header.id === 'actions' 新增 修改 刪除 */}
-                    {header.id === 'actions' && (
+                    {header.id === 'actions' && ( // 新增 修改 刪除
                       <div className="flex items-center space-x-3.5">
                         <button className="hover:text-primary" onClick={() => onEdit(row)}>
                           <FaEdit />
@@ -89,38 +89,40 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
                         </button>
                       </div>
                     )}
-                    {header.id === 'imageActions' && (onUploadFile || onDeleteFiles) && (
-                      <div className="flex items-center space-x-3.5">
-                        {onEdit && (
-                          <button className="hover:text-primary" onClick={() => onEdit(row)}>
-                            <FaEdit />
+                    {header.id === 'imageActions' && (onUploadFile || onDeleteFiles) && ( // 上傳單張圖片
+                      <div className="flex items-center space-x-10">
+                        <div className="flex items-center space-x-5 px-5 py-2 w-full">
+                          {onEdit && (
+                            <button className="hover:text-primary" onClick={() => onEdit(row)}>
+                              <FaEdit />
+                            </button>
+                          )}
+                          <button className="hover:text-primary" onClick={() => handleDeleteClick(row.id)}>
+                            <FaTrashAlt />
                           </button>
-                        )}
-                        <button className="hover:text-primary" onClick={() => handleDeleteClick(row.id)}>
-                          <FaTrashAlt />
-                        </button>
-                        {onUploadFile && !row[header.Name] && (
-                          <button className="hover:text-primary" onClick={() => onUploadFile(row)}>
-                            <LuImagePlus className="text-green-500"/>
-                          </button>
-                        )}
-                        {onDeleteFiles && row[header.Name] && (
-                          <button className="hover:text-primary" onClick={() => onDeleteFiles(row)}>
-                            <LuImageMinus className="text-red-500"/>
-                          </button>
-                        )}
-                        <img
-                          key={imageUpdate}
-                          src={row.imageUrl ? row.imageUrl : `https://widm-back-end.nevercareu.space/${page}/${row['id']}/${header.Name}`}
-                          className="w-10 h-10 object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                          }}
-                        />
+                          {onUploadFile && !row[header.Name] && (
+                            <button className="hover:text-primary" onClick={() => onUploadFile(row)}>
+                              <LuImagePlus className="text-green-500"/>
+                            </button>
+                          )}
+                          {onDeleteFiles && row[header.Name] && (
+                            <button className="hover:text-primary" onClick={() => onDeleteFiles(row)}>
+                              <LuImageMinus className="text-red-500"/>
+                            </button>
+                          )}
+                          <img
+                            key={imageUpdate}
+                            src={row.imageUrl ? row.imageUrl : `https://widm-back-end.nevercareu.space/${page}/${row['id']}/${header.Name}`}
+                            className="w-10 h-10 object-cover"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                            }}
+                          />
+                        </div>
                       </div>
                     )}
-                    {header.id === 'imagesActions' && (onUploadFile || onDeleteFiles || onEditImage) && (
+                    {header.id === 'imagesActions' && (onUploadFile || onDeleteFiles || onEditImage) && ( // 上傳多張圖片
                       <div className="flex items-center space-x-3.5">
                         {onEdit && (
                           <button className="hover:text-primary" onClick={() => onEdit(row)}>
@@ -147,7 +149,7 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
                         )}
                       </div>
                     )}
-                    {header.id === 'attachmentActions' && (
+                    {header.id === 'attachmentActions' && ( // 上傳檔案
                       <div className="flex items-center space-x-3.5">
                         {onEdit && (
                           <button className="hover:text-primary" onClick={() => onEdit(row)}>
@@ -176,7 +178,7 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
                         )}
                       </div>
                     )}
-                    {header.type === 'Tags' ? (
+                    {header.type === 'Tags' ? ( // 顯示標籤
                       <div className="flex flex-wrap">
                         {row[header.id] ? row[header.id].map((tag: string, index: number) => (
                           <Tag key={`tag-${row}-${rowIndex}-${tag}-${index}`} className="mb-1 mr-1">
@@ -184,11 +186,11 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
                           </Tag>
                         )) : <></>}
                       </div>
-                    ) : header.type === 'Url' ? (
+                    ) : header.type === 'Url' && row[header.id] ? ( // 顯示連結
                       <a href={row[header.id]} target="_blank" rel="noopener noreferrer" className="text-blue-500">
                         <FaLink />
                       </a>
-                    ) : (
+                    ) : ( // 顯示文字
                       <span className="text-black dark:text-white">
                         {row[header.id]}
                       </span>

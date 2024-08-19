@@ -1,28 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import JoditEditor from 'jodit-react';
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
+import AddItemForm from '../components/Forms/AddItemForm';
 import { Spin } from 'antd';
 import { defaultHttp } from '../utils/http';
 import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
 import { handleErrorResponse } from '../utils';
-
-interface Header {
-  id: string;
-  Name: string;
-  isShow: string;
-  type: string;
-  isEnable?: string;
-}
-
-interface AddItemFormProps {
-  headers: Header[];
-  onClose: () => void;
-  onSubmit: (formData: { [key: string]: any }) => void;
-  editData?: { [key: string]: any } | null;
-}
 
 const NewsPage = () => {
   const [news, setNews] = useState<any[]>([]);
@@ -75,9 +60,9 @@ const NewsPage = () => {
     []
   );
 
-  const headers: Header[] = [
+  const headers = [
     { id: 'id', Name: 'Id', isShow: 'true', type: 'Number' },
-    { id: 'title', Name: '標題', isShow: 'true', type: 'String' },
+    { id: 'title', Name: '標題', isShow: 'true', type: 'String', required: 'true' },
     { id: 'sub_title', Name: '副標題', isShow: 'true', type: 'String' },
     { id: 'content', Name: '內容', isShow: 'false', isEnable: 'false', type: 'jodit' },
     { id: 'actions', Name: 'Actions', isShow: 'false', type: 'Null' },
@@ -103,8 +88,8 @@ const NewsPage = () => {
       setLoadingStates(prev => ({ ...prev, createNews: true }));
       const newNews = {
         title: formData.title,
-        sub_title: formData.sub_title,
-        content: formData.content,
+        sub_title: formData.sub_title || '',
+        content: formData.content || '',
       };
       let response;
       if (editData) {
@@ -168,115 +153,6 @@ const NewsPage = () => {
   const handleCloseForm = () => {
     setIsAdding(false);
   };
-
-  const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData }) => {
-    const [formData, setFormData] = useState<{ [key: string]: any }>({});
-  
-    useEffect(() => {
-      if (editData) {
-        const cleanEditData = { ...editData };
-        headers.forEach((header) => {
-          if (header.type === 'Tags' && editData[header.id]) {
-            cleanEditData[header.id] = editData[header.id].map((item: any) =>
-              typeof item === 'string' ? { id: item, text: item } : item
-            );
-          }
-        });
-        setFormData(cleanEditData);
-      }
-    }, [editData, headers]);
-  
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
-    };
-  
-    const handleEditorChange = (value: string, name: string) => {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    };
-  
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      onSubmit(formData);
-      onClose();
-    };
-  
-    const renderInputField = (header: Header) => {
-      if (header.type === 'Textarea') {
-        return (
-          <textarea
-            key={header.id}
-            name={header.id}
-            placeholder={header.Name}
-            value={formData[header.id] || ''}
-            onChange={handleChange}
-            className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-            rows={4}
-          />
-        );
-      } else if (header.type === 'jodit') {
-        return (
-          <JoditEditor
-            key={header.id}
-            value={formData[header.id]}
-            onBlur={(value) => handleEditorChange(value, header.id)}
-            config={config}
-          />
-        );
-      }
-      return (
-        <input
-          key={header.id}
-          type="text"
-          name={header.id}
-          placeholder={header.Name}
-          value={formData[header.id] || ''}
-          onChange={handleChange}
-          className="w-full rounded-lg border-[1.5px] border-stroke bg-transparent py-3 px-5 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-        />
-      );
-    };
-  
-    return (
-      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
-        <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-          <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
-            <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>
-          </div>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8 max-h-[80vh] overflow-y-auto">
-            {headers
-              .filter((header) => header.id !== 'id' && header.id !== 'actions' && header.id !== 'imageActions' && header.id !== 'imagesActions' && header.id !== 'attachmentActions')
-              .map((header) => (
-                <div key={header.id}>
-                  <label className="mb-3 block text-black dark:text-white">{header.Name}</label>
-                  {renderInputField(header)}
-                </div>
-              ))}
-            <div className="flex justify-end gap-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
-              >
-                取消
-              </button>
-              <button
-                type="submit"
-                className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
-              >
-                {editData ? '更新' : '新增'}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    );
-  };
   
 
   return (
@@ -294,7 +170,7 @@ const NewsPage = () => {
         <div className="flex flex-col gap-6">
           <DynamicTable data={news} headers={headers} onDelete={deleteNews} onEdit={handleEditItem} />
         </div>
-        {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createNews} editData={editData} />}
+        {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createNews} editData={editData} joditConfig={config} />}
         {showSuccessMessage && (
           <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
             {successMessage}

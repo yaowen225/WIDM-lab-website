@@ -31,8 +31,8 @@ const ActivityPage = () => {
   type PickerMode = 'date' | 'week' | 'month' | 'quarter' | 'year'; // 定義PickerMode類型
 
   const headers = [
-    { id: 'id', Name: 'Id', isShow: 'false', isEnable: "false", type: 'Number' },
-    { id: 'title', Name: '標題', isShow: 'true', type: 'String' },
+    { id: 'id', Name: 'Id', isShow: 'false', isEnable: 'false', type: 'Number' },
+    { id: 'title', Name: '標題', isShow: 'true', type: 'String', required: 'true' },
     { id: 'sub_title', Name: '副標題', isShow: 'true', type: 'String' },
     { id: 'date', Name: '日期', isShow: 'true', type: 'Date', dateType: ['date','YYYY-MM-DD'] as [PickerMode, string]  },
     { id: 'imagesActions', Name: 'images', isShow: 'false', type: 'Null' },
@@ -59,7 +59,7 @@ const ActivityPage = () => {
       setLoadingStates(prev => ({ ...prev, createActivitie: true }));
       const newActivity = {
         title: formData.title,
-        sub_title: formData.sub_title,
+        sub_title: formData.sub_title || '',
         date: formData.date,
       };
 

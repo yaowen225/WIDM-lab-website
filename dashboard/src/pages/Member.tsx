@@ -32,10 +32,10 @@ const MemberPage = () => {
 
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'false', isEnable: "false", type: 'Number' },
-    { id: 'name', Name: '名稱', isShow: 'true', type: 'String' },
+    { id: 'name', Name: '名稱', isShow: 'true', type: 'String', required: 'true' },
     { id: 'name_en', Name: '英文名稱', isShow: 'true', type: 'String' },
     { id: 'intro', Name: '介紹', isShow: 'true', type: 'Textarea' },
-    { id: 'position', Name: '職位', isShow: 'true', type: 'Select', data: ['Master Student', 'PHD Student', 'Project Assistant'] },
+    { id: 'position', Name: '職位', isShow: 'true', type: 'Select', data: ['Master Student', 'PHD Student', 'Project Assistant'], required: 'true' },
     { id: 'graduate_year', Name: '畢業時間', isShow: 'true', type: 'Date', dateType: ['month','YYYY-MM'] as [PickerMode, string] },
     { id: 'imageActions', Name: 'member-image', isShow: 'false', type: 'Null' },
   ];
@@ -61,10 +61,10 @@ const MemberPage = () => {
       setLoadingStates(prev => ({ ...prev, createMember: true }));
       const newMember = {
         name: formData.name,
-        name_en: formData.name_en,
-        intro: formData.intro,
+        name_en: formData.name_en || "",
+        intro: formData.intro || "",
         position: formData.position,
-        graduate_year: formData.graduate_year || ""
+        graduate_year: formData.graduate_year
       };
 
       let response;

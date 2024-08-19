@@ -3,8 +3,10 @@ import { Fragment, useState, useRef, useEffect } from 'react';
 import { BiMessageDetail } from "react-icons/bi";
 import { IoMdReturnLeft } from "react-icons/io";
 import { motion } from 'framer-motion';
-import { RetrievalApi } from 'domain/api-client/src';
 import eventBus from '../utils/eventBus'; // 引入事件總線
+import { defaultHttp } from 'utils/http'
+import { processDataRoutes } from 'routes/api'
+
 
 export default function LayoutMessage() {
   const [messages, setMessages] = useState([]);
@@ -67,9 +69,12 @@ export default function LayoutMessage() {
     localStorage.setItem('chatMessages', JSON.stringify(updatedMessages)); // 更新 localStorage
     eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
 
-    const apiClient = new RetrievalApi();
-    const data = await apiClient.retrievalQueryGetWithHttpInfo(current_text);
-    const responseMessage = { sender: 'api', text: data.response.text };
+    const response = await defaultHttp.get(`${processDataRoutes.retrieval}/query`, {
+      params: {
+        query_string: current_text
+      }
+    });
+    const responseMessage = { sender: 'api', text: response.data };
     const finalMessages = [...updatedMessages, responseMessage];
     if (finalMessages.length > 15) {
       finalMessages.shift(); // 移除最舊的訊息

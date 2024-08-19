@@ -32,7 +32,7 @@ const PaperPage = () => {
 
   const headers = [
     { id: 'id', Name: 'Id', isShow: 'false', isEnable: "false", type: 'Number' },
-    { id: 'title', Name: '論文標題', isShow: 'true', type: 'String' },
+    { id: 'title', Name: '論文標題', isShow: 'true', type: 'String', required: 'true' },
     { id: 'sub_title', Name: '論文副標題', isShow: 'true', type: 'String' },
     { id: 'origin', Name: '論文來源', isShow: 'true', type: 'String' },
     { id: 'publish_year', Name: '論文發布年分', isShow: 'true', type: 'Date', dateType: ['month','YYYY-MM'] as [PickerMode, string] },
@@ -64,13 +64,13 @@ const PaperPage = () => {
       setLoadingStates(prev => ({ ...prev, createPaper: true }));
       const newPaper = {
         title: formData.title,
-        sub_title: formData.sub_title,
-        origin: formData.origin,
+        sub_title: formData.sub_title || '',
+        origin: formData.origin || '',
         publish_year: formData.publish_year,
         authors: formData.authors ? formData.authors.map((author: { id: string; text: string; className: string }) => author.text) : null,
         tags: formData.tags ? formData.tags.map((tag: { id: string; text: string; className: string }) => tag.text) : null,
         types: formData.types ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : null,
-        link: formData.link,
+        link: formData.link || '',
       };
 
       let response;
