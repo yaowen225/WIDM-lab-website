@@ -84,16 +84,18 @@ const ProjectTask = () => {
           <div style={{ flex: 1, textAlign: 'center' }}> {/* 讓 h1 標籤居中 */}
             <h1 
               style={{overflowWrap: 'anywhere'}}
-              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap"> {projectTasks.project_task_title}  </h1>
+              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap"> {projectTasks.title}  </h1>
           </div>
           <button onClick={() => router.back()} className="p-2 border border-gray-400 rounded text-gray-600 hover:bg-gray-100">
             <IoMdReturnLeft size={24} />
           </button>
         </div>
         <hr className="my-4 border-gray-300" />
-        <div className="mx-auto w-full max-w-4xl"> {/* 設置寬度並使其居中 */}
-          <ReactMarkdown components={markdownComponents}>{projectTasks.project_task_content}</ReactMarkdown>
-        </div>
+        {/* <div className="mx-auto w-full max-w-4xl">
+          <ReactMarkdown components={markdownComponents}>{projectTasks.content}</ReactMarkdown>
+        </div> */}
+                <div className="mx-auto w-full max-w-4xl" dangerouslySetInnerHTML={{ __html: projectTasks.content }} />
+
       </article>
     </>
   )

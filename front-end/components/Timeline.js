@@ -35,21 +35,21 @@ function TimelineItem({ item, level = 0 }) {
         href={`/projectTasks/${item.project_id}/${item.id}`}
         key={item.project_task_id}
       >
-        <li className="mb-4 ml-8 rounded-md border border-gray-100 bg-white px-4 py-4 shadow-sm shadow-gray-300 dark:border-zinc-900 dark:bg-zinc-900 dark:shadow-none"
+        <li className="list-none mb-4 ml-8 rounded-md border border-gray-100 bg-white px-4 py-4 shadow-sm shadow-gray-300 dark:border-zinc-900 dark:bg-zinc-900 dark:shadow-none"
             style={{ borderColor: backgroundColor, boxShadow: `0 2px 4px ${backgroundColor}` }}>
           <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full"
                 style={{ backgroundColor: backgroundColor, ringColor: backgroundColor }}>
             {icon}
           </span>
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-            {item.project_task_title}
+            {item.title}
             
           </h2>
           <p className='mt-1 mb-3 '>{
-            item.project_task_sub_title && (
+            item.sub_title && (
               <span className="mt-2 mb-3 rounded px-2.5 py-0.5 text-sm font-medium"
                     style={{ backgroundColor: backgroundColor, color: '#FFFFFF' }}>
-                {item.project_task_sub_title}
+                {item.sub_title}
               </span>
             )}
           </p>
@@ -77,7 +77,7 @@ function TimelineItem({ item, level = 0 }) {
                 leaveTo="transform scale-95 opacity-0"
               >
                 <Disclosure.Panel>
-                  <ul>
+                  <ul className='list-none'>
                     {item.children.map((child, index) => <TimelineItem key={child.id} item={child} level={level + 1} />)}
                   </ul>
                 </Disclosure.Panel>

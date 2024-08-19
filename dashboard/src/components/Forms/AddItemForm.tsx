@@ -16,7 +16,7 @@ interface Header {
 }
 
 interface AddItemFormProps
- {
+{
   headers: Header[];
   onClose: () => void;
   onSubmit: (formData: { [key: string]: any }) => void;
@@ -27,7 +27,14 @@ type PickerMode = 'date' | 'week' | 'month' | 'quarter' | 'year'; // 定義Picke
 
 // dateType固定寫 'date' | 'week' | 'month' | 'quarter' | 'year'
 const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData }) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+  const [formData, setFormData] = useState<{ [key: string]: any }>(() => {
+    // 初始化 formData 根據 headers 設置預設值
+    const initialData: { [key: string]: any } = {};
+    headers.forEach(header => {
+      initialData[header.id] = null
+    });
+    return initialData;
+  });
 
   useEffect(() => {
     if (editData) {

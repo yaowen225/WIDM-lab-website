@@ -46,7 +46,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
             </svg>
           </div>
         </div>
-        <ul>
+        <ul className='list-none'>
           {!filteredBlogPosts.length && 'No posts found.'}
           {displayPosts.map((frontMatter) => {
             const { id, uniqueId, sub_title, title, content } = frontMatter
@@ -56,7 +56,7 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                 key={id}
                 className="group flex bg-transparent bg-opacity-20 px-2 transition duration-100 hover:scale-105 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800"
               >
-                <li key={uniqueId} className="py-6">
+                <li key={uniqueId} className="list-none py-6">
                   <article className="space-y-2 bg-transparent bg-opacity-20 p-2 transition duration-200 hover:rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-3">
                     <div className="space-y-5 xl:col-span-4">
                       <div className="space-y-1">

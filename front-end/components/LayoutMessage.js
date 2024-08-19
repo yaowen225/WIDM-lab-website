@@ -117,7 +117,7 @@ export default function LayoutMessage() {
   return (
     <>
       <motion.button
-        className="ml-2 mr-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-zinc-300 p-1 ring-zinc-400 transition-all duration-200 ease-in-out hover:bg-zinc-400 hover:ring-2 dark:bg-zinc-700 dark:ring-white dark:hover:bg-zinc-800"
+        className="ml-2 mr-1 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-400 p-1 ring-gray-600 transition-all duration-200 ease-in-out hover:bg-gray-500 hover:ring-2 dark:bg-gray-700 dark:ring-white dark:hover:bg-gray-800"
         type="button"
         aria-label="Message button"
         animate={{
@@ -129,7 +129,7 @@ export default function LayoutMessage() {
         <BiMessageDetail />
       </motion.button>
       <Transition.Root show={isOpen} as={Fragment}>
-        <Dialog onClose={setIsOpen} className="fixed inset-0 z-20 flex items-center justify-center p-12">
+        <Dialog onClose={setIsOpen} className="fixed inset-0 z-20 flex items-center justify-center">
           <Transition.Child
             enter="duration-300 ease-out"
             enterFrom="opacity-0"
@@ -138,7 +138,7 @@ export default function LayoutMessage() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-zinc-500/75 " />
+            <Dialog.Overlay className="fixed inset-0 bg-black/50" />
           </Transition.Child>
           <Transition.Child
             enter="duration-300 ease-out"
@@ -148,7 +148,7 @@ export default function LayoutMessage() {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="relative mx-auto w-full max-w-3xl h-[70vh] overflow-hidden rounded-xl bg-zinc-200 shadow-2xl ring-1 ring-black/5 dark:bg-zinc-800">
+            <div className="relative mx-auto w-full max-w-4xl h-[80vh] overflow-hidden rounded-xl bg-zinc-200 shadow-2xl ring-1 ring-black/5 dark:bg-zinc-800">
               <div className="flex flex-col h-full">
                 <div ref={nodeRef} className="flex-1 w-full overflow-y-auto bg-white dark:bg-black p-4 rounded-md custom-scrollbar">
                   {messages.length === 0 ? (
@@ -178,7 +178,7 @@ export default function LayoutMessage() {
                   )}
                   <div ref={messagesEndRef} />
                 </div>
-                <div className="flex items-stretch space-x-1 mb-1 py-1 px-1 bg-white dark:bg-black">
+                <div className="flex items-stretch space-x-1 mb-1 py-1 px-1 bg-gray-200 dark:bg-gray-900">
                   <textarea
                     ref={textareaRef}
                     className="dark:bg-black border border-gray-300 dark:border-gray-700 rounded-l-md flex-1 py-4 px-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -191,7 +191,7 @@ export default function LayoutMessage() {
                     style={{ minHeight: '3rem', maxHeight: '24rem' }}
                   />
                   <button
-                    className="flex items-center justify-center bg-blue-500 dark:bg-gray-200 text-white dark:text-black font-bold py-2 px-4 rounded-r-md"
+                    className="flex items-center justify-center bg-gray-500 dark:bg-gray-300 text-white dark:text-black font-bold py-2 px-4 rounded-r-md"
                     onClick={handleSubmit}
                     type="button"
                     style={{
