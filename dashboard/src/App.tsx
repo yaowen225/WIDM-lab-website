@@ -13,26 +13,29 @@ import Member from './pages/Member';
 import NotFound from './pages/NotFound'
 import Unauthorized from './pages/Unauthorized';
 
+import { defaultHttp } from './utils/http';
+import { processDataRoutes } from './routes/api';
+import { storedHeaders } from './utils/storedHeaders';
+import { handleErrorResponse } from './utils/';
+
 // import { AuthApi } from '../domain/api-client/api';
 // import { Configuration} from '../domain/api-client/configuration';
 
 const App: React.FC = () => {
   const { pathname } = useLocation();
 
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
 
   const user_info_get = async () => {
     try {
-        // const configuration = new Configuration({
-        //   baseOptions: {
-        //       withCredentials: true,
-        //   }
-        // });
-        // const apiClient = new AuthApi(configuration);
-        // const response = await apiClient.authUserInfoGet();
+
+      const response = await defaultHttp.get(processDataRoutes.user_info, {
+        headers: storedHeaders(),
+        withCredentials: true,
+      });
         
-        // setIsAuthenticated(response.status === 200);
+      setIsAuthenticated(response.status === 200);
     } catch (error) {
         console.error('Error fetching user info:', error);
     } finally {
@@ -52,7 +55,7 @@ const App: React.FC = () => {
     return <div>Loading...</div>; // 顯示加載指示器直到API調用完成
   }
 
-  return true ? (
+  return isAuthenticated ? (
     <Routes>
       <Route
         index

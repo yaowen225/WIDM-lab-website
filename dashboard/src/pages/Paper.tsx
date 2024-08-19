@@ -38,7 +38,7 @@ const PaperPage = () => {
     { id: 'publish_year', Name: '論文發布年分', isShow: 'true', type: 'Date', dateType: ['month','YYYY-MM'] as [PickerMode, string] },
     { id: 'authors', Name: '論文作者', isShow: 'true', type: 'Tags' },
     { id: 'tags', Name: '論文標籤', isShow: 'true', type: 'Tags' },
-    { id: 'types', Name: '類型', isShow: 'true', type: 'Tags' },
+    { id: 'type', Name: '類型', isShow: 'true', type: 'Tags' },
     { id: 'link', Name: '連結', isShow: 'true', type: 'Url' },
     { id: 'attachmentActions', Name: 'attachment', isShow: 'false', type: 'Null' },
   ];

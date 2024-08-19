@@ -7,6 +7,9 @@ export const processDataRoutes = {
   news: `${API_URL}/news`,
   paper: `${API_URL}/paper`,
   project: `${API_URL}/project`,
+
+  user_info: `${API_URL}/auth/user_info`,
+  log_out: `${API_URL}/auth/log_out`
 };
 
 /**
