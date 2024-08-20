@@ -210,47 +210,56 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
 
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark overflow-y-auto max-h-[90%]">
-        <div className="border-b border-stroke py-6 px-8 dark:border-strokedark">
+      <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="border-b border-stroke py-6 px-8 dark:border-strokedark flex justify-between items-center">
           <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className="text-black dark:text-white text-lg font-bold"
+          >
+            &times;
+          </button>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-8">
-          {headers
-            .filter(
-              (header) =>
-                header.id !== 'id' &&
-                header.id !== 'actions' &&
-                header.id !== 'imageActions' &&
-                header.id !== 'imagesActions' &&
-                header.id !== 'attachmentActions'
-            )
-            .map((header) => (
-              <div key={header.id}>
-                <label className="mb-3 block text-black dark:text-white">
-                  {header.required === 'true' && (
-                    <span className="text-red-500">* </span>
-                  )}
-                  {header.Name}
-                </label>
-                {renderInputField(header)}
-              </div>
-            ))}
-          <div className="flex justify-end gap-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
-            >
-              取消
-            </button>
-            <button
-              type="submit"
-              className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
-            >
-              {editData ? '更新' : '新增'}
-            </button>
-          </div>
-        </form>
+        <div className="overflow-y-auto max-h-[80vh] p-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+            {headers
+              .filter(
+                (header) =>
+                  header.id !== 'id' &&
+                  header.id !== 'actions' &&
+                  header.id !== 'imageActions' &&
+                  header.id !== 'imagesActions' &&
+                  header.id !== 'attachmentActions'
+              )
+              .map((header) => (
+                <div key={header.id}>
+                  <label className="mb-3 block text-black dark:text-white">
+                    {header.required === 'true' && (
+                      <span className="text-red-500">* </span>
+                    )}
+                    {header.Name}
+                  </label>
+                  {renderInputField(header)}
+                </div>
+              ))}
+            <div className="flex justify-end gap-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
+              >
+                取消
+              </button>
+              <button
+                type="submit"
+                className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
+              >
+                {editData ? '更新' : '新增'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
