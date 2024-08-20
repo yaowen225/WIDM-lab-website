@@ -89,3 +89,18 @@ ul {
 menu {
   list-style-type: none; /* 或你希望的其他样式 */
 }
+
+.dark .news-content-container {
+  background-color: black;
+  color: white;
+}
+
+.dark .news-content-container * {
+  background-color: transparent !important;
+  color: inherit;
+}
+
+/* 將非白色文字改成白色 */
+.dark .news-content-container *:not([style*="color: white"]) {
+  color: white !important;
+}

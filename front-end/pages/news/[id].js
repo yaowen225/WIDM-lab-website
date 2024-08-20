@@ -48,7 +48,7 @@ const NewsDetail = () => {
           <div style={{ flex: 1, textAlign: 'center' }}>
             <h1
               style={{ overflowWrap: 'anywhere' }}
-              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap"
+              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap dark:text-white"
             >
               {news.title}
             </h1>
@@ -58,7 +58,12 @@ const NewsDetail = () => {
           </button>
         </div>
         <hr className="my-4 border-gray-300" />
-        <div className="mx-auto w-full max-w-4xl" dangerouslySetInnerHTML={{ __html: news.content }} />
+        <div
+          className="mx-auto w-full max-w-4xl news-content-container"
+          dangerouslySetInnerHTML={{
+            __html: news.content,
+          }}
+        />
       </article>
     </>
   )
