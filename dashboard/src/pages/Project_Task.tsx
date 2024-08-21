@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Breadcrumb from '../components/Breadcrumbs/Breadcrumb';
 import DefaultLayout from '../layout/DefaultLayout';
-import { Select, Tree, TreeProps } from 'antd';
+import { Select, Tree, TreeProps, Spin, message } from 'antd';
 import AddTaskModal from '../components/AddTaskModal';
 import { DownOutlined } from '@ant-design/icons';
 import JoditEditor from 'jodit-react';
 import { WithContext as ReactTags } from 'react-tag-input';
-import { Spin } from 'antd';
 import { defaultHttp } from '../utils/http';
 import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
 import { handleErrorResponse } from '../utils';
+import { joditConfig } from '../config/joditConfig';
 
 const { Option } = Select;
 
@@ -47,165 +47,15 @@ const ProjectPage = () => {
   const [projectId, setProjectId] = useState(0);
   const [projectTasks, setProjectTasks] = useState<ProjectTask[]>([]);
   const [projectTask, setProjectTask] = useState<ProjectTask | null>(null);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-   // - Loading
+  // - Loading
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStates, setLoadingStates] = useState({});    // 儲存各個API的loading狀態
   useEffect(() => {   // 當任何一個API的loading狀態改變時，更新isLoading
     const anyLoading = Object.values(loadingStates).some(state => state);
     setIsLoading(anyLoading);
   }, [loadingStates]);
-
-  const config = React.useMemo(
-    () => ({
-      readonly: false,
-      height: '1000px',
-      uploader: {
-        url: 'https://widm-back-end.nevercareu.space/image',
-        filesVariableName: () => 'file',
-        withCredentials: false,
-        pathVariableName: 'path',
-        format: 'json',
-        method: 'POST',
-      },
-      filebrowser: {
-        ajax: {
-          url: 'https://widm-back-end.nevercareu.space/image',
-          method: 'GET',
-        },
-        permissions: {
-          create: true,
-          remove: true,
-          rename: true,
-          download: true,
-        },
-        fileRemove: {
-          url: 'https://widm-back-end.nevercareu.space/image',
-          method: 'DELETE',
-          contentType: 'application/json',
-        },
-      },
-      removeButtons: ['file', 'video'],
-      style: {
-        font: [
-          'Arial', 
-          'Georgia', 
-          'Impact', 
-          'Verdana', 
-          'Roboto', 
-          'Open Sans', 
-          'Lato', 
-          'Montserrat', 
-          'Oswald', 
-          'Raleway', 
-          'Poppins', 
-          'Merriweather', 
-          'Ubuntu', 
-          'Nunito', 
-          'Rubik', 
-          'Playfair Display', 
-          'Quicksand', 
-          'Source Sans Pro', 
-          'PT Sans', 
-          'Josefin Sans', 
-          'Fira Sans', 
-          'Libre Baskerville', 
-          'Inconsolata', 
-          'Arvo', 
-          'Cabin', 
-          'Exo', 
-          'Dosis', 
-          'Anton', 
-          'Signika', 
-          'Work Sans', 
-          'Zilla Slab', 
-          'Alegreya', 
-          'Amatic SC', 
-          'Bad Script', 
-          'Baloo', 
-          'Bitter', 
-          'Caveat', 
-          'Comfortaa', 
-          'Cormorant Garamond', 
-          'Crimson Text', 
-          'Damion', 
-          'Domine', 
-          'EB Garamond', 
-          'Fjalla One', 
-          'Fredericka the Great', 
-          'Gudea', 
-          'Inknut Antiqua', 
-          'Julius Sans One', 
-          'Karla', 
-          'Libre Franklin', 
-          'Literata'
-        ]
-      },
-      controls: {
-        font: {
-          list: {
-            'Arial': 'Arial',
-            'Georgia': 'Georgia',
-            'Impact': 'Impact',
-            'Verdana': 'Verdana',
-            'Roboto': 'Roboto',
-            'Open Sans': 'Open Sans',
-            'Lato': 'Lato',
-            'Montserrat': 'Montserrat',
-            'Oswald': 'Oswald',
-            'Raleway': 'Raleway',
-            'Poppins': 'Poppins',
-            'Merriweather': 'Merriweather',
-            'Ubuntu': 'Ubuntu',
-            'Nunito': 'Nunito',
-            'Rubik': 'Rubik',
-            'Playfair Display': 'Playfair Display',
-            'Quicksand': 'Quicksand',
-            'Source Sans Pro': 'Source Sans Pro',
-            'PT Sans': 'PT Sans',
-            'Josefin Sans': 'Josefin Sans',
-            'Fira Sans': 'Fira Sans',
-            'Libre Baskerville': 'Libre Baskerville',
-            'Inconsolata': 'Inconsolata',
-            'Arvo': 'Arvo',
-            'Cabin': 'Cabin',
-            'Exo': 'Exo',
-            'Dosis': 'Dosis',
-            'Anton': 'Anton',
-            'Signika': 'Signika',
-            'Work Sans': 'Work Sans',
-            'Zilla Slab': 'Zilla Slab',
-            'Alegreya': 'Alegreya',
-            'Amatic SC': 'Amatic SC',
-            'Bad Script': 'Bad Script',
-            'Baloo': 'Baloo',
-            'Bitter': 'Bitter',
-            'Caveat': 'Caveat',
-            'Comfortaa': 'Comfortaa',
-            'Cormorant Garamond': 'Cormorant Garamond',
-            'Crimson Text': 'Crimson Text',
-            'Damion': 'Damion',
-            'Domine': 'Domine',
-            'EB Garamond': 'EB Garamond',
-            'Fjalla One': 'Fjalla One',
-            'Fredericka the Great': 'Fredericka the Great',
-            'Gudea': 'Gudea',
-            'Inknut Antiqua': 'Inknut Antiqua',
-            'Julius Sans One': 'Julius Sans One',
-            'Karla': 'Karla',
-            'Libre Franklin': 'Libre Franklin',
-            'Literata': 'Literata'
-          }
-        }
-      }
-    }),
-    []
-  );
 
   const fetchProjects = async () => {
     try {
@@ -232,8 +82,8 @@ const ProjectPage = () => {
       const data = response.data.response;
       setProjectTasks(data);
     } catch (error) {
-        handleErrorResponse(error);
-        console.error('API 調用失敗:', (error as Error).message);
+      handleErrorResponse(error);
+      console.error('API 調用失敗:', (error as Error).message);
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -270,8 +120,8 @@ const ProjectPage = () => {
         papers: transformedPapers
       });
     } catch (error) {
-        handleErrorResponse(error);
-        console.error('API 調用失敗:', (error as Error).message);
+      handleErrorResponse(error);
+      console.error('API 調用失敗:', (error as Error).message);
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -305,15 +155,11 @@ const ProjectPage = () => {
       };
     
       await defaultHttp.post(`${processDataRoutes.project}/${project_id}/task`, newTask, { headers: storedHeaders() });
-      setSuccessMessage('新增成功!');
-      setShowSuccessMessage(true);
+      message.success('新增成功!');
       fetchProjectsTasks(project_id);
-      setTimeout(() => setShowSuccessMessage(false), 3000);
     } catch (error) {
       console.error('API 新增失敗:', (error as Error).message);
-      setErrorMessage('新增失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
+      message.error('新增失敗!');
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -338,15 +184,11 @@ const ProjectPage = () => {
         };
       
         await defaultHttp.patch(`${processDataRoutes.project}/${projectId}/task/${projectTask.id}`, updatedTask, { headers: storedHeaders() });
-        setSuccessMessage('更新成功!');
-        setShowSuccessMessage(true);
-        setTimeout(() => setShowSuccessMessage(false), 3000);
+        message.success('更新成功!');
         fetchProjectsTasks(projectId);
       } catch (error) {
         console.error('API 更新失敗:', (error as Error).message);
-        setErrorMessage('更新失敗!');
-        setShowErrorMessage(true);
-        setTimeout(() => setShowErrorMessage(false), 3000);
+        message.error('更新失敗!');
         if ((error as any).response) {
           console.error('API Response Error:', (error as any).response.body);
         }
@@ -364,16 +206,12 @@ const ProjectPage = () => {
           return;
         }
         await defaultHttp.delete(`${processDataRoutes.project}/${projectId}/task/${projectTask.id}`, { headers: storedHeaders() });
-        setSuccessMessage('刪除成功!');
-        setShowSuccessMessage(true); // 顯示成功消息
-        setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+        message.success('刪除成功!');  // 顯示成功消息
         fetchProjectsTasks(projectId);
         setProjectTask(null);
       } catch (error) {
         console.error('API 刪除失敗:', (error as Error).message);
-        setErrorMessage('刪除失敗!');
-        setShowErrorMessage(true); // 顯示錯誤消息
-        setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+        message.error('刪除失敗!');  // 顯示錯誤消息
         if ((error as any).response) {
           console.error('API Response Error:', (error as any).response.body);
         }
@@ -465,7 +303,6 @@ const ProjectPage = () => {
       setProjectTask({ ...projectTask, papers: newTags });
     }
   };
-
 
   useEffect(() => {
     fetchProjects();
@@ -564,7 +401,7 @@ const ProjectPage = () => {
                       <label className="mb-3 block text-black dark:text-white">內容</label>
                       <JoditEditor
                         value={projectTask?.content}
-                        config={config}
+                        config={joditConfig}
                         onBlur={(newContent) => handleEditorBlur(newContent)}
                       />
                     </div>
@@ -596,16 +433,6 @@ const ProjectPage = () => {
             </div>
           </div>
         </div>
-        {showSuccessMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-            {successMessage}
-          </div>
-        )}
-        {showErrorMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
-            {errorMessage}
-          </div>
-        )}
       </DefaultLayout>
     </Spin>
   );

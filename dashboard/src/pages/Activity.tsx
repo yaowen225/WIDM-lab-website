@@ -4,7 +4,7 @@ import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
 import ImageManagement from '../components/Forms/ImageManagement';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 import { defaultHttp } from '../utils/http';
 import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
@@ -15,11 +15,7 @@ const ActivityPage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isEditImages, setIsEditImages] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  
+
   // - Loading
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStates, setLoadingStates] = useState({});    // 儲存各個API的loading狀態
@@ -34,7 +30,7 @@ const ActivityPage = () => {
     { id: 'id', Name: 'Id', isShow: 'false', isEnable: 'false', type: 'Number' },
     { id: 'title', Name: '標題', isShow: 'true', type: 'String', required: 'true' },
     { id: 'sub_title', Name: '副標題', isShow: 'true', type: 'String' },
-    { id: 'date', Name: '日期', isShow: 'true', type: 'Date', dateType: ['date','YYYY-MM-DD'] as [PickerMode, string]  },
+    { id: 'date', Name: '日期', isShow: 'true', type: 'Date', dateType: ['date','YYYY-MM-DD'] as [PickerMode, string], required: 'true' },
     { id: 'imagesActions', Name: 'images', isShow: 'false', type: 'Null' },
   ];
 
@@ -71,14 +67,10 @@ const ActivityPage = () => {
       }
       setIsAdding(false);
       fetchActivities();  // 新增或更新後重新獲取成員數據
-      setSuccessMessage('更新成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+      message.success('更新成功!');  // 顯示成功消息
     } catch (error) {
       console.error('API 創建失敗:', (error as Error).message);
-      setErrorMessage('更新失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      message.error('更新失敗!');  // 顯示錯誤消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -87,33 +79,35 @@ const ActivityPage = () => {
     }
   };
 
-  const handleUploadImageSubmit = async (formData: { [key: string]: any }) => {
+  const handleUploadImageSubmit = async (images: File[]) => {
     try {
       setLoadingStates(prev => ({ ...prev, handleUploadImageSubmit: true }));
-      if (editData) {
-        const activityImageUrl = `${processDataRoutes.activity}/${editData.id}/activity-image`;
-        const uploadFormData = new FormData();
-
-        // 確保圖片文件被添加到 FormData 中
-        if (formData.image) {
-          uploadFormData.append('image', formData.image);
+      
+      if (editData && images.length > 0) {
+        for (let i = 0; i < images.length; i++) {
+          const activityImageUrl = `${processDataRoutes.activity}/${editData.id}/activity-image`;
+          const uploadFormData = new FormData();
+          uploadFormData.append('image', images[i]);
+  
+          try {
+            const response = await defaultHttp.post(activityImageUrl, uploadFormData);
+            if (response.status === 200) {
+              message.success(`圖片 ${i + 1} 上傳成功!`);
+            } else {
+              throw new Error(`圖片 ${i + 1} 上傳失敗!`);
+            }
+          } catch (error) {
+            message.error(`圖片 ${i + 1} 上傳失敗!`);
+            throw error; // 如果上傳失敗，仍然拋出錯誤，停止後續上傳
+          }
         }
-        const response = await defaultHttp.post(activityImageUrl, uploadFormData);
-        if (response.status === 200) {
-          await fetchActivities();
-          updateImagesId(editData.id);
-          setSuccessMessage('圖片上傳成功!');
-          setShowSuccessMessage(true);
-          setTimeout(() => setShowSuccessMessage(false), 3000);
-        } else {
-          throw new Error('圖片上傳失敗!');
-        }
+  
+        await fetchActivities();
+        updateImagesId(editData.id);
       }
     } catch (error) {
       console.error('圖片上傳失敗:', (error as Error).message);
-      setErrorMessage('圖片上傳失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
+      message.error('圖片上傳失敗!');
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -128,14 +122,10 @@ const ActivityPage = () => {
       await defaultHttp.delete(`${processDataRoutes.activity}/${id}/activity-image/${imageId}`, { headers: storedHeaders() });
       await fetchActivities();
       updateImagesId(id);
-      setSuccessMessage('圖片刪除成功!');
-      setShowSuccessMessage(true);
-      setTimeout(() => setShowSuccessMessage(false), 3000);
+      message.success('圖片刪除成功!');
     } catch (error) {
       console.error('圖片刪除失敗:', (error as Error).message);
-      setErrorMessage('圖片刪除失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
+      message.error('圖片刪除失敗!');
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -149,14 +139,10 @@ const ActivityPage = () => {
       setLoadingStates(prev => ({ ...prev, deleteActivitie: true }));
       await defaultHttp.delete(`${processDataRoutes.activity}/${id}`, { headers: storedHeaders() });
       fetchActivities(); // 刪除後重新獲取成員數據
-      setSuccessMessage('刪除成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+      message.success('刪除成功!');  // 顯示成功消息
     } catch (error) {
       console.error('API 刪除失敗:', (error as Error).message);
-      setErrorMessage('刪除失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      message.error('刪除失敗!');  // 顯示錯誤消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -220,18 +206,8 @@ const ActivityPage = () => {
         <div className="flex flex-col gap-6">
           <DynamicTable data={activities} headers={headers} onDelete={deleteActivitie} onEdit={handleEditItem} onEditImage={handleEditImages}/>
         </div>
-        {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />}
-        {isEditImages && <ImageManagement onClose={handleCloseEditImages} action_1={'activity'} action_2={'activity-image'} id={editData?.id!} initialImagesId={editData?.images} onUploadImage={handleUploadImageSubmit} onDeleteImage={handleDeleteImagesSubmit}/>}
-        {showSuccessMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-            {successMessage}
-          </div>
-        )}
-        {showErrorMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
-            {errorMessage}
-          </div>
-        )}
+        <AddItemForm headers={headers} isOpen={isAdding} onClose={handleCloseForm} onSubmit={createActivitie} editData={editData} />
+        <ImageManagement isOpen={isEditImages} onClose={handleCloseEditImages} action_1={'activity'} action_2={'activity-image'} id={editData?.id!} initialImagesId={editData?.images} onUploadImage={handleUploadImageSubmit} onDeleteImage={handleDeleteImagesSubmit}/>
       </DefaultLayout>
     </Spin>
   );

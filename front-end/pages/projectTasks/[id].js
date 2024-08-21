@@ -6,7 +6,7 @@ import { defaultHttp } from 'utils/http'
 import { processDataRoutes } from 'routes/api'
 import { IoMdReturnLeft } from "react-icons/io"
 
-import Timeline from '@/components/Timeline'
+import ProjectTimeline from '@/components/ProjectTimeline'
 import { motion } from 'framer-motion'
 
 const ProjectTask = () => {
@@ -75,7 +75,7 @@ const ProjectTask = () => {
             },
           }}
         >
-          <Timeline items={projectTasks} />
+          <ProjectTimeline items={projectTasks} />
         </motion.div>
       </div>
     </>

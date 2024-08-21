@@ -2,7 +2,7 @@ import SocialIcon from './social-icons'
 import Link from '@/components/Link'
 import FolderIcon from './icon'
 
-const ProjectCard = ({ key, project_id, title, description, project_link, github, tags, icon }) => (
+const ProjectCard = ({ project_id, title, description, project_link, github, tags, members, icon }) => (
   
   <div className="md p-4 md:w-1/2" style={{ maxWidth: '544px' }}>
       <div className="h-full transform overflow-hidden rounded-md border-2 border-solid border-gray-200 bg-transparent bg-opacity-20 transition duration-500 hover:scale-105 hover:rounded-md hover:border-primary-500 hover:bg-gray-200 dark:border-gray-700 dark:hover:border-primary-500 dark:hover:bg-gray-800">
@@ -39,6 +39,18 @@ const ProjectCard = ({ key, project_id, title, description, project_link, github
                 ))}
               </div>
             )}
+          </div>
+          <div className="flex flex-row justify-between">
+            {members && members.length > 0 && (
+              <div className="text-sm text-gray-400">
+                {members.map((member, index) => (
+                  <span key={index}>
+                    {member}
+                    {index < members.length - 1 && ' \u2022 '}
+                  </span>
+                ))}
+              </div>
+            )}
             <div className="flex flex-row justify-between">
               <div className="mx-1.5">
                 {project_link ? <SocialIcon kind="website" href={project_link} size="6" /> : null}
@@ -48,8 +60,6 @@ const ProjectCard = ({ key, project_id, title, description, project_link, github
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     

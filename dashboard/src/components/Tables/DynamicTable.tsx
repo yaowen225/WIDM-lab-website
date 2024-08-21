@@ -3,7 +3,7 @@ import { FaEdit, FaTrashAlt, FaLink } from 'react-icons/fa';
 import { LuImage, LuImagePlus, LuImageMinus } from "react-icons/lu";
 import { FiFilePlus, FiFileMinus } from "react-icons/fi";
 import { MdOutlineFileDownload } from "react-icons/md";
-import { Tag } from 'antd';
+import { Tag, Modal } from 'antd';
 
 type HeaderType = {
   id: string;
@@ -77,7 +77,7 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
             <tr key={`intr-${row}-${rowIndex}`} className="hover:bg-gray-50 dark:hover:bg-meta-4">
               {headers.map((header) => (
                 (!header.isEnable || header.isEnable === 'true') ? (
-                  <td key={`intd-${rowIndex}-${header.id}`} className="border-b border-[#eee] py-5 px-5 dark:border-strokedark xl:pl-11">
+                  <td key={`intd-${rowIndex}-${header.id}`} className="border-b border-[#eee] py-5 px-10 dark:border-strokedark xl:pl-11">
                     {/* header.id === 'actions' 新增 修改 刪除 */}
                     {header.id === 'actions' && ( // 新增 修改 刪除
                       <div className="flex items-center space-x-3.5">
@@ -91,7 +91,7 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
                     )}
                     {header.id === 'imageActions' && (onUploadFile || onDeleteFiles) && ( // 上傳單張圖片
                       <div className="flex items-center space-x-10">
-                        <div className="flex items-center space-x-5 px-5 py-2 w-full">
+                        <div className="flex items-center space-x-5 px-3.5 py-2 w-full">
                           {onEdit && (
                             <button className="hover:text-primary" onClick={() => onEdit(row)}>
                               <FaEdit />
@@ -205,27 +205,30 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
       </div>
 
       {/* 刪除用 */}
-      {showModal && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg dark:bg-boxdark">
-            <h3 className="mb-4 text-black dark:text-white">確定刪除此筆資料?</h3>
-            <div className="flex justify-end space-x-4">
-              <button
-                onClick={handleCancelDelete}
-                className="px-4 py-2 rounded border border-gray-300 text-black dark:text-white"
-              >
-                取消
-              </button>
-              <button
-                onClick={handleConfirmDelete}
-                className="px-4 py-2 rounded bg-red-500 text-white"
-              >
-                確定
-              </button>
-            </div>
+        <Modal
+          title="確認刪除"
+          open={showModal}
+          onCancel={handleCancelDelete}
+          footer={null}
+          centered={true}
+          maskClosable={false}
+        >
+          <h3 className="mb-4 text-black dark:text-white">確定刪除此筆資料?</h3>
+          <div className="flex justify-end space-x-4">
+            <button
+              onClick={handleCancelDelete}
+              className="px-4 py-2 rounded border border-gray-300 text-black dark:text-white"
+            >
+              取消
+            </button>
+            <button
+              onClick={handleConfirmDelete}
+              className="px-4 py-2 rounded bg-red-500 text-white"
+            >
+              確定
+            </button>
           </div>
-        </div>
-      )}
+        </Modal>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
 import UploadAttachmentForm from '../components/Forms/UploadAttachmentForm';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 import { defaultHttp } from '../utils/http';
 import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
@@ -15,10 +15,6 @@ const PaperPage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   // - Loading
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +31,7 @@ const PaperPage = () => {
     { id: 'title', Name: '論文標題', isShow: 'true', type: 'String', required: 'true' },
     { id: 'sub_title', Name: '論文副標題', isShow: 'true', type: 'String' },
     { id: 'origin', Name: '論文來源', isShow: 'true', type: 'String' },
-    { id: 'publish_year', Name: '論文發布年分', isShow: 'true', type: 'Date', dateType: ['month','YYYY-MM'] as [PickerMode, string] },
+    { id: 'publish_year', Name: '論文發布年分', isShow: 'true', type: 'Date', dateType: ['month','YYYY-MM'] as [PickerMode, string], required: 'true' },
     { id: 'authors', Name: '論文作者', isShow: 'true', type: 'Tags' },
     { id: 'tags', Name: '論文標籤', isShow: 'true', type: 'Tags' },
     { id: 'type', Name: '類型', isShow: 'true', type: 'Tags' },
@@ -67,9 +63,9 @@ const PaperPage = () => {
         sub_title: formData.sub_title || '',
         origin: formData.origin || '',
         publish_year: formData.publish_year,
-        authors: formData.authors ? formData.authors.map((author: { id: string; text: string; className: string }) => author.text) : null,
-        tags: formData.tags ? formData.tags.map((tag: { id: string; text: string; className: string }) => tag.text) : null,
-        types: formData.types ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : null,
+        authors: formData.authors ? formData.authors.map((author: { id: string; text: string; className: string }) => author.text) : [],
+        tags: formData.tags ? formData.tags.map((tag: { id: string; text: string; className: string }) => tag.text) : [],
+        types: formData.types ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : [],
         link: formData.link || '',
       };
 
@@ -81,14 +77,10 @@ const PaperPage = () => {
       }
       setIsAdding(false);
       fetchPapers();  // 新增或更新後重新獲取成員數據
-      setSuccessMessage('更新成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+      message.success('更新成功!');  // 顯示成功消息
     } catch (error) {
       console.error('API 創建失敗:', (error as Error).message);
-      setErrorMessage('更新失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      message.error('更新失敗!');  // 顯示錯誤消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -111,18 +103,14 @@ const PaperPage = () => {
         const response = await defaultHttp.post(paperImageUrl, uploadFormData);
         if (response.status === 200) {
           await fetchPapers();
-          setSuccessMessage('檔案上傳成功!');
-          setShowSuccessMessage(true);
-          setTimeout(() => setShowSuccessMessage(false), 3000);
+          message.success('檔案上傳成功!');
         } else {
           throw new Error('檔案上傳失敗!');
         }
       }
     } catch (error) {
       console.error('檔案上傳失敗:', (error as Error).message);
-      setErrorMessage('檔案上傳失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
+      message.error('檔案上傳失敗!');
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -136,14 +124,10 @@ const PaperPage = () => {
       setLoadingStates(prev => ({ ...prev, deletePaper: true }));
       await defaultHttp.delete(`${processDataRoutes.paper}/${id}`, { headers: storedHeaders() });
       fetchPapers(); // 刪除後重新獲取成員數據
-      setSuccessMessage('刪除成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+      message.success('刪除成功!');  // 顯示成功消息
     } catch (error) {
       console.error('API 刪除失敗:', (error as Error).message);
-      setErrorMessage('刪除失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      message.error('刪除失敗!');  // 顯示錯誤消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -178,17 +162,13 @@ const PaperPage = () => {
         link.click();
         document.body.removeChild(link);
   
-        setSuccessMessage('檔案下載成功!');
-        setShowSuccessMessage(true);
-        setTimeout(() => setShowSuccessMessage(false), 3000);
+        message.success('檔案下載成功!');
       } else {
         throw new Error('檔案下載失敗!');
       }
     } catch (error) {
       console.error('檔案下載失敗:', (error as Error).message);
-      setErrorMessage('檔案下載失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
+      message.error('檔案下載失敗!');
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -239,19 +219,8 @@ const PaperPage = () => {
         <div className="flex flex-col gap-6">
           <DynamicTable page={'paper'} data={papers} headers={headers} onDelete={deletePaper} onEdit={handleEditItem} onUploadFile={handleUploadAttachment} onDownloadFile={handleDownloadAttachment} />
         </div>
-        {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createPaper} editData={editData} />}
+        <AddItemForm headers={headers} isOpen={isAdding} onClose={handleCloseForm} onSubmit={createPaper} editData={editData} />
         {isUploading && <UploadAttachmentForm onClose={handleCloseUploadAttachment} onSubmit={handleUploadAttachmentSubmit} />}
-        {/* {isDeletingFiles && <DeleteFiles action="paper" id={editData!.id} fileId={editData!.attachment} onClose={handleCloseDeleteFiles} onDeleteFile={handleDeleteFileSubmit} />} */}
-        {showSuccessMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-            {successMessage}
-          </div>
-        )}
-        {showErrorMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
-            {errorMessage}
-          </div>
-        )}
       </DefaultLayout>
     </Spin>
   );

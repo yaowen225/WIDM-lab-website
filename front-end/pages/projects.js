@@ -47,6 +47,7 @@ export const projects = () => {
                 github={d.github}
                 tags={d.tags}
                 icon={d.icon}
+                members={d.members}
                 project_link={d.link}
               />
             ))}

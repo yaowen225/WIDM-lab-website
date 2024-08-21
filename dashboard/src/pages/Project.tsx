@@ -4,7 +4,7 @@ import DefaultLayout from '../layout/DefaultLayout';
 import DynamicTable from '../components/Tables/DynamicTable';
 import AddItemForm from '../components/Forms/AddItemForm';
 import UploadImage from '../components/Forms/UploadImageForm';
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
 import { defaultHttp } from '../utils/http';
 import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
@@ -15,10 +15,6 @@ const ProjectPage = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [editData, setEditData] = useState<{ [key: string]: any } | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   // - Loading
   const [isLoading, setIsLoading] = useState(false);
@@ -58,14 +54,17 @@ const ProjectPage = () => {
   const createProject = async (formData: { [key: string]: any }) => {
     try {
       setLoadingStates(prev => ({ ...prev, createProject: true }));
+      console.log(formData);
       const newProject = {
         name: formData.name,
         description: formData.description || '',
         github: formData.github || '',
         link: formData.link || '',
-        tags: formData.tags ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : null,
-        members: formData.members ? formData.types.map((type: { id: string; text: string; className: string }) => type.text) : null,
+        tags: formData.tags ? formData.tags.map((type: { id: string; text: string; className: string }) => type.text) : [],
+        members: formData.members ? formData.members.map((member: { id: string; text: string; className: string }) => member.text) : [],
       };
+
+      console.log(newProject);
 
       let response;
       if (editData) {
@@ -75,14 +74,10 @@ const ProjectPage = () => {
       }
       setIsAdding(false);
       fetchProjects();  // 新增或更新後重新獲取成員數據
-      setSuccessMessage('更新成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+      message.success('更新成功!');  // 顯示成功消息
     } catch (error) {
       console.error('API 創建失敗:', (error as Error).message);
-      setErrorMessage('更新失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      message.error('更新失敗!');  // 顯示錯誤消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -96,14 +91,10 @@ const ProjectPage = () => {
       setLoadingStates(prev => ({ ...prev, deleteProject: true }));
       await defaultHttp.delete(`${processDataRoutes.project}/${id}`, { headers: storedHeaders() });
       fetchProjects(); // 刪除後重新獲取成員數據
-      setSuccessMessage('刪除成功!');
-      setShowSuccessMessage(true); // 顯示成功消息
-      setTimeout(() => setShowSuccessMessage(false), 3000); // 3秒後隱藏消息
+      message.success('刪除成功!');  // 顯示成功消息
     } catch (error) {
       console.error('API 刪除失敗:', (error as Error).message);
-      setErrorMessage('刪除失敗!');
-      setShowErrorMessage(true); // 顯示錯誤消息
-      setTimeout(() => setShowErrorMessage(false), 3000); // 3秒後隱藏消息
+      message.error('刪除失敗!');  // 顯示錯誤消息
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -139,18 +130,14 @@ const ProjectPage = () => {
           console.log(updatedProjects);
           setProjects(updatedProjects);
   
-          setSuccessMessage('圖片上傳成功!');
-          setShowSuccessMessage(true);
-          setTimeout(() => setShowSuccessMessage(false), 3000);
+          message.success('圖片上傳成功!');
         } else {
           throw new Error('圖片上傳失敗!');
         }
       }
     } catch (error) {
       console.error('圖片上傳失敗:', (error as Error).message);
-      setErrorMessage('圖片上傳失敗!');
-      setShowErrorMessage(true);
-      setTimeout(() => setShowErrorMessage(false), 3000);
+      message.error('圖片上傳失敗!');
       if ((error as any).response) {
         console.error('API Response Error:', (error as any).response.body);
       }
@@ -201,18 +188,8 @@ const ProjectPage = () => {
         <div className="flex flex-col gap-6">
           <DynamicTable page={'project'} data={projects} headers={headers} onDelete={deleteProject} onEdit={handleEditItem} onUploadFile={handleUploadImage} />
         </div>
-        {isAdding && <AddItemForm headers={headers} onClose={handleCloseForm} onSubmit={createProject} editData={editData} />}
-        {isUploading && <UploadImage onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />}
-        {showSuccessMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded shadow-lg">
-            {successMessage}
-          </div>
-        )}
-        {showErrorMessage && (
-          <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
-            {errorMessage}
-          </div>
-        )}
+        <AddItemForm headers={headers} isOpen={isAdding} onClose={handleCloseForm} onSubmit={createProject} editData={editData} />
+        <UploadImage isOpen={isUploading} onClose={handleCloseUploadImage} onSubmit={handleUploadImageSubmit} />
       </DefaultLayout>
     </Spin>
   );

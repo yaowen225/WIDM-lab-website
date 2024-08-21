@@ -8,6 +8,7 @@ import { processDataRoutes } from '../routes/api';
 import { storedHeaders } from '../utils/storedHeaders';
 import { handleErrorResponse } from '../utils';
 import JoditEditor from 'jodit-react';
+import { joditConfig } from '../config/joditConfig';
 
 interface Task {
   id: number;
@@ -45,152 +46,6 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
     const anyLoading = Object.values(loadingStates).some(state => state);
     setIsLoading(anyLoading);
   }, [loadingStates]);
-
-  const config = React.useMemo(
-    () => ({
-      readonly: false,
-      height: '1000px',
-      uploader: {
-        url: 'https://widm-back-end.nevercareu.space/image',
-        filesVariableName: () => 'file',
-        withCredentials: false,
-        pathVariableName: 'path',
-        format: 'json',
-        method: 'POST',
-      },
-      filebrowser: {
-        ajax: {
-          url: 'https://widm-back-end.nevercareu.space/image',
-          method: 'GET',
-        },
-        permissions: {
-          create: true,
-          remove: true,
-          rename: true,
-          download: true,
-        },
-        fileRemove: {
-          url: 'https://widm-back-end.nevercareu.space/image',
-          method: 'DELETE',
-          contentType: 'application/json',
-        },
-      },
-      removeButtons: ['file', 'video'],
-      style: {
-        font: [
-          'Arial', 
-          'Georgia', 
-          'Impact', 
-          'Verdana', 
-          'Roboto', 
-          'Open Sans', 
-          'Lato', 
-          'Montserrat', 
-          'Oswald', 
-          'Raleway', 
-          'Poppins', 
-          'Merriweather', 
-          'Ubuntu', 
-          'Nunito', 
-          'Rubik', 
-          'Playfair Display', 
-          'Quicksand', 
-          'Source Sans Pro', 
-          'PT Sans', 
-          'Josefin Sans', 
-          'Fira Sans', 
-          'Libre Baskerville', 
-          'Inconsolata', 
-          'Arvo', 
-          'Cabin', 
-          'Exo', 
-          'Dosis', 
-          'Anton', 
-          'Signika', 
-          'Work Sans', 
-          'Zilla Slab', 
-          'Alegreya', 
-          'Amatic SC', 
-          'Bad Script', 
-          'Baloo', 
-          'Bitter', 
-          'Caveat', 
-          'Comfortaa', 
-          'Cormorant Garamond', 
-          'Crimson Text', 
-          'Damion', 
-          'Domine', 
-          'EB Garamond', 
-          'Fjalla One', 
-          'Fredericka the Great', 
-          'Gudea', 
-          'Inknut Antiqua', 
-          'Julius Sans One', 
-          'Karla', 
-          'Libre Franklin', 
-          'Literata'
-        ]
-      },
-      controls: {
-        font: {
-          list: {
-            'Arial': 'Arial',
-            'Georgia': 'Georgia',
-            'Impact': 'Impact',
-            'Verdana': 'Verdana',
-            'Roboto': 'Roboto',
-            'Open Sans': 'Open Sans',
-            'Lato': 'Lato',
-            'Montserrat': 'Montserrat',
-            'Oswald': 'Oswald',
-            'Raleway': 'Raleway',
-            'Poppins': 'Poppins',
-            'Merriweather': 'Merriweather',
-            'Ubuntu': 'Ubuntu',
-            'Nunito': 'Nunito',
-            'Rubik': 'Rubik',
-            'Playfair Display': 'Playfair Display',
-            'Quicksand': 'Quicksand',
-            'Source Sans Pro': 'Source Sans Pro',
-            'PT Sans': 'PT Sans',
-            'Josefin Sans': 'Josefin Sans',
-            'Fira Sans': 'Fira Sans',
-            'Libre Baskerville': 'Libre Baskerville',
-            'Inconsolata': 'Inconsolata',
-            'Arvo': 'Arvo',
-            'Cabin': 'Cabin',
-            'Exo': 'Exo',
-            'Dosis': 'Dosis',
-            'Anton': 'Anton',
-            'Signika': 'Signika',
-            'Work Sans': 'Work Sans',
-            'Zilla Slab': 'Zilla Slab',
-            'Alegreya': 'Alegreya',
-            'Amatic SC': 'Amatic SC',
-            'Bad Script': 'Bad Script',
-            'Baloo': 'Baloo',
-            'Bitter': 'Bitter',
-            'Caveat': 'Caveat',
-            'Comfortaa': 'Comfortaa',
-            'Cormorant Garamond': 'Cormorant Garamond',
-            'Crimson Text': 'Crimson Text',
-            'Damion': 'Damion',
-            'Domine': 'Domine',
-            'EB Garamond': 'EB Garamond',
-            'Fjalla One': 'Fjalla One',
-            'Fredericka the Great': 'Fredericka the Great',
-            'Gudea': 'Gudea',
-            'Inknut Antiqua': 'Inknut Antiqua',
-            'Julius Sans One': 'Julius Sans One',
-            'Karla': 'Karla',
-            'Libre Franklin': 'Libre Franklin',
-            'Literata': 'Literata'
-          }
-        }
-      }
-    }),
-    []
-  );
 
   const fetchProjects = async () => {
     try {
@@ -406,7 +261,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
             <Form.Item label="內容">
               <JoditEditor
                 value={taskContent}
-                config={config}
+                config={joditConfig}
                 onBlur={(newContent) => setTaskContent(newContent)}
               />
             </Form.Item>

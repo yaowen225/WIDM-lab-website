@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
-import { DatePicker } from 'antd';
+import { DatePicker, Modal } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import JoditEditor from 'jodit-react';
@@ -20,6 +20,7 @@ interface Header {
 interface AddItemFormProps {
   headers: Header[];
   onClose: () => void;
+  isOpen: boolean;
   onSubmit: (formData: { [key: string]: any }) => void;
   editData?: { [key: string]: any } | null;
   joditConfig?: any;
@@ -27,7 +28,7 @@ interface AddItemFormProps {
 
 type PickerMode = 'date' | 'week' | 'month' | 'quarter' | 'year'; // 定義PickerMode類型
 
-const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, editData, joditConfig }) => {
+const AddItemForm: React.FC<AddItemFormProps> = ({ headers, isOpen, onClose, onSubmit, editData, joditConfig }) => {
   const [formData, setFormData] = useState<{ [key: string]: any }>(() => {
     const initialData: { [key: string]: any } = {};
     headers.forEach(header => {
@@ -41,18 +42,31 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
   });
 
   useEffect(() => {
-    if (editData) {
-      const cleanEditData = { ...editData };
-      headers.forEach((header) => {
-        if (header.type === 'Tags' && editData[header.id]) {
-          cleanEditData[header.id] = editData[header.id].map((item: any) =>
-            typeof item === 'string' ? { id: item, text: item } : item
-          );
-        }
-      });
-      setFormData(cleanEditData);
+    if (isOpen) {
+      if (editData) {
+        const cleanEditData = { ...editData };
+        headers.forEach((header) => {
+          if (header.type === 'Tags' && editData[header.id]) {
+            cleanEditData[header.id] = editData[header.id].map((item: any) =>
+              typeof item === 'string' ? { id: item, text: item } : item
+            );
+          }
+        });
+        setFormData(cleanEditData);
+      } else {
+        // 如果沒有 editData，則重置 formData 為初始狀態
+        const initialData: { [key: string]: any } = {};
+        headers.forEach(header => {
+          if (header.type === 'Date') {
+            initialData[header.id] = dayjs().format(header.dateType?.[1] || 'YYYY-MM-DD');
+          } else {
+            initialData[header.id] = null;
+          }
+        });
+        setFormData(initialData);
+      }
     }
-  }, [editData]);
+  }, [isOpen, editData, headers]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -161,11 +175,11 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
         <DatePicker
           format={header.dateType?.[1]}
           key={header.id}
-          value={formData[header.id] ? dayjs(formData[header.id], header.dateType?.[1]) : dayjs()}
+          value={formData[header.id] ? dayjs(formData[header.id], header.dateType?.[1]) : null}
           onChange={(date, dateString) => {
             setFormData({
               ...formData,
-              [header.id]: date ? date.format(header.dateType?.[1]) : undefined,
+              [header.id]: date ? date.format(header.dateType?.[1]) : null,
             });
           }}
           picker={header.dateType?.[0]}
@@ -209,59 +223,55 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, onClose, onSubmit, e
   };
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-3/4 max-w-4xl rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="border-b border-stroke py-6 px-8 dark:border-strokedark flex justify-between items-center">
-          <h3 className="text-lg font-medium text-black dark:text-white">Add New Item</h3>
-          <button
-            type="button"
-            onClick={onClose}
-            className="text-black dark:text-white text-lg font-bold"
-          >
-            &times;
-          </button>
-        </div>
-        <div className="overflow-y-auto max-h-[80vh] p-8">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            {headers
-              .filter(
-                (header) =>
-                  header.id !== 'id' &&
-                  header.id !== 'actions' &&
-                  header.id !== 'imageActions' &&
-                  header.id !== 'imagesActions' &&
-                  header.id !== 'attachmentActions'
-              )
-              .map((header) => (
-                <div key={header.id}>
-                  <label className="mb-3 block text-black dark:text-white">
-                    {header.required === 'true' && (
-                      <span className="text-red-500">* </span>
-                    )}
-                    {header.Name}
-                  </label>
-                  {renderInputField(header)}
-                </div>
-              ))}
-            <div className="flex justify-end gap-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
-              >
-                取消
-              </button>
-              <button
-                type="submit"
-                className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
-              >
-                {editData ? '更新' : '新增'}
-              </button>
-            </div>
-          </form>
-        </div>
+    <Modal
+      title={editData ? 'Edit Item' : 'Add New Item'}
+      open={isOpen}
+      onCancel={onClose}
+      footer={null}
+      width={1000}
+      centered={true}
+      maskClosable={false}
+    >
+      <div className="overflow-y-auto max-h-[80vh] p-8">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          {headers
+            .filter(
+              (header) =>
+                header.id !== 'id' &&
+                header.id !== 'actions' &&
+                header.id !== 'imageActions' &&
+                header.id !== 'imagesActions' &&
+                header.id !== 'attachmentActions'
+            )
+            .map((header) => (
+              <div key={header.id}>
+                <label className="mb-3 block text-black dark:text-white">
+                  {header.required === 'true' && (
+                    <span className="text-red-500">* </span>
+                  )}
+                  {header.Name}
+                </label>
+                {renderInputField(header)}
+              </div>
+            ))}
+          <div className="flex justify-end gap-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
+            >
+              取消
+            </button>
+            <button
+              type="submit"
+              className="rounded-md border border-primary bg-primary py-3 px-6 text-white"
+            >
+              {editData ? '更新' : '新增'}
+            </button>
+          </div>
+        </form>
       </div>
-    </div>
+    </Modal>
   );
 };
 

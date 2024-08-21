@@ -16,6 +16,7 @@ export default function Tweet({
   title,
   sub_title,
   create_time,
+  date,
   images,
 }) {
   
@@ -70,8 +71,9 @@ export default function Tweet({
         target="_blank"
         rel="noopener noreferrer"
       >
-        <time title={`Time Posted: ${new Date(create_time).toUTCString()}`} dateTime={new Date(create_time).toISOString()}>
-          Update by {format(new Date(create_time), 'h:mm a - MMM d, y')}
+        <time title={`Time Posted: ${new Date(date).toUTCString()}`} dateTime={new Date(date).toISOString()}>
+          Update by {format(new Date(date), 'MMM d, y')}
+          {/* Update by {format(new Date(date), 'h:mm a - MMM d, y')} */}
         </time>
       </a>
     </div>

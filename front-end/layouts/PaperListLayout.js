@@ -137,13 +137,15 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
                       {/* <div>{origin}</div> */}
 
                       <div className="flex flex-wrap">
-                        {tags.map((tag) => (
+                        {tags && tags.length > 0 && tags.map((tag) => (
                           <Tag key={tag} text={tag} />
                         ))}
                       </div>
 
                       <div className="prose flex max-w-none justify-between pt-2 text-gray-500 dark:text-gray-400">
+                        { authors && authors.length > 0 &&
                         <p>Author: {authors.join(', ')}</p>
+                        }
                         <div className='flex gap-4'>
 
                           <div className='text-2xl font-bold content-center text-cyan-600/70	'>{origin}</div>
@@ -160,10 +162,10 @@ export default function ListLayout({ posts, title, initialDisplayPosts = [], pag
 
                           <FaFileDownload
                             className={`cursor-pointer text-4xl ${
-                              paper_existed === 'true' ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
+                              paper_existed === false ? 'text-gray-200 cursor-not-allowed' : 'text-gray-500'
                             }`}
                             onClick={() => {
-                              if (paper_existed !== 'true') {
+                              if (paper_existed === true) {
                                 download_attachment(id);
                               }
                             }}
