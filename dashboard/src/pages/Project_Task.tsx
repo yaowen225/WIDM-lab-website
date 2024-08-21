@@ -411,7 +411,7 @@ const ProjectPage = () => {
                         onClick={() => setProjectTask(null)}
                         className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
                       >
-                        取消
+                        關閉
                       </button>
                       <button
                         type="submit"

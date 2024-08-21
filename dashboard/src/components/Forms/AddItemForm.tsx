@@ -260,7 +260,7 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, isOpen, onClose, onS
               onClick={onClose}
               className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
             >
-              取消
+              關閉
             </button>
             <button
               type="submit"

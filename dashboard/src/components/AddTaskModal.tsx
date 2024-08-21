@@ -213,7 +213,7 @@ const AddTaskModal: React.FC<AddTaskModalProps> = ({ open, onOk, onCancel }) => 
           setTreeData([]);
         }}
         okText="儲存"
-        cancelText="取消"
+        cancelText="關閉"
         okButtonProps={{ style: { backgroundColor: '#3c50e0', color: 'white' } }}
         width={'50%'}
       >

@@ -219,7 +219,7 @@ const DynamicTable: React.FC<TableProps> = ({ page, headers, data, onDelete, onE
               onClick={handleCancelDelete}
               className="px-4 py-2 rounded border border-gray-300 text-black dark:text-white"
             >
-              取消
+              關閉
             </button>
             <button
               onClick={handleConfirmDelete}

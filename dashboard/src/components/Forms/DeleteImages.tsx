@@ -77,7 +77,7 @@ const DeleteImages: React.FC<DeleteImagesProps> = ({ onClose, action_1, action_2
               onClick={onClose}
               className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
             >
-              取消
+              關閉
             </button>
           </div>
         </div>
@@ -92,7 +92,7 @@ const DeleteImages: React.FC<DeleteImagesProps> = ({ onClose, action_1, action_2
                 onClick={handleCancelDelete}
                 className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
               >
-                取消
+                關閉
               </button>
               <button
                 onClick={handleConfirmDelete}

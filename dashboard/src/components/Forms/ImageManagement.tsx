@@ -90,7 +90,7 @@ const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, isOpen, acti
             onClick={onClose}
             className="rounded-md border border-stroke bg-transparent py-3 px-6 text-black dark:text-white"
           >
-            取消
+            關閉
           </button>
           <button
             type="submit"
@@ -136,7 +136,7 @@ const ImageManagement: React.FC<ImageManagementProps> = ({ onClose, isOpen, acti
                 onClick={handleCancelDelete}
                 className="rounded-md border border-stroke bg-transparent py-2 px-4 text-black dark:text-white"
               >
-                取消
+                關閉
               </button>
               <button
                 onClick={handleConfirmDelete}
