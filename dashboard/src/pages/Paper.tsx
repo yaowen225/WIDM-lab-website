@@ -220,7 +220,7 @@ const PaperPage = () => {
           <DynamicTable page={'paper'} data={papers} headers={headers} onDelete={deletePaper} onEdit={handleEditItem} onUploadFile={handleUploadAttachment} onDownloadFile={handleDownloadAttachment} />
         </div>
         <AddItemForm headers={headers} isOpen={isAdding} onClose={handleCloseForm} onSubmit={createPaper} editData={editData} />
-        {isUploading && <UploadAttachmentForm onClose={handleCloseUploadAttachment} onSubmit={handleUploadAttachmentSubmit} />}
+        <UploadAttachmentForm isOpen={isUploading} onClose={handleCloseUploadAttachment} onSubmit={handleUploadAttachmentSubmit} />
       </DefaultLayout>
     </Spin>
   );
