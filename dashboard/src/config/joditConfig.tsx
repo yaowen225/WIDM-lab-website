@@ -79,7 +79,27 @@ export const joditConfig = {
       'Julius Sans One',
       'Karla',
       'Libre Franklin',
-      'Literata'
+      'Literata',
+      'Noto Sans TC',
+      'Noto Serif TC',
+      'Noto Sans SC',
+      'Noto Serif SC',
+      'Noto Sans JP',
+      'Noto Serif JP',
+      'ZCOOL KuaiLe',
+      'ZCOOL XiaoWei',
+      'ZCOOL QingKe HuangYou',
+      'Ma Shan Zheng',
+      'Long Cang',
+      'Zhi Mang Xing',
+      'Fang Zheng Hei Ti Shao Nv',
+      'Fang Zheng Kai Ti',
+      'Fang Zheng Xing Kai Jian',
+      'Fang Zheng Xing Shu',
+      'Fang Zheng Fang Song',
+      'Fang Zheng Zong Yi Shu',
+      'Fang Zheng Hei Ti Shu',
+      'Fang Zheng Hei Ti Tai Wan'
     ]
   },
   controls: {
@@ -135,7 +155,27 @@ export const joditConfig = {
         'Julius Sans One': 'Julius Sans One',
         'Karla': 'Karla',
         'Libre Franklin': 'Libre Franklin',
-        'Literata': 'Literata'
+        'Literata': 'Literata',
+        'Noto Sans TC': 'Noto Sans TC',
+        'Noto Serif TC': 'Noto Serif TC',
+        'Noto Sans SC': 'Noto Sans SC',
+        'Noto Serif SC': 'Noto Serif SC',
+        'Noto Sans JP': 'Noto Sans JP',
+        'Noto Serif JP': 'Noto Serif JP',
+        'ZCOOL KuaiLe': 'ZCOOL KuaiLe',
+        'ZCOOL XiaoWei': 'ZCOOL XiaoWei',
+        'ZCOOL QingKe HuangYou': 'ZCOOL QingKe HuangYou',
+        'Ma Shan Zheng': 'Ma Shan Zheng',
+        'Long Cang': 'Long Cang',
+        'Zhi Mang Xing': 'Zhi Mang Xing',
+        'Fang Zheng Hei Ti Shao Nv': 'Fang Zheng Hei Ti Shao Nv',
+        'Fang Zheng Kai Ti': 'Fang Zheng Kai Ti',
+        'Fang Zheng Xing Kai Jian': 'Fang Zheng Xing Kai Jian',
+        'Fang Zheng Xing Shu': 'Fang Zheng Xing Shu',
+        'Fang Zheng Fang Song': 'Fang Zheng Fang Song',
+        'Fang Zheng Zong Yi Shu': 'Fang Zheng Zong Yi Shu',
+        'Fang Zheng Hei Ti Shu': 'Fang Zheng Hei Ti Shu',
+        'Fang Zheng Hei Ti Tai Wan': 'Fang Zheng Hei Ti Tai Wan'
       }
     }
   }
