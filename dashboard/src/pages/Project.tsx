@@ -30,8 +30,8 @@ const ProjectPage = () => {
     { id: 'description', Name: '專案描述', isShow: 'true', type: 'Textarea' },
     { id: 'github', Name: 'GitHub 連結', isShow: 'true', type: 'Url' },
     { id: 'link', Name: '專案連結', isShow: 'true', type: 'Url' },
-    { id: 'tags', Name: '專案標籤', isShow: 'true', type: 'Tags' },
-    { id: 'members', Name: '人員', isShow: 'true', type: 'Tags' },
+    { id: 'tags', Name: '專案標籤', isShow: 'true', type: 'SelectItems', data: [] },
+    { id: 'members', Name: '人員', isShow: 'true', type: 'SelectItems', data: [] },
     { id: 'imageActions', Name: 'project-icon', isShow: 'false', type: 'Null' },
   ];
 
@@ -60,8 +60,8 @@ const ProjectPage = () => {
         description: formData.description || '',
         github: formData.github || '',
         link: formData.link || '',
-        tags: formData.tags ? formData.tags.map((type: { id: string; text: string; className: string }) => type.text) : [],
-        members: formData.members ? formData.members.map((member: { id: string; text: string; className: string }) => member.text) : [],
+        tags: formData.tags || [],
+        members: formData.members || [],
       };
 
       console.log(newProject);

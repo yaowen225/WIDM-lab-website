@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { WithContext as ReactTags } from 'react-tag-input';
-import { DatePicker, Modal } from 'antd';
+import { DatePicker, Modal, Select } from 'antd';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import JoditEditor from 'jodit-react';
@@ -29,6 +29,10 @@ interface AddItemFormProps {
 type PickerMode = 'date' | 'week' | 'month' | 'quarter' | 'year'; // 定義PickerMode類型
 
 const AddItemForm: React.FC<AddItemFormProps> = ({ headers, isOpen, onClose, onSubmit, editData, joditConfig }) => {
+
+  // selectitems
+  const [selectOpen, setSelectOpen] = useState(false);
+
   const [formData, setFormData] = useState<{ [key: string]: any }>(() => {
     const initialData: { [key: string]: any } = {};
     headers.forEach(header => {
@@ -199,6 +203,29 @@ const AddItemForm: React.FC<AddItemFormProps> = ({ headers, isOpen, onClose, onS
             </option>
           ))}
         </select>
+      );
+    } else if (header.type === 'SelectItems') {
+      return (
+        <Select
+          key={header.id}
+          mode="tags"
+          placeholder={header.data.length > 0 ? `選擇或輸入${header.Name}` : `輸入${header.Name} (按下Enter輸入多個)`}
+          value={formData[header.id] || undefined} // 使用 undefined 來表示沒有選擇
+          className="w-full"
+          size={'large'}
+          open={selectOpen && header.data.length > 0} // 如果有資料才顯示下拉選單
+          suffixIcon={header.data.length > 0 ? undefined : null} // 如果沒有資料，不顯示下拉選單的箭頭
+          onDropdownVisibleChange={(open) => {
+            // 只有在有資料時才改變下拉選單的開啟狀態
+            if (header.data.length > 0) {
+              setSelectOpen(open);
+            }
+          }}
+          onChange={(value) => {
+            setFormData({ ...formData, [header.id]: value });
+          }}
+          options={header.data.map((item: any) => ({ label: item, value: item }))}
+        />
       );
     } else if (header.type === 'jodit') {
       return (
