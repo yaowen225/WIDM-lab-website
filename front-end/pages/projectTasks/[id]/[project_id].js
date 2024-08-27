@@ -1,42 +1,18 @@
-﻿import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import siteMetadata from '@/data/siteMetadata'
+﻿import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import { defaultHttp } from 'utils/http'
 import { processDataRoutes } from 'routes/api'
 import { IoMdReturnLeft } from "react-icons/io"
+import { useRouter } from 'next/router'
 
-const ProjectTask = () => {
+const ProjectTask = ({ projectTasks, error }) => {
   const router = useRouter()
-  const { id, project_id} = router.query;
-  const [projectTasks, setProjectTasks] = useState(null)
-  const [error, setError] = useState(null)
-
-  const fetchProjectTask = async () => {
-    try {
-      const response = await defaultHttp.get(`${processDataRoutes.project}/${id}/task/${project_id}`);
-      setProjectTasks(response.data.response)
-      console.log(response.data.response)
-    } catch (error) {
-      console.error('API 調用失敗:', error.message)
-      if (error.response) {
-        console.error('API Response Error:', error.response.body)
-      }
-      setError(error.message)
-    }
-  }
-
-  useEffect(() => {
-    if (id) {
-      fetchProjectTask()
-    }
-  }, [id])
 
   if (error) {
     return <div>載入失敗: {error}</div>
   }
 
-  if (!projectTasks) {
+  if (router.isFallback) {
     return <div>載入中...</div>
   }
 
@@ -45,24 +21,69 @@ const ProjectTask = () => {
       <PageSEO title={`Project Task - ${siteMetadata.author}`} description={siteMetadata.description} />
       <article>
         <div className="flex items-center justify-between">
-          <div style={{ flex: 1, textAlign: 'center' }}> {/* 讓 h1 標籤居中 */}
+          <div style={{ flex: 1, textAlign: 'center' }}>
             <h1 
               style={{overflowWrap: 'anywhere'}}
-              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap dark:text-white"> {projectTasks.title}  </h1>
+              className="text-5xl font-extrabold text-gray-800/80 drop-shadow-lg text-wrap dark:text-white">
+              {projectTasks.title}
+            </h1>
           </div>
           <button onClick={() => router.back()} className="p-2 border border-gray-400 rounded text-gray-600 hover:bg-gray-100">
             <IoMdReturnLeft size={24} />
           </button>
         </div>
         <hr className="my-4 border-gray-300" />
-        {/* <div className="mx-auto w-full max-w-4xl">
-          <ReactMarkdown components={markdownComponents}>{projectTasks.content}</ReactMarkdown>
-        </div> */}
         <div className="mx-auto w-full max-w-4xl" dangerouslySetInnerHTML={{ __html: projectTasks.content }} />
-
       </article>
     </>
   )
+}
+
+export async function getStaticPaths() {
+  try {
+    const response = await defaultHttp.get(processDataRoutes.project);
+    const projects = response.data.response;
+
+    // 遍歷所有專案及其任務，生成對應的路徑
+    const paths = projects.flatMap((project) =>
+      (project.tasks || []).map((task) => ({
+        params: { id: project.id.toString(), project_id: task.id.toString() },
+      }))
+    );
+
+    return {
+      paths,
+      fallback: 'blocking', // 其餘頁面首次訪問時將被阻塞，直到生成完成
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+    return {
+      paths: [],
+      fallback: 'blocking',
+    }
+  }
+}
+
+export async function getStaticProps({ params }) {
+  try {
+    const response = await defaultHttp.get(`${processDataRoutes.project}/${params.id}/task/${params.project_id}`);
+    const projectTasks = response.data.response;
+
+    return {
+      props: {
+        projectTasks,
+      },
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+
+    return {
+      props: {
+        projectTasks: null,
+        error: error.message,
+      },
+    }
+  }
 }
 
 export default ProjectTask

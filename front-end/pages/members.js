@@ -1,31 +1,11 @@
-﻿import { useEffect, useState } from 'react'
-import siteMetadata from '@/data/siteMetadata'
+﻿import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Link from '@/components/Link'
 import { Icon } from '@iconify/react';
 import { defaultHttp } from 'utils/http'
 import { processDataRoutes } from 'routes/api'
 
-export const Members = () => {
-  const [members, setMembers] = useState([])
-
-  const fetchMembers = async () => {
-    try {
-      const response = await defaultHttp.get(processDataRoutes.member);
-      setMembers(response.data.response)
-      console.log(response.data.response)
-    } catch (error) {
-      console.error('API 調用失敗:', error.message)
-      if (error.response) {
-        console.error('API Response Error:', error.response.body)
-      }
-    }
-  }
-
-  useEffect(() => {
-    fetchMembers()
-  }, [])
-
+export const Members = ({ members }) => {
   const groupByPosition = members.reduce((acc, member) => {
     if (!acc[member.position]) {
       acc[member.position] = []
@@ -87,6 +67,27 @@ export const Members = () => {
       </div>
     </>
   )
+}
+
+// 使用 getStaticProps 在構建時獲取資料
+export async function getStaticProps() {
+  try {
+    const response = await defaultHttp.get(processDataRoutes.member);
+    const members = response.data.response;
+
+    return {
+      props: {
+        members,
+      },
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+    return {
+      props: {
+        members: [],
+      },
+    }
+  }
 }
 
 export default Members

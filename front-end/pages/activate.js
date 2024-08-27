@@ -1,36 +1,16 @@
-import { useEffect, useState } from 'react'
+// pages/activates.js
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import Activate from '@/components/Activate'
-import { Slide } from 'react-slideshow-image';
 import { defaultHttp } from 'utils/http'
 import { processDataRoutes } from 'routes/api'
 
-export const activate = () => {
-
-  const [activates, setActivates] = useState([])
-
-  const fetchActivates = async () => {
-    try {
-      const response = await defaultHttp.get(processDataRoutes.activity);
-      setActivates(response.data.response)
-    } catch (error) {
-      console.error('API 調用失敗:', error.message)
-      if (error.response) {
-        console.error('API Response Error:', error.response.body)
-      }
-    }
-  }
-
-  useEffect(() => {
-    fetchActivates()
-  }, [])
-
+export default function ActivatePage({ activates }) {
   return (
     <>
       <PageSEO
-        title={`Tweets - ${siteMetadata.author}`}
-        description="A collection of tweets that inspire me, make me laugh, and make me think."
+        title={`Activates - ${siteMetadata.author}`}
+        description="A collection of activities."
       />
       <div className="mx-auto max-w-2xl">
         <div className="space-y-2 pt-6 pb-8 md:space-y-5">
@@ -46,4 +26,23 @@ export const activate = () => {
   )
 }
 
-export default activate
+// 使用 getStaticProps 在構建時獲取資料
+export async function getStaticProps() {
+  try {
+    const response = await defaultHttp.get(processDataRoutes.activity);
+    const activates = response.data.response;
+
+    return {
+      props: {
+        activates,
+      },
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+    return {
+      props: {
+        activates: [],
+      },
+    }
+  }
+}

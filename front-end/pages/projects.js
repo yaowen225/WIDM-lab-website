@@ -1,29 +1,10 @@
-import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import ProjectCard from '@/components/ProjectCard'
 import { PageSEO } from '@/components/SEO'
 import { defaultHttp } from 'utils/http'
 import { processDataRoutes } from 'routes/api'
-  
-export const projects = () => {
-  const [projectsDatas, setProjectsData] = useState([])
 
-  const fetchProjects = async () => {
-    try {
-      const response = await defaultHttp.get(processDataRoutes.project);
-      setProjectsData(response.data.response);
-    } catch (error) {
-      console.error('API 調用失敗:', error.message);
-      if (error.response) {
-        console.error('API Response Error:', error.response.body);
-      }
-    }
-  }
-
-  useEffect(() => {
-    fetchProjects();
-  }, [])
-
+const Projects = ({ projectsDatas }) => {
   return (
     <>
       <PageSEO
@@ -58,4 +39,25 @@ export const projects = () => {
   )
 }
 
-export default projects
+export async function getStaticProps() {
+  try {
+    const response = await defaultHttp.get(processDataRoutes.project);
+    const projectsDatas = response.data.response;
+
+    return {
+      props: {
+        projectsDatas,
+      },
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+
+    return {
+      props: {
+        projectsDatas: [],
+      },
+    }
+  }
+}
+
+export default Projects

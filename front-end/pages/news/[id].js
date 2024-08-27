@@ -1,42 +1,18 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 import siteMetadata from '@/data/siteMetadata'
 import { PageSEO } from '@/components/SEO'
 import { IoMdReturnLeft } from "react-icons/io"
 import { defaultHttp } from 'utils/http'
 import { processDataRoutes } from 'routes/api'
 
-const NewsDetail = () => {
+const NewsDetail = ({ news, error }) => {
   const router = useRouter()
-  const { id } = router.query
-  const [news, setNews] = useState(null)
-  const [error, setError] = useState(null)
-
-  const fetchNewsDetail = async () => {
-    try {
-      const response = await defaultHttp.get(`${processDataRoutes.news}/${id}`);
-      setNews(response.data.response)
-      console.log(response.data.response)
-    } catch (error) {
-      console.error('API 調用失敗:', error.message)
-      if (error.response) {
-        console.error('API Response Error:', error.response.body)
-      }
-      setError(error.message)
-    }
-  }
-
-  useEffect(() => {
-    if (id) {
-      fetchNewsDetail()
-    }
-  }, [id])
 
   if (error) {
     return <div>載入失敗: {error}</div>
   }
 
-  if (!news) {
+  if (router.isFallback) {
     return <div>載入中...</div>
   }
 
@@ -67,6 +43,50 @@ const NewsDetail = () => {
       </article>
     </>
   )
+}
+
+export async function getStaticPaths() {
+  try {
+    const response = await defaultHttp.get(processDataRoutes.news);
+    const newsList = response.data.response;
+
+    const paths = newsList.map((news) => ({
+      params: { id: news.id.toString() },
+    }))
+
+    return {
+      paths,
+      fallback: true, // 如果未預先生成的頁面，首次訪問時會生成
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+    return {
+      paths: [],
+      fallback: true,
+    }
+  }
+}
+
+export async function getStaticProps({ params }) {
+  try {
+    const response = await defaultHttp.get(`${processDataRoutes.news}/${params.id}`);
+    const news = response.data.response;
+
+    return {
+      props: {
+        news,
+      },
+    }
+  } catch (error) {
+    console.error('API 調用失敗:', error.message);
+
+    return {
+      props: {
+        news: null,
+        error: error.message,
+      },
+    }
+  }
 }
 
 export default NewsDetail
