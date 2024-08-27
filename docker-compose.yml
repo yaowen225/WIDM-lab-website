@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  widm-dashboard-end:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    container_name: widm-dashboard-end
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=production
+    command: npm run start
+
+  widm-front-end:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    container_name: widm-front-end
+    ports:
+      - "7230:7230"
+      - "24678:24678"
+    environment:
+      - NODE_ENV=production
+    command: npm run start
