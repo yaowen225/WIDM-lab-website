@@ -8,9 +8,6 @@ services:
     container_name: widm-dashboard-end
     ports:
       - "5173:5173"
-    environment:
-      - NODE_ENV=production
-    command: npm run start
 
   widm-front-end:
     build:
@@ -20,6 +17,3 @@ services:
     ports:
       - "7230:7230"
       - "24678:24678"
-    environment:
-      - NODE_ENV=production
-    command: npm run start
