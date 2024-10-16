@@ -8,6 +8,8 @@ services:
     container_name: widm-dashboard-end
     ports:
       - "5173:5173"
+    environment:
+      - VITE_API_URL=https://widm-back-end.nevercareu.space
 
   widm-front-end:
     build:
@@ -17,3 +19,5 @@ services:
     ports:
       - "7230:7230"
       - "24678:24678"
+    environment:
+      - API_URL=https://widm-back-end.nevercareu.space
