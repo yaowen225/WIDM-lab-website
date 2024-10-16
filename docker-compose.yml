@@ -28,4 +28,4 @@ services:
       - "7230:7230"
       - "24678:24678"
     environment:
-      - API_URL=http://140.115.54.46:5025
+      - NEXT_PUBLIC_API_URL=http://140.115.54.46:5025
