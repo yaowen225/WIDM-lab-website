@@ -11,7 +11,7 @@ services:
     environment:
       - VITE_AUTHORITY=https://portal.ncu.edu.tw
       - VITE_CLIENT_ID=20240618161634J1sGMZdQrgsj
-      - VITE_REDIRECT_URI=https://your-redirect-uri.com
+      - VITE_REDIRECT_URI=https://widm-back-end.nevercareu.space/auth/return-to
       - VITE_AUTHORIZATION_ENDPOINT=https://portal.ncu.edu.tw/oauth2/authorization
       - VITE_TOKEN_ENDPOINT=https://portal.ncu.edu.tw/oauth2/token
       - VITE_USERINFO_ENDPOINT=https://portal.ncu.edu.tw/apis/oauth/v1/info
