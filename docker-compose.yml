@@ -10,6 +10,8 @@ services:
       - "5173:5173"
     environment:
       - VITE_API_URL=https://widm-back-end.nevercareu.space
+      - VITE_CLIENT_ID=20240618161634J1sGMZdQrgsj
+      - VITE_REDIRECT_URI=https://widm-back-end.nevercareu.space/auth/return-t
 
   widm-front-end:
     build:
