@@ -9,9 +9,14 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=https://widm-back-end.nevercareu.space
+      - VITE_AUTHORITY=https://portal.ncu.edu.tw
       - VITE_CLIENT_ID=20240618161634J1sGMZdQrgsj
-      - VITE_REDIRECT_URI=https://widm-back-end.nevercareu.space/auth/return-t
+      - VITE_REDIRECT_URI=https://your-redirect-uri.com
+      - VITE_AUTHORIZATION_ENDPOINT=https://portal.ncu.edu.tw/oauth2/authorization
+      - VITE_TOKEN_ENDPOINT=https://portal.ncu.edu.tw/oauth2/token
+      - VITE_USERINFO_ENDPOINT=https://portal.ncu.edu.tw/apis/oauth/v1/info
+      - VITE_WEB_URL=https://widm-front-end.nevercareu.space
+      - VITE_DASHBOARD_URL=https://widm-dash.nevercareu.space
 
   widm-front-end:
     build:
