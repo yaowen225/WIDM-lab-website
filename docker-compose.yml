@@ -10,12 +10,14 @@ services:
       - "5173:5173"
     environment:
       - VITE_API_URL=http://140.115.54.46:5025
-      - VITE_AUTHORITY=https://portal.ncu.edu.tw
-      - VITE_CLIENT_ID=20240618161634J1sGMZdQrgsj
       - VITE_REDIRECT_URI=http://140.115.54.46:5025/auth/return-to
-      - VITE_AUTHORIZATION_ENDPOINT=https://portal.ncu.edu.tw/oauth2/authorization
+      - VITE_CLIENT_ID=20240618161634J1sGMZdQrgsj
+
+      - VITE_AUTHORITY=https://portal.ncu.edu.tw
       - VITE_TOKEN_ENDPOINT=https://portal.ncu.edu.tw/oauth2/token
+      - VITE_AUTHORIZATION_ENDPOINT=https://portal.ncu.edu.tw/oauth2/authorization
       - VITE_USERINFO_ENDPOINT=https://portal.ncu.edu.tw/apis/oauth/v1/info
+      
       - VITE_WEB_URL=http://widm.csie.ncu.edu.tw:7230
       - VITE_DASHBOARD_URL=http://widm.csie.ncu.edu.tw:5173
 
