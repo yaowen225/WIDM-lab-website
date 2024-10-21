@@ -22,7 +22,6 @@ services:
       
       - VITE_WEB_URL=http://widm.csie.ncu.edu.tw
       - VITE_DASHBOARD_URL=http://widm.csie.ncu.edu.tw/dash/
-      
 
   widm-front-end:
     build:
