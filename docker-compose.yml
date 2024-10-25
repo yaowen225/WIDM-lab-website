@@ -11,8 +11,8 @@ services:
     environment:
       - VITE_END_POINT=/dash
 
-      - VITE_API_URL=http://widm.ai-master.space/api
-      - VITE_REDIRECT_URI=https://widm.ai-master.space/api/auth/return-to
+      - VITE_API_URL=http://widm.csie.ncu.edu.tw/api
+      - VITE_REDIRECT_URI=http://widm.csie.ncu.edu.tw/api/auth/return-to
       - VITE_CLIENT_ID=20241015055432qRZYk9smXsLH
 
       - VITE_AUTHORITY=https://portal.ncu.edu.tw
@@ -20,10 +20,10 @@ services:
       - VITE_AUTHORIZATION_ENDPOINT=https://portal.ncu.edu.tw/oauth2/authorization
       - VITE_USERINFO_ENDPOINT=https://portal.ncu.edu.tw/apis/oauth/v1/info
       
-      - VITE_WEB_URL=http://widm.ai-master.space/
-      - VITE_DASHBOARD_URL=http://widm.ai-master.space/dash/
+      - VITE_WEB_URL=http://widm.csie.ncu.edu.tw/
+      - VITE_DASHBOARD_URL=http://widm.csie.ncu.edu.tw/dash/
     networks:
-      - nginxproxymanager_default
+      - nginx_proxy
       - backend_network
 
   widm-front-end:
@@ -35,9 +35,9 @@ services:
       - "7230:7230"
       - "24678:24678"
     environment:
-      - NEXT_PUBLIC_API_URL=https://widm.ai-master.space/api
+      - NEXT_PUBLIC_API_URL=https://widm.csie.ncu.edu.tw/api
     networks:
-      - nginxproxymanager_default
+      - nginx_proxy
       - backend_network
 
   widm-backend:
@@ -46,11 +46,11 @@ services:
       dockerfile: Dockerfile
     container_name: widm-back-end
     environment:
-#      SQLALCHEMY_DATABASE_URI: mysql+pymysql://widm:widmwidm@widm-database:3306/backend
-      OPENAI_KEY:
+      SQLALCHEMY_DATABASE_URI: mysql+pymysql://widm:widmwidm@widm-database:3306/backend
+      OPENAI_KEY: 
       BASIC_AUTH: MjAyNDEwMTUwNTU0MzJxUlpZazlzbVhzTEg6NTc4WEFwbUR3YXgxcjZub2RsUmpqOXVvdnl1TkN3RzAwc0hOYXVaYTVpek5URG9vYnh1c2VtUQ==
-      DASH_BOARD_URL: http://widm.ai-master.space/dash/
-      HOME_PAGE_URL: http://widm.ai-master.space
+      DASH_BOARD_URL: http://widm.csie.ncu.edu.tw/dash/
+      HOME_PAGE_URL: http://widm.csie.ncu.edu.tw
     ports:
       - "5025:5025"
     volumes:
@@ -61,11 +61,11 @@ services:
         condition: service_healthy
     restart: always
     networks:
-      - nginxproxymanager_default
+      - nginx_proxy
       - backend_network
 
   widm-database:
-    image: mysql:5.7
+    image: mysql:8
     container_name: widm-database
     environment:
       MYSQL_ROOT_PASSWORD: widmwidm
@@ -93,11 +93,11 @@ services:
       MYSQL_ROOT_PASSWORD: widmwidm
     restart: always
     networks:
-      - nginxproxymanager_default
+      - nginx_proxy
       - backend_network
 
 networks:
-  nginxproxymanager_default:
+  nginx_proxy:
     external: true
   backend_network:
     internal: true
