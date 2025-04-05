@@ -2,94 +2,96 @@ import Link from '@/components/Link'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
 import { RoughNotation } from 'react-rough-notation'
-import { IoMdReturnLeft } from "react-icons/io"
+import { IoMdReturnLeft } from 'react-icons/io'
 import React, { useState, useRef, useEffect } from 'react'
 import eventBus from '../utils/eventBus'
 import { Icon } from '@iconify/react'
 import { defaultHttp } from '../utils/http'
 import { processDataRoutes } from '../routes/api'
-import { marked } from 'marked';
+import { marked } from 'marked'
 
 export default function Home() {
-  const [messages, setMessages] = useState([]);
-  const nodeRef = useRef(null);
-  const messagesEndRef = useRef(null);
+  const [messages, setMessages] = useState([])
+  const nodeRef = useRef(null)
+  const messagesEndRef = useRef(null)
 
   useEffect(() => {
-    const savedMessages = localStorage.getItem('chatMessages');
+    const savedMessages = localStorage.getItem('chatMessages')
     if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
+      setMessages(JSON.parse(savedMessages))
     }
-    eventBus.on('refreshMessages', loadMessagesFromStorage); // 訂閱刷新消息事件
+    eventBus.on('refreshMessages', loadMessagesFromStorage) // 訂閱刷新消息事件
     return () => {
-      eventBus.off('refreshMessages', loadMessagesFromStorage); // 清除訂閱
-    };
-  }, []);
+      eventBus.off('refreshMessages', loadMessagesFromStorage) // 清除訂閱
+    }
+  }, [])
 
   const loadMessagesFromStorage = () => {
-    const savedMessages = localStorage.getItem('chatMessages');
+    const savedMessages = localStorage.getItem('chatMessages')
     if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
+      setMessages(JSON.parse(savedMessages))
     }
-  };
+  }
 
   useEffect(() => {
     if (messages.length > 10) {
-      setMessages((prevMessages) => prevMessages.slice(1));
+      setMessages((prevMessages) => prevMessages.slice(1))
     }
-    localStorage.setItem('chatMessages', JSON.stringify(messages));
-  }, [messages]);
+    localStorage.setItem('chatMessages', JSON.stringify(messages))
+  }, [messages])
 
   useEffect(() => {
     if (nodeRef.current) {
-      nodeRef.current.scrollTop = nodeRef.current.scrollHeight;
+      nodeRef.current.scrollTop = nodeRef.current.scrollHeight
     }
-  }, [messages]);
+  }, [messages])
 
   const handleSubmitMessage = async (current_text) => {
-    
-    const timestamp = new Date().toLocaleString(); // 獲取當前時間
-    const newMessage = { sender: 'user', text: current_text };
-    const timeMessage = { sender: 'time', text: timestamp };
-    const tempMessage = { sender: 'api', text: 'loading' }; // 等待回應的符號...
-    const updatedMessages = [...messages, timeMessage, newMessage, tempMessage];
+    const timestamp = new Date().toLocaleString() // 獲取當前時間
+    const newMessage = { sender: 'user', text: current_text }
+    const timeMessage = { sender: 'time', text: timestamp }
+    const tempMessage = { sender: 'api', text: 'loading' } // 等待回應的符號...
+    const updatedMessages = [...messages, timeMessage, newMessage, tempMessage]
     if (updatedMessages.length > 15) {
-      updatedMessages.shift();
-      updatedMessages.shift(); // 移除最舊的訊息
+      updatedMessages.shift()
+      updatedMessages.shift() // 移除最舊的訊息
     }
 
-    setMessages(updatedMessages);
-    localStorage.setItem('chatMessages', JSON.stringify(updatedMessages)); // 更新 localStorage
-    eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
+    setMessages(updatedMessages)
+    localStorage.setItem('chatMessages', JSON.stringify(updatedMessages)) // 更新 localStorage
+    eventBus.emit('refreshMessages') // 通知其他對話框刷新消息
     // - Response
     const response = await defaultHttp.get(`${processDataRoutes.retrieval}/query`, {
       params: {
         query_string: current_text,
-        person_id: "1"
-      }
-    });
+        person_id: '1',
+      },
+    })
     // console.log(response)
-    const responseMessage = { sender: 'api', text: response.data.response.answer }; // 單一解答
+    const responseMessage = { sender: 'api', text: response.data.response.answer } // 單一解答
     // console.log(response.data.response)
-    const responseSourceLink = response.data.response.source_list; // 連結列表 (list)
-    const linksource = Array.isArray(responseSourceLink) && responseSourceLink.length > 0
-    ? responseSourceLink
-        .map((link, index) => {
-          const isLastLink = index === responseSourceLink.length - 1;
-          return `<a href="${link}" target="_blank" rel="noopener noreferrer">${link}</a>${isLastLink ? '' : '<br>'}`;
-        })
-        .join('')
-    : '';
+    const responseSourceLink = response.data.response.source_list // 連結列表 (list)
+    const linksource =
+      Array.isArray(responseSourceLink) && responseSourceLink.length > 0
+        ? responseSourceLink
+            .map((link, index) => {
+              const isLastLink = index === responseSourceLink.length - 1
+              return `<a href="${link}" target="_blank" rel="noopener noreferrer">${link}</a>${
+                isLastLink ? '' : '<br>'
+              }`
+            })
+            .join('')
+        : ''
     const combinedMessage = {
       sender: 'api',
       text: linksource ? `${marked(responseMessage.text)}<br>${linksource}` : responseMessage.text,
-    };
+    }
 
     // 合併到 finalMessages
     const finalMessages = [
       ...updatedMessages.slice(0, -1), // 保留原來的訊息，移除最後一個
       combinedMessage, // 插入合併後的訊息
-    ];
+    ]
 
     // console.log(finalMessages);
     // const responseMessage = { sender: 'api', text: response.data.response.answer };
@@ -97,52 +99,52 @@ export default function Home() {
     // const finalMessages = [...updatedMessages.slice(0, -1), responseMessage]; // 排除回覆符號，在新增回覆訊息
 
     if (finalMessages.length > 15) {
-      finalMessages.shift(); // 移除最舊的訊息
+      finalMessages.shift() // 移除最舊的訊息
     }
-    setMessages(finalMessages || []);
-    localStorage.setItem('chatMessages', JSON.stringify(finalMessages)); // 更新 localStorage
-    eventBus.emit('refreshMessages'); // 通知其他對話框刷新消息
-  };
+    setMessages(finalMessages || [])
+    localStorage.setItem('chatMessages', JSON.stringify(finalMessages)) // 更新 localStorage
+    eventBus.emit('refreshMessages') // 通知其他對話框刷新消息
+  }
 
   function AutoResizeTextarea() {
-    const [text, setText] = useState("");
-    const [textareaHeight, setTextareaHeight] = useState('6rem');
-    const [isComposing, setIsComposing] = useState(false);
-    const textareaRef = useRef(null);
+    const [text, setText] = useState('')
+    const [textareaHeight, setTextareaHeight] = useState('6rem')
+    const [isComposing, setIsComposing] = useState(false)
+    const textareaRef = useRef(null)
 
     useEffect(() => {
-      textareaRef.current.style.height = "inherit";
-      const newHeight = `${textareaRef.current.scrollHeight}px`;
-      textareaRef.current.style.height = newHeight;
-      setTextareaHeight(newHeight);
-    }, [text]);
+      textareaRef.current.style.height = 'inherit'
+      const newHeight = `${textareaRef.current.scrollHeight}px`
+      textareaRef.current.style.height = newHeight
+      setTextareaHeight(newHeight)
+    }, [text])
 
     const handleSubmit = () => {
-      handleSubmitMessage(text);
-      setText("");
-    };
+      handleSubmitMessage(text)
+      setText('')
+    }
 
     const handleKeyDown = (event) => {
       if (event.key === 'Enter' && !event.shiftKey && !isComposing) {
-        event.preventDefault();
-        handleSubmit();
+        event.preventDefault()
+        handleSubmit()
       }
-    };
+    }
 
     const handleComposition = (event) => {
       if (event.type === 'compositionstart') {
-        setIsComposing(true);
+        setIsComposing(true)
       }
       if (event.type === 'compositionend') {
-        setIsComposing(false);
+        setIsComposing(false)
       }
-    };
+    }
 
     return (
       <div className="flex items-stretch space-x-2">
         <textarea
           ref={textareaRef}
-          className="bg-gray-100 dark:bg-black borde r border-gray-300 rounded-l-md flex-1 py-4 px-4 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="borde r flex-1 resize-none rounded-l-md border-gray-300 bg-gray-100 py-4 px-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-black"
           placeholder="輸入消息..."
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -152,27 +154,26 @@ export default function Home() {
           style={{ minHeight: '3rem', maxHeight: '24rem' }}
         />
         <button
-          className="flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-r-md"
+          className="flex items-center justify-center rounded-r-md bg-gray-200 py-2 px-4 font-bold text-gray-800 hover:bg-gray-300"
           onClick={handleSubmit}
           type="button"
           style={{
             height: textareaHeight,
             opacity: 0.7,
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            transition: 'opacity 0.3s ease, box-shadow 1s ease'
+            transition: 'opacity 0.3s ease, box-shadow 1s ease',
           }}
         >
-          <IoMdReturnLeft className="text-xl"/>
+          <IoMdReturnLeft className="text-xl" />
         </button>
       </div>
-    );
+    )
   }
 
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
       <div>
-      
         <div className="pt-10">
           <h1 className="pb-6 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             Hello, Here's &nbsp;
@@ -180,10 +181,9 @@ export default function Home() {
           </h1>
         </div>
 
-        <hr style={{paddingBottom: '20px'}}></hr>
+        <hr style={{ paddingBottom: '20px' }}></hr>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 xl:flex-row item-center">
-          
+        <div className="item-center grid grid-cols-1 gap-4 xl:grid-cols-3 xl:flex-row">
           <div className="col-span-1 flex items-center justify-center">
             <div className="grid grid-cols-1 grid-rows-3 gap-8 py-12">
               <div className="my-2 grid items-start gap-8">
@@ -249,10 +249,12 @@ export default function Home() {
               </div>
 
               <div className="my-2 grid items-start gap-8">
-
                 <div className="group relative">
                   <div className="animate-tilt absolute -inset-0.5 rounded-lg bg-gradient-to-r from-pink-600 to-purple-600 opacity-50 blur transition duration-1000 group-hover:opacity-100 group-hover:duration-200"></div>
-                  <Link href="https://calendar.google.com/calendar/u/3/embed?color=%23668CD9&color=%23D96666&color=%23E0C240&src=g.ncu.edu.tw_q7ilmj1v5cd4agv6p1a4j0kn60@group.calendar.google.com&src=gpq4ghafoa05a1cig7g5kk8alk@group.calendar.google.com&src=rj4ap5ceilcs5cmhro5g3vaslc@group.calendar.google.com&csspa=1" newTab={true}>
+                  <Link
+                    href="https://calendar.google.com/calendar/u/3/embed?color=%23668CD9&color=%23D96666&color=%23E0C240&src=g.ncu.edu.tw_q7ilmj1v5cd4agv6p1a4j0kn60@group.calendar.google.com&src=gpq4ghafoa05a1cig7g5kk8alk@group.calendar.google.com&src=rj4ap5ceilcs5cmhro5g3vaslc@group.calendar.google.com&csspa=1"
+                    newTab={true}
+                  >
                     <span className="relative flex items-center divide-x divide-gray-600 rounded-lg bg-white px-7 py-4 leading-none dark:bg-black">
                       <span className="flex items-center space-x-5">
                         <svg
@@ -271,7 +273,7 @@ export default function Home() {
                         </svg>
                         <span className="pr-6 text-gray-900 dark:text-gray-100">
                           Our Schedule!&nbsp;&nbsp;&nbsp;
-                        </span                      >
+                        </span>
                       </span>
                       <span className="pl-6 text-primary-400 transition duration-200 group-hover:text-gray-900 dark:group-hover:text-gray-100">
                         Check&nbsp;&rarr;
@@ -283,26 +285,50 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="col-span-1 xl:col-span-2 content-center">
-            <div ref={nodeRef} className="mb-6 w-full max-w-full overflow-y-auto max-h-96 bg-white dark:bg-black p-4 rounded-md custom-scrollbar">
+          <div className="col-span-1 content-center xl:col-span-2">
+            <div
+              ref={nodeRef}
+              className="custom-scrollbar mb-6 max-h-96 w-full max-w-full overflow-y-auto rounded-md bg-white p-4 dark:bg-black"
+            >
               {messages.length === 0 ? (
                 <p className="prose pt-5 text-lg text-gray-600 dark:text-gray-300">
                   {`Welcome to ${siteMetadata.description}. `}
-                  在這裏，你有什麼想知道的嗎？ 
+                  在這裏，你有什麼想知道的嗎？
                 </p>
               ) : (
                 messages.map((msg, index) => (
                   <div key={index}>
-                    <div className={`flex ${msg.sender === 'user' ? 'justify-end' : msg.sender === 'api' ? 'justify-start' : ''}`}>
                     <div
-                      className={`inline-block p-2 my-2 rounded-md ${msg.sender === 'user' ? 'bg-blue-100/70 dark:bg-gradient-to-r dark:from-pink-600 dark:to-purple-600 text-left' :  msg.sender === 'api' ? 'bg-gray-100/70 dark:bg-gradient-to-r dark:from-green-600 dark:to-blue-600 text-left' : ''}`}
-                      style={{ maxWidth: '80%', wordBreak: 'break-word' }}
+                      className={`flex ${
+                        msg.sender === 'user'
+                          ? 'justify-end'
+                          : msg.sender === 'api'
+                          ? 'justify-start'
+                          : ''
+                      }`}
                     >
+                      <div
+                        className={`my-2 inline-block rounded-md p-2 ${
+                          msg.sender === 'user'
+                            ? 'bg-blue-100/70 text-left dark:bg-gradient-to-r dark:from-pink-600 dark:to-purple-600'
+                            : msg.sender === 'api'
+                            ? 'bg-gray-100/70 text-left dark:bg-gradient-to-r dark:from-green-600 dark:to-blue-600'
+                            : ''
+                        }`}
+                        style={{ maxWidth: '80%', wordBreak: 'break-word' }}
+                      >
                         {msg.sender !== 'time' && (
                           <div>
                             <p className="text-gray-800 dark:text-gray-100">
                               {/* {msg.text === 'loading' ? <Icon icon="svg-spinners:3-dots-bounce" style={{'color': 'black'}} /> : msg.text} */}
-                              {msg.text === 'loading' ? <Icon icon="svg-spinners:3-dots-bounce" style={{'color': 'black'}} /> : <span dangerouslySetInnerHTML={{ __html: msg.text }} />}
+                              {msg.text === 'loading' ? (
+                                <Icon
+                                  icon="svg-spinners:3-dots-bounce"
+                                  style={{ color: 'black' }}
+                                />
+                              ) : (
+                                <span dangerouslySetInnerHTML={{ __html: msg.text }} />
+                              )}
                             </p>
 
                             {/* <div className='flex mt-4 gap-4 '>
@@ -314,7 +340,7 @@ export default function Home() {
                     </div>
                     {msg.sender === 'time' && (
                       <div className="flex justify-center">
-                        <p className="text-xs text-gray-500 mb-1">{msg.text}</p>
+                        <p className="mb-1 text-xs text-gray-500">{msg.text}</p>
                       </div>
                     )}
                   </div>
@@ -323,11 +349,10 @@ export default function Home() {
               <div ref={messagesEndRef} />
             </div>
           </div>
-
         </div>
 
-        <div className="hidden mb-2 pt-2 text-lg leading-6 text-slate-600 dark:text-slate-300 md:block">
-          你可以透過下面的 {' '} 
+        <div className="mb-2 hidden pt-2 text-lg leading-6 text-slate-600 dark:text-slate-300 md:block">
+          你可以透過下面的{' '}
           <RoughNotation
             animate="true"
             type="highlight"
@@ -343,17 +368,24 @@ export default function Home() {
         </div>
         <AutoResizeTextarea />
 
-        <hr className="border-gray-200 dark:border-gray-700 pb-5 mt-5" />
-        <div className="flex flex-col xl:flex-row gap-6">
+        <hr className="mt-5 border-gray-200 pb-5 dark:border-gray-700" />
+
+        <div className="flex flex-col gap-6 xl:flex-row">
           <div className="flex-1">
-            <h1 className="text-3xl font-extrabold mb-3 text-gray-800 dark:text-gray-500">{siteMetadata.labName}</h1>
-            <h2 className="text-2xl font-semibold mt-5 mb-2 text-gray-700 dark:text-gray-500">位置</h2>
+            <h1 className="mb-3 text-3xl font-extrabold text-gray-800 dark:text-gray-500">
+              {siteMetadata.labName}
+            </h1>
+            <h2 className="mt-5 mb-2 text-2xl font-semibold text-gray-700 dark:text-gray-500">
+              位置
+            </h2>
             <p className="mb-4 text-gray-600 dark:text-gray-500">{siteMetadata.address}</p>
 
-            <h2 className="text-2xl font-semibold mt-5 mb-2 text-gray-700 dark:text-gray-500">聯絡方式</h2>
+            <h2 className="mt-5 mb-2 text-2xl font-semibold text-gray-700 dark:text-gray-500">
+              聯絡方式
+            </h2>
             <p className="text-xl text-gray-600 dark:text-gray-500">{siteMetadata.contactNumber}</p>
           </div>
-          
+
           <div className="flex-1">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3616.9695183580543!2d121.18513762950894!3d24.96715169153035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ec9d6d4167%3A0xf1c9f93ab06af735!2z5ZyL56uL5Lit5aSu5aSn5a24IOW3peeoi-S6lOmkqA!5e0!3m2!1szh-TW!2stw!4v1729840297941!5m2!1szh-TW!2stw"
@@ -363,6 +395,26 @@ export default function Home() {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+
+        <hr className="mt-8 border-gray-200 dark:border-gray-700" />
+
+        {/* Calendar Section - Moved below the map */}
+        <div className="mt-8 mb-10">
+          <h2 className="mb-4 text-2xl font-bold text-gray-800 dark:text-gray-500">Lab Calendar</h2>
+          <div className="h-[600px] w-full overflow-hidden rounded-lg shadow-lg">
+            <iframe
+              src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FTaipei&showPrint=0&src=Z3BxNGdoYWZvYTA1YTFjaWc3ZzVrazhhbGtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23D50000"
+              style={{ border: 'solid 1px #777' }}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              scrolling="no"
+              title="WIDM Lab Calendar"
+              allowFullScreen={true}
+              loading="lazy"
             ></iframe>
           </div>
         </div>
@@ -385,5 +437,5 @@ export default function Home() {
         }
       `}</style>
     </>
-  );
+  )
 }
